@@ -1,0 +1,2104 @@
+Component: ARM Compiler 5.06 update 6 (build 750) Tool: armlink [4d35ed]
+
+==============================================================================
+
+Section Cross References
+
+    arch_main.o(.text) refers to uart.o(.text) for uart_printf
+    arch_main.o(.text) refers to wdt.o(.text) for wdt_enable
+    arch_main.o(.text) refers to flash.o(.text) for flash_read_data
+    arch_main.o(.text) refers to rwip.o(.text) for rwip_schedule
+    arch_main.o(.text) refers to oads.o(.text) for oad_updating_user_section_pro
+    arch_main.o(.text) refers to app_hid.o(.text) for app_hid_send_audio
+    arch_main.o(.text) refers to icu.o(.text) for icu_get_sleep_mode
+    arch_main.o(.text) refers to emi.o(.text) for emi_init
+    arch_main.o(.text) refers to timer.o(.text) for timer_init
+    arch_main.o(.text) refers to intc.o(.text) for intc_init
+    arch_main.o(.text) refers to gpio.o(.text) for gpio_init
+    arch_main.o(.text) refers to app_key.o(.text) for key_init
+    arch_main.o(.text) refers to audio.o(.text) for audio_init
+    arch_main.o(.text) refers to app_sbc.o(.text) for sbc_encoder_init
+    arch_main.o(.text) refers to rf_test.o(.text) for rw_fcc_enter
+    arch_main.o(.text) refers to rf_pn9_test.o(.text) for rw_pn9_enter
+    arch_main.o(.text) refers to arch_main.o(.constdata) for .constdata
+    arch_main.o(.text) refers to wdt.o(.data) for wdt_disable_flag
+    arch_main.o(.text) refers to app_key.o(.data) for app_key_state
+    arch_main.o(.text) refers to prf.o(.text) for prf_get_id_from_task
+    arch_main.o(.text) refers to rwble_hl.o(.text) for rwble_hl_reset
+    arch_main.o(.text) refers to arch_main.o(.bss) for .bss
+    arch_main.o(.text) refers to app_task.o(.bss) for sbc_env
+    arch_main.o(.text) refers to boot_handlers.o(SYS_BOOT) for boot_stack_base_UNUSED
+    boot_handlers.o(SYS_BOOT) refers to arch_main.o(.text) for rw_main
+    boot_vectors.o(SYS_BOOT) refers to boot_handlers.o(SYS_BOOT) for sys_Reset
+    boot_vectors.o(SYS_BOOT) refers to intc.o(sys_irq_entry) for SYSirq_IRQ_Handler
+    boot_vectors.o(SYS_BOOT) refers to intc.o(sys_fiq_entry) for SYSirq_FIQ_Handler
+    rwble.o(.text) refers to rwip.o(.text) for rwip_wakeup
+    rwble.o(.text) refers to wdt.o(.text) for wdt_feed
+    rwip.o(.text) refers to rf_xvr.o(.text) for rf_init
+    rwip.o(.text) refers to arch_main.o(.text) for rwip_eif_get
+    rwip.o(.text) refers to rwble_hl.o(.text) for rwble_hl_init
+    rwip.o(.text) refers to rwble.o(.text) for rwble_init
+    rwip.o(.text) refers to app.o(.text) for appm_init
+    rwip.o(.text) refers to uart.o(.text) for check_uart_stop
+    rwip.o(.text) refers to wdt.o(.text) for wdt_feed
+    rwip.o(.text) refers to rwip.o(.bss) for .bss
+    rwip.o(.text) refers to rwip.o(ke_heap) for ke_heap
+    rwip.o(.text) refers to uart.o(.data) for cur_read_buf_idx
+    audio.o(.text) refers to app.o(.text) for app_send_encode_evt
+    audio.o(.text) refers to icu.o(.text) for switch_clk
+    audio.o(.text) refers to uart.o(.text) for uart_printf
+    audio.o(.text) refers to audio.o(.bss) for .bss
+    audio.o(.text) refers to audio.o(.data) for .data
+    audio.o(.text) refers to app_hid.o(.bss) for app_hid_env
+    flash.o(.text) refers to flash.o(.data) for .data
+    flash.o(.text) refers to uart.o(.text) for uart_printf
+    flash.o(.text) refers to flash.o(.bss) for .bss
+    gpio.o(.text) refers to gpio.o(.data) for .data
+    gpio.o(.text) refers to gpio.o(.bss) for .bss
+    icu.o(.text) refers to icu.o(.data) for .data
+    icu.o(.text) refers to rf_xvr.o(.bss) for XVR_ANALOG_REG_BAK
+    intc.o(.text) refers to icu.o(.text) for cpu_wakeup
+    intc.o(.text) refers to uart.o(.text) for uart_isr
+    intc.o(.text) refers to audio.o(.text) for audio_isr
+    intc.o(.text) refers to gpio.o(.text) for gpio_isr
+    intc.o(.text) refers to rwble.o(.text) for rwble_isr
+    intc.o(sys_fiq_entry) refers to intc.o(.text) for FIQ_Exception
+    intc.o(sys_irq_entry) refers to intc.o(.text) for IRQ_Exception
+    pwm.o(.text) refers to pwm.o(.bss) for .bss
+    uart.o(.text) refers to printfa.o(i.__0vsprintf) for vsprintf
+    uart.o(.text) refers to rf_pn9_test.o(.text) for pn9_test_process
+    uart.o(.text) refers to uart.o(.bss) for .bss
+    uart.o(.text) refers to uart.o(.data) for .data
+    wdt.o(.text) refers to wdt.o(.data) for .data
+    rf_xvr.o(.text) refers to rf_xvr.o(.bss) for .bss
+    bass.o(.text) refers to prf.o(.text) for prf_env_get
+    bass.o(.text) refers to bass.o(.constdata) for .constdata
+    bass.o(.text) refers to bass_task.o(.constdata) for bass_default_handler
+    bass.o(.constdata) refers to bass.o(.text) for bass_init
+    bass_task.o(.text) refers to prf.o(.text) for prf_env_get
+    bass_task.o(.text) refers to bass.o(.text) for bass_exe_operation
+    bass_task.o(.text) refers to prf_utils.o(.text) for prf_pack_char_pres_fmt
+    bass_task.o(.constdata) refers to bass_task.o(.text) for bass_enable_req_handler
+    bass_task.o(.constdata) refers to bass_task.o(.constdata) for bass_default_state
+    diss.o(.text) refers to diss.o(.constdata) for .constdata
+    diss.o(.text) refers to diss_task.o(.constdata) for diss_default_handler
+    diss.o(.constdata) refers to diss.o(.text) for diss_init
+    diss_task.o(.text) refers to prf.o(.text) for prf_env_get
+    diss_task.o(.text) refers to diss.o(.text) for diss_value_to_handle
+    diss_task.o(.constdata) refers to diss_task.o(.text) for diss_set_value_req_handler
+    diss_task.o(.constdata) refers to diss_task.o(.constdata) for diss_default_state
+    hogpd.o(.text) refers to hogpd.o(.constdata) for .constdata
+    hogpd.o(.text) refers to hogpd_task.o(.constdata) for hogpd_default_handler
+    hogpd.o(.text) refers to prf.o(.text) for prf_env_get
+    hogpd.o(.text) refers to hogpd.o(.data) for .data
+    hogpd.o(.constdata) refers to hogpd.o(.text) for hogpd_init
+    hogpd_task.o(.text) refers to prf.o(.text) for prf_env_get
+    hogpd_task.o(.text) refers to hogpd.o(.text) for hogpd_ntf_send
+    hogpd_task.o(.text) refers to hogpd.o(.data) for g_hid_handle
+    hogpd_task.o(.constdata) refers to hogpd_task.o(.text) for hogpd_enable_req_handler
+    hogpd_task.o(.constdata) refers to hogpd_task.o(.constdata) for hogpd_default_state
+    oads.o(.text) refers to uart.o(.text) for uart_printf
+    oads.o(.text) refers to flash.o(.text) for flash_write
+    oads.o(.text) refers to wdt.o(.text) for wdt_enable
+    oads.o(.text) refers to prf.o(.text) for prf_env_get
+    oads.o(.text) refers to oads.o(.constdata) for .constdata
+    oads.o(.text) refers to oads_task.o(.constdata) for braces_default_handler
+    oads.o(.text) refers to oads.o(.bss) for .bss
+    oads.o(.text) refers to oads.o(.data) for .data
+    oads.o(.text) refers to app.o(.text) for appm_update_param
+    oads.o(.constdata) refers to oads.o(.text) for oads_init
+    oads_task.o(.text) refers to uart.o(.text) for uart_printf
+    oads_task.o(.text) refers to prf.o(.text) for prf_env_get
+    oads_task.o(.text) refers to oads.o(.text) for oadImgIdentifyWrite
+    oads_task.o(.text) refers to oads_task.o(.constdata) for .constdata
+    oads_task.o(.constdata) refers to oads_task.o(.text) for oads_enable_req_handler
+    oads_task.o(.constdata) refers to oads_task.o(.constdata) for oads_default_state
+    prf.o(.text) refers to oads.o(.text) for oads_prf_itf_get
+    prf.o(.text) refers to diss.o(.text) for diss_prf_itf_get
+    prf.o(.text) refers to bass.o(.text) for bass_prf_itf_get
+    prf.o(.text) refers to hogpd.o(.text) for hogpd_prf_itf_get
+    prf.o(.text) refers to prf.o(.bss) for .bss
+    app.o(.text) refers to uart.o(.text) for uart_printf
+    app.o(.text) refers to app_sec.o(.text) for app_sec_init
+    app.o(.text) refers to app_dis.o(.text) for app_dis_init
+    app.o(.text) refers to app_hid.o(.text) for app_hid_init
+    app.o(.text) refers to app_batt.o(.text) for app_batt_init
+    app.o(.text) refers to app_oads.o(.text) for app_oads_init
+    app.o(.text) refers to wdt.o(.text) for wdt_enable
+    app.o(.text) refers to app_wlist.o(.text) for appm_add_dev_to_wlist
+    app.o(.text) refers to app.o(.bss) for .bss
+    app.o(.text) refers to app.o(.constdata) for .constdata
+    app.o(.text) refers to app.o(.data) for .data
+    app.o(.text) refers to wdt.o(.data) for wdt_disable_flag
+    app.o(.text) refers to app_hid.o(.bss) for app_hid_env
+    app.o(.constdata) refers to app_task.o(.constdata) for appm_default_handler
+    app.o(.constdata) refers to app_task.o(.data) for appm_state
+    app.o(.constdata) refers to app_dis.o(.text) for app_dis_add_dis
+    app.o(.constdata) refers to app_batt.o(.text) for app_batt_add_bas
+    app.o(.constdata) refers to app_hid.o(.text) for app_hid_add_hids
+    app.o(.constdata) refers to app_oads.o(.text) for app_oad_add_oads
+    app_batt.o(.text) refers to prf.o(.text) for prf_get_task_from_id
+    app_batt.o(.text) refers to app_batt.o(.data) for .data
+    app_batt.o(.constdata) refers to app_batt.o(.text) for app_batt_msg_dflt_handler
+    app_batt.o(.constdata) refers to app_batt.o(.constdata) for app_batt_msg_handler_list
+    app_dis.o(.constdata) refers to app_dis.o(.text) for diss_value_req_ind_handler
+    app_dis.o(.constdata) refers to app_dis.o(.constdata) for app_dis_msg_handler_list
+    app_hid.o(.text) refers to prf.o(.text) for prf_get_task_from_id
+    app_hid.o(.text) refers to app.o(.text) for appm_update_param
+    app_hid.o(.text) refers to uart.o(.text) for uart_printf
+    app_hid.o(.text) refers to app_hid.o(.bss) for .bss
+    app_hid.o(.text) refers to app_hid.o(.constdata) for .constdata
+    app_hid.o(.text) refers to app_task.o(.bss) for send_buf
+    app_hid.o(.constdata) refers to app_hid.o(.text) for app_hid_msg_dflt_handler
+    app_hid.o(.constdata) refers to app_hid.o(.constdata) for app_hid_msg_handler_list
+    app_key.o(.text) refers to gpio.o(.text) for gpio_set
+    app_key.o(.text) refers to rf_xvr.o(.text) for Delay_ms
+    app_key.o(.text) refers to app_key.o(.data) for .data
+    app_key.o(.text) refers to app_key.o(.bss) for .bss
+    app_key.o(.text) refers to app_key.o(.constdata) for .constdata
+    app_key.o(.text) refers to fflti.o(.text) for __aeabi_i2f
+    app_key.o(.text) refers to fdiv.o(.text) for __aeabi_fdiv
+    app_key.o(.text) refers to fadd.o(.text) for __aeabi_frsub
+    app_key.o(.text) refers to ffixui.o(.text) for __aeabi_f2uiz
+    app_key.o(.text) refers to uart.o(.text) for uart_printf
+    app_key.o(.text) refers to app.o(.text) for app_get_mode
+    app_key.o(.text) refers to audio.o(.text) for audio_start
+    app_key.o(.text) refers to app_hid.o(.text) for app_hid_send_report
+    app_key.o(.text) refers to app_hid.o(.bss) for app_hid_env
+    app_oads.o(.text) refers to uart.o(.text) for uart_printf
+    app_oads.o(.text) refers to prf.o(.text) for prf_get_task_from_id
+    app_oads.o(.text) refers to oads.o(.text) for oadImgIdentifyWrite
+    app_oads.o(.text) refers to app_oads.o(.data) for .data
+    app_oads.o(.text) refers to app_oads.o(.constdata) for .constdata
+    app_oads.o(.constdata) refers to app_oads.o(.text) for app_oads_msg_dflt_handler
+    app_oads.o(.constdata) refers to app_oads.o(.constdata) for app_oads_msg_handler_list
+    app_sec.o(.text) refers to uart.o(.text) for uart_printf
+    app_sec.o(.text) refers to app.o(.text) for appm_disconnect
+    app_sec.o(.text) refers to app_sec.o(.data) for .data
+    app_sec.o(.text) refers to app_sec.o(.constdata) for .constdata
+    app_sec.o(.text) refers to app.o(.bss) for app_env
+    app_sec.o(.constdata) refers to app_sec.o(.text) for app_sec_msg_dflt_handler
+    app_sec.o(.constdata) refers to app_sec.o(.constdata) for app_sec_msg_handler_list
+    app_task.o(.text) refers to uart.o(.text) for uart_printf
+    app_task.o(.text) refers to app.o(.text) for appm_stop_advertising
+    app_task.o(.text) refers to app_key.o(.text) for key_wakeup_config
+    app_task.o(.text) refers to app_sec.o(.text) for app_sec_get_bond_status
+    app_task.o(.text) refers to app_hid.o(.text) for app_hid_init
+    app_task.o(.text) refers to app_batt.o(.text) for app_batt_enable_prf
+    app_task.o(.text) refers to audio.o(.text) for audio_stop
+    app_task.o(.text) refers to app_task.o(.constdata) for .constdata
+    app_task.o(.text) refers to app_task.o(.data) for .data
+    app_task.o(.text) refers to wdt.o(.data) for wdt_disable_flag
+    app_task.o(.text) refers to app.o(.bss) for app_env
+    app_task.o(.text) refers to app_sec.o(.data) for app_sec_env
+    app_task.o(.text) refers to app_sbc.o(.text) for sbc_encoder_frame_encode
+    app_task.o(.text) refers to app_key.o(.data) for app_key_state
+    app_task.o(.text) refers to app_dis.o(.constdata) for app_dis_table_handler
+    app_task.o(.text) refers to app_oads.o(.constdata) for app_oads_table_handler
+    app_task.o(.text) refers to app_sec.o(.constdata) for app_sec_table_handler
+    app_task.o(.text) refers to app_hid.o(.constdata) for app_hid_table_handler
+    app_task.o(.text) refers to app_batt.o(.constdata) for app_batt_table_handler
+    app_task.o(.text) refers to app_hid.o(.bss) for app_hid_env
+    app_task.o(.text) refers to audio.o(.data) for pcm_index_in
+    app_task.o(.text) refers to audio.o(.bss) for pcm_sample_buffer
+    app_task.o(.text) refers to app_task.o(.bss) for .bss
+    app_task.o(.constdata) refers to app_task.o(.text) for appm_msg_handler
+    app_task.o(.constdata) refers to app_wlist.o(.text) for app_gapm_white_list_ind_handler
+    app_task.o(.constdata) refers to app_task.o(.constdata) for appm_default_state
+    app_wlist.o(.text) refers to uart.o(.text) for uart_printf
+    app_wlist.o(.text) refers to app_wlist.o(.constdata) for .constdata
+    app_sbc.o(.text) refers to app_sbc.o(.constdata) for .constdata
+    rf_test.o(.text) refers to strncmp.o(.text) for strncmp
+    rf_test.o(.text) refers to uart.o(.text) for uart_printf
+    rf_test.o(.text) refers to uart.o(.data) for uart_rx_done
+    rf_test.o(.text) refers to rf_test.o(.data) for .data
+    rf_test.o(.text) refers to uart.o(.bss) for uart_rx_buf
+    rf_test.o(.text) refers to rf_test.o(.constdata) for .constdata
+    rf_pn9_test.o(.text) refers to uart.o(.text) for uart_send
+    rf_pn9_test.o(.text) refers to rf_pn9_test.o(.data) for .data
+    printfa.o(i.__0fprintf) refers (Special) to iusefp.o(.text) for __I$use$fp
+    printfa.o(i.__0fprintf) refers to printfa.o(i._printf_core) for _printf_core
+    printfa.o(i.__0fprintf) refers to fputc.o(i.fputc) for fputc
+    printfa.o(i.__0printf) refers (Special) to iusefp.o(.text) for __I$use$fp
+    printfa.o(i.__0printf) refers to printfa.o(i._printf_core) for _printf_core
+    printfa.o(i.__0printf) refers to fputc.o(i.fputc) for fputc
+    printfa.o(i.__0printf) refers to stdout.o(.data) for __stdout
+    printfa.o(i.__0snprintf) refers (Special) to iusefp.o(.text) for __I$use$fp
+    printfa.o(i.__0snprintf) refers to printfa.o(i._printf_core) for _printf_core
+    printfa.o(i.__0snprintf) refers to printfa.o(i._snputc) for _snputc
+    printfa.o(i.__0sprintf) refers (Special) to iusefp.o(.text) for __I$use$fp
+    printfa.o(i.__0sprintf) refers to printfa.o(i._printf_core) for _printf_core
+    printfa.o(i.__0sprintf) refers to printfa.o(i._sputc) for _sputc
+    printfa.o(i.__0vfprintf) refers (Special) to iusefp.o(.text) for __I$use$fp
+    printfa.o(i.__0vfprintf) refers to printfa.o(i._printf_core) for _printf_core
+    printfa.o(i.__0vfprintf) refers to fputc.o(i.fputc) for fputc
+    printfa.o(i.__0vprintf) refers (Special) to iusefp.o(.text) for __I$use$fp
+    printfa.o(i.__0vprintf) refers to printfa.o(i._printf_core) for _printf_core
+    printfa.o(i.__0vprintf) refers to fputc.o(i.fputc) for fputc
+    printfa.o(i.__0vprintf) refers to stdout.o(.data) for __stdout
+    printfa.o(i.__0vsnprintf) refers (Special) to iusefp.o(.text) for __I$use$fp
+    printfa.o(i.__0vsnprintf) refers to printfa.o(i._printf_core) for _printf_core
+    printfa.o(i.__0vsnprintf) refers to printfa.o(i._snputc) for _snputc
+    printfa.o(i.__0vsprintf) refers (Special) to iusefp.o(.text) for __I$use$fp
+    printfa.o(i.__0vsprintf) refers to printfa.o(i._printf_core) for _printf_core
+    printfa.o(i.__0vsprintf) refers to printfa.o(i._sputc) for _sputc
+    printfa.o(i._fp_digits) refers (Special) to iusefp.o(.text) for __I$use$fp
+    printfa.o(i._fp_digits) refers to dmul.o(.text) for __aeabi_dmul
+    printfa.o(i._fp_digits) refers to ddiv.o(.text) for __aeabi_ddiv
+    printfa.o(i._fp_digits) refers to cdrcmple.o(.text) for __aeabi_cdrcmple
+    printfa.o(i._fp_digits) refers to dadd.o(.text) for __aeabi_dadd
+    printfa.o(i._fp_digits) refers to dfixul.o(.text) for __aeabi_d2ulz
+    printfa.o(i._fp_digits) refers to uldiv.o(.text) for __aeabi_uldivmod
+    printfa.o(i._printf_core) refers (Special) to iusefp.o(.text) for __I$use$fp
+    printfa.o(i._printf_core) refers to printfa.o(i._printf_pre_padding) for _printf_pre_padding
+    printfa.o(i._printf_core) refers to uldiv.o(.text) for __aeabi_uldivmod
+    printfa.o(i._printf_core) refers to printfa.o(i._printf_post_padding) for _printf_post_padding
+    printfa.o(i._printf_core) refers to printfa.o(i._fp_digits) for _fp_digits
+    printfa.o(i._printf_post_padding) refers (Special) to iusefp.o(.text) for __I$use$fp
+    printfa.o(i._printf_pre_padding) refers (Special) to iusefp.o(.text) for __I$use$fp
+    printfa.o(i._snputc) refers (Special) to iusefp.o(.text) for __I$use$fp
+    printfa.o(i._sputc) refers (Special) to iusefp.o(.text) for __I$use$fp
+    fadd.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    fadd.o(.text) refers to fepilogue.o(.text) for _float_epilogue
+    fdiv.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    fdiv.o(.text) refers to fepilogue.o(.text) for _float_round
+    fflti.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    fflti.o(.text) refers to fepilogue.o(.text) for _float_epilogue
+    ffixui.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    fputc.o(i.fputc) refers (Special) to iusesemip.o(.text) for __I$use$semihosting$fputc
+    fputc.o(i.fputc) refers (Special) to semi.o(.text) for __semihosting_library_function
+    uldiv.o(.text) refers to llushr.o(.text) for __aeabi_llsr
+    uldiv.o(.text) refers to llshl.o(.text) for __aeabi_llsl
+    dadd.o(.text) refers to llshl.o(.text) for __aeabi_llsl
+    dadd.o(.text) refers to llsshr.o(.text) for __aeabi_lasr
+    dadd.o(.text) refers to depilogue.o(.text) for _double_epilogue
+    dmul.o(.text) refers to depilogue.o(.text) for _double_epilogue
+    ddiv.o(.text) refers to depilogue.o(.text) for _double_round
+    dfixul.o(.text) refers to llushr.o(.text) for __aeabi_llsr
+    dfixul.o(.text) refers to llshl.o(.text) for __aeabi_llsl
+    depilogue.o(.text) refers to llshl.o(.text) for __aeabi_llsl
+    depilogue.o(.text) refers to llushr.o(.text) for __aeabi_llsr
+
+
+==============================================================================
+
+Removing Unused input sections from the image.
+
+    Removing arch_main.o(.data), (16 bytes).
+    Removing pwm.o(.text), (400 bytes).
+    Removing pwm.o(.bss), (20 bytes).
+    Removing uart.o(.bss), (64 bytes).
+    Removing app_key.o(.data), (1 bytes).
+    Removing app_key.o(.data), (1 bytes).
+    Removing app_key.o(.data), (1 bytes).
+    Removing app_key.o(.data), (1 bytes).
+    Removing app_sbc.o(.constdata), (80 bytes).
+    Removing app_sbc.o(.constdata), (160 bytes).
+    Removing app_sbc.o(.constdata), (16 bytes).
+    Removing app_sbc.o(.constdata), (32 bytes).
+    Removing arch_main.o(i.__ARM_common_enable_irq), (16 bytes).
+    Removing arch_main.o(i.__ARM_common_enable_fiq), (16 bytes).
+    Removing arch_main.o(i.__ARM_common_disable_irq), (20 bytes).
+    Removing arch_main.o(i.__ARM_common_disable_fiq), (20 bytes).
+    Removing hogpd_task.o(i.__ARM_common_switch8), (24 bytes).
+    Removing fepilogue.o(i.__ARM_clz), (8 bytes).
+
+18 unused section(s) (total 896 bytes) removed from the image.
+
+==============================================================================
+
+Adding Veneers to the image
+
+    Adding AT veneer (8 bytes, Long) for call to 'Undefined_Exception' from boot_vectors.o(SYS_BOOT).
+    Adding AT veneer (8 bytes, Long) for call to 'SoftwareInterrupt_Exception' from boot_vectors.o(SYS_BOOT).
+    Adding AT veneer (8 bytes, Long) for call to 'PrefetchAbort_Exception' from boot_vectors.o(SYS_BOOT).
+    Adding AT veneer (8 bytes, Long) for call to 'DataAbort_Exception' from boot_vectors.o(SYS_BOOT).
+    Adding AT veneer (8 bytes, Long) for call to 'Reserved_Exception' from boot_vectors.o(SYS_BOOT).
+    Adding AT veneer (8 bytes, Long) for call to 'rw_main' from boot_handlers.o(SYS_BOOT).
+
+6 Veneer(s) (total 48 bytes) added to the image.
+
+==============================================================================
+
+Image Symbol Table
+
+    Local Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    ../clib/microlib/division.c              0x00000000   Number         0  uldiv.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llsshr.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfa.o ABSOLUTE
+    ../clib/microlib/stdio/fputc.c           0x00000000   Number         0  fputc.o ABSOLUTE
+    ../clib/microlib/stdio/semi.s            0x00000000   Number         0  semi.o ABSOLUTE
+    ../clib/microlib/stdio/streams.c         0x00000000   Number         0  stdout.o ABSOLUTE
+    ../clib/microlib/string/strncmp.c        0x00000000   Number         0  strncmp.o ABSOLUTE
+    ../clib/microlib/stubs.s                 0x00000000   Number         0  iusesemip.o ABSOLUTE
+    ../clib/microlib/stubs.s                 0x00000000   Number         0  iusefp.o ABSOLUTE
+    ../fplib/microlib/fpadd.c                0x00000000   Number         0  dadd.o ABSOLUTE
+    ../fplib/microlib/fpadd.c                0x00000000   Number         0  fadd.o ABSOLUTE
+    ../fplib/microlib/fpdiv.c                0x00000000   Number         0  ddiv.o ABSOLUTE
+    ../fplib/microlib/fpdiv.c                0x00000000   Number         0  fdiv.o ABSOLUTE
+    ../fplib/microlib/fpepilogue.c           0x00000000   Number         0  fepilogue.o ABSOLUTE
+    ../fplib/microlib/fpepilogue.c           0x00000000   Number         0  depilogue.o ABSOLUTE
+    ../fplib/microlib/fpfix.c                0x00000000   Number         0  ffixui.o ABSOLUTE
+    ../fplib/microlib/fpfix.c                0x00000000   Number         0  dfixul.o ABSOLUTE
+    ../fplib/microlib/fpflt.c                0x00000000   Number         0  fflti.o ABSOLUTE
+    ../fplib/microlib/fpmul.c                0x00000000   Number         0  dmul.o ABSOLUTE
+    ..\..\sdk\ble_stack\com\prf\prf.c        0x00000000   Number         0  prf.o ABSOLUTE
+    ..\..\sdk\ble_stack\com\prf\prf_utils.c  0x00000000   Number         0  prf_utils.o ABSOLUTE
+    ..\..\sdk\ble_stack\com\profiles\bas\bass\src\bass.c 0x00000000   Number         0  bass.o ABSOLUTE
+    ..\..\sdk\ble_stack\com\profiles\bas\bass\src\bass_task.c 0x00000000   Number         0  bass_task.o ABSOLUTE
+    ..\..\sdk\ble_stack\com\profiles\dis\diss\src\diss.c 0x00000000   Number         0  diss.o ABSOLUTE
+    ..\..\sdk\ble_stack\com\profiles\dis\diss\src\diss_task.c 0x00000000   Number         0  diss_task.o ABSOLUTE
+    ..\..\sdk\ble_stack\com\profiles\hogp\hogpd\src\hogpd.c 0x00000000   Number         0  hogpd.o ABSOLUTE
+    ..\..\sdk\ble_stack\com\profiles\hogp\hogpd\src\hogpd_task.c 0x00000000   Number         0  hogpd_task.o ABSOLUTE
+    ..\..\sdk\ble_stack\com\profiles\oad\src\oads.c 0x00000000   Number         0  oads.o ABSOLUTE
+    ..\..\sdk\ble_stack\com\profiles\oad\src\oads_task.c 0x00000000   Number         0  oads_task.o ABSOLUTE
+    ..\..\sdk\ble_stack\com\rwble\rwble.c    0x00000000   Number         0  rwble.o ABSOLUTE
+    ..\..\sdk\ble_stack\com\rwble_hl\rwble_hl.c 0x00000000   Number         0  rwble_hl.o ABSOLUTE
+    ..\..\sdk\ble_stack\com\rwip\src\rwip.c  0x00000000   Number         0  rwip.o ABSOLUTE
+    ..\..\sdk\plactform\arch\boot\boot_handlers.s 0x00000000   Number         0  boot_handlers.o ABSOLUTE
+    ..\..\sdk\plactform\arch\boot\boot_vectors.s 0x00000000   Number         0  boot_vectors.o ABSOLUTE
+    ..\..\sdk\plactform\core_modules\rf\src\rf_xvr.c 0x00000000   Number         0  rf_xvr.o ABSOLUTE
+    ..\..\sdk\plactform\driver\audio\audio.c 0x00000000   Number         0  audio.o ABSOLUTE
+    ..\..\sdk\plactform\driver\emi\emi.c     0x00000000   Number         0  emi.o ABSOLUTE
+    ..\..\sdk\plactform\driver\flash\flash.c 0x00000000   Number         0  flash.o ABSOLUTE
+    ..\..\sdk\plactform\driver\gpio\gpio.c   0x00000000   Number         0  gpio.o ABSOLUTE
+    ..\..\sdk\plactform\driver\icu\icu.c     0x00000000   Number         0  icu.o ABSOLUTE
+    ..\..\sdk\plactform\driver\intc\intc.c   0x00000000   Number         0  intc.o ABSOLUTE
+    ..\..\sdk\plactform\driver\pwm\pwm.c     0x00000000   Number         0  pwm.o ABSOLUTE
+    ..\..\sdk\plactform\driver\timer\timer.c 0x00000000   Number         0  timer.o ABSOLUTE
+    ..\..\sdk\plactform\driver\uart\uart.c   0x00000000   Number         0  uart.o ABSOLUTE
+    ..\..\sdk\plactform\driver\wdt\wdt.c     0x00000000   Number         0  wdt.o ABSOLUTE
+    app\app.c                                0x00000000   Number         0  app.o ABSOLUTE
+    app\app_batt.c                           0x00000000   Number         0  app_batt.o ABSOLUTE
+    app\app_dis.c                            0x00000000   Number         0  app_dis.o ABSOLUTE
+    app\app_hid.c                            0x00000000   Number         0  app_hid.o ABSOLUTE
+    app\app_key.c                            0x00000000   Number         0  app_key.o ABSOLUTE
+    app\app_oads.c                           0x00000000   Number         0  app_oads.o ABSOLUTE
+    app\app_sec.c                            0x00000000   Number         0  app_sec.o ABSOLUTE
+    app\app_task.c                           0x00000000   Number         0  app_task.o ABSOLUTE
+    app\app_wlist.c                          0x00000000   Number         0  app_wlist.o ABSOLUTE
+    app\arch_main.c                          0x00000000   Number         0  arch_main.o ABSOLUTE
+    app\rf_pn9_test.c                        0x00000000   Number         0  rf_pn9_test.o ABSOLUTE
+    cdrcmple.s                               0x00000000   Number         0  cdrcmple.o ABSOLUTE
+    dc.s                                     0x00000000   Number         0  dc.o ABSOLUTE
+    src\modules\app\src\app_sbc.c            0x00000000   Number         0  app_sbc.o ABSOLUTE
+    src\rf_test.c                            0x00000000   Number         0  rf_test.o ABSOLUTE
+    SYS_BOOT                                 0x0001e200   Section       92  boot_vectors.o(SYS_BOOT)
+    Undefined                                0x0001e240   ARM Code       0  boot_vectors.o(SYS_BOOT)
+    SoftwareInterrupt                        0x0001e244   ARM Code       0  boot_vectors.o(SYS_BOOT)
+    PrefetchAbort                            0x0001e248   ARM Code       0  boot_vectors.o(SYS_BOOT)
+    DataAbort                                0x0001e24c   ARM Code       0  boot_vectors.o(SYS_BOOT)
+    IRQ_Handler                              0x0001e250   ARM Code       0  boot_vectors.o(SYS_BOOT)
+    sys_reserved                             0x0001e254   ARM Code       0  boot_vectors.o(SYS_BOOT)
+    FIQ_Handler                              0x0001e258   ARM Code       0  boot_vectors.o(SYS_BOOT)
+    SYS_BOOT                                 0x0001e25c   Section      500  boot_handlers.o(SYS_BOOT)
+    sys_fiq_entry                            0x0001e500   Section        0  intc.o(sys_fiq_entry)
+    sys_irq_entry                            0x0001e520   Section        0  intc.o(sys_irq_entry)
+    .text                                    0x0001e530   Section        0  arch_main.o(.text)
+    Stack_Integrity_Check                    0x0001e7ab   Thumb Code    84  arch_main.o(.text)
+    .text                                    0x0001ea1c   Section        0  rwble.o(.text)
+    .text                                    0x0001eb9c   Section        0  rwble_hl.o(.text)
+    .text                                    0x0001ebd4   Section        0  rwip.o(.text)
+    .text                                    0x0001ee90   Section        0  audio.o(.text)
+    .text                                    0x0001f004   Section        0  emi.o(.text)
+    .text                                    0x0001f01c   Section        0  flash.o(.text)
+    .text                                    0x0001f704   Section        0  gpio.o(.text)
+    .text                                    0x0001f8e0   Section        0  icu.o(.text)
+    .text                                    0x0001fa68   Section        0  intc.o(.text)
+    .text                                    0x0001fafc   Section        0  timer.o(.text)
+    .text                                    0x0001fb28   Section        0  uart.o(.text)
+    .text                                    0x0001fe84   Section        0  wdt.o(.text)
+    .text                                    0x0001feec   Section        0  rf_xvr.o(.text)
+    rf_reset                                 0x0001feed   Thumb Code     2  rf_xvr.o(.text)
+    rf_txpwr_dbm_get                         0x0001feef   Thumb Code     4  rf_xvr.o(.text)
+    rf_sleep                                 0x0001fef3   Thumb Code    14  rf_xvr.o(.text)
+    rf_rssi_convert                          0x0001ff01   Thumb Code    10  rf_xvr.o(.text)
+    rf_rpl_reg_rd                            0x0001ff0b   Thumb Code     4  rf_xvr.o(.text)
+    rf_rpl_reg_wr                            0x0001ff0f   Thumb Code     4  rf_xvr.o(.text)
+    rf_force_agc_enable                      0x0001ff13   Thumb Code    16  rf_xvr.o(.text)
+    .text                                    0x00020398   Section        0  bass.o(.text)
+    bass_init                                0x00020399   Thumb Code   342  bass.o(.text)
+    bass_destroy                             0x000204ef   Thumb Code    28  bass.o(.text)
+    bass_create                              0x0002050b   Thumb Code    10  bass.o(.text)
+    bass_cleanup                             0x00020515   Thumb Code    10  bass.o(.text)
+    bass_notify_batt_lvl                     0x00020599   Thumb Code    64  bass.o(.text)
+    .text                                    0x0002074c   Section        0  bass_task.o(.text)
+    bass_enable_req_handler                  0x0002074d   Thumb Code   122  bass_task.o(.text)
+    bass_batt_level_upd_req_handler          0x000207c7   Thumb Code   102  bass_task.o(.text)
+    gattc_att_info_req_ind_handler           0x0002082d   Thumb Code    78  bass_task.o(.text)
+    gattc_write_req_ind_handler              0x0002087b   Thumb Code   160  bass_task.o(.text)
+    gattc_read_req_ind_handler               0x0002091b   Thumb Code   186  bass_task.o(.text)
+    gattc_cmp_evt_handler                    0x000209d5   Thumb Code    16  bass_task.o(.text)
+    .text                                    0x000209f0   Section        0  diss.o(.text)
+    diss_init                                0x00020a19   Thumb Code   130  diss.o(.text)
+    diss_destroy                             0x00020a9b   Thumb Code    36  diss.o(.text)
+    diss_create                              0x00020abf   Thumb Code     2  diss.o(.text)
+    diss_cleanup                             0x00020ac1   Thumb Code     2  diss.o(.text)
+    .text                                    0x00020b70   Section        0  diss_task.o(.text)
+    diss_set_value_req_handler               0x00020b71   Thumb Code   150  diss_task.o(.text)
+    gattc_read_req_ind_handler               0x00020c07   Thumb Code   186  diss_task.o(.text)
+    diss_value_cfm_handler                   0x00020cc1   Thumb Code   120  diss_task.o(.text)
+    .text                                    0x00020d40   Section        0  hogpd.o(.text)
+    hogpd_init                               0x00020e35   Thumb Code  1038  hogpd.o(.text)
+    hogpd_destroy                            0x00021243   Thumb Code    16  hogpd.o(.text)
+    hogpd_create                             0x00021253   Thumb Code     2  hogpd.o(.text)
+    hogpd_cleanup                            0x00021255   Thumb Code    34  hogpd.o(.text)
+    .text                                    0x00021550   Section        0  hogpd_task.o(.text)
+    hogpd_enable_req_handler                 0x00021551   Thumb Code   110  hogpd_task.o(.text)
+    hogpd_report_upd_req_handler             0x000215bf   Thumb Code   106  hogpd_task.o(.text)
+    hogpd_report_cfm_handler                 0x00021629   Thumb Code   238  hogpd_task.o(.text)
+    hogpd_proto_mode_cfm_handler             0x00021717   Thumb Code   166  hogpd_task.o(.text)
+    gattc_att_info_req_ind_handler           0x000217bd   Thumb Code   104  hogpd_task.o(.text)
+    gattc_write_req_ind_handler              0x00021825   Thumb Code   406  hogpd_task.o(.text)
+    gattc_read_req_ind_handler               0x000219bb   Thumb Code   336  hogpd_task.o(.text)
+    gattc_cmp_evt_handler                    0x00021b0b   Thumb Code    92  hogpd_task.o(.text)
+    .text                                    0x00021b74   Section        0  oads.o(.text)
+    oads_init                                0x00021b75   Thumb Code   190  oads.o(.text)
+    oads_destroy                             0x00021c33   Thumb Code    28  oads.o(.text)
+    oads_create                              0x00021c4f   Thumb Code    18  oads.o(.text)
+    oads_cleanup                             0x00021c61   Thumb Code    18  oads.o(.text)
+    oadImgIdentifyReq                        0x00021d35   Thumb Code   150  oads.o(.text)
+    oadImgBlockReq                           0x00021dcb   Thumb Code    76  oads.o(.text)
+    .text                                    0x00022340   Section        0  oads_task.o(.text)
+    oads_enable_req_handler                  0x00022341   Thumb Code   118  oads_task.o(.text)
+    oads_ffc1_upd_req_handler                0x000223b7   Thumb Code    12  oads_task.o(.text)
+    oads_ffc2_upd_req_handler                0x000223c3   Thumb Code    16  oads_task.o(.text)
+    gattc_write_req_ind_handler              0x000223d3   Thumb Code   278  oads_task.o(.text)
+    gattc_read_req_ind_handler               0x000224e9   Thumb Code   218  oads_task.o(.text)
+    gattc_cmp_evt_handler                    0x000225c3   Thumb Code     4  oads_task.o(.text)
+    .text                                    0x00022650   Section        0  prf.o(.text)
+    prf_itf_get                              0x00022651   Thumb Code    50  prf.o(.text)
+    .text                                    0x00022888   Section        0  prf_utils.o(.text)
+    .text                                    0x000228e8   Section        0  app.o(.text)
+    .text                                    0x0002304c   Section        0  app_batt.o(.text)
+    bass_batt_level_ntf_cfg_ind_handler      0x000230d3   Thumb Code     4  app_batt.o(.text)
+    batt_level_upd_handler                   0x000230d7   Thumb Code     4  app_batt.o(.text)
+    bass_enable_rsp_handler                  0x000230db   Thumb Code     4  app_batt.o(.text)
+    app_batt_msg_dflt_handler                0x000230df   Thumb Code     4  app_batt.o(.text)
+    .text                                    0x000230f0   Section        0  app_dis.o(.text)
+    diss_value_req_ind_handler               0x000230f1   Thumb Code   124  app_dis.o(.text)
+    .text                                    0x000231fc   Section        0  app_hid.o(.text)
+    hogpd_ctnl_pt_ind_handler                0x00023499   Thumb Code    74  app_hid.o(.text)
+    hogpd_ntf_cfg_ind_handler                0x000234e3   Thumb Code    68  app_hid.o(.text)
+    hogpd_report_req_ind_handler             0x00023527   Thumb Code   398  app_hid.o(.text)
+    hogpd_proto_mode_req_ind_handler         0x000236b5   Thumb Code   100  app_hid.o(.text)
+    hogpd_report_upd_handler                 0x0002374b   Thumb Code    20  app_hid.o(.text)
+    hogpd_enable_rsp_handler                 0x0002375f   Thumb Code    16  app_hid.o(.text)
+    app_hid_msg_dflt_handler                 0x0002376f   Thumb Code    16  app_hid.o(.text)
+    app_hid_send_voice                       0x0002377f   Thumb Code    80  app_hid.o(.text)
+    .text                                    0x00023800   Section        0  app_key.o(.text)
+    app_gpio_int_cb                          0x0002384d   Thumb Code    44  app_key.o(.text)
+    .text                                    0x000244b0   Section        0  app_oads.o(.text)
+    oads_enable_rsp_handler                  0x00024521   Thumb Code     4  app_oads.o(.text)
+    app_oads_msg_dflt_handler                0x00024525   Thumb Code    32  app_oads.o(.text)
+    app_ffc1_writer_req_handler              0x00024545   Thumb Code    28  app_oads.o(.text)
+    app_ffc2_writer_req_handler              0x00024561   Thumb Code    16  app_oads.o(.text)
+    oads_ffc1_upd_rsp_handler                0x000245cb   Thumb Code    16  app_oads.o(.text)
+    oads_ffc2_upd_rsp_handler                0x000245db   Thumb Code    16  app_oads.o(.text)
+    .text                                    0x00024668   Section        0  app_sec.o(.text)
+    gapc_bond_req_ind_handler                0x0002473d   Thumb Code   228  app_sec.o(.text)
+    gapc_bond_ind_handler                    0x00024821   Thumb Code   204  app_sec.o(.text)
+    gapc_encrypt_req_ind_handler             0x000248ed   Thumb Code   168  app_sec.o(.text)
+    gapc_encrypt_ind_handler                 0x00024995   Thumb Code    16  app_sec.o(.text)
+    app_sec_msg_dflt_handler                 0x000249a5   Thumb Code     4  app_sec.o(.text)
+    .text                                    0x00024b50   Section        0  app_task.o(.text)
+    appm_get_handler                         0x00024b51   Thumb Code    68  app_task.o(.text)
+    app_adv_timeout_handler                  0x00024b95   Thumb Code    32  app_task.o(.text)
+    gapm_device_ready_ind_handler            0x00024bb5   Thumb Code    26  app_task.o(.text)
+    gapm_cmp_evt_handler                     0x00024bcf   Thumb Code   298  app_task.o(.text)
+    gapc_get_dev_info_req_ind_handler        0x00024cf9   Thumb Code   108  app_task.o(.text)
+    gapc_set_dev_info_req_ind_handler        0x00024d65   Thumb Code    34  app_task.o(.text)
+    gapc_connection_req_ind_handler          0x00024d87   Thumb Code   272  app_task.o(.text)
+    gapc_cmp_evt_handler                     0x00024e97   Thumb Code    90  app_task.o(.text)
+    gapc_disconnect_ind_handler              0x00024ef1   Thumb Code   512  app_task.o(.text)
+    app_period_timer_handler                 0x000250f1   Thumb Code   114  app_task.o(.text)
+    gapm_profile_added_ind_handler           0x00025163   Thumb Code    12  app_task.o(.text)
+    appm_msg_handler                         0x0002516f   Thumb Code    68  app_task.o(.text)
+    gapc_update_conn_param_req_ind_handler   0x000251b3   Thumb Code    36  app_task.o(.text)
+    gapc_le_pkt_size_ind_handler             0x000251d7   Thumb Code    48  app_task.o(.text)
+    gapc_param_updated_ind_handler           0x00025207   Thumb Code    42  app_task.o(.text)
+    gapc_send_security_req_handler           0x00025231   Thumb Code    10  app_task.o(.text)
+    gattc_mtu_changed_ind_handler            0x0002523b   Thumb Code    28  app_task.o(.text)
+    gapc_param_update_req_ind_handler        0x00025257   Thumb Code    48  app_task.o(.text)
+    app_adv_enable_handler                   0x00025287   Thumb Code    44  app_task.o(.text)
+    app_disconnect_timer_handler             0x000252b3   Thumb Code    30  app_task.o(.text)
+    app_sbc_encode_handler                   0x000252d1   Thumb Code    92  app_task.o(.text)
+    .text                                    0x00025454   Section        0  app_wlist.o(.text)
+    .text                                    0x00025a88   Section        0  app_sbc.o(.text)
+    _sbc_encoder_analyze_four                0x00025c85   Thumb Code   362  app_sbc.o(.text)
+    _sbc_encoder_analyze_eight               0x00025def   Thumb Code  1210  app_sbc.o(.text)
+    sbc_encoder_analyze_four                 0x00026983   Thumb Code   122  app_sbc.o(.text)
+    sbc_encoder_analyze_eight                0x000269fd   Thumb Code   146  app_sbc.o(.text)
+    .text                                    0x00026a94   Section        0  rf_test.o(.text)
+    .text                                    0x00026f20   Section        0  rf_pn9_test.o(.text)
+    .text                                    0x0002721c   Section        0  strncmp.o(.text)
+    .text                                    0x0002723a   Section        0  fadd.o(.text)
+    .text                                    0x000272f0   Section        0  fdiv.o(.text)
+    .text                                    0x0002736c   Section        0  fflti.o(.text)
+    .text                                    0x00027382   Section        0  ffixui.o(.text)
+    .text                                    0x000273aa   Section        0  uldiv.o(.text)
+    .text                                    0x0002740c   Section        0  iusefp.o(.text)
+    .text                                    0x0002740c   Section        0  fepilogue.o(.text)
+    .text                                    0x00027474   Section        0  dadd.o(.text)
+    .text                                    0x000275d8   Section        0  dmul.o(.text)
+    .text                                    0x000276a8   Section        0  ddiv.o(.text)
+    .text                                    0x00027798   Section        0  dfixul.o(.text)
+    .text                                    0x000277d8   Section       40  cdrcmple.o(.text)
+    .text                                    0x00027800   Section        0  llshl.o(.text)
+    .text                                    0x00027820   Section        0  llushr.o(.text)
+    .text                                    0x00027842   Section        0  llsshr.o(.text)
+    .text                                    0x00027868   Section        0  depilogue.o(.text)
+    i.__0vsprintf                            0x00027928   Section        0  printfa.o(i.__0vsprintf)
+    i._fp_digits                             0x0002794c   Section        0  printfa.o(i._fp_digits)
+    _fp_digits                               0x0002794d   Thumb Code   344  printfa.o(i._fp_digits)
+    i._printf_core                           0x00027ac0   Section        0  printfa.o(i._printf_core)
+    _printf_core                             0x00027ac1   Thumb Code  1764  printfa.o(i._printf_core)
+    i._printf_post_padding                   0x000281b4   Section        0  printfa.o(i._printf_post_padding)
+    _printf_post_padding                     0x000281b5   Thumb Code    32  printfa.o(i._printf_post_padding)
+    i._printf_pre_padding                    0x000281d4   Section        0  printfa.o(i._printf_pre_padding)
+    _printf_pre_padding                      0x000281d5   Thumb Code    44  printfa.o(i._printf_pre_padding)
+    i._sputc                                 0x00028200   Section        0  printfa.o(i._sputc)
+    _sputc                                   0x00028201   Thumb Code    10  printfa.o(i._sputc)
+    .constdata                               0x0002820a   Section       46  arch_main.o(.constdata)
+    __func__                                 0x0002820a   Data          11  arch_main.o(.constdata)
+    __func__                                 0x00028215   Data          13  arch_main.o(.constdata)
+    __func__                                 0x00028222   Data          12  arch_main.o(.constdata)
+    __func__                                 0x0002822e   Data          10  arch_main.o(.constdata)
+    .constdata                               0x00028238   Section       56  bass.o(.constdata)
+    .constdata                               0x00028270   Section       48  bass_task.o(.constdata)
+    .constdata                               0x000282a0   Section        8  bass_task.o(.constdata)
+    .constdata                               0x000282a8   Section      168  diss.o(.constdata)
+    .constdata                               0x00028350   Section       24  diss_task.o(.constdata)
+    .constdata                               0x00028368   Section        8  diss_task.o(.constdata)
+    .constdata                               0x00028370   Section      200  hogpd.o(.constdata)
+    .constdata                               0x00028438   Section       64  hogpd_task.o(.constdata)
+    .constdata                               0x00028478   Section        8  hogpd_task.o(.constdata)
+    .constdata                               0x00028480   Section      158  oads.o(.constdata)
+    __func__                                 0x000284d8   Data          32  oads.o(.constdata)
+    __func__                                 0x000284f8   Data          20  oads.o(.constdata)
+    __func__                                 0x0002850c   Data          18  oads.o(.constdata)
+    .constdata                               0x00028520   Section       48  oads_task.o(.constdata)
+    .constdata                               0x00028550   Section        8  oads_task.o(.constdata)
+    .constdata                               0x00028558   Section       50  oads_task.o(.constdata)
+    __func__                                 0x00028558   Data          24  oads_task.o(.constdata)
+    __func__                                 0x00028570   Data          26  oads_task.o(.constdata)
+    .constdata                               0x0002858c   Section       54  app.o(.constdata)
+    TASK_DESC_APP                            0x0002858c   Data          16  app.o(.constdata)
+    appm_add_svc_func_list                   0x0002859c   Data          16  app.o(.constdata)
+    __func__                                 0x000285ac   Data          22  app.o(.constdata)
+    .constdata                               0x000285c4   Section       32  app_batt.o(.constdata)
+    .constdata                               0x000285e4   Section        8  app_batt.o(.constdata)
+    .constdata                               0x000285ec   Section        8  app_dis.o(.constdata)
+    .constdata                               0x000285f4   Section        8  app_dis.o(.constdata)
+    .constdata                               0x000285fc   Section      400  app_hid.o(.constdata)
+    __func__                                 0x000286e8   Data          26  app_hid.o(.constdata)
+    __func__                                 0x00028702   Data          26  app_hid.o(.constdata)
+    __func__                                 0x0002871c   Data          29  app_hid.o(.constdata)
+    __func__                                 0x00028739   Data          33  app_hid.o(.constdata)
+    __func__                                 0x0002875a   Data          25  app_hid.o(.constdata)
+    __func__                                 0x00028773   Data          25  app_hid.o(.constdata)
+    .constdata                               0x0002878c   Section       56  app_hid.o(.constdata)
+    .constdata                               0x000287c4   Section        8  app_hid.o(.constdata)
+    .constdata                               0x000287cc   Section       94  app_key.o(.constdata)
+    .constdata                               0x0002882c   Section       48  app_oads.o(.constdata)
+    .constdata                               0x0002885c   Section        8  app_oads.o(.constdata)
+    .constdata                               0x00028864   Section      168  app_oads.o(.constdata)
+    __func__                                 0x00028864   Data          26  app_oads.o(.constdata)
+    __func__                                 0x0002887e   Data          28  app_oads.o(.constdata)
+    __func__                                 0x0002889a   Data          28  app_oads.o(.constdata)
+    __func__                                 0x000288b6   Data          17  app_oads.o(.constdata)
+    __func__                                 0x000288c7   Data          17  app_oads.o(.constdata)
+    __func__                                 0x000288d8   Data          26  app_oads.o(.constdata)
+    __func__                                 0x000288f2   Data          26  app_oads.o(.constdata)
+    .constdata                               0x0002890c   Section       40  app_sec.o(.constdata)
+    .constdata                               0x00028934   Section        8  app_sec.o(.constdata)
+    .constdata                               0x0002893c   Section      122  app_sec.o(.constdata)
+    __func__                                 0x0002893c   Data          20  app_sec.o(.constdata)
+    __func__                                 0x00028950   Data          26  app_sec.o(.constdata)
+    __func__                                 0x0002896a   Data          22  app_sec.o(.constdata)
+    __func__                                 0x00028980   Data          29  app_sec.o(.constdata)
+    __func__                                 0x0002899d   Data          25  app_sec.o(.constdata)
+    .constdata                               0x000289b8   Section      208  app_task.o(.constdata)
+    .constdata                               0x00028a88   Section        8  app_task.o(.constdata)
+    .constdata                               0x00028a90   Section      232  app_task.o(.constdata)
+    __func__                                 0x00028a90   Data          24  app_task.o(.constdata)
+    __func__                                 0x00028aa8   Data          32  app_task.o(.constdata)
+    __func__                                 0x00028ac8   Data          29  app_task.o(.constdata)
+    __func__                                 0x00028ae5   Data          31  app_task.o(.constdata)
+    __func__                                 0x00028b04   Data          30  app_task.o(.constdata)
+    __func__                                 0x00028b22   Data          34  app_task.o(.constdata)
+    __func__                                 0x00028b44   Data          23  app_task.o(.constdata)
+    __func__                                 0x00028b5b   Data          29  app_task.o(.constdata)
+    .constdata                               0x00028b78   Section      523  app_wlist.o(.constdata)
+    __func__                                 0x00028b78   Data          20  app_wlist.o(.constdata)
+    __func__                                 0x00028b8c   Data          32  app_wlist.o(.constdata)
+    __func__                                 0x00028bac   Data          22  app_wlist.o(.constdata)
+    __func__                                 0x00028bc2   Data          24  app_wlist.o(.constdata)
+    __func__                                 0x00028bda   Data          17  app_wlist.o(.constdata)
+    __func__                                 0x00028beb   Data          23  app_wlist.o(.constdata)
+    __func__                                 0x00028c02   Data          35  app_wlist.o(.constdata)
+    __func__                                 0x00028c25   Data          25  app_wlist.o(.constdata)
+    __func__                                 0x00028c3e   Data          27  app_wlist.o(.constdata)
+    __func__                                 0x00028c59   Data          22  app_wlist.o(.constdata)
+    __func__                                 0x00028c6f   Data          23  app_wlist.o(.constdata)
+    __func__                                 0x00028c86   Data          20  app_wlist.o(.constdata)
+    __func__                                 0x00028c9a   Data          30  app_wlist.o(.constdata)
+    __func__                                 0x00028cb8   Data          26  app_wlist.o(.constdata)
+    __func__                                 0x00028cd2   Data          37  app_wlist.o(.constdata)
+    __func__                                 0x00028cf7   Data          24  app_wlist.o(.constdata)
+    __func__                                 0x00028d0f   Data          35  app_wlist.o(.constdata)
+    __func__                                 0x00028d32   Data          26  app_wlist.o(.constdata)
+    __func__                                 0x00028d4c   Data          37  app_wlist.o(.constdata)
+    __func__                                 0x00028d71   Data          18  app_wlist.o(.constdata)
+    .constdata                               0x00028d84   Section      460  app_sbc.o(.constdata)
+    SBC_ENCODER_FRAME_ID                     0x00028d84   Data           4  app_sbc.o(.constdata)
+    SBC_SAMPLE_RATES                         0x00028d88   Data           8  app_sbc.o(.constdata)
+    SBC_COMMON_OFFSET4                       0x00028d90   Data          64  app_sbc.o(.constdata)
+    SBC_COMMON_OFFSET8                       0x00028dd0   Data         128  app_sbc.o(.constdata)
+    SBC_CRC_TABLE                            0x00028e50   Data         256  app_sbc.o(.constdata)
+    .constdata                               0x00028f50   Section       80  rf_test.o(.constdata)
+    .data                                    0x00400800   Section        6  audio.o(.data)
+    voice_start_flag                         0x00400802   Data           1  audio.o(.data)
+    .data                                    0x00400808   Section       12  flash.o(.data)
+    .data                                    0x00400814   Section       44  gpio.o(.data)
+    gpio_int_cb                              0x00400814   Data           4  gpio.o(.data)
+    .data                                    0x00400840   Section        2  icu.o(.data)
+    reduce_voltage_set                       0x00400840   Data           1  icu.o(.data)
+    default_sleep_mode                       0x00400841   Data           1  icu.o(.data)
+    .data                                    0x00400844   Section       16  uart.o(.data)
+    str                                      0x00400847   Data           3  uart.o(.data)
+    usrt_rx_cb                               0x00400850   Data           4  uart.o(.data)
+    .data                                    0x00400854   Section        2  wdt.o(.data)
+    wdt_enable_status                        0x00400855   Data           1  wdt.o(.data)
+    .data                                    0x00400856   Section        2  hogpd.o(.data)
+    .data                                    0x00400858   Section        8  oads.o(.data)
+    oad_uid_check_status                     0x00400858   Data           1  oads.o(.data)
+    oadBlkNum                                0x0040085a   Data           2  oads.o(.data)
+    oadBlkTot                                0x0040085c   Data           2  oads.o(.data)
+    validBlockCnt                            0x0040085e   Data           2  oads.o(.data)
+    .data                                    0x00400860   Section       12  app.o(.data)
+    target_remote                            0x00400864   Data           8  app.o(.data)
+    .data                                    0x0040086c   Section        2  app_batt.o(.data)
+    .data                                    0x00400870   Section      113  app_key.o(.data)
+    voice_key_press_status                   0x00400874   Data           1  app_key.o(.data)
+    app_clear_bond_flag                      0x00400875   Data           1  app_key.o(.data)
+    key_down_status                          0x00400876   Data           1  app_key.o(.data)
+    old_voice_key_press_status               0x00400882   Data           1  app_key.o(.data)
+    power_key_delay                          0x00400894   Data           4  app_key.o(.data)
+    .data                                    0x004008e1   Section        1  app_oads.o(.data)
+    .data                                    0x004008e2   Section        5  app_sec.o(.data)
+    .data                                    0x004008e8   Section        4  app_task.o(.data)
+    adv_timeout_flag                         0x004008e8   Data           1  app_task.o(.data)
+    uLedDutyCnt                              0x004008e9   Data           1  app_task.o(.data)
+    key_free_dalay_cnt                       0x004008ea   Data           2  app_task.o(.data)
+    .data                                    0x004008ec   Section        1  app_task.o(.data)
+    .data                                    0x004008ed   Section        9  rf_test.o(.data)
+    .data                                    0x004008f8   Section       38  rf_pn9_test.o(.data)
+    tst_mode                                 0x004008f8   Data           1  rf_pn9_test.o(.data)
+    .bss                                     0x00400920   Section       16  arch_main.o(.bss)
+    .bss                                     0x00400930   Section       16  rwip.o(.bss)
+    rwip_env                                 0x00400930   Data          16  rwip.o(.bss)
+    .bss                                     0x00400940   Section      960  audio.o(.bss)
+    .bss                                     0x00400d00   Section       12  flash.o(.bss)
+    .bss                                     0x00400d0c   Section       40  gpio.o(.bss)
+    .bss                                     0x00400d34   Section      148  uart.o(.bss)
+    .bss                                     0x00400dc8   Section       64  rf_xvr.o(.bss)
+    .bss                                     0x00400e08   Section      192  oads.o(.bss)
+    .bss                                     0x00400ec8   Section      240  prf.o(.bss)
+    .bss                                     0x00400fb8   Section     3264  app.o(.bss)
+    .bss                                     0x00401c78   Section       20  app_hid.o(.bss)
+    .bss                                     0x00401c8c   Section       63  app_key.o(.bss)
+    .bss                                     0x00401ccc   Section     2684  app_task.o(.bss)
+    .bss                                     0x00402748   Section       20  app_task.o(.bss)
+    ke_heap                                  0x00815000   Section     4696  rwip.o(ke_heap)
+
+    Global Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    BuildAttributes$$THM_ISAv2$ARM_ISAv5$E$P$S$PE$A:L22$X:L11$S22$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$ROPI$EBA8$MICROLIB$REQ8$PRES8$EABIv2 0x00000000   Number         0  anon$$obj.o ABSOLUTE
+    Image$$RAM_BSS$$Length                   0x00000000   Number         0  anon$$obj.o ABSOLUTE
+    Image$$RAM_STACK_UNUSED$$ZI$$Length      0x00000020   Number         0  anon$$obj.o ABSOLUTE
+    Image$$RAM_DATA$$Length                  0x00000120   Number         0  anon$$obj.o ABSOLUTE
+    Image$$RAM_STACK_FIQ$$ZI$$Length         0x000001f0   Number         0  anon$$obj.o ABSOLUTE
+    Image$$RAM_STACK_IRQ$$ZI$$Length         0x000001f0   Number         0  anon$$obj.o ABSOLUTE
+    Image$$RAM_STACK_SVC$$ZI$$Length         0x000006f0   Number         0  anon$$obj.o ABSOLUTE
+    Image$$RAM_BSS$$ZI$$Length               0x00001e3c   Number         0  anon$$obj.o ABSOLUTE
+    uart_stack_register                      0x00002181   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    Undefined_Exception                      0x0000219d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    SoftwareInterrupt_Exception              0x0000219f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    PrefetchAbort_Exception                  0x000021a1   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    DataAbort_Exception                      0x000021a3   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    Reserved_Exception                       0x000021a5   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    stack_main                               0x000021b1   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    nvds_init                                0x0000224b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    nvds_get                                 0x00002295   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    nvds_del                                 0x000022d3   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    nvds_lock                                0x00002307   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    nvds_put                                 0x00002333   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_init                                  0x000024dd   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_flush                                 0x00002509   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_sleep_check                           0x00002549   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_event_init                            0x00002561   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_event_callback_set                    0x0000256d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_event_set                             0x00002581   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_event_clear                           0x000025b3   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_event_get                             0x000025e5   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_event_get_all                         0x00002619   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_event_flush                           0x0000261f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_event_schedule                        0x00002627   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_mem_init                              0x00002651   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_mem_is_empty                          0x000026b1   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_check_malloc                          0x000026f5   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_malloc                                0x00002785   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_free                                  0x0000284f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_is_free                               0x00002923   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_get_mem_usage                         0x00002935   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_get_max_mem_usage                     0x00002939   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_msg_alloc                             0x00002955   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_msg_send                              0x00002987   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_msg_send_basic                        0x000029b9   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_msg_forward                           0x000029c7   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_msg_forward_new_id                    0x000029d1   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_msg_free                              0x000029e1   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_msg_dest_id_get                       0x000029e9   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_msg_src_id_get                        0x000029ef   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_msg_in_queue                          0x000029f5   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_queue_extract                         0x00002a05   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_queue_insert                          0x00002a43   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_task_init                             0x00002b7d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_task_create                           0x00002b91   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_task_delete                           0x00002bd3   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_state_set                             0x00002c09   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_state_get                             0x00002c73   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_msg_discard                           0x00002c93   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_msg_save                              0x00002c97   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_task_msg_flush                        0x00002c9b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_task_check                            0x00002cdd   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_timer_init                            0x00002dc1   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_timer_set                             0x00002dcd   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_timer_clear                           0x00002e61   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_timer_active                          0x00002eb7   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_timer_adjust_all                      0x00002edd   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_timer_target_get                      0x00002ef1   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ke_timer_sleep_check                     0x00002f03   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    dbg_platform_reset_complete              0x00002fa5   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    co_list_init                             0x00002fe1   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    co_list_push_back                        0x00002fe9   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    co_list_pool_init                        0x00002fff   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    co_list_push_front                       0x0000305b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    co_list_pop_front                        0x00003069   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    co_list_extract                          0x0000307d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    co_list_extract_after                    0x000030b9   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    co_list_find                             0x000030d3   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    co_list_merge                            0x000030e9   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    co_list_insert_before                    0x00003103   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    co_list_insert_after                     0x0000312d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    co_list_size                             0x0000315b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    co_list_check_size_available             0x00003171   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    co_bdaddr_compare                        0x0000318d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    em_buf_init                              0x000031ad   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    em_buf_rx_free                           0x0000327d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    em_buf_rx_buff_addr_get                  0x0000328f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    em_buf_tx_buff_addr_get                  0x0000329f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    em_buf_tx_free                           0x000032a7   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_init                                 0x00003339   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_stop                                 0x00003363   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_reset                                0x000033ad   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_le_con_cmp_evt_send                  0x000033d1   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_start                                0x000035f1   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_discon_event_complete_send           0x000036d9   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_con_update_complete_send             0x000036fb   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_ltk_req_send                         0x00003775   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_feats_rd_event_send                  0x000037ab   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_version_rd_event_send                0x000037e5   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_common_cmd_complete_send             0x00003817   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_common_cmd_status_send               0x00003835   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_common_flush_occurred_send           0x00003851   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_common_enc_key_ref_comp_evt_send     0x0000386b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_common_enc_change_evt_send           0x00003889   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_common_nb_of_pkt_comp_evt_send       0x000038f3   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_con_update_ind                       0x00003915   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_lsto_con_update                      0x00003951   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_map_update_ind                       0x00003983   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_con_update_finished                  0x000039d3   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_map_update_finished                  0x00003a57   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_hci_command_handler                  0x00004499   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_hci_acl_data_tx_handler              0x000044c7   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_llcp_version_ind_pdu_send            0x000045c7   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_llcp_ch_map_update_pdu_send          0x000045e5   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_llcp_pause_enc_req_pdu_send          0x00004621   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_llcp_pause_enc_rsp_pdu_send          0x0000464f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_llcp_enc_req_pdu_send                0x00004685   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_llcp_enc_rsp_pdu_send                0x00004757   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_llcp_start_enc_rsp_pdu_send          0x000047cd   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_llcp_reject_ind_pdu_send             0x00004815   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_llcp_con_update_pdu_send             0x00004865   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_llcp_con_param_req_pdu_send          0x00004891   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_llcp_con_param_rsp_pdu_send          0x000048d9   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_llcp_feats_req_pdu_send              0x0000491f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_llcp_feats_rsp_pdu_send              0x0000494b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_llcp_start_enc_req_pdu_send          0x00004979   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_llcp_terminate_ind_pdu_send          0x000049c3   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_llcp_unknown_rsp_send_pdu            0x00004a27   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_llcp_ping_req_pdu_send               0x00004a3d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_llcp_ping_rsp_pdu_send               0x00004a4f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_llcp_length_req_pdu_send             0x00004a61   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_llcp_length_rsp_pdu_send             0x00004a8b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_llcp_recv_handler                    0x00004c93   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_llcp_get_autorize                    0x00005e2b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_util_get_free_conhdl                 0x000065e9   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_util_get_nb_active_link              0x00006611   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_util_dicon_procedure                 0x00006639   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_util_update_channel_map              0x00006679   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_util_set_llcp_discard_enable         0x0000668b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_util_set_auth_payl_to_margin         0x000066a3   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_util_clear_operation_ptr             0x000066cf   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_util_bw_mgt                          0x000066eb   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_end_evt_defer                        0x0000673d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_pdu_llcp_tx_ack_defer                0x00006783   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_pdu_acl_tx_ack_defer                 0x00006877   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llc_pdu_defer                            0x00006899   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_init                                 0x00006945   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_core_reset                           0x00006a99   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_adv_start                            0x00006aed   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_adv_stop                             0x00006c95   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_con_update_after_param_req           0x00006cbd   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_con_param_rsp                        0x00006f31   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_con_param_req                        0x00007023   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_con_stop                             0x000070ef   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_get_mode                             0x000070fb   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_move_to_slave                        0x0000711f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_ch_map_ind                           0x00007245   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_con_update_ind                       0x00007283   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_crypt_isr                            0x00007291   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_ral_renew_req                        0x000073f5   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_evt_elt_delete                       0x00007465   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_evt_drift_compute                    0x000076d7   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_evt_delete_elt_push                  0x00007805   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_evt_channel_next                     0x000079f5   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_evt_deffered_elt_handler             0x00007a2f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_evt_init                             0x00007aff   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_evt_init_evt                         0x00007b81   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_evt_restart                          0x00007bd3   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_evt_elt_insert                       0x00007f43   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_evt_schedule_next                    0x00007fab   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_evt_schedule                         0x0000814f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_evt_prevent_stop                     0x0000821d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_evt_canceled                         0x0000821f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_evt_move_to_slave                    0x00008261   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_evt_slave_update                     0x00008503   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_evt_adv_create                       0x00008605   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_evt_end                              0x00008675   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_evt_rx                               0x000087c3   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_evt_timer_isr                        0x000087ff   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_evt_end_isr                          0x00008809   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_evt_rx_isr                           0x0000883f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_pdu_data_tx_push                     0x000089a5   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_pdu_check                            0x00008e55   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_pdu_tx_loop                          0x0000901d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_pdu_data_send                        0x0000905f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_pdu_tx_push                          0x000090b7   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_pdu_tx_prog                          0x00009113   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_pdu_tx_flush                         0x00009491   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_pdu_adv_pack                         0x00009501   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_pdu_rx_handler                       0x00009525   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_sleep_init                           0x0000976d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_sleep_enter                          0x0000981d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_sleep_wakeup                         0x0000985d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_sleep_wakeup_end                     0x00009879   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_util_instant_get                     0x000098f5   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_util_get_bd_address                  0x0000990d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_util_set_bd_address                  0x0000992d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_util_ral_force_rpa_renew             0x0000996b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_util_freq2chnl                       0x000099ab   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_util_get_local_offset                0x000099cf   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_util_get_peer_offset                 0x000099ed   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_util_connection_param_set            0x00009a0d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_util_dle_set_cs_fields               0x00009a57   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_util_anchor_point_move               0x00009a79   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_util_flush_list                      0x00009b49   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_util_instant_ongoing                 0x00009b5f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_util_compute_ce_max                  0x00009b6b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_util_elt_programmed                  0x00009bfd   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_util_priority_set                    0x00009c1b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_util_priority_update                 0x00009c5f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_util_get_tx_pkt_cnt                  0x00009c65   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    lld_util_eff_tx_time_set                 0x00009c6b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_ral_clear                            0x00009c91   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_wl_clr                               0x00009caf   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_encryption_start                     0x00009d01   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_encryption_done                      0x00009d8f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_init                                 0x00009e27   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_common_cmd_complete_send             0x00009f37   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_ble_ready                            0x00009f4f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_con_req_ind                          0x00009f55   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_common_cmd_status_send               0x0000a0c1   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_set_adv_param                        0x0000a351   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_ral_update                           0x0000a4e1   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_set_adv_en                           0x0000a507   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_set_adv_data                         0x0000a60b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_set_scan_rsp_data                    0x0000a69b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_wl_dev_add                           0x0000a72b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_wl_dev_rem                           0x0000a759   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_wl_dev_add_hdl                       0x0000a77f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_wl_dev_rem_hdl                       0x0000a7f3   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_ral_dev_add                          0x0000a85f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_ral_dev_rm                           0x0000a97f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_ral_get_rpa                          0x0000a9b5   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_ral_set_timeout                      0x0000aa2f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    hci_command_handler                      0x0000b20d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_util_bd_addr_wl_position             0x0000b305   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_util_bl_check                        0x0000b377   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_util_bd_addr_in_wl                   0x0000b3e1   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_util_check_address_validity          0x0000b42f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_util_check_map_validity              0x0000b43f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_util_apply_bd_addr                   0x0000b48f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_util_set_public_addr                 0x0000b4ad   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_util_check_evt_mask                  0x0000b4bd   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_util_get_channel_map                 0x0000b4dd   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_util_get_supp_features               0x0000b4df   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_util_adv_data_update                 0x0000b4eb   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_util_bd_addr_in_ral                  0x0000b527   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_util_bl_add                          0x0000b595   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_util_bl_rem                          0x0000b619   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_end_evt_defer                        0x0000b67b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    llm_pdu_defer                            0x0000b743   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ea_elt_cancel                            0x0000b865   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ea_time_get_slot_rounded                 0x0000b961   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ea_init                                  0x0000ba3f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ea_elt_create                            0x0000ba63   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ea_time_get_halfslot_rounded             0x0000ba7d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ea_elt_insert                            0x0000baa7   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ea_elt_remove                            0x0000bcf3   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ea_interval_create                       0x0000bd5d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ea_interval_insert                       0x0000bd73   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ea_interval_remove                       0x0000bd81   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ea_interval_delete                       0x0000bd91   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ea_finetimer_isr                         0x0000bdab   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ea_sw_isr                                0x0000be7f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ea_offset_req                            0x0000be9f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ea_timer_target_get                      0x0000c057   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ea_sleep_check                           0x0000c073   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ea_interval_duration_req                 0x0000c0c1   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_update_state                        0x0000c1dd   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_get_requester                       0x0000c20d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_send_complete_evt                   0x0000c229   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_init                                0x0000c2f3   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_con_create                          0x0000c325   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_con_cleanup                         0x0000c439   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_send_disconect_ind                  0x0000c449   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_get_conidx                          0x0000c46b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_get_conhdl                          0x0000c491   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_get_role                            0x0000c4a5   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_get_bdaddr                          0x0000c4c1   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_get_csrk                            0x0000c4e1   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_get_sign_counter                    0x0000c4ff   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_send_error_evt                      0x0000c51d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_get_operation                       0x0000c53f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_get_operation_ptr                   0x0000c555   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_set_operation_ptr                   0x0000c561   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_reschedule_operation                0x0000c56d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_is_sec_set                          0x0000c5af   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_lk_sec_lvl_get                      0x0000c5e3   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_enc_keysize_get                     0x0000c5fd   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_enc_keysize_set                     0x0000c615   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_link_encrypted                      0x0000c629   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_auth_set                            0x0000c641   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_auth_get                            0x0000c689   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_svc_chg_ccc_get                     0x0000c6b9   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_svc_chg_ccc_set                     0x0000c6c9   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_param_update_sanity                 0x0000c6df   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_hci_handler                         0x0000cc8d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_sig_pdu_recv_handler                0x0000cd95   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapc_process_op                          0x0000cdd1   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_update_state                        0x0000db39   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_le_psm_cleanup                      0x0000db9d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_init                                0x0000dbb7   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_init_attr                           0x0000dc37   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_get_operation                       0x0000dc63   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_get_requester                       0x0000dc75   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_reschedule_operation                0x0000dc8d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_send_complete_evt                   0x0000dcaf   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_send_error_evt                      0x0000dce5   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_get_address_type                    0x0000dd05   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_con_create                          0x0000dd11   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_con_enable                          0x0000dd7f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_con_cleanup                         0x0000dd8b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_get_id_from_task                    0x0000ddc1   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_get_task_from_id                    0x0000de11   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_is_disc_connection                  0x0000de59   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_get_max_mtu                         0x0000de7f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_get_max_mps                         0x0000de85   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_set_max_mtu                         0x0000de8b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_set_max_mps                         0x0000dea5   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_addr_check                          0x0000debb   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_dle_val_check                       0x0000ded7   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_is_legacy_pairing_supp              0x0000def3   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_is_sec_con_pairing_supp             0x0000deff   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_le_psm_find                         0x0000df0b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_le_psm_get_info                     0x0000df21   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_lecb_register                       0x0000df69   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_lecb_unregister                     0x0000df97   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_is_embedded_host                    0x0000dfb7   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_set_embedded_host                   0x0000dfbd   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_is_pref_con_param_pres              0x0000dfc3   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_get_att_handle                      0x0000dfcd   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_svc_chg_en                          0x0000dff5   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_hci_handler                         0x0000e88d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_adv_op_sanity                       0x0000f287   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_set_adv_mode                        0x0000f415   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_set_adv_data                        0x0000f42d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_get_local_addrtype                  0x0000f457   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_execute_adv_op                      0x0000f477   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_get_role                            0x0000f58d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_update_air_op_state                 0x0000f593   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_get_irk                             0x0000f65d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_get_bdaddr                          0x0000f661   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_basic_hci_cmd_send                  0x0000f667   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_setup_conn                          0x0000f67b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_get_adv_mode                        0x0000f6d7   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_op_reset_continue                   0x0000f6f3   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gapm_op_setup_continue                   0x0000f779   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_send_use_enc_block_cmd              0x0000f911   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_send_start_enc_cmd                  0x0000f949   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_send_ltk_req_rsp                    0x0000f9b9   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_send_pairing_req_ind                0x0000fa15   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_send_pairing_ind                    0x0000fac7   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_check_pairing_feat                  0x0000fb51   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_launch_rep_att_timer                0x0000fb77   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_check_repeated_attempts             0x0000fbb1   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_check_max_key_size                  0x0000fc03   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_check_key_distrib                   0x0000fc2b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_xor                                 0x0000fcb1   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_generate_l                          0x0000fcc9   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_generate_ci                         0x0000fd31   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_generate_rand                       0x0000fd91   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_generate_e1                         0x0000fdb7   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_generate_cfm                        0x0000fe75   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_generate_stk                        0x0000feef   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_calc_subkeys                        0x0000ff45   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_clear_timeout_timer                 0x0000ffbb   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_pairing_end                         0x0000ffe3   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_tkdp_rcp_continue                   0x0001004b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_tkdp_rcp_start                      0x000100db   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_pdu_send                            0x0001010b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_tkdp_send_continue                  0x0001019f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_tkdp_send_start                     0x00010269   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_get_key_sec_prop                    0x00010299   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_is_sec_mode_reached                 0x00010311   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_handle_enc_change_evt               0x0001033b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_pdu_recv                            0x000103cb   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_pairing_tk_exch                     0x00010439   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_pairing_ltk_exch                    0x0001049d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_pairing_irk_exch                    0x00010503   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_pairing_csrk_exch                   0x0001053f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_pairing_rsp                         0x00010583   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_pairing_req_handler                 0x00010667   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_security_req_send                   0x0001069b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_encrypt_start_handler               0x000106ed   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_encrypt_cfm                         0x00010719   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_sign_command                        0x00010745   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_sign_cont                           0x0001080f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_calc_confirm_cont                   0x000109bd   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_confirm_gen_rand                    0x00010a99   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_key_press_notification_ind          0x00010ae7   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpc_check_param                         0x00010b0d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpm_gen_rand_addr                       0x00010eb5   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpm_send_encrypt_req                    0x00010ed1   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpm_resolv_addr                         0x00010eff   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpm_use_enc_block                       0x00010f21   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    smpm_gen_rand_nb                         0x00010f23   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attc_send_att_req                        0x00010f49   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attc_send_hdl_cfm                        0x00010f73   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attc_send_execute                        0x00010f93   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attc_send_read_ind                       0x00010fb7   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attc_l2cc_pdu_recv_handler               0x00011933   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attm_convert_to128                       0x00011989   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attm_uuid_comp                           0x000119b9   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attm_uuid16_comp                         0x00011a11   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attm_is_bt16_uuid                        0x00011a1d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attm_is_bt32_uuid                        0x00011a43   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attm_convert_to128_ti                    0x00011a6b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attm_svc_create_db                       0x00011a9b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attm_svc_create_db_128                   0x00011b9b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attm_svc_create_db128                    0x00011cc7   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attm_reserve_handle_range                0x00011e05   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attm_att_set_value                       0x00011e27   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attm_get_value                           0x00011ed9   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attm_att_set_permission                  0x00012041   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attm_att_update_perm                     0x000120b7   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attm_svc_set_permission                  0x00012125   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attm_svc_get_permission                  0x00012149   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attm_init                                0x00012167   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attmdb_svc_check_hdl                     0x0001247f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attmdb_add_service                       0x000124cf   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attmdb_destroy                           0x00012545   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attmdb_get_service                       0x0001255f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attmdb_get_attribute                     0x0001259d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attmdb_get_next_att                      0x000125d1   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attmdb_uuid16_comp                       0x00012647   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attmdb_get_max_len                       0x00012685   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attmdb_get_uuid                          0x000126ef   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    attmdb_att_get_permission                0x000127c5   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    atts_clear_read_cache                    0x00012975   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    atts_send_error                          0x00012acf   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    atts_write_signed_cfm                    0x00012af3   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    atts_send_event                          0x00012b35   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    atts_clear_prep_data                     0x00012bc1   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    atts_clear_rsp_data                      0x00012bdd   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    atts_write_rsp_send                      0x00012bf9   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    atts_process_pdu                         0x00013893   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    atts_l2cc_pdu_recv_handler               0x000138f9   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gattc_update_state                       0x00013b3f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gattc_get_requester                      0x00013b63   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gattc_send_complete_evt                  0x00013b7f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gattc_cleanup                            0x00013bdd   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gattc_init                               0x00013c77   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gattc_create                             0x00013cab   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gattc_con_enable                         0x00013d1d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gattc_get_mtu                            0x00013d31   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gattc_set_mtu                            0x00013d3d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gattc_send_error_evt                     0x00013d7b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gattc_get_operation                      0x00013da1   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gattc_get_op_seq_num                     0x00013db7   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gattc_get_operation_ptr                  0x00013dcd   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gattc_set_operation_ptr                  0x00013dd9   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gattc_reschedule_operation               0x00013de5   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gattm_svc_get_start_hdl                  0x00014d05   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gattm_init                               0x00014d0b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gattm_init_attr                          0x00014d29   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gattm_create                             0x00014d91   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    gattm_cleanup                            0x00014d99   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_send_error_evt                      0x00014db5   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_update_state                        0x00014ddd   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_send_complete_evt                   0x00014e03   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_cleanup                             0x00014e55   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_init                                0x00014f0b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_create                              0x00014f41   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_get_operation                       0x00014f83   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_get_operation_ptr                   0x00014f97   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_set_operation_ptr                   0x00014fa3   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_data_send                           0x00014faf   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_lecb_h2l_err                        0x0001523d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_lecb_find                           0x00015277   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_lecb_free                           0x000152b3   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_lecb_init_disconnect                0x0001536b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_lecb_send_con_req                   0x0001539b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_lecb_send_con_rsp                   0x000153d7   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_lecb_send_disc_req                  0x00015407   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_lecb_send_disc_rsp                  0x00015437   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_lecb_send_credit_add                0x0001545b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_lecb_pdu_pack                       0x0001548d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_lecb_pdu_unpack                     0x000154f1   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_pdu_pack                            0x00015543   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_pdu_unpack                          0x000157b3   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_pdu_header_check                    0x00015a15   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_sig_send_cmd_reject                 0x00015c5d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_sig_pdu_recv_handler                0x0001613d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_process_op                          0x0001618d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_pdu_alloc                           0x0001687f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_pdu_send                            0x000168a9   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cm_init                                0x0001690f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cm_create                              0x00016935   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cm_cleanup                             0x0001693d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cm_set_link_layer_buff_size            0x00016947   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cm_get_nb_buffer_available             0x00016951   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    l2cm_tx_status                           0x0001695d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    hci_evt_mask_set                         0x00016991   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    hci_init                                 0x000169db   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    hci_reset                                0x000169fd   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    hci_send_2_host                          0x00016a1f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    hci_send_2_controller                    0x00016ab7   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    hci_fc_init                              0x00016b81   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    hci_fc_acl_buf_size_set                  0x00016b8d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    hci_fc_acl_en                            0x00016bad   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    hci_fc_acl_packet_sent                   0x00016bd5   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    hci_fc_host_nb_acl_pkts_complete         0x00016be5   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    hci_fc_check_host_available_nb_acl_packets 0x00016bf7   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    hci_look_for_cmd_desc                    0x00016f23   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    hci_look_for_evt_desc                    0x00016f73   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    hci_look_for_dbg_evt_desc                0x00016f99   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    hci_look_for_le_evt_desc                 0x00016fbd   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    hci_tl_send                              0x00017287   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    hci_tl_init                              0x000172cf   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    hci_cmd_get_max_param_size               0x000172f7   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    hci_cmd_received                         0x00017309   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    hci_acl_tx_data_alloc                    0x0001742b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    hci_acl_tx_data_received                 0x0001749b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    hci_util_pack                            0x0001758d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    hci_util_unpack                          0x0001768d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    h4tl_init                                0x00017b6f   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    h4tl_write                               0x00017bed   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    h4tl_start                               0x00017c23   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    h4tl_stop                                0x00017c3d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ahi_init                                 0x00017d17   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    ahi_send_msg                             0x00017d39   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    __aeabi_uidiv                            0x00017de5   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    __aeabi_uidivmod                         0x00017de5   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    __aeabi_idiv                             0x00017e11   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    __aeabi_idivmod                          0x00017e11   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    rand                                     0x00017e39   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    srand                                    0x00017e4b   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    __aeabi_memcpy                           0x00017e5d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    __aeabi_memcpy4                          0x00017e5d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    __aeabi_memcpy8                          0x00017e5d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    __aeabi_memset                           0x00017e81   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    __aeabi_memset4                          0x00017e81   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    __aeabi_memset8                          0x00017e81   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    __aeabi_memclr                           0x00017e91   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    __aeabi_memclr4                          0x00017e91   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    __aeabi_memclr8                          0x00017e91   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    _memset$wrapper                          0x00017e95   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    memcmp                                   0x00017ea7   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
+    __ARM_clz                                0x00017ec0   ARM Code       0  stack_rom_symbol.txt ABSOLUTE
+    __ARM_common_disable_fiq                 0x00017ec8   ARM Code       0  stack_rom_symbol.txt ABSOLUTE
+    __ARM_common_disable_irq                 0x00017edc   ARM Code       0  stack_rom_symbol.txt ABSOLUTE
+    __ARM_common_enable_fiq                  0x00017ef0   ARM Code       0  stack_rom_symbol.txt ABSOLUTE
+    __ARM_common_enable_irq                  0x00017f00   ARM Code       0  stack_rom_symbol.txt ABSOLUTE
+    __ARM_common_switch8                     0x00017f10   ARM Code       0  stack_rom_symbol.txt ABSOLUTE
+    one_bits                                 0x00017f2c   Data           0  stack_rom_symbol.txt ABSOLUTE
+    co_sca2ppm                               0x00017f3c   Data           0  stack_rom_symbol.txt ABSOLUTE
+    co_null_bdaddr                           0x00017f4c   Data           0  stack_rom_symbol.txt ABSOLUTE
+    llc_default_handler                      0x0001811c   Data           0  stack_rom_symbol.txt ABSOLUTE
+    rwip_coex_cfg                            0x00018134   Data           0  stack_rom_symbol.txt ABSOLUTE
+    rwip_priority                            0x00018139   Data           0  stack_rom_symbol.txt ABSOLUTE
+    lld_pdu_adv_pk_desc_tab                  0x00018148   Data           0  stack_rom_symbol.txt ABSOLUTE
+    lld_pdu_llcp_pk_desc_tab                 0x0001819c   Data           0  stack_rom_symbol.txt ABSOLUTE
+    llm_local_data_len_values                0x000182aa   Data           0  stack_rom_symbol.txt ABSOLUTE
+    llm_local_cmds                           0x000182c8   Data           0  stack_rom_symbol.txt ABSOLUTE
+    llm_local_le_feats                       0x00018308   Data           0  stack_rom_symbol.txt ABSOLUTE
+    llm_local_le_states                      0x00018310   Data           0  stack_rom_symbol.txt ABSOLUTE
+    llm_default_handler                      0x00018490   Data           0  stack_rom_symbol.txt ABSOLUTE
+    LLM_AA_CT1                               0x00018498   Data           0  stack_rom_symbol.txt ABSOLUTE
+    LLM_AA_CT2                               0x0001849b   Data           0  stack_rom_symbol.txt ABSOLUTE
+    gapc_sig_handlers                        0x00018558   Data           0  stack_rom_symbol.txt ABSOLUTE
+    gapc_default_state                       0x00018570   Data           0  stack_rom_symbol.txt ABSOLUTE
+    gapc_default_handler                     0x00018680   Data           0  stack_rom_symbol.txt ABSOLUTE
+    gapm_default_state                       0x000187f0   Data           0  stack_rom_symbol.txt ABSOLUTE
+    gapm_default_handler                     0x000188b8   Data           0  stack_rom_symbol.txt ABSOLUTE
+    smpc_construct_pdu                       0x000188dc   Data           0  stack_rom_symbol.txt ABSOLUTE
+    smpc_recv_pdu                            0x00018918   Data           0  stack_rom_symbol.txt ABSOLUTE
+    attc_handlers                            0x00018954   Data           0  stack_rom_symbol.txt ABSOLUTE
+    atts_handlers                            0x000189e8   Data           0  stack_rom_symbol.txt ABSOLUTE
+    gattc_default_state                      0x00018a60   Data           0  stack_rom_symbol.txt ABSOLUTE
+    gattc_default_handler                    0x00018b40   Data           0  stack_rom_symbol.txt ABSOLUTE
+    gattm_default_state                      0x00018b7c   Data           0  stack_rom_symbol.txt ABSOLUTE
+    gattm_default_handler                    0x00018b84   Data           0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_sig_handlers                        0x00018cb0   Data           0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_default_state                       0x00018cf0   Data           0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_default_handler                     0x00018d50   Data           0  stack_rom_symbol.txt ABSOLUTE
+    hci_cmd_desc_tab_lk_ctrl                 0x00018d68   Data           0  stack_rom_symbol.txt ABSOLUTE
+    hci_cmd_desc_tab_ctrl_bb                 0x00018d8c   Data           0  stack_rom_symbol.txt ABSOLUTE
+    hci_cmd_desc_tab_info_par                0x00018e04   Data           0  stack_rom_symbol.txt ABSOLUTE
+    hci_cmd_desc_tab_stat_par                0x00018e40   Data           0  stack_rom_symbol.txt ABSOLUTE
+    hci_cmd_desc_tab_le                      0x00018e4c   Data           0  stack_rom_symbol.txt ABSOLUTE
+    hci_cmd_desc_tab_vs                      0x00019074   Data           0  stack_rom_symbol.txt ABSOLUTE
+    hci_evt_dbg_desc_tab                     0x000190bc   Data           0  stack_rom_symbol.txt ABSOLUTE
+    hci_cmd_desc_root_tab                    0x000190c4   Data           0  stack_rom_symbol.txt ABSOLUTE
+    hci_evt_desc_tab                         0x000190f4   Data           0  stack_rom_symbol.txt ABSOLUTE
+    hci_evt_le_desc_tab                      0x0001913c   Data           0  stack_rom_symbol.txt ABSOLUTE
+    ahi_default_state                        0x0001919c   Data           0  stack_rom_symbol.txt ABSOLUTE
+    ahi_default_handler                      0x000191a4   Data           0  stack_rom_symbol.txt ABSOLUTE
+    boot_stack_base_UNUSED                   0x0001e264   Data           4  boot_handlers.o(SYS_BOOT)
+    boot_stack_len_UNUSED                    0x0001e268   Data           4  boot_handlers.o(SYS_BOOT)
+    boot_stack_base_IRQ                      0x0001e26c   Data           4  boot_handlers.o(SYS_BOOT)
+    boot_stack_len_IRQ                       0x0001e270   Data           4  boot_handlers.o(SYS_BOOT)
+    boot_stack_base_SVC                      0x0001e274   Data           4  boot_handlers.o(SYS_BOOT)
+    boot_stack_len_SVC                       0x0001e278   Data           4  boot_handlers.o(SYS_BOOT)
+    boot_stack_base_FIQ                      0x0001e27c   Data           4  boot_handlers.o(SYS_BOOT)
+    boot_stack_len_FIQ                       0x0001e280   Data           4  boot_handlers.o(SYS_BOOT)
+    sys_Reset                                0x0001e284   ARM Code       0  boot_handlers.o(SYS_BOOT)
+    Long ARM to Thumb Veneer to Undefined_Exception 0x0001e450   ARM Code       8  anon$$obj.o(Veneer$$Code)
+    Long ARM to Thumb Veneer to SoftwareInterrupt_Exception 0x0001e458   ARM Code       8  anon$$obj.o(Veneer$$Code)
+    Long ARM to Thumb Veneer to PrefetchAbort_Exception 0x0001e460   ARM Code       8  anon$$obj.o(Veneer$$Code)
+    Long ARM to Thumb Veneer to DataAbort_Exception 0x0001e468   ARM Code       8  anon$$obj.o(Veneer$$Code)
+    Long ARM to Thumb Veneer to Reserved_Exception 0x0001e470   ARM Code       8  anon$$obj.o(Veneer$$Code)
+    Long ARM to Thumb Veneer to rw_main      0x0001e478   ARM Code       8  anon$$obj.o(Veneer$$Code)
+    SYSirq_FIQ_Handler                       0x0001e500   ARM Code      16  intc.o(sys_fiq_entry)
+    SYSirq_IRQ_Handler                       0x0001e520   ARM Code      16  intc.o(sys_irq_entry)
+    assert_err                               0x0001e531   Thumb Code    18  arch_main.o(.text)
+    assert_param                             0x0001e543   Thumb Code    22  arch_main.o(.text)
+    assert_warn                              0x0001e559   Thumb Code    22  arch_main.o(.text)
+    dump_data                                0x0001e56f   Thumb Code    18  arch_main.o(.text)
+    platform_reset                           0x0001e581   Thumb Code    46  arch_main.o(.text)
+    bdaddr_env_init                          0x0001e5af   Thumb Code    72  arch_main.o(.text)
+    rw_dut_enter                             0x0001e5f7   Thumb Code     6  arch_main.o(.text)
+    rw_app_enter                             0x0001e5fd   Thumb Code   102  arch_main.o(.text)
+    sys_mode_init                            0x0001e663   Thumb Code     8  arch_main.o(.text)
+    rom_env_init                             0x0001e66b   Thumb Code    86  arch_main.o(.text)
+    rwip_eif_api_init                        0x0001e6c1   Thumb Code    20  arch_main.o(.text)
+    rw_main                                  0x0001e6d5   Thumb Code   198  arch_main.o(.text)
+    rwip_eif_get                             0x0001e79b   Thumb Code    16  arch_main.o(.text)
+    rwble_init                               0x0001ea1d   Thumb Code    28  rwble.o(.text)
+    rwble_reset                              0x0001ea39   Thumb Code    86  rwble.o(.text)
+    rwble_sleep_check                        0x0001ea8f   Thumb Code    16  rwble.o(.text)
+    rwble_activity_ongoing_check             0x0001ea9f   Thumb Code    30  rwble.o(.text)
+    rwble_version                            0x0001eabd   Thumb Code    44  rwble.o(.text)
+    rwble_isr                                0x0001eae9   Thumb Code   172  rwble.o(.text)
+    rwble_hl_init                            0x0001eb9d   Thumb Code    28  rwble_hl.o(.text)
+    rwble_hl_reset                           0x0001ebb9   Thumb Code    28  rwble_hl.o(.text)
+    rwip_check_wakeup_boundary               0x0001ebd5   Thumb Code    34  rwip.o(.text)
+    rwip_init                                0x0001ebf7   Thumb Code   182  rwip.o(.text)
+    rwip_reset                               0x0001ecad   Thumb Code    56  rwip.o(.text)
+    rwip_version                             0x0001ece5   Thumb Code     8  rwip.o(.text)
+    rwip_schedule                            0x0001eced   Thumb Code    16  rwip.o(.text)
+    rwip_prevent_sleep_set                   0x0001ecfd   Thumb Code    42  rwip.o(.text)
+    rwip_sleep                               0x0001ed27   Thumb Code   144  rwip.o(.text)
+    rwip_wakeup                              0x0001edb7   Thumb Code    24  rwip.o(.text)
+    rwip_prevent_sleep_clear                 0x0001edcf   Thumb Code    42  rwip.o(.text)
+    rwip_wakeup_end                          0x0001edf9   Thumb Code    36  rwip.o(.text)
+    rwip_us_2_lpcycles                       0x0001ee1d   Thumb Code    12  rwip.o(.text)
+    rwip_wakeup_delay_set                    0x0001ee29   Thumb Code    12  rwip.o(.text)
+    rwip_prevent_sleep_get                   0x0001ee35   Thumb Code     6  rwip.o(.text)
+    rwip_sleep_enable                        0x0001ee3b   Thumb Code     6  rwip.o(.text)
+    rwip_ext_wakeup_enable                   0x0001ee41   Thumb Code     6  rwip.o(.text)
+    rwip_sleep_lpcycles_2_us                 0x0001ee47   Thumb Code    32  rwip.o(.text)
+    audio_init                               0x0001ee91   Thumb Code    50  audio.o(.text)
+    audio_int_en                             0x0001eec3   Thumb Code    32  audio.o(.text)
+    audio_int_dis                            0x0001eee3   Thumb Code    34  audio.o(.text)
+    audio_isr                                0x0001ef05   Thumb Code    92  audio.o(.text)
+    audio_start                              0x0001ef61   Thumb Code    48  audio.o(.text)
+    audio_stop                               0x0001ef91   Thumb Code    48  audio.o(.text)
+    emi_init                                 0x0001f005   Thumb Code    20  emi.o(.text)
+    set_flash_clk                            0x0001f01d   Thumb Code    40  flash.o(.text)
+    get_flash_ID                             0x0001f045   Thumb Code    34  flash.o(.text)
+    flash_read_sr                            0x0001f067   Thumb Code    26  flash.o(.text)
+    flash_write_sr                           0x0001f081   Thumb Code   168  flash.o(.text)
+    flash_wp_256k                            0x0001f129   Thumb Code    70  flash.o(.text)
+    flash_wp_ALL                             0x0001f16f   Thumb Code    70  flash.o(.text)
+    flash_advance_init                       0x0001f1b5   Thumb Code   102  flash.o(.text)
+    clr_flash_qwfr                           0x0001f21b   Thumb Code    76  flash.o(.text)
+    flash_set_dual_mode                      0x0001f267   Thumb Code    32  flash.o(.text)
+    flash_init                               0x0001f287   Thumb Code    34  flash.o(.text)
+    flash_set_line_mode                      0x0001f2a9   Thumb Code     2  flash.o(.text)
+    flash_erase_sector                       0x0001f2ab   Thumb Code    50  flash.o(.text)
+    flash_read_data                          0x0001f2dd   Thumb Code   134  flash.o(.text)
+    flash_write_data                         0x0001f363   Thumb Code   300  flash.o(.text)
+    flash_set_qe                             0x0001f48f   Thumb Code    68  flash.o(.text)
+    flash_read                               0x0001f4d3   Thumb Code    46  flash.o(.text)
+    flash_write                              0x0001f501   Thumb Code   102  flash.o(.text)
+    udi_exchange_fdata_to_adjoining_next_sector 0x0001f567   Thumb Code   102  flash.o(.text)
+    udi_exchange_fdata_to_adjoining_previous_sector 0x0001f5cd   Thumb Code    98  flash.o(.text)
+    flash_erase                              0x0001f62f   Thumb Code   174  flash.o(.text)
+    gpio_config                              0x0001f705   Thumb Code   144  gpio.o(.text)
+    gpio_get_input                           0x0001f795   Thumb Code    28  gpio.o(.text)
+    gpio_set                                 0x0001f7b1   Thumb Code    36  gpio.o(.text)
+    gpio_init                                0x0001f7d5   Thumb Code     2  gpio.o(.text)
+    gpio_triger                              0x0001f7d7   Thumb Code    20  gpio.o(.text)
+    gpio_cb_register                         0x0001f7eb   Thumb Code    12  gpio.o(.text)
+    gpio_isr                                 0x0001f7f7   Thumb Code    34  gpio.o(.text)
+    gpio_test_init                           0x0001f819   Thumb Code    54  gpio.o(.text)
+    gpio_sleep                               0x0001f84f   Thumb Code    72  gpio.o(.text)
+    gpio_wakeup                              0x0001f897   Thumb Code    52  gpio.o(.text)
+    DEBUG_MSG                                0x0001f8cb   Thumb Code     2  gpio.o(.text)
+    system_sleep_init                        0x0001f8e1   Thumb Code    20  icu.o(.text)
+    icu_init                                 0x0001f8f5   Thumb Code    74  icu.o(.text)
+    icu_get_sleep_mode                       0x0001f93f   Thumb Code     6  icu.o(.text)
+    icu_set_sleep_mode                       0x0001f945   Thumb Code     6  icu.o(.text)
+    cpu_reduce_voltage_sleep                 0x0001f94b   Thumb Code    60  icu.o(.text)
+    cpu_wakeup                               0x0001f987   Thumb Code    28  icu.o(.text)
+    cpu_idle_sleep                           0x0001f9a3   Thumb Code     8  icu.o(.text)
+    switch_clk                               0x0001f9ab   Thumb Code    82  icu.o(.text)
+    bk3435_singleWaveCfg                     0x0001f9fd   Thumb Code    22  icu.o(.text)
+    bk3435_set_power                         0x0001fa13   Thumb Code    48  icu.o(.text)
+    intc_spurious                            0x0001fa69   Thumb Code     2  intc.o(.text)
+    intc_init                                0x0001fa6b   Thumb Code    28  intc.o(.text)
+    intc_stat_clear                          0x0001fa87   Thumb Code     8  intc.o(.text)
+    IRQ_Exception                            0x0001fa8f   Thumb Code    76  intc.o(.text)
+    FIQ_Exception                            0x0001fadb   Thumb Code    22  intc.o(.text)
+    timer_init                               0x0001fafd   Thumb Code     2  timer.o(.text)
+    timer_set_timeout                        0x0001faff   Thumb Code     6  timer.o(.text)
+    timer_get_time                           0x0001fb05   Thumb Code     6  timer.o(.text)
+    timer_enable                             0x0001fb0b   Thumb Code     6  timer.o(.text)
+    timer_isr                                0x0001fb11   Thumb Code    20  timer.o(.text)
+    Read_Uart_Buf                            0x0001fb29   Thumb Code    14  uart.o(.text)
+    Uart_Read_Byte                           0x0001fb37   Thumb Code    10  uart.o(.text)
+    uart_putchar                             0x0001fb41   Thumb Code    34  uart.o(.text)
+    uart_printf                              0x0001fb63   Thumb Code    46  uart.o(.text)
+    uart_printf_null                         0x0001fb91   Thumb Code     4  uart.o(.text)
+    hex2Str                                  0x0001fb95   Thumb Code    46  uart.o(.text)
+    uart_print_int                           0x0001fbc3   Thumb Code    48  uart.o(.text)
+    cpu_delay                                0x0001fbf3   Thumb Code    26  uart.o(.text)
+    uart_init                                0x0001fc0d   Thumb Code   130  uart.o(.text)
+    uart_flow_on                             0x0001fc8f   Thumb Code     2  uart.o(.text)
+    uart_clear_rxfifo                        0x0001fc91   Thumb Code    26  uart.o(.text)
+    uart_flow_off                            0x0001fcab   Thumb Code     4  uart.o(.text)
+    uart_finish_transfers                    0x0001fcaf   Thumb Code    24  uart.o(.text)
+    uart_read                                0x0001fcc7   Thumb Code    10  uart.o(.text)
+    uart_write                               0x0001fcd1   Thumb Code    64  uart.o(.text)
+    uart_send                                0x0001fd11   Thumb Code    26  uart.o(.text)
+    uart_cb_register                         0x0001fd2b   Thumb Code    10  uart.o(.text)
+    uart_cb_clear                            0x0001fd35   Thumb Code    14  uart.o(.text)
+    uart_isr                                 0x0001fd43   Thumb Code   224  uart.o(.text)
+    check_uart_stop                          0x0001fe23   Thumb Code    10  uart.o(.text)
+    wdt_disable                              0x0001fe85   Thumb Code    28  wdt.o(.text)
+    wdt_enable                               0x0001fea1   Thumb Code    38  wdt.o(.text)
+    wdt_feed                                 0x0001fec7   Thumb Code    28  wdt.o(.text)
+    Delay_ms                                 0x0001ff23   Thumb Code    26  rf_xvr.o(.text)
+    kmod_calibration                         0x0001ff3d   Thumb Code   280  rf_xvr.o(.text)
+    init_analog_xvr_reg                      0x00020055   Thumb Code   186  rf_xvr.o(.text)
+    initial_xver_BK3435V2_openLoop           0x0002010f   Thumb Code   260  rf_xvr.o(.text)
+    rf_init                                  0x00020213   Thumb Code    36  rf_xvr.o(.text)
+    Delay_us                                 0x00020237   Thumb Code    20  rf_xvr.o(.text)
+    Delay                                    0x0002024b   Thumb Code    20  rf_xvr.o(.text)
+    CLK32K_AutoCali_init                     0x0002025f   Thumb Code    48  rf_xvr.o(.text)
+    bass_get_att_handle                      0x0002051f   Thumb Code   122  bass.o(.text)
+    bass_prf_itf_get                         0x000205d9   Thumb Code     6  bass.o(.text)
+    bass_get_att_idx                         0x000205df   Thumb Code   112  bass.o(.text)
+    bass_exe_operation                       0x0002064f   Thumb Code   238  bass.o(.text)
+    diss_compute_cfg_flag                    0x000209f1   Thumb Code    40  diss.o(.text)
+    diss_prf_itf_get                         0x00020ac3   Thumb Code     6  diss.o(.text)
+    diss_handle_to_value                     0x00020ac9   Thumb Code    54  diss.o(.text)
+    diss_value_to_handle                     0x00020aff   Thumb Code    60  diss.o(.text)
+    diss_check_val_len                       0x00020b3b   Thumb Code    42  diss.o(.text)
+    hogpd_get_att_handle                     0x00020d41   Thumb Code   244  hogpd.o(.text)
+    hogpd_prf_itf_get                        0x00021277   Thumb Code     6  hogpd.o(.text)
+    hogpd_get_att_idx                        0x0002127d   Thumb Code   292  hogpd.o(.text)
+    hogpd_ntf_send                           0x000213a1   Thumb Code   260  hogpd.o(.text)
+    hogpd_ntf_cfg_ind_send                   0x000214a5   Thumb Code   164  hogpd.o(.text)
+    oad_save_reciveData                      0x00021c73   Thumb Code    32  oads.o(.text)
+    oad_updating_user_section_begin          0x00021c93   Thumb Code    38  oads.o(.text)
+    oad_updating_user_section_pro            0x00021cb9   Thumb Code   106  oads.o(.text)
+    oad_updating_user_section_end            0x00021d23   Thumb Code    18  oads.o(.text)
+    oadImgIdentifyWrite                      0x00021e17   Thumb Code   778  oads.o(.text)
+    oadImgBlockWrite                         0x00022121   Thumb Code   364  oads.o(.text)
+    oads_prf_itf_get                         0x0002228d   Thumb Code     4  oads.o(.text)
+    prf_init                                 0x00022683   Thumb Code   112  prf.o(.text)
+    prf_add_profile                          0x000226f3   Thumb Code   130  prf.o(.text)
+    prf_create                               0x00022775   Thumb Code    44  prf.o(.text)
+    prf_cleanup                              0x000227a1   Thumb Code    48  prf.o(.text)
+    prf_env_get                              0x000227d1   Thumb Code    44  prf.o(.text)
+    prf_src_task_get                         0x000227fd   Thumb Code    16  prf.o(.text)
+    prf_dst_task_get                         0x0002280d   Thumb Code    16  prf.o(.text)
+    prf_get_id_from_task                     0x0002281d   Thumb Code    52  prf.o(.text)
+    prf_get_task_from_id                     0x00022851   Thumb Code    52  prf.o(.text)
+    prf_pack_char_pres_fmt                   0x00022889   Thumb Code    30  prf_utils.o(.text)
+    prf_pack_date_time                       0x000228a7   Thumb Code    32  prf_utils.o(.text)
+    prf_unpack_date_time                     0x000228c7   Thumb Code    34  prf_utils.o(.text)
+    appm_init                                0x000228e9   Thumb Code   218  app.o(.text)
+    appm_add_svc                             0x000229c3   Thumb Code    32  app.o(.text)
+    appm_disconnect                          0x000229e3   Thumb Code    34  app.o(.text)
+    appm_start_advertising                   0x00022a05   Thumb Code   360  app.o(.text)
+    appm_start_direct_dvertising             0x00022b6d   Thumb Code   134  app.o(.text)
+    appm_start_white_list_dvertising         0x00022bf3   Thumb Code    62  app.o(.text)
+    appm_stop_advertising                    0x00022c31   Thumb Code    72  app.o(.text)
+    appm_update_adv_data                     0x00022c79   Thumb Code    86  app.o(.text)
+    appm_update_param                        0x00022ccf   Thumb Code   370  app.o(.text)
+    appm_get_dev_name                        0x00022e41   Thumb Code    16  app.o(.text)
+    appm_switch_general_adv                  0x00022e51   Thumb Code    12  app.o(.text)
+    appm_send_seurity_req                    0x00022e5d   Thumb Code    20  app.o(.text)
+    app_set_mode                             0x00022e71   Thumb Code    22  app.o(.text)
+    app_get_mode                             0x00022e87   Thumb Code    12  app.o(.text)
+    read_encode_data                         0x00022e93   Thumb Code    50  app.o(.text)
+    store_encode_data                        0x00022ec5   Thumb Code    86  app.o(.text)
+    print_debug_info                         0x00022f1b   Thumb Code    18  app.o(.text)
+    encode_voice_init                        0x00022f2d   Thumb Code    34  app.o(.text)
+    app_send_encode_evt                      0x00022f4f   Thumb Code    14  app.o(.text)
+    print_debug_status                       0x00022f5d   Thumb Code    48  app.o(.text)
+    app_batt_init                            0x0002304d   Thumb Code    12  app_batt.o(.text)
+    app_batt_add_bas                         0x00023059   Thumb Code    44  app_batt.o(.text)
+    app_batt_enable_prf                      0x00023085   Thumb Code    44  app_batt.o(.text)
+    app_batt_send_lvl                        0x000230b1   Thumb Code    34  app_batt.o(.text)
+    app_dis_init                             0x0002316d   Thumb Code     2  app_dis.o(.text)
+    app_dis_add_dis                          0x0002316f   Thumb Code    44  app_dis.o(.text)
+    app_hid_set_send_flag                    0x000231fd   Thumb Code     6  app_hid.o(.text)
+    app_hid_init                             0x00023203   Thumb Code    20  app_hid.o(.text)
+    app_hid_add_hids                         0x00023217   Thumb Code   108  app_hid.o(.text)
+    app_hid_enable_prf                       0x00023283   Thumb Code    82  app_hid.o(.text)
+    app_hid_send_report                      0x000232d5   Thumb Code   248  app_hid.o(.text)
+    app_hid_send_mouse_report                0x000233cd   Thumb Code   104  app_hid.o(.text)
+    app_hid_send_sensor_report               0x00023435   Thumb Code   100  app_hid.o(.text)
+    app_hid_send_audio                       0x00023719   Thumb Code    50  app_hid.o(.text)
+    delay_us                                 0x00023801   Thumb Code    20  app_key.o(.text)
+    key_wakeup_set                           0x00023815   Thumb Code    56  app_key.o(.text)
+    key_init                                 0x00023879   Thumb Code   184  app_key.o(.text)
+    key_scan                                 0x00023931   Thumb Code   394  app_key.o(.text)
+    key_judge_error                          0x00023abb   Thumb Code   112  app_key.o(.text)
+    key_ghost_scan                           0x00023b2b   Thumb Code    86  app_key.o(.text)
+    key_data_analysis                        0x00023b81   Thumb Code  1306  app_key.o(.text)
+    xyz_axis_process                         0x0002409b   Thumb Code    86  app_key.o(.text)
+    key_state_reset                          0x000240f1   Thumb Code    14  app_key.o(.text)
+    key_process                              0x000240ff   Thumb Code   230  app_key.o(.text)
+    key_wakeup_config                        0x000241e5   Thumb Code   162  app_key.o(.text)
+    key_status_check                         0x00024287   Thumb Code   226  app_key.o(.text)
+    hid_send_keycode                         0x00024369   Thumb Code   194  app_key.o(.text)
+    app_oads_init                            0x000244b1   Thumb Code     8  app_oads.o(.text)
+    app_oad_add_oads                         0x000244b9   Thumb Code    62  app_oads.o(.text)
+    app_oads_enable_prf                      0x000244f7   Thumb Code    42  app_oads.o(.text)
+    app_ffc1_ntf_req                         0x00024571   Thumb Code    44  app_oads.o(.text)
+    app_ffc2_ntf_req                         0x0002459d   Thumb Code    46  app_oads.o(.text)
+    app_sec_init                             0x00024669   Thumb Code    54  app_sec.o(.text)
+    app_sec_get_bond_status                  0x0002469f   Thumb Code     6  app_sec.o(.text)
+    app_get_bonding_flag                     0x000246a5   Thumb Code    16  app_sec.o(.text)
+    app_get_encrypt_flag                     0x000246b5   Thumb Code    16  app_sec.o(.text)
+    app_sec_remove_bond                      0x000246c5   Thumb Code    54  app_sec.o(.text)
+    app_sec_send_security_req                0x000246fb   Thumb Code    66  app_sec.o(.text)
+    appm_get_wlist_size                      0x00025455   Thumb Code    32  app_wlist.o(.text)
+    app_gapm_white_list_ind_handler          0x00025475   Thumb Code    26  app_wlist.o(.text)
+    appm_add_dev_to_wlist                    0x0002548f   Thumb Code    90  app_wlist.o(.text)
+    appm_rmv_dev_from_wlist                  0x000254e9   Thumb Code    90  app_wlist.o(.text)
+    appm_clear_wlist                         0x00025543   Thumb Code    34  app_wlist.o(.text)
+    appm_get_ral_list_size                   0x00025565   Thumb Code    36  app_wlist.o(.text)
+    app_gapm_ral_list_size_ind_handler       0x00025589   Thumb Code    26  app_wlist.o(.text)
+    appm_add_ral_dev_to_list                 0x000255a3   Thumb Code   160  app_wlist.o(.text)
+    appm_rmv_ral_dev_from_list               0x00025643   Thumb Code   154  app_wlist.o(.text)
+    appm_get_ral_loc_addr                    0x000256dd   Thumb Code    60  app_wlist.o(.text)
+    appm_get_ral_peer_addr                   0x00025719   Thumb Code    60  app_wlist.o(.text)
+    appm_clear_ral_list                      0x00025755   Thumb Code    34  app_wlist.o(.text)
+    app_gapm_ral_addr_ind_handler            0x00025777   Thumb Code    64  app_wlist.o(.text)
+    appm_gapm_resolv_dev_addr                0x000257b7   Thumb Code   258  app_wlist.o(.text)
+    app_gapm_resolv_dev_addr_ind_handler     0x000258b9   Thumb Code    82  app_wlist.o(.text)
+    appm_gapm_gen_rand_addr                  0x0002590b   Thumb Code    60  app_wlist.o(.text)
+    app_gapm_gen_rand_addr_ind_handler       0x00025947   Thumb Code    56  app_wlist.o(.text)
+    appm_gapm_gen_rand_number                0x0002597f   Thumb Code    36  app_wlist.o(.text)
+    app_gapm_gen_rand_number_ind_handler     0x000259a3   Thumb Code    48  app_wlist.o(.text)
+    appm_gapm_set_irk                        0x000259d3   Thumb Code    82  app_wlist.o(.text)
+    sbc_common_sample_rate_get               0x00025a89   Thumb Code     8  app_sbc.o(.text)
+    sbc_common_crc8                          0x00025a91   Thumb Code    82  app_sbc.o(.text)
+    sbc_common_bit_allocation                0x00025ae3   Thumb Code   418  app_sbc.o(.text)
+    sbc_encoder_ioctrl                       0x000262a9   Thumb Code   500  app_sbc.o(.text)
+    sbc_encoder_init                         0x0002649d   Thumb Code   228  app_sbc.o(.text)
+    sbc_encoder_frame_encode                 0x00026581   Thumb Code  1026  app_sbc.o(.text)
+    BT_delayUs                               0x00026a95   Thumb Code    20  rf_test.o(.text)
+    char_to_num                              0x00026aa9   Thumb Code    44  rf_test.o(.text)
+    fCheckValue                              0x00026ad5   Thumb Code    58  rf_test.o(.text)
+    BT_singleWaveCfg                         0x00026b0f   Thumb Code    38  rf_test.o(.text)
+    rw_fcc_enter                             0x00026b35   Thumb Code   736  rf_test.o(.text)
+    XVR_Initial                              0x00026f21   Thumb Code   304  rf_pn9_test.o(.text)
+    Test_XVR_PN9_Rx_Ena                      0x00027051   Thumb Code    32  rf_pn9_test.o(.text)
+    Test_XVR_Single_Carrier_Tx_Ena1          0x00027071   Thumb Code    30  rf_pn9_test.o(.text)
+    LockPn9Test                              0x0002708f   Thumb Code    26  rf_pn9_test.o(.text)
+    GetBER                                   0x000270a9   Thumb Code    16  rf_pn9_test.o(.text)
+    rw_pn9_enter                             0x000270b9   Thumb Code     2  rf_pn9_test.o(.text)
+    pn9_test_process                         0x000270bb   Thumb Code   164  rf_pn9_test.o(.text)
+    strncmp                                  0x0002721d   Thumb Code    30  strncmp.o(.text)
+    __aeabi_fadd                             0x0002723b   Thumb Code   166  fadd.o(.text)
+    __aeabi_fsub                             0x000272e1   Thumb Code     8  fadd.o(.text)
+    __aeabi_frsub                            0x000272e9   Thumb Code     8  fadd.o(.text)
+    __aeabi_fdiv                             0x000272f1   Thumb Code   124  fdiv.o(.text)
+    __aeabi_i2f                              0x0002736d   Thumb Code    22  fflti.o(.text)
+    __aeabi_f2uiz                            0x00027383   Thumb Code    40  ffixui.o(.text)
+    __aeabi_uldivmod                         0x000273ab   Thumb Code    96  uldiv.o(.text)
+    __I$use$fp                               0x0002740c   ARM Code       0  iusefp.o(.text)
+    _float_round                             0x0002740d   Thumb Code    16  fepilogue.o(.text)
+    _float_epilogue                          0x0002741d   Thumb Code    88  fepilogue.o(.text)
+    __aeabi_dadd                             0x00027475   Thumb Code   328  dadd.o(.text)
+    __aeabi_dsub                             0x000275bd   Thumb Code    12  dadd.o(.text)
+    __aeabi_drsub                            0x000275c9   Thumb Code    12  dadd.o(.text)
+    __aeabi_dmul                             0x000275d9   Thumb Code   202  dmul.o(.text)
+    __aeabi_ddiv                             0x000276a9   Thumb Code   234  ddiv.o(.text)
+    __aeabi_d2ulz                            0x00027799   Thumb Code    54  dfixul.o(.text)
+    __aeabi_cdrcmple                         0x000277d9   Thumb Code    38  cdrcmple.o(.text)
+    __aeabi_llsl                             0x00027801   Thumb Code    32  llshl.o(.text)
+    _ll_shift_l                              0x00027801   Thumb Code     0  llshl.o(.text)
+    __aeabi_llsr                             0x00027821   Thumb Code    34  llushr.o(.text)
+    _ll_ushift_r                             0x00027821   Thumb Code     0  llushr.o(.text)
+    __aeabi_lasr                             0x00027843   Thumb Code    38  llsshr.o(.text)
+    _ll_sshift_r                             0x00027843   Thumb Code     0  llsshr.o(.text)
+    _double_round                            0x00027869   Thumb Code    26  depilogue.o(.text)
+    _double_epilogue                         0x00027883   Thumb Code   164  depilogue.o(.text)
+    __0vsprintf                              0x00027929   Thumb Code    30  printfa.o(i.__0vsprintf)
+    __1vsprintf                              0x00027929   Thumb Code     0  printfa.o(i.__0vsprintf)
+    __2vsprintf                              0x00027929   Thumb Code     0  printfa.o(i.__0vsprintf)
+    __c89vsprintf                            0x00027929   Thumb Code     0  printfa.o(i.__0vsprintf)
+    vsprintf                                 0x00027929   Thumb Code     0  printfa.o(i.__0vsprintf)
+    bas_att_db                               0x00028238   Data          40  bass.o(.constdata)
+    bass_itf                                 0x00028260   Data          16  bass.o(.constdata)
+    bass_default_state                       0x00028270   Data          48  bass_task.o(.constdata)
+    bass_default_handler                     0x000282a0   Data           8  bass_task.o(.constdata)
+    diss_att_db                              0x000282a8   Data         152  diss.o(.constdata)
+    diss_itf                                 0x00028340   Data          16  diss.o(.constdata)
+    diss_default_state                       0x00028350   Data          24  diss_task.o(.constdata)
+    diss_default_handler                     0x00028368   Data           8  diss_task.o(.constdata)
+    hids_att_db                              0x00028370   Data         184  hogpd.o(.constdata)
+    hogpd_itf                                0x00028428   Data          16  hogpd.o(.constdata)
+    hogpd_default_state                      0x00028438   Data          64  hogpd_task.o(.constdata)
+    hogpd_default_handler                    0x00028478   Data           8  hogpd_task.o(.constdata)
+    oads_att_db                              0x00028480   Data          72  oads.o(.constdata)
+    oads_itf                                 0x000284c8   Data          16  oads.o(.constdata)
+    oads_default_state                       0x00028520   Data          48  oads_task.o(.constdata)
+    braces_default_handler                   0x00028550   Data           8  oads_task.o(.constdata)
+    app_batt_msg_handler_list                0x000285c4   Data          32  app_batt.o(.constdata)
+    app_batt_table_handler                   0x000285e4   Data           8  app_batt.o(.constdata)
+    app_dis_msg_handler_list                 0x000285ec   Data           8  app_dis.o(.constdata)
+    app_dis_table_handler                    0x000285f4   Data           8  app_dis.o(.constdata)
+    gHIDReportDescriptor                     0x000285fc   Data         236  app_hid.o(.constdata)
+    app_hid_msg_handler_list                 0x0002878c   Data          56  app_hid.o(.constdata)
+    app_hid_table_handler                    0x000287c4   Data           8  app_hid.o(.constdata)
+    media_key                                0x000287cc   Data          94  app_key.o(.constdata)
+    app_oads_msg_handler_list                0x0002882c   Data          48  app_oads.o(.constdata)
+    app_oads_table_handler                   0x0002885c   Data           8  app_oads.o(.constdata)
+    app_sec_msg_handler_list                 0x0002890c   Data          40  app_sec.o(.constdata)
+    app_sec_table_handler                    0x00028934   Data           8  app_sec.o(.constdata)
+    appm_default_state                       0x000289b8   Data         208  app_task.o(.constdata)
+    appm_default_handler                     0x00028a88   Data           8  app_task.o(.constdata)
+    RF_CHANNEL_TABLE                         0x00028f50   Data          80  rf_test.o(.constdata)
+    Load$$RAM_DATA$$Base                     0x00028fa0   Number         0  anon$$obj.o ABSOLUTE
+    co_default_bdaddr                        0x00400024   Data           0  stack_rom_symbol.txt ABSOLUTE
+    llc_env                                  0x0040002c   Data           0  stack_rom_symbol.txt ABSOLUTE
+    llc_state                                0x00400030   Data           0  stack_rom_symbol.txt ABSOLUTE
+    latency_disable_state                    0x00400031   Data           0  stack_rom_symbol.txt ABSOLUTE
+    system_sleep_flag                        0x00400032   Data           0  stack_rom_symbol.txt ABSOLUTE
+    lld_sleep_env                            0x00400034   Data           0  stack_rom_symbol.txt ABSOLUTE
+    system_mode                              0x00400038   Data           0  stack_rom_symbol.txt ABSOLUTE
+    llm_state                                0x00400039   Data           0  stack_rom_symbol.txt ABSOLUTE
+    gapc_env                                 0x0040003c   Data           0  stack_rom_symbol.txt ABSOLUTE
+    gapc_state                               0x00400040   Data           0  stack_rom_symbol.txt ABSOLUTE
+    gapm_state                               0x00400041   Data           0  stack_rom_symbol.txt ABSOLUTE
+    gattc_env                                0x00400044   Data           0  stack_rom_symbol.txt ABSOLUTE
+    gattc_state                              0x00400048   Data           0  stack_rom_symbol.txt ABSOLUTE
+    gattm_state                              0x00400049   Data           0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_env                                 0x0040004c   Data           0  stack_rom_symbol.txt ABSOLUTE
+    l2cc_state                               0x00400050   Data           0  stack_rom_symbol.txt ABSOLUTE
+    ahi_state                                0x00400051   Data           0  stack_rom_symbol.txt ABSOLUTE
+    ke_env                                   0x0040007c   Data           0  stack_rom_symbol.txt ABSOLUTE
+    rwip_rf                                  0x00400130   Data           0  stack_rom_symbol.txt ABSOLUTE
+    rom_env                                  0x00400164   Data           0  stack_rom_symbol.txt ABSOLUTE
+    em_buf_env                               0x004001b0   Data           0  stack_rom_symbol.txt ABSOLUTE
+    lld_evt_env                              0x004004f8   Data           0  stack_rom_symbol.txt ABSOLUTE
+    llm_le_env                               0x00400524   Data           0  stack_rom_symbol.txt ABSOLUTE
+    gapm_env                                 0x004005a0   Data           0  stack_rom_symbol.txt ABSOLUTE
+    gattm_env                                0x004005d8   Data           0  stack_rom_symbol.txt ABSOLUTE
+    l2cm_env                                 0x004005f8   Data           0  stack_rom_symbol.txt ABSOLUTE
+    hci_env                                  0x00400604   Data           0  stack_rom_symbol.txt ABSOLUTE
+    hci_fc_env                               0x00400614   Data           0  stack_rom_symbol.txt ABSOLUTE
+    ahi_env                                  0x00400664   Data           0  stack_rom_symbol.txt ABSOLUTE
+    Image$$RAM_DATA$$Base                    0x00400800   Number         0  anon$$obj.o ABSOLUTE
+    pcm_index_in                             0x00400800   Data           1  audio.o(.data)
+    pcm_index_out                            0x00400801   Data           1  audio.o(.data)
+    pcm_sample_col                           0x00400804   Data           2  audio.o(.data)
+    flash_enable_write_flag1                 0x00400808   Data           1  flash.o(.data)
+    flash_enable_write_flag2                 0x00400809   Data           1  flash.o(.data)
+    flash_enable_write_flag3                 0x0040080a   Data           1  flash.o(.data)
+    flash_enable_write_flag4                 0x0040080b   Data           1  flash.o(.data)
+    flash_enable_erase_flag1                 0x0040080c   Data           1  flash.o(.data)
+    flash_enable_erase_flag2                 0x0040080d   Data           1  flash.o(.data)
+    flash_mid                                0x00400810   Data           4  flash.o(.data)
+    GPIO_CFG                                 0x00400818   Data          20  gpio.o(.data)
+    GPIO_DATA                                0x0040082c   Data          20  gpio.o(.data)
+    uart_rx_done                             0x00400844   Data           1  uart.o(.data)
+    cur_read_buf_idx                         0x00400845   Data           1  uart.o(.data)
+    uart_dut_reg_flag                        0x00400846   Data           1  uart.o(.data)
+    uart_rx_index                            0x0040084c   Data           4  uart.o(.data)
+    wdt_disable_flag                         0x00400854   Data           1  wdt.o(.data)
+    g_hid_handle                             0x00400856   Data           2  hogpd.o(.data)
+    oad_firmware_type                        0x00400859   Data           1  oads.o(.data)
+    wlist_enable_flag                        0x00400860   Data           1  app.o(.data)
+    pbuff_write                              0x00400861   Data           1  app.o(.data)
+    pbuff_read                               0x00400862   Data           1  app.o(.data)
+    app_batt_env                             0x0040086c   Data           2  app_batt.o(.data)
+    tx_buff_head                             0x00400870   Data           1  app_key.o(.data)
+    tx_buff_tail                             0x00400871   Data           1  app_key.o(.data)
+    tx_buff_count                            0x00400872   Data           1  app_key.o(.data)
+    app_key_state                            0x00400873   Data           1  app_key.o(.data)
+    stan_key_len                             0x00400877   Data           1  app_key.o(.data)
+    old_key_len                              0x00400878   Data           1  app_key.o(.data)
+    key_err_time                             0x00400879   Data           1  app_key.o(.data)
+    key_status                               0x0040087a   Data           1  app_key.o(.data)
+    m_key                                    0x0040087b   Data           1  app_key.o(.data)
+    s_key                                    0x0040087c   Data           1  app_key.o(.data)
+    c_key                                    0x0040087d   Data           1  app_key.o(.data)
+    p_key                                    0x0040087e   Data           1  app_key.o(.data)
+    key_null                                 0x0040087f   Data           1  app_key.o(.data)
+    sys_power_key                            0x00400880   Data           1  app_key.o(.data)
+    data_upload_status                       0x00400881   Data           1  app_key.o(.data)
+    power_key                                0x00400883   Data           3  app_key.o(.data)
+    gpio_buff_c                              0x00400886   Data           3  app_key.o(.data)
+    cow                                      0x00400889   Data           3  app_key.o(.data)
+    real_key_value                           0x0040088c   Data           3  app_key.o(.data)
+    sys_flag                                 0x00400890   Data           4  app_key.o(.data)
+    sys_media_key                            0x00400898   Data           4  app_key.o(.data)
+    gpio_buff_r                              0x0040089c   Data           5  app_key.o(.data)
+    row                                      0x004008a1   Data           5  app_key.o(.data)
+    tx_buff_len                              0x004008a6   Data           6  app_key.o(.data)
+    stan_key                                 0x004008ac   Data           8  app_key.o(.data)
+    old_key                                  0x004008b4   Data           8  app_key.o(.data)
+    sys_standard_key                         0x004008bc   Data           8  app_key.o(.data)
+    f1_f12                                   0x004008c4   Data          14  app_key.o(.data)
+    stand_key_map                            0x004008d2   Data          15  app_key.o(.data)
+    app_oads_env                             0x004008e1   Data           1  app_oads.o(.data)
+    app_sec_env                              0x004008e2   Data           5  app_sec.o(.data)
+    appm_state                               0x004008ec   Data           1  app_task.o(.data)
+    ch_status                                0x004008ed   Data           1  rf_test.o(.data)
+    freq                                     0x004008ee   Data           1  rf_test.o(.data)
+    powerlevel                               0x004008ef   Data           1  rf_test.o(.data)
+    p_mode                                   0x004008f0   Data           1  rf_test.o(.data)
+    d_mode                                   0x004008f1   Data           1  rf_test.o(.data)
+    hopping                                  0x004008f2   Data           1  rf_test.o(.data)
+    freq_value                               0x004008f3   Data           1  rf_test.o(.data)
+    temp                                     0x004008f4   Data           1  rf_test.o(.data)
+    index                                    0x004008f5   Data           1  rf_test.o(.data)
+    p_APB_XVER_ADDR                          0x004008fc   Data           4  rf_pn9_test.o(.data)
+    tx_rsp_buffer                            0x00400900   Data           7  rf_pn9_test.o(.data)
+    rx_rsp_buffer                            0x00400907   Data           7  rf_pn9_test.o(.data)
+    error_cmd_rsp                            0x0040090e   Data           7  rf_pn9_test.o(.data)
+    test_end_rsp_buffer                      0x00400915   Data           9  rf_pn9_test.o(.data)
+    Image$$RAM_BSS$$Base                     0x00400920   Number         0  anon$$obj.o ABSOLUTE
+    uart_api                                 0x00400920   Data          16  arch_main.o(.bss)
+    pcm_sample_buffer                        0x00400940   Data         960  audio.o(.bss)
+    flash_env                                0x00400d00   Data          12  flash.o(.bss)
+    GPIO_CFG_BACKUP                          0x00400d0c   Data          20  gpio.o(.bss)
+    GPIO_DATA_BACKUP                         0x00400d20   Data          20  gpio.o(.bss)
+    uart_rx_buf                              0x00400d34   Data          64  uart.o(.bss)
+    uart_env                                 0x00400d74   Data          20  uart.o(.bss)
+    uart_buff                                0x00400d88   Data          64  uart.o(.bss)
+    XVR_ANALOG_REG_BAK                       0x00400dc8   Data          64  rf_xvr.o(.bss)
+    bsec                                     0x00400e08   Data         192  oads.o(.bss)
+    prf_env                                  0x00400ec8   Data         240  prf.o(.bss)
+    app_env                                  0x00400fb8   Data          64  app.o(.bss)
+    encode_voice_data                        0x00400ff8   Data        3200  app.o(.bss)
+    app_hid_env                              0x00401c78   Data          20  app_hid.o(.bss)
+    bt_tx_buff                               0x00401c8c   Data          48  app_key.o(.bss)
+    key_flag                                 0x00401cbc   Data          15  app_key.o(.bss)
+    sbc_env                                  0x00401ccc   Data        2684  app_task.o(.bss)
+    send_buf                                 0x00402748   Data          20  app_task.o(.bss)
+    Image$$RAM_STACK_UNUSED$$Base            0x0040b50c   Number         0  anon$$obj.o ABSOLUTE
+    Image$$RAM_STACK_SVC$$Base               0x0040b52c   Number         0  anon$$obj.o ABSOLUTE
+    Image$$RAM_STACK_IRQ$$Base               0x0040bc1c   Number         0  anon$$obj.o ABSOLUTE
+    Image$$RAM_STACK_FIQ$$Base               0x0040be0c   Number         0  anon$$obj.o ABSOLUTE
+    rwip_heap_env                            0x00815000   Data         708  rwip.o(ke_heap)
+    rwip_heap_db                             0x008152c4   Data        1036  rwip.o(ke_heap)
+    rwip_heap_msg                            0x008156d0   Data        1404  rwip.o(ke_heap)
+    rwip_heap_non_ret                        0x00815c4c   Data        1548  rwip.o(ke_heap)
+
+
+
+==============================================================================
+
+Memory Map of the image
+
+  Image Entry point : 0x0001e284
+
+  Load Region SECTIONS (Base: 0x0001e200, Size: 0x0000aec0, Max: 0xffffffff, ABSOLUTE)
+
+    Execution Region ROM_SYS (Exec base: 0x0001e200, Load base: 0x0001e200, Size: 0x00000280, Max: 0xffffffff, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x0001e200   0x0001e200   0x0000005c   Code   RO           15  * SYS_BOOT            boot_vectors.o
+    0x0001e25c   0x0001e25c   0x000001f4   Code   RO           14  * SYS_BOOT            boot_handlers.o
+    0x0001e450   0x0001e450   0x00000008   Ven    RO          169    Veneer$$Code        anon$$obj.o
+    0x0001e458   0x0001e458   0x00000008   Ven    RO          170    Veneer$$Code        anon$$obj.o
+    0x0001e460   0x0001e460   0x00000008   Ven    RO          171    Veneer$$Code        anon$$obj.o
+    0x0001e468   0x0001e468   0x00000008   Ven    RO          172    Veneer$$Code        anon$$obj.o
+    0x0001e470   0x0001e470   0x00000008   Ven    RO          173    Veneer$$Code        anon$$obj.o
+    0x0001e478   0x0001e478   0x00000008   Ven    RO          174    Veneer$$Code        anon$$obj.o
+
+
+    Execution Region FAST_CALL_SEG (Exec base: 0x0001e500, Load base: 0x0001e500, Size: 0x00000030, Max: 0xffffffff, ABSOLUTE, FIXED)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x0001e500   0x0001e500   0x00000010   Code   RO           34    sys_fiq_entry       intc.o
+    0x0001e510   0x0001e510   0x00000010   PAD
+    0x0001e520   0x0001e520   0x00000010   Code   RO           35    sys_irq_entry       intc.o
+
+
+    Execution Region ROM (Exec base: 0x0001e530, Load base: 0x0001e530, Size: 0x0000aa70, Max: 0xffffffff, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x0001e530   0x0001e530   0x000004ec   Code   RO            5    .text               arch_main.o
+    0x0001ea1c   0x0001ea1c   0x00000180   Code   RO           16    .text               rwble.o
+    0x0001eb9c   0x0001eb9c   0x00000038   Code   RO           17    .text               rwble_hl.o
+    0x0001ebd4   0x0001ebd4   0x000002bc   Code   RO           18    .text               rwip.o
+    0x0001ee90   0x0001ee90   0x00000174   Code   RO           21    .text               audio.o
+    0x0001f004   0x0001f004   0x00000018   Code   RO           24    .text               emi.o
+    0x0001f01c   0x0001f01c   0x000006e8   Code   RO           25    .text               flash.o
+    0x0001f704   0x0001f704   0x000001dc   Code   RO           28    .text               gpio.o
+    0x0001f8e0   0x0001f8e0   0x00000188   Code   RO           31    .text               icu.o
+    0x0001fa68   0x0001fa68   0x00000094   Code   RO           33    .text               intc.o
+    0x0001fafc   0x0001fafc   0x0000002c   Code   RO           38    .text               timer.o
+    0x0001fb28   0x0001fb28   0x0000035c   Code   RO           39    .text               uart.o
+    0x0001fe84   0x0001fe84   0x00000068   Code   RO           43    .text               wdt.o
+    0x0001feec   0x0001feec   0x000004ac   Code   RO           45    .text               rf_xvr.o
+    0x00020398   0x00020398   0x000003b4   Code   RO           47    .text               bass.o
+    0x0002074c   0x0002074c   0x000002a4   Code   RO           49    .text               bass_task.o
+    0x000209f0   0x000209f0   0x00000180   Code   RO           52    .text               diss.o
+    0x00020b70   0x00020b70   0x000001d0   Code   RO           54    .text               diss_task.o
+    0x00020d40   0x00020d40   0x00000810   Code   RO           57    .text               hogpd.o
+    0x00021550   0x00021550   0x00000624   Code   RO           60    .text               hogpd_task.o
+    0x00021b74   0x00021b74   0x000007cc   Code   RO           64    .text               oads.o
+    0x00022340   0x00022340   0x00000310   Code   RO           68    .text               oads_task.o
+    0x00022650   0x00022650   0x00000238   Code   RO           72    .text               prf.o
+    0x00022888   0x00022888   0x00000060   Code   RO           74    .text               prf_utils.o
+    0x000228e8   0x000228e8   0x00000764   Code   RO           75    .text               app.o
+    0x0002304c   0x0002304c   0x000000a4   Code   RO           79    .text               app_batt.o
+    0x000230f0   0x000230f0   0x0000010c   Code   RO           83    .text               app_dis.o
+    0x000231fc   0x000231fc   0x00000604   Code   RO           86    .text               app_hid.o
+    0x00023800   0x00023800   0x00000cb0   Code   RO           91    .text               app_key.o
+    0x000244b0   0x000244b0   0x000001b8   Code   RO           99    .text               app_oads.o
+    0x00024668   0x00024668   0x000004e8   Code   RO          104    .text               app_sec.o
+    0x00024b50   0x00024b50   0x00000904   Code   RO          109    .text               app_task.o
+    0x00025454   0x00025454   0x00000634   Code   RO          117    .text               app_wlist.o
+    0x00025a88   0x00025a88   0x0000100c   Code   RO          119    .text               sbc_encode_v2.0.lib(app_sbc.o)
+    0x00026a94   0x00026a94   0x0000048c   Code   RO          125    .text               bk3435_fcc_mode.lib(rf_test.o)
+    0x00026f20   0x00026f20   0x000002fc   Code   RO          128    .text               bk3435_pn9_mode.lib(rf_pn9_test.o)
+    0x0002721c   0x0002721c   0x0000001e   Code   RO          132    .text               mc_5.l(strncmp.o)
+    0x0002723a   0x0002723a   0x000000b6   Code   RO          147    .text               mf_5.l(fadd.o)
+    0x000272f0   0x000272f0   0x0000007c   Code   RO          148    .text               mf_5.l(fdiv.o)
+    0x0002736c   0x0002736c   0x00000016   Code   RO          149    .text               mf_5.l(fflti.o)
+    0x00027382   0x00027382   0x00000028   Code   RO          150    .text               mf_5.l(ffixui.o)
+    0x000273aa   0x000273aa   0x00000060   Code   RO          153    .text               mc_5.l(uldiv.o)
+    0x0002740a   0x0002740a   0x00000002   PAD
+    0x0002740c   0x0002740c   0x00000000   Code   RO          154    .text               mc_5.l(iusefp.o)
+    0x0002740c   0x0002740c   0x00000068   Code   RO          155    .text               mf_5.l(fepilogue.o)
+    0x00027474   0x00027474   0x00000164   Code   RO          157    .text               mf_5.l(dadd.o)
+    0x000275d8   0x000275d8   0x000000d0   Code   RO          158    .text               mf_5.l(dmul.o)
+    0x000276a8   0x000276a8   0x000000f0   Code   RO          159    .text               mf_5.l(ddiv.o)
+    0x00027798   0x00027798   0x00000040   Code   RO          160    .text               mf_5.l(dfixul.o)
+    0x000277d8   0x000277d8   0x00000028   Code   RO          161    .text               mf_5.l(cdrcmple.o)
+    0x00027800   0x00027800   0x00000020   Code   RO          163    .text               mc_5.l(llshl.o)
+    0x00027820   0x00027820   0x00000022   Code   RO          164    .text               mc_5.l(llushr.o)
+    0x00027842   0x00027842   0x00000026   Code   RO          165    .text               mc_5.l(llsshr.o)
+    0x00027868   0x00027868   0x000000be   Code   RO          167    .text               mf_5.l(depilogue.o)
+    0x00027926   0x00027926   0x00000002   PAD
+    0x00027928   0x00027928   0x00000024   Code   RO          140    i.__0vsprintf       mc_5.l(printfa.o)
+    0x0002794c   0x0002794c   0x00000174   Code   RO          141    i._fp_digits        mc_5.l(printfa.o)
+    0x00027ac0   0x00027ac0   0x000006f4   Code   RO          142    i._printf_core      mc_5.l(printfa.o)
+    0x000281b4   0x000281b4   0x00000020   Code   RO          143    i._printf_post_padding  mc_5.l(printfa.o)
+    0x000281d4   0x000281d4   0x0000002c   Code   RO          144    i._printf_pre_padding  mc_5.l(printfa.o)
+    0x00028200   0x00028200   0x0000000a   Code   RO          146    i._sputc            mc_5.l(printfa.o)
+    0x0002820a   0x0002820a   0x0000002e   Data   RO            7    .constdata          arch_main.o
+    0x00028238   0x00028238   0x00000038   Data   RO           48    .constdata          bass.o
+    0x00028270   0x00028270   0x00000030   Data   RO           50    .constdata          bass_task.o
+    0x000282a0   0x000282a0   0x00000008   Data   RO           51    .constdata          bass_task.o
+    0x000282a8   0x000282a8   0x000000a8   Data   RO           53    .constdata          diss.o
+    0x00028350   0x00028350   0x00000018   Data   RO           55    .constdata          diss_task.o
+    0x00028368   0x00028368   0x00000008   Data   RO           56    .constdata          diss_task.o
+    0x00028370   0x00028370   0x000000c8   Data   RO           58    .constdata          hogpd.o
+    0x00028438   0x00028438   0x00000040   Data   RO           61    .constdata          hogpd_task.o
+    0x00028478   0x00028478   0x00000008   Data   RO           62    .constdata          hogpd_task.o
+    0x00028480   0x00028480   0x0000009e   Data   RO           66    .constdata          oads.o
+    0x0002851e   0x0002851e   0x00000002   PAD
+    0x00028520   0x00028520   0x00000030   Data   RO           69    .constdata          oads_task.o
+    0x00028550   0x00028550   0x00000008   Data   RO           70    .constdata          oads_task.o
+    0x00028558   0x00028558   0x00000032   Data   RO           71    .constdata          oads_task.o
+    0x0002858a   0x0002858a   0x00000002   PAD
+    0x0002858c   0x0002858c   0x00000036   Data   RO           77    .constdata          app.o
+    0x000285c2   0x000285c2   0x00000002   PAD
+    0x000285c4   0x000285c4   0x00000020   Data   RO           80    .constdata          app_batt.o
+    0x000285e4   0x000285e4   0x00000008   Data   RO           81    .constdata          app_batt.o
+    0x000285ec   0x000285ec   0x00000008   Data   RO           84    .constdata          app_dis.o
+    0x000285f4   0x000285f4   0x00000008   Data   RO           85    .constdata          app_dis.o
+    0x000285fc   0x000285fc   0x00000190   Data   RO           88    .constdata          app_hid.o
+    0x0002878c   0x0002878c   0x00000038   Data   RO           89    .constdata          app_hid.o
+    0x000287c4   0x000287c4   0x00000008   Data   RO           90    .constdata          app_hid.o
+    0x000287cc   0x000287cc   0x0000005e   Data   RO           93    .constdata          app_key.o
+    0x0002882a   0x0002882a   0x00000002   PAD
+    0x0002882c   0x0002882c   0x00000030   Data   RO          100    .constdata          app_oads.o
+    0x0002885c   0x0002885c   0x00000008   Data   RO          101    .constdata          app_oads.o
+    0x00028864   0x00028864   0x000000a8   Data   RO          102    .constdata          app_oads.o
+    0x0002890c   0x0002890c   0x00000028   Data   RO          105    .constdata          app_sec.o
+    0x00028934   0x00028934   0x00000008   Data   RO          106    .constdata          app_sec.o
+    0x0002893c   0x0002893c   0x0000007a   Data   RO          107    .constdata          app_sec.o
+    0x000289b6   0x000289b6   0x00000002   PAD
+    0x000289b8   0x000289b8   0x000000d0   Data   RO          112    .constdata          app_task.o
+    0x00028a88   0x00028a88   0x00000008   Data   RO          113    .constdata          app_task.o
+    0x00028a90   0x00028a90   0x000000e8   Data   RO          114    .constdata          app_task.o
+    0x00028b78   0x00028b78   0x0000020b   Data   RO          118    .constdata          app_wlist.o
+    0x00028d83   0x00028d83   0x00000001   PAD
+    0x00028d84   0x00028d84   0x000001cc   Data   RO          120    .constdata          sbc_encode_v2.0.lib(app_sbc.o)
+    0x00028f50   0x00028f50   0x00000050   Data   RO          126    .constdata          bk3435_fcc_mode.lib(rf_test.o)
+
+
+    Execution Region RAM_DATA (Exec base: 0x00400800, Load base: 0x00028fa0, Size: 0x00000120, Max: 0xffffffff, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x00400800   0x00028fa0   0x00000006   Data   RW           23    .data               audio.o
+    0x00400806   0x00028fa6   0x00000002   PAD
+    0x00400808   0x00028fa8   0x0000000c   Data   RW           27    .data               flash.o
+    0x00400814   0x00028fb4   0x0000002c   Data   RW           30    .data               gpio.o
+    0x00400840   0x00028fe0   0x00000002   Data   RW           32    .data               icu.o
+    0x00400842   0x00028fe2   0x00000002   PAD
+    0x00400844   0x00028fe4   0x00000010   Data   RW           42    .data               uart.o
+    0x00400854   0x00028ff4   0x00000002   Data   RW           44    .data               wdt.o
+    0x00400856   0x00028ff6   0x00000002   Data   RW           59    .data               hogpd.o
+    0x00400858   0x00028ff8   0x00000008   Data   RW           67    .data               oads.o
+    0x00400860   0x00029000   0x0000000c   Data   RW           78    .data               app.o
+    0x0040086c   0x0002900c   0x00000002   Data   RW           82    .data               app_batt.o
+    0x0040086e   0x0002900e   0x00000002   PAD
+    0x00400870   0x00029010   0x00000071   Data   RW           94    .data               app_key.o
+    0x004008e1   0x00029081   0x00000001   Data   RW          103    .data               app_oads.o
+    0x004008e2   0x00029082   0x00000005   Data   RW          108    .data               app_sec.o
+    0x004008e7   0x00029087   0x00000001   PAD
+    0x004008e8   0x00029088   0x00000004   Data   RW          115    .data               app_task.o
+    0x004008ec   0x0002908c   0x00000001   Data   RW          116    .data               app_task.o
+    0x004008ed   0x0002908d   0x00000009   Data   RW          127    .data               bk3435_fcc_mode.lib(rf_test.o)
+    0x004008f6   0x00029096   0x00000002   PAD
+    0x004008f8   0x00029098   0x00000026   Data   RW          129    .data               bk3435_pn9_mode.lib(rf_pn9_test.o)
+
+
+    Execution Region RAM_BSS (Exec base: 0x00400920, Load base: 0x000290c0, Size: 0x00001e3c, Max: 0xffffffff, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x00400920        -       0x00000010   Zero   RW            6    .bss                arch_main.o
+    0x00400930        -       0x00000010   Zero   RW           19    .bss                rwip.o
+    0x00400940        -       0x000003c0   Zero   RW           22    .bss                audio.o
+    0x00400d00        -       0x0000000c   Zero   RW           26    .bss                flash.o
+    0x00400d0c        -       0x00000028   Zero   RW           29    .bss                gpio.o
+    0x00400d34        -       0x00000094   Zero   RW           40    .bss                uart.o
+    0x00400dc8        -       0x00000040   Zero   RW           46    .bss                rf_xvr.o
+    0x00400e08        -       0x000000c0   Zero   RW           65    .bss                oads.o
+    0x00400ec8        -       0x000000f0   Zero   RW           73    .bss                prf.o
+    0x00400fb8        -       0x00000cc0   Zero   RW           76    .bss                app.o
+    0x00401c78        -       0x00000014   Zero   RW           87    .bss                app_hid.o
+    0x00401c8c        -       0x0000003f   Zero   RW           92    .bss                app_key.o
+    0x00401ccb   0x000290c0   0x00000001   PAD
+    0x00401ccc        -       0x00000a7c   Zero   RW          110    .bss                app_task.o
+    0x00402748        -       0x00000014   Zero   RW          111    .bss                app_task.o
+
+
+    Execution Region RAM_STACK_UNUSED (Exec base: 0x0040b50c, Load base: 0x000290c0, Size: 0x00000020, Max: 0x00000020, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x0040b50c        -       0x00000020   Zero   RW            1    RAM_STACK_UNUSED.bss  anon$$obj.o
+
+
+    Execution Region RAM_STACK_SVC (Exec base: 0x0040b52c, Load base: 0x000290c0, Size: 0x000006f0, Max: 0x000006f0, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x0040b52c        -       0x000006f0   Zero   RW            2    RAM_STACK_SVC.bss   anon$$obj.o
+
+
+    Execution Region RAM_STACK_IRQ (Exec base: 0x0040bc1c, Load base: 0x000290c0, Size: 0x000001f0, Max: 0x000001f0, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x0040bc1c        -       0x000001f0   Zero   RW            3    RAM_STACK_IRQ.bss   anon$$obj.o
+
+
+    Execution Region RAM_STACK_FIQ (Exec base: 0x0040be0c, Load base: 0x000290c0, Size: 0x000001f0, Max: 0x000001f0, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x0040be0c        -       0x000001f0   Zero   RW            4    RAM_STACK_FIQ.bss   anon$$obj.o
+
+
+    Execution Region RAM_BSS_1 (Exec base: 0x00815000, Load base: 0x000290c0, Size: 0x00001258, Max: 0xffffffff, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x00815000        -       0x00001258   Zero   RW           20    ke_heap             rwip.o
+
+
+==============================================================================
+
+Image component sizes
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
+
+      1892        492         54         12       3264          0   app.o
+       164         14         40          2          0          0   app_batt.o
+       268        110         16          0          0          0   app_dis.o
+      1540        134        464          0         20          0   app_hid.o
+      3248        244         94        113         63          0   app_key.o
+       440        126        224          1          0          0   app_oads.o
+      1256        424        170          5          0          0   app_sec.o
+      2308        738        448          5       2704          0   app_task.o
+      1588        230        523          0          0          0   app_wlist.o
+      1260        542         46          0         16          0   arch_main.o
+       372         68          0          6        960          0   audio.o
+       948         16         56          0          0          0   bass.o
+       676         12         56          0          0          0   bass_task.o
+       500         76          0          0          0          0   boot_handlers.o
+        92         32          0          0          0          0   boot_vectors.o
+       384         12        168          0          0          0   diss.o
+       464          8         32          0          0          0   diss_task.o
+        24          4          0          0          0          0   emi.o
+      1768        116          0         12         12          0   flash.o
+       476         20          0         44         40          0   gpio.o
+      2064         22        200          2          0          0   hogpd.o
+      1572         66         72          0          0          0   hogpd_task.o
+       392         38          0          2          0          0   icu.o
+       180         12          0          0          0          0   intc.o
+      1996        544        158          8        192          0   oads.o
+       784        138        106          0          0          0   oads_task.o
+       568          4          0          0        240          0   prf.o
+        96          0          0          0          0          0   prf_utils.o
+      1196        266          0          0         64          0   rf_xvr.o
+       384          8          0          0          0          0   rwble.o
+        56          0          0          0          0          0   rwble_hl.o
+       700         42          0          0       4712          0   rwip.o
+        44          4          0          0          0          0   timer.o
+       860         88          0         16        148          0   uart.o
+       104         10          0          2          0          0   wdt.o
+
+    ----------------------------------------------------------------------
+     30728       4684       2938        237      15236          0   Object Totals
+        48         24          0          0       2800          0   (incl. Generated)
+        16          0         11          7          1          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Member Name
+
+      1164        268         80          9          0          0   rf_test.o
+       764        190          0         38          0          0   rf_pn9_test.o
+         0          0          0          0          0          0   iusefp.o
+        32          0          0          0          0          0   llshl.o
+        38          0          0          0          0          0   llsshr.o
+        34          0          0          0          0          0   llushr.o
+      2274         94          0          0          0          0   printfa.o
+        30          0          0          0          0          0   strncmp.o
+        96          0          0          0          0          0   uldiv.o
+        40          2          0          0          0          0   cdrcmple.o
+       356          4          0          0          0          0   dadd.o
+       240          6          0          0          0          0   ddiv.o
+       190          0          0          0          0          0   depilogue.o
+        64         10          0          0          0          0   dfixul.o
+       208          6          0          0          0          0   dmul.o
+       182          0          0          0          0          0   fadd.o
+       124          0          0          0          0          0   fdiv.o
+       104          0          0          0          0          0   fepilogue.o
+        40          0          0          0          0          0   ffixui.o
+        22          0          0          0          0          0   fflti.o
+      4108        222        460          0          0          0   app_sbc.o
+
+    ----------------------------------------------------------------------
+     10114        802        540         51          0          0   Library Totals
+         4          0          0          4          0          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Name
+
+      1164        268         80          9          0          0   bk3435_fcc_mode.lib
+       764        190          0         38          0          0   bk3435_pn9_mode.lib
+      2504         94          0          0          0          0   mc_5.l
+      1570         28          0          0          0          0   mf_5.l
+      4108        222        460          0          0          0   sbc_encode_v2.0.lib
+
+    ----------------------------------------------------------------------
+     10114        802        540         51          0          0   Library Totals
+
+    ----------------------------------------------------------------------
+
+==============================================================================
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
+
+     40842       5486       3478        288      15236          0   Grand Totals
+     40842       5486       3478        288      15236          0   ELF Image Totals
+     40842       5486       3478        288          0          0   ROM Totals
+
+==============================================================================
+
+    Total RO  Size (Code + RO Data)                44320 (  43.28kB)
+    Total RW  Size (RW Data + ZI Data)             15524 (  15.16kB)
+    Total ROM Size (Code + RO Data + RW Data)      44608 (  43.56kB)
+
+==============================================================================
+
