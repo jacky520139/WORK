@@ -81,18 +81,19 @@ typedef enum
 #define GPIOD_6     0x36
 #define GPIOD_7     0x37
 
-#define	BlueLedPort		0x12
+#define	RedLedPort		0x12
 #define	BlueLedOn()		REG_APB5_GPIOB_DATA |= 0x04
 #define	BlueLedOff()	REG_APB5_GPIOB_DATA &= (~0x04)
 #define	BlueLedToggle()	REG_APB5_GPIOB_DATA ^= 0x04
 
 
-#define	RedLedPort		0x13
+#define	BlueLedPort		0x13
 #define	RedLedOn()		REG_APB5_GPIOB_DATA |= 0x08
 #define	RedLedOff()		REG_APB5_GPIOB_DATA &= (~0x08)
 #define	RedLedToggle()	REG_APB5_GPIOB_DATA ^= 0x08
 
-
+#define ButtonPort    0x05
+#define MotorPort     0x10
 
 void gpio_init(void);
 void gpio_config(uint8_t gpio, Dir_Type dir, Pull_Type pull);

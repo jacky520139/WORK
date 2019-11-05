@@ -23,33 +23,32 @@
 #include "icu.h"
 #include "BK3435_reg.h"
 #include "lld_evt.h"
-#include "LED.h"
 
+#include "ALL_Includes.h"
 void Init_LED(void)
 {
 	//≥ı ºªØLED
-	gpio_config(BlueLedPort|RedLedPort|0X10, OUTPUT, PULL_NONE);
-	gpio_config(BlueLedPort|RedLedPort|0X10, OUTPUT, PULL_NONE);
-//	gpio_config(RedLedPort, OUTPUT, PULL_NONE);
-	gpio_config(0x05, INPUT, PULL_HIGH);
+	gpio_config(BlueLedPort, OUTPUT, PULL_NONE);
+	gpio_config(RedLedPort, OUTPUT, PULL_NONE);
+  gpio_config(MotorPort, OUTPUT, PULL_NONE);
+	gpio_config(ButtonPort, INPUT, PULL_HIGH);
 	gpio_set(BlueLedPort, 1);
 	gpio_set(RedLedPort, 1);
-	
-gpio_set(0X10, 0);
+  gpio_set(ButtonPort, 0);
 while(1)
 {
 
-if(gpio_get_input(0x05))
+if(gpio_get_input(ButtonPort))
 {	gpio_set(BlueLedPort, 1);
 	gpio_set(RedLedPort, 1);
-	gpio_set(0X10, 0);}
+	gpio_set(MotorPort, 0);}
 	else
 	{
-gpio_set(BlueLedPort, 0);
+  gpio_set(BlueLedPort, 0);
 	gpio_set(RedLedPort, 0);
-	gpio_set(0X10, 1);}	
+	gpio_set(MotorPort, 1);}	
 	
-	
+	ANO_DT_Send_Version(0xf1,1, 2, 3, 4, 5);
 	}
 
 

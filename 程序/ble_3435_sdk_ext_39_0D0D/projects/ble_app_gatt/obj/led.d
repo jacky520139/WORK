@@ -72,4 +72,7 @@
 .\obj\led.o: ..\..\sdk\ble_stack\inc\ble\ll\llm\llm_task.h
 .\obj\led.o: ..\..\sdk\ble_stack\inc\ea\ea.h
 .\obj\led.o: ..\..\sdk\ble_stack\inc\ble\ll\llc\llc_task.h
+.\obj\led.o: user\ALL_Includes.h
+.\obj\led.o: user\ANO_UART.h
+.\obj\led.o: user\ALL_Includes.h
 .\obj\led.o: user\LED.h
