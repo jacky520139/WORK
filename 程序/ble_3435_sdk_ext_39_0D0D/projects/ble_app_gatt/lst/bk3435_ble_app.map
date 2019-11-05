@@ -13,6 +13,7 @@ Section Cross References
     arch_main.o(.text) refers to emi.o(.text) for emi_init
     arch_main.o(.text) refers to timer.o(.text) for timer_init
     arch_main.o(.text) refers to intc.o(.text) for intc_init
+    arch_main.o(.text) refers to adc.o(.text) for adc_init
     arch_main.o(.text) refers to led.o(.text) for Init_LED
     arch_main.o(.text) refers to gpio.o(.text) for gpio_config
     arch_main.o(.text) refers to rf_test.o(.text) for rw_fcc_enter
@@ -53,6 +54,7 @@ Section Cross References
     intc.o(.text) refers to icu.o(.text) for cpu_wakeup
     intc.o(.text) refers to uart.o(.text) for uart_isr
     intc.o(.text) refers to gpio.o(.text) for gpio_isr
+    intc.o(.text) refers to adc.o(.text) for adc_isr
     intc.o(.text) refers to rwble.o(.text) for rwble_isr
     intc.o(sys_fiq_entry) refers to intc.o(.text) for FIQ_Exception
     intc.o(sys_irq_entry) refers to intc.o(.text) for IRQ_Exception
@@ -154,7 +156,7 @@ Section Cross References
     app_task.o(.constdata) refers to app_task.o(.text) for appm_msg_handler
     app_task.o(.constdata) refers to app_task.o(.constdata) for appm_default_state
     led.o(.text) refers to gpio.o(.text) for gpio_config
-    led.o(.text) refers to ano_uart.o(.text) for ANO_DT_Send_Version
+    led.o(.text) refers to adc.o(.text) for adc_get_value
     ano_uart.o(.text) refers to ano_uart.o(.data) for .data
     ano_uart.o(.data) refers to uart.o(.text) for uart_send
     ano_uart.o(.data) refers to uart.o(.bss) for uart_tx_buf
@@ -228,10 +230,11 @@ Section Cross References
 Removing Unused input sections from the image.
 
     Removing arch_main.o(.data), (16 bytes).
-    Removing adc.o(.text), (208 bytes).
-    Removing adc.o(.data), (4 bytes).
     Removing pwm.o(.text), (400 bytes).
     Removing pwm.o(.bss), (20 bytes).
+    Removing uart.o(.bss), (64 bytes).
+    Removing ano_uart.o(.text), (120 bytes).
+    Removing ano_uart.o(.data), (8 bytes).
     Removing arch_main.o(i.__ARM_common_enable_irq), (16 bytes).
     Removing arch_main.o(i.__ARM_common_enable_fiq), (16 bytes).
     Removing arch_main.o(i.__ARM_common_disable_irq), (20 bytes).
@@ -239,7 +242,7 @@ Removing Unused input sections from the image.
     Removing app_dis.o(i.__ARM_common_switch8), (24 bytes).
     Removing depilogue.o(i.__ARM_clz), (8 bytes).
 
-11 unused section(s) (total 752 bytes) removed from the image.
+12 unused section(s) (total 732 bytes) removed from the image.
 
 ==============================================================================
 
@@ -330,230 +333,229 @@ Image Symbol Table
     sys_irq_entry                            0x0001e520   Section        0  intc.o(sys_irq_entry)
     .text                                    0x0001e530   Section        0  arch_main.o(.text)
     uart_rx_handler                          0x0001e6af   Thumb Code    36  arch_main.o(.text)
-    Stack_Integrity_Check                    0x0001e7cd   Thumb Code    84  arch_main.o(.text)
-    .text                                    0x0001ea70   Section        0  rwble_hl.o(.text)
-    .text                                    0x0001eaa8   Section        0  rwble.o(.text)
-    .text                                    0x0001ec28   Section        0  rwip.o(.text)
-    .text                                    0x0001eee4   Section        0  icu.o(.text)
-    .text                                    0x0001f06c   Section        0  gpio.o(.text)
-    .text                                    0x0001f248   Section        0  flash.o(.text)
-    .text                                    0x0001f930   Section        0  emi.o(.text)
-    .text                                    0x0001f948   Section        0  intc.o(.text)
-    .text                                    0x0001f9d0   Section        0  timer.o(.text)
-    .text                                    0x0001f9fc   Section        0  uart.o(.text)
-    .text                                    0x0001fd58   Section        0  wdt.o(.text)
-    .text                                    0x0001fdc0   Section        0  rf_xvr.o(.text)
-    rf_reset                                 0x0001fdc1   Thumb Code     2  rf_xvr.o(.text)
-    rf_txpwr_dbm_get                         0x0001fdc3   Thumb Code     4  rf_xvr.o(.text)
-    rf_sleep                                 0x0001fdc7   Thumb Code    14  rf_xvr.o(.text)
-    rf_rssi_convert                          0x0001fdd5   Thumb Code    10  rf_xvr.o(.text)
-    rf_rpl_reg_rd                            0x0001fddf   Thumb Code     4  rf_xvr.o(.text)
-    rf_rpl_reg_wr                            0x0001fde3   Thumb Code     4  rf_xvr.o(.text)
-    rf_force_agc_enable                      0x0001fde7   Thumb Code    16  rf_xvr.o(.text)
-    .text                                    0x0002026c   Section        0  bass.o(.text)
-    bass_init                                0x0002026d   Thumb Code   342  bass.o(.text)
-    bass_destroy                             0x000203c3   Thumb Code    28  bass.o(.text)
-    bass_create                              0x000203df   Thumb Code    10  bass.o(.text)
-    bass_cleanup                             0x000203e9   Thumb Code    10  bass.o(.text)
-    bass_notify_batt_lvl                     0x0002046d   Thumb Code    64  bass.o(.text)
-    .text                                    0x00020620   Section        0  bass_task.o(.text)
-    bass_enable_req_handler                  0x00020621   Thumb Code   122  bass_task.o(.text)
-    bass_batt_level_upd_req_handler          0x0002069b   Thumb Code   102  bass_task.o(.text)
-    gattc_att_info_req_ind_handler           0x00020701   Thumb Code    78  bass_task.o(.text)
-    gattc_write_req_ind_handler              0x0002074f   Thumb Code   160  bass_task.o(.text)
-    gattc_read_req_ind_handler               0x000207ef   Thumb Code   186  bass_task.o(.text)
-    gattc_cmp_evt_handler                    0x000208a9   Thumb Code    16  bass_task.o(.text)
-    .text                                    0x000208c4   Section        0  diss.o(.text)
-    diss_init                                0x000208ed   Thumb Code   130  diss.o(.text)
-    diss_destroy                             0x0002096f   Thumb Code    36  diss.o(.text)
-    diss_create                              0x00020993   Thumb Code     2  diss.o(.text)
-    diss_cleanup                             0x00020995   Thumb Code     2  diss.o(.text)
-    .text                                    0x00020a44   Section        0  diss_task.o(.text)
-    diss_set_value_req_handler               0x00020a45   Thumb Code   150  diss_task.o(.text)
-    gattc_read_req_ind_handler               0x00020adb   Thumb Code   186  diss_task.o(.text)
-    diss_value_cfm_handler                   0x00020b95   Thumb Code   120  diss_task.o(.text)
-    .text                                    0x00020c14   Section        0  fff0s.o(.text)
-    fff0s_init                               0x00020c15   Thumb Code   204  fff0s.o(.text)
-    fff0s_destroy                            0x00020ce1   Thumb Code    28  fff0s.o(.text)
-    fff0s_create                             0x00020cfd   Thumb Code    14  fff0s.o(.text)
-    fff0s_cleanup                            0x00020d0b   Thumb Code    14  fff0s.o(.text)
-    .text                                    0x00020ddc   Section        0  fff0s_task.o(.text)
-    fff0s_fff1_level_upd_req_handler         0x00020ddd   Thumb Code    56  fff0s_task.o(.text)
-    gattc_att_info_req_ind_handler           0x00020e15   Thumb Code    74  fff0s_task.o(.text)
-    gattc_write_req_ind_handler              0x00020e5f   Thumb Code   206  fff0s_task.o(.text)
-    gattc_read_req_ind_handler               0x00020f2d   Thumb Code   140  fff0s_task.o(.text)
-    gattc_cmp_evt_handler                    0x00020fb9   Thumb Code    68  fff0s_task.o(.text)
-    .text                                    0x00021004   Section        0  oads.o(.text)
-    oads_init                                0x00021005   Thumb Code   190  oads.o(.text)
-    oads_destroy                             0x000210c3   Thumb Code    28  oads.o(.text)
-    oads_create                              0x000210df   Thumb Code    18  oads.o(.text)
-    oads_cleanup                             0x000210f1   Thumb Code    18  oads.o(.text)
-    oadImgIdentifyReq                        0x000211c5   Thumb Code   150  oads.o(.text)
-    oadImgBlockReq                           0x0002125b   Thumb Code    76  oads.o(.text)
-    .text                                    0x000217d0   Section        0  oads_task.o(.text)
-    oads_enable_req_handler                  0x000217d1   Thumb Code   118  oads_task.o(.text)
-    oads_ffc1_upd_req_handler                0x00021847   Thumb Code    12  oads_task.o(.text)
-    oads_ffc2_upd_req_handler                0x00021853   Thumb Code    16  oads_task.o(.text)
-    gattc_write_req_ind_handler              0x00021863   Thumb Code   278  oads_task.o(.text)
-    gattc_read_req_ind_handler               0x00021979   Thumb Code   218  oads_task.o(.text)
-    gattc_cmp_evt_handler                    0x00021a53   Thumb Code     4  oads_task.o(.text)
-    .text                                    0x00021ae0   Section        0  prf.o(.text)
-    prf_itf_get                              0x00021ae1   Thumb Code    50  prf.o(.text)
-    .text                                    0x00021d18   Section        0  prf_utils.o(.text)
-    .text                                    0x00021d78   Section        0  app.o(.text)
-    .text                                    0x000220c4   Section        0  app_batt.o(.text)
-    bass_batt_level_ntf_cfg_ind_handler      0x0002214b   Thumb Code     4  app_batt.o(.text)
-    batt_level_upd_handler                   0x0002214f   Thumb Code     4  app_batt.o(.text)
-    bass_enable_rsp_handler                  0x00022153   Thumb Code     4  app_batt.o(.text)
-    app_batt_msg_dflt_handler                0x00022157   Thumb Code     4  app_batt.o(.text)
-    .text                                    0x00022168   Section        0  app_dis.o(.text)
-    diss_value_req_ind_handler               0x00022169   Thumb Code   124  app_dis.o(.text)
-    .text                                    0x00022274   Section        0  app_fff0.o(.text)
-    fff0s_fff1_level_ntf_cfg_ind_handler     0x000222d7   Thumb Code    14  app_fff0.o(.text)
-    fff1_level_upd_handler                   0x000222e5   Thumb Code    26  app_fff0.o(.text)
-    app_fff0_msg_dflt_handler                0x000222ff   Thumb Code    14  app_fff0.o(.text)
-    fff2_writer_req_handler                  0x0002230d   Thumb Code    48  app_fff0.o(.text)
-    fff1_period_ntf_handler                  0x0002233d   Thumb Code    18  app_fff0.o(.text)
-    .text                                    0x000223a4   Section        0  app_oads.o(.text)
-    oads_enable_rsp_handler                  0x00022415   Thumb Code     4  app_oads.o(.text)
-    app_oads_msg_dflt_handler                0x00022419   Thumb Code    32  app_oads.o(.text)
-    app_ffc1_writer_req_handler              0x00022439   Thumb Code    28  app_oads.o(.text)
-    app_ffc2_writer_req_handler              0x00022455   Thumb Code    16  app_oads.o(.text)
-    oads_ffc1_upd_rsp_handler                0x000224bf   Thumb Code    16  app_oads.o(.text)
-    oads_ffc2_upd_rsp_handler                0x000224cf   Thumb Code    16  app_oads.o(.text)
-    .text                                    0x0002255c   Section        0  app_task.o(.text)
-    appm_get_handler                         0x0002255d   Thumb Code    68  app_task.o(.text)
-    gapm_device_ready_ind_handler            0x000225a1   Thumb Code    26  app_task.o(.text)
-    gapm_cmp_evt_handler                     0x000225bb   Thumb Code   176  app_task.o(.text)
-    gapc_get_dev_info_req_ind_handler        0x0002266b   Thumb Code   106  app_task.o(.text)
-    gapc_set_dev_info_req_ind_handler        0x000226d5   Thumb Code    34  app_task.o(.text)
-    gapc_connection_req_ind_handler          0x000226f7   Thumb Code    94  app_task.o(.text)
-    gapc_cmp_evt_handler                     0x00022755   Thumb Code    94  app_task.o(.text)
-    gapc_disconnect_ind_handler              0x000227b3   Thumb Code    32  app_task.o(.text)
-    gapm_profile_added_ind_handler           0x000227d3   Thumb Code    12  app_task.o(.text)
-    app_period_timer_handler                 0x000227df   Thumb Code    16  app_task.o(.text)
-    appm_msg_handler                         0x000227ef   Thumb Code    58  app_task.o(.text)
-    gapc_update_conn_param_req_ind_handler   0x00022829   Thumb Code    36  app_task.o(.text)
-    gapc_le_pkt_size_ind_handler             0x0002284d   Thumb Code    50  app_task.o(.text)
-    gapc_param_updated_ind_handler           0x0002287f   Thumb Code    42  app_task.o(.text)
-    gattc_mtu_changed_ind_handler            0x000228a9   Thumb Code    28  app_task.o(.text)
-    gapc_param_update_req_ind_handler        0x000228c5   Thumb Code    48  app_task.o(.text)
-    .text                                    0x00022b44   Section        0  led.o(.text)
-    .text                                    0x00022bd4   Section        0  ano_uart.o(.text)
-    .text                                    0x00022c4c   Section        0  rf_test.o(.text)
-    .text                                    0x000230d8   Section        0  rf_pn9_test.o(.text)
-    .text                                    0x000233d4   Section        0  strncmp.o(.text)
-    .text                                    0x000233f2   Section        0  uldiv.o(.text)
-    .text                                    0x00023454   Section        0  iusefp.o(.text)
-    .text                                    0x00023454   Section        0  dadd.o(.text)
-    .text                                    0x000235b8   Section        0  dmul.o(.text)
-    .text                                    0x00023688   Section        0  ddiv.o(.text)
-    .text                                    0x00023778   Section        0  dfixul.o(.text)
-    .text                                    0x000237b8   Section       40  cdrcmple.o(.text)
-    .text                                    0x000237e0   Section        0  llshl.o(.text)
-    .text                                    0x00023800   Section        0  llushr.o(.text)
-    .text                                    0x00023822   Section        0  llsshr.o(.text)
-    .text                                    0x00023848   Section        0  depilogue.o(.text)
-    i.__0vsprintf                            0x00023908   Section        0  printfa.o(i.__0vsprintf)
-    i._fp_digits                             0x0002392c   Section        0  printfa.o(i._fp_digits)
-    _fp_digits                               0x0002392d   Thumb Code   344  printfa.o(i._fp_digits)
-    i._printf_core                           0x00023aa0   Section        0  printfa.o(i._printf_core)
-    _printf_core                             0x00023aa1   Thumb Code  1764  printfa.o(i._printf_core)
-    i._printf_post_padding                   0x00024194   Section        0  printfa.o(i._printf_post_padding)
-    _printf_post_padding                     0x00024195   Thumb Code    32  printfa.o(i._printf_post_padding)
-    i._printf_pre_padding                    0x000241b4   Section        0  printfa.o(i._printf_pre_padding)
-    _printf_pre_padding                      0x000241b5   Thumb Code    44  printfa.o(i._printf_pre_padding)
-    i._sputc                                 0x000241e0   Section        0  printfa.o(i._sputc)
-    _sputc                                   0x000241e1   Thumb Code    10  printfa.o(i._sputc)
-    .constdata                               0x000241ea   Section       46  arch_main.o(.constdata)
-    __func__                                 0x000241ea   Data          11  arch_main.o(.constdata)
-    __func__                                 0x000241f5   Data          13  arch_main.o(.constdata)
-    __func__                                 0x00024202   Data          12  arch_main.o(.constdata)
-    __func__                                 0x0002420e   Data          10  arch_main.o(.constdata)
-    .constdata                               0x00024218   Section       56  bass.o(.constdata)
-    .constdata                               0x00024250   Section       48  bass_task.o(.constdata)
-    .constdata                               0x00024280   Section        8  bass_task.o(.constdata)
-    .constdata                               0x00024288   Section      168  diss.o(.constdata)
-    .constdata                               0x00024330   Section       24  diss_task.o(.constdata)
-    .constdata                               0x00024348   Section        8  diss_task.o(.constdata)
-    .constdata                               0x00024350   Section       64  fff0s.o(.constdata)
-    .constdata                               0x00024390   Section       40  fff0s_task.o(.constdata)
-    .constdata                               0x000243b8   Section        8  fff0s_task.o(.constdata)
-    .constdata                               0x000243c0   Section      158  oads.o(.constdata)
-    __func__                                 0x00024418   Data          32  oads.o(.constdata)
-    __func__                                 0x00024438   Data          20  oads.o(.constdata)
-    __func__                                 0x0002444c   Data          18  oads.o(.constdata)
-    .constdata                               0x00024460   Section       48  oads_task.o(.constdata)
-    .constdata                               0x00024490   Section        8  oads_task.o(.constdata)
-    .constdata                               0x00024498   Section       50  oads_task.o(.constdata)
-    __func__                                 0x00024498   Data          24  oads_task.o(.constdata)
-    __func__                                 0x000244b0   Data          26  oads_task.o(.constdata)
-    .constdata                               0x000244cc   Section       32  app.o(.constdata)
-    TASK_DESC_APP                            0x000244cc   Data          16  app.o(.constdata)
-    appm_add_svc_func_list                   0x000244dc   Data          16  app.o(.constdata)
-    .constdata                               0x000244ec   Section       32  app_batt.o(.constdata)
-    .constdata                               0x0002450c   Section        8  app_batt.o(.constdata)
-    .constdata                               0x00024514   Section        8  app_dis.o(.constdata)
-    .constdata                               0x0002451c   Section        8  app_dis.o(.constdata)
-    .constdata                               0x00024524   Section       40  app_fff0.o(.constdata)
-    .constdata                               0x0002454c   Section        8  app_fff0.o(.constdata)
-    .constdata                               0x00024554   Section       26  app_fff0.o(.constdata)
-    __func__                                 0x00024554   Data          26  app_fff0.o(.constdata)
-    .constdata                               0x00024570   Section       48  app_oads.o(.constdata)
-    .constdata                               0x000245a0   Section        8  app_oads.o(.constdata)
-    .constdata                               0x000245a8   Section      168  app_oads.o(.constdata)
-    __func__                                 0x000245a8   Data          26  app_oads.o(.constdata)
-    __func__                                 0x000245c2   Data          28  app_oads.o(.constdata)
-    __func__                                 0x000245de   Data          28  app_oads.o(.constdata)
-    __func__                                 0x000245fa   Data          17  app_oads.o(.constdata)
-    __func__                                 0x0002460b   Data          17  app_oads.o(.constdata)
-    __func__                                 0x0002461c   Data          26  app_oads.o(.constdata)
-    __func__                                 0x00024636   Data          26  app_oads.o(.constdata)
-    .constdata                               0x00024650   Section      120  app_task.o(.constdata)
-    .constdata                               0x000246c8   Section        8  app_task.o(.constdata)
-    .constdata                               0x000246d0   Section      181  app_task.o(.constdata)
-    __func__                                 0x000246d0   Data          32  app_task.o(.constdata)
-    __func__                                 0x000246f0   Data          25  app_task.o(.constdata)
-    __func__                                 0x00024709   Data          29  app_task.o(.constdata)
-    __func__                                 0x00024726   Data          31  app_task.o(.constdata)
-    __func__                                 0x00024745   Data          30  app_task.o(.constdata)
-    __func__                                 0x00024763   Data          34  app_task.o(.constdata)
-    .constdata                               0x00024785   Section       80  rf_test.o(.constdata)
+    Stack_Integrity_Check                    0x0001e7dd   Thumb Code    84  arch_main.o(.text)
+    .text                                    0x0001ea80   Section        0  rwble_hl.o(.text)
+    .text                                    0x0001eab8   Section        0  rwble.o(.text)
+    .text                                    0x0001ec38   Section        0  rwip.o(.text)
+    .text                                    0x0001eef4   Section        0  icu.o(.text)
+    .text                                    0x0001f07c   Section        0  gpio.o(.text)
+    .text                                    0x0001f258   Section        0  flash.o(.text)
+    .text                                    0x0001f940   Section        0  emi.o(.text)
+    .text                                    0x0001f958   Section        0  adc.o(.text)
+    .text                                    0x0001fa30   Section        0  intc.o(.text)
+    .text                                    0x0001fac4   Section        0  timer.o(.text)
+    .text                                    0x0001faf0   Section        0  uart.o(.text)
+    .text                                    0x0001fe4c   Section        0  wdt.o(.text)
+    .text                                    0x0001feb4   Section        0  rf_xvr.o(.text)
+    rf_reset                                 0x0001feb5   Thumb Code     2  rf_xvr.o(.text)
+    rf_txpwr_dbm_get                         0x0001feb7   Thumb Code     4  rf_xvr.o(.text)
+    rf_sleep                                 0x0001febb   Thumb Code    14  rf_xvr.o(.text)
+    rf_rssi_convert                          0x0001fec9   Thumb Code    10  rf_xvr.o(.text)
+    rf_rpl_reg_rd                            0x0001fed3   Thumb Code     4  rf_xvr.o(.text)
+    rf_rpl_reg_wr                            0x0001fed7   Thumb Code     4  rf_xvr.o(.text)
+    rf_force_agc_enable                      0x0001fedb   Thumb Code    16  rf_xvr.o(.text)
+    .text                                    0x00020360   Section        0  bass.o(.text)
+    bass_init                                0x00020361   Thumb Code   342  bass.o(.text)
+    bass_destroy                             0x000204b7   Thumb Code    28  bass.o(.text)
+    bass_create                              0x000204d3   Thumb Code    10  bass.o(.text)
+    bass_cleanup                             0x000204dd   Thumb Code    10  bass.o(.text)
+    bass_notify_batt_lvl                     0x00020561   Thumb Code    64  bass.o(.text)
+    .text                                    0x00020714   Section        0  bass_task.o(.text)
+    bass_enable_req_handler                  0x00020715   Thumb Code   122  bass_task.o(.text)
+    bass_batt_level_upd_req_handler          0x0002078f   Thumb Code   102  bass_task.o(.text)
+    gattc_att_info_req_ind_handler           0x000207f5   Thumb Code    78  bass_task.o(.text)
+    gattc_write_req_ind_handler              0x00020843   Thumb Code   160  bass_task.o(.text)
+    gattc_read_req_ind_handler               0x000208e3   Thumb Code   186  bass_task.o(.text)
+    gattc_cmp_evt_handler                    0x0002099d   Thumb Code    16  bass_task.o(.text)
+    .text                                    0x000209b8   Section        0  diss.o(.text)
+    diss_init                                0x000209e1   Thumb Code   130  diss.o(.text)
+    diss_destroy                             0x00020a63   Thumb Code    36  diss.o(.text)
+    diss_create                              0x00020a87   Thumb Code     2  diss.o(.text)
+    diss_cleanup                             0x00020a89   Thumb Code     2  diss.o(.text)
+    .text                                    0x00020b38   Section        0  diss_task.o(.text)
+    diss_set_value_req_handler               0x00020b39   Thumb Code   150  diss_task.o(.text)
+    gattc_read_req_ind_handler               0x00020bcf   Thumb Code   186  diss_task.o(.text)
+    diss_value_cfm_handler                   0x00020c89   Thumb Code   120  diss_task.o(.text)
+    .text                                    0x00020d08   Section        0  fff0s.o(.text)
+    fff0s_init                               0x00020d09   Thumb Code   204  fff0s.o(.text)
+    fff0s_destroy                            0x00020dd5   Thumb Code    28  fff0s.o(.text)
+    fff0s_create                             0x00020df1   Thumb Code    14  fff0s.o(.text)
+    fff0s_cleanup                            0x00020dff   Thumb Code    14  fff0s.o(.text)
+    .text                                    0x00020ed0   Section        0  fff0s_task.o(.text)
+    fff0s_fff1_level_upd_req_handler         0x00020ed1   Thumb Code    56  fff0s_task.o(.text)
+    gattc_att_info_req_ind_handler           0x00020f09   Thumb Code    74  fff0s_task.o(.text)
+    gattc_write_req_ind_handler              0x00020f53   Thumb Code   206  fff0s_task.o(.text)
+    gattc_read_req_ind_handler               0x00021021   Thumb Code   140  fff0s_task.o(.text)
+    gattc_cmp_evt_handler                    0x000210ad   Thumb Code    68  fff0s_task.o(.text)
+    .text                                    0x000210f8   Section        0  oads.o(.text)
+    oads_init                                0x000210f9   Thumb Code   190  oads.o(.text)
+    oads_destroy                             0x000211b7   Thumb Code    28  oads.o(.text)
+    oads_create                              0x000211d3   Thumb Code    18  oads.o(.text)
+    oads_cleanup                             0x000211e5   Thumb Code    18  oads.o(.text)
+    oadImgIdentifyReq                        0x000212b9   Thumb Code   150  oads.o(.text)
+    oadImgBlockReq                           0x0002134f   Thumb Code    76  oads.o(.text)
+    .text                                    0x000218c4   Section        0  oads_task.o(.text)
+    oads_enable_req_handler                  0x000218c5   Thumb Code   118  oads_task.o(.text)
+    oads_ffc1_upd_req_handler                0x0002193b   Thumb Code    12  oads_task.o(.text)
+    oads_ffc2_upd_req_handler                0x00021947   Thumb Code    16  oads_task.o(.text)
+    gattc_write_req_ind_handler              0x00021957   Thumb Code   278  oads_task.o(.text)
+    gattc_read_req_ind_handler               0x00021a6d   Thumb Code   218  oads_task.o(.text)
+    gattc_cmp_evt_handler                    0x00021b47   Thumb Code     4  oads_task.o(.text)
+    .text                                    0x00021bd4   Section        0  prf.o(.text)
+    prf_itf_get                              0x00021bd5   Thumb Code    50  prf.o(.text)
+    .text                                    0x00021e0c   Section        0  prf_utils.o(.text)
+    .text                                    0x00021e6c   Section        0  app.o(.text)
+    .text                                    0x000221b8   Section        0  app_batt.o(.text)
+    bass_batt_level_ntf_cfg_ind_handler      0x0002223f   Thumb Code     4  app_batt.o(.text)
+    batt_level_upd_handler                   0x00022243   Thumb Code     4  app_batt.o(.text)
+    bass_enable_rsp_handler                  0x00022247   Thumb Code     4  app_batt.o(.text)
+    app_batt_msg_dflt_handler                0x0002224b   Thumb Code     4  app_batt.o(.text)
+    .text                                    0x0002225c   Section        0  app_dis.o(.text)
+    diss_value_req_ind_handler               0x0002225d   Thumb Code   124  app_dis.o(.text)
+    .text                                    0x00022368   Section        0  app_fff0.o(.text)
+    fff0s_fff1_level_ntf_cfg_ind_handler     0x000223cb   Thumb Code    14  app_fff0.o(.text)
+    fff1_level_upd_handler                   0x000223d9   Thumb Code    26  app_fff0.o(.text)
+    app_fff0_msg_dflt_handler                0x000223f3   Thumb Code    14  app_fff0.o(.text)
+    fff2_writer_req_handler                  0x00022401   Thumb Code    48  app_fff0.o(.text)
+    fff1_period_ntf_handler                  0x00022431   Thumb Code    18  app_fff0.o(.text)
+    .text                                    0x00022498   Section        0  app_oads.o(.text)
+    oads_enable_rsp_handler                  0x00022509   Thumb Code     4  app_oads.o(.text)
+    app_oads_msg_dflt_handler                0x0002250d   Thumb Code    32  app_oads.o(.text)
+    app_ffc1_writer_req_handler              0x0002252d   Thumb Code    28  app_oads.o(.text)
+    app_ffc2_writer_req_handler              0x00022549   Thumb Code    16  app_oads.o(.text)
+    oads_ffc1_upd_rsp_handler                0x000225b3   Thumb Code    16  app_oads.o(.text)
+    oads_ffc2_upd_rsp_handler                0x000225c3   Thumb Code    16  app_oads.o(.text)
+    .text                                    0x00022650   Section        0  app_task.o(.text)
+    appm_get_handler                         0x00022651   Thumb Code    68  app_task.o(.text)
+    gapm_device_ready_ind_handler            0x00022695   Thumb Code    26  app_task.o(.text)
+    gapm_cmp_evt_handler                     0x000226af   Thumb Code   176  app_task.o(.text)
+    gapc_get_dev_info_req_ind_handler        0x0002275f   Thumb Code   106  app_task.o(.text)
+    gapc_set_dev_info_req_ind_handler        0x000227c9   Thumb Code    34  app_task.o(.text)
+    gapc_connection_req_ind_handler          0x000227eb   Thumb Code    94  app_task.o(.text)
+    gapc_cmp_evt_handler                     0x00022849   Thumb Code    94  app_task.o(.text)
+    gapc_disconnect_ind_handler              0x000228a7   Thumb Code    32  app_task.o(.text)
+    gapm_profile_added_ind_handler           0x000228c7   Thumb Code    12  app_task.o(.text)
+    app_period_timer_handler                 0x000228d3   Thumb Code    16  app_task.o(.text)
+    appm_msg_handler                         0x000228e3   Thumb Code    58  app_task.o(.text)
+    gapc_update_conn_param_req_ind_handler   0x0002291d   Thumb Code    36  app_task.o(.text)
+    gapc_le_pkt_size_ind_handler             0x00022941   Thumb Code    50  app_task.o(.text)
+    gapc_param_updated_ind_handler           0x00022973   Thumb Code    42  app_task.o(.text)
+    gattc_mtu_changed_ind_handler            0x0002299d   Thumb Code    28  app_task.o(.text)
+    gapc_param_update_req_ind_handler        0x000229b9   Thumb Code    48  app_task.o(.text)
+    .text                                    0x00022c38   Section        0  led.o(.text)
+    .text                                    0x00022cb8   Section        0  rf_test.o(.text)
+    .text                                    0x00023144   Section        0  rf_pn9_test.o(.text)
+    .text                                    0x00023440   Section        0  strncmp.o(.text)
+    .text                                    0x0002345e   Section        0  uldiv.o(.text)
+    .text                                    0x000234c0   Section        0  iusefp.o(.text)
+    .text                                    0x000234c0   Section        0  dadd.o(.text)
+    .text                                    0x00023624   Section        0  dmul.o(.text)
+    .text                                    0x000236f4   Section        0  ddiv.o(.text)
+    .text                                    0x000237e4   Section        0  dfixul.o(.text)
+    .text                                    0x00023824   Section       40  cdrcmple.o(.text)
+    .text                                    0x0002384c   Section        0  llshl.o(.text)
+    .text                                    0x0002386c   Section        0  llushr.o(.text)
+    .text                                    0x0002388e   Section        0  llsshr.o(.text)
+    .text                                    0x000238b4   Section        0  depilogue.o(.text)
+    i.__0vsprintf                            0x00023974   Section        0  printfa.o(i.__0vsprintf)
+    i._fp_digits                             0x00023998   Section        0  printfa.o(i._fp_digits)
+    _fp_digits                               0x00023999   Thumb Code   344  printfa.o(i._fp_digits)
+    i._printf_core                           0x00023b0c   Section        0  printfa.o(i._printf_core)
+    _printf_core                             0x00023b0d   Thumb Code  1764  printfa.o(i._printf_core)
+    i._printf_post_padding                   0x00024200   Section        0  printfa.o(i._printf_post_padding)
+    _printf_post_padding                     0x00024201   Thumb Code    32  printfa.o(i._printf_post_padding)
+    i._printf_pre_padding                    0x00024220   Section        0  printfa.o(i._printf_pre_padding)
+    _printf_pre_padding                      0x00024221   Thumb Code    44  printfa.o(i._printf_pre_padding)
+    i._sputc                                 0x0002424c   Section        0  printfa.o(i._sputc)
+    _sputc                                   0x0002424d   Thumb Code    10  printfa.o(i._sputc)
+    .constdata                               0x00024256   Section       46  arch_main.o(.constdata)
+    __func__                                 0x00024256   Data          11  arch_main.o(.constdata)
+    __func__                                 0x00024261   Data          13  arch_main.o(.constdata)
+    __func__                                 0x0002426e   Data          12  arch_main.o(.constdata)
+    __func__                                 0x0002427a   Data          10  arch_main.o(.constdata)
+    .constdata                               0x00024284   Section       56  bass.o(.constdata)
+    .constdata                               0x000242bc   Section       48  bass_task.o(.constdata)
+    .constdata                               0x000242ec   Section        8  bass_task.o(.constdata)
+    .constdata                               0x000242f4   Section      168  diss.o(.constdata)
+    .constdata                               0x0002439c   Section       24  diss_task.o(.constdata)
+    .constdata                               0x000243b4   Section        8  diss_task.o(.constdata)
+    .constdata                               0x000243bc   Section       64  fff0s.o(.constdata)
+    .constdata                               0x000243fc   Section       40  fff0s_task.o(.constdata)
+    .constdata                               0x00024424   Section        8  fff0s_task.o(.constdata)
+    .constdata                               0x0002442c   Section      158  oads.o(.constdata)
+    __func__                                 0x00024484   Data          32  oads.o(.constdata)
+    __func__                                 0x000244a4   Data          20  oads.o(.constdata)
+    __func__                                 0x000244b8   Data          18  oads.o(.constdata)
+    .constdata                               0x000244cc   Section       48  oads_task.o(.constdata)
+    .constdata                               0x000244fc   Section        8  oads_task.o(.constdata)
+    .constdata                               0x00024504   Section       50  oads_task.o(.constdata)
+    __func__                                 0x00024504   Data          24  oads_task.o(.constdata)
+    __func__                                 0x0002451c   Data          26  oads_task.o(.constdata)
+    .constdata                               0x00024538   Section       32  app.o(.constdata)
+    TASK_DESC_APP                            0x00024538   Data          16  app.o(.constdata)
+    appm_add_svc_func_list                   0x00024548   Data          16  app.o(.constdata)
+    .constdata                               0x00024558   Section       32  app_batt.o(.constdata)
+    .constdata                               0x00024578   Section        8  app_batt.o(.constdata)
+    .constdata                               0x00024580   Section        8  app_dis.o(.constdata)
+    .constdata                               0x00024588   Section        8  app_dis.o(.constdata)
+    .constdata                               0x00024590   Section       40  app_fff0.o(.constdata)
+    .constdata                               0x000245b8   Section        8  app_fff0.o(.constdata)
+    .constdata                               0x000245c0   Section       26  app_fff0.o(.constdata)
+    __func__                                 0x000245c0   Data          26  app_fff0.o(.constdata)
+    .constdata                               0x000245dc   Section       48  app_oads.o(.constdata)
+    .constdata                               0x0002460c   Section        8  app_oads.o(.constdata)
+    .constdata                               0x00024614   Section      168  app_oads.o(.constdata)
+    __func__                                 0x00024614   Data          26  app_oads.o(.constdata)
+    __func__                                 0x0002462e   Data          28  app_oads.o(.constdata)
+    __func__                                 0x0002464a   Data          28  app_oads.o(.constdata)
+    __func__                                 0x00024666   Data          17  app_oads.o(.constdata)
+    __func__                                 0x00024677   Data          17  app_oads.o(.constdata)
+    __func__                                 0x00024688   Data          26  app_oads.o(.constdata)
+    __func__                                 0x000246a2   Data          26  app_oads.o(.constdata)
+    .constdata                               0x000246bc   Section      120  app_task.o(.constdata)
+    .constdata                               0x00024734   Section        8  app_task.o(.constdata)
+    .constdata                               0x0002473c   Section      181  app_task.o(.constdata)
+    __func__                                 0x0002473c   Data          32  app_task.o(.constdata)
+    __func__                                 0x0002475c   Data          25  app_task.o(.constdata)
+    __func__                                 0x00024775   Data          29  app_task.o(.constdata)
+    __func__                                 0x00024792   Data          31  app_task.o(.constdata)
+    __func__                                 0x000247b1   Data          30  app_task.o(.constdata)
+    __func__                                 0x000247cf   Data          34  app_task.o(.constdata)
+    .constdata                               0x000247f1   Section       80  rf_test.o(.constdata)
     .data                                    0x00400800   Section        2  icu.o(.data)
     reduce_voltage_set                       0x00400800   Data           1  icu.o(.data)
     default_sleep_mode                       0x00400801   Data           1  icu.o(.data)
     .data                                    0x00400804   Section       44  gpio.o(.data)
     gpio_int_cb                              0x00400804   Data           4  gpio.o(.data)
     .data                                    0x00400830   Section       12  flash.o(.data)
-    .data                                    0x0040083c   Section       16  uart.o(.data)
-    str                                      0x0040083f   Data           3  uart.o(.data)
-    usrt_rx_cb                               0x00400848   Data           4  uart.o(.data)
-    .data                                    0x0040084c   Section        2  wdt.o(.data)
-    wdt_enable_status                        0x0040084d   Data           1  wdt.o(.data)
-    .data                                    0x0040084e   Section        8  oads.o(.data)
-    oad_uid_check_status                     0x0040084e   Data           1  oads.o(.data)
-    oadBlkNum                                0x00400850   Data           2  oads.o(.data)
-    oadBlkTot                                0x00400852   Data           2  oads.o(.data)
-    validBlockCnt                            0x00400854   Data           2  oads.o(.data)
-    .data                                    0x00400856   Section        2  app_batt.o(.data)
-    .data                                    0x00400858   Section        2  app_fff0.o(.data)
-    .data                                    0x0040085a   Section        1  app_oads.o(.data)
-    .data                                    0x0040085b   Section        1  app_task.o(.data)
-    .data                                    0x0040085c   Section        8  ano_uart.o(.data)
-    .data                                    0x00400864   Section        9  rf_test.o(.data)
-    .data                                    0x00400870   Section       38  rf_pn9_test.o(.data)
-    tst_mode                                 0x00400870   Data           1  rf_pn9_test.o(.data)
-    .bss                                     0x00400898   Section       16  arch_main.o(.bss)
-    .bss                                     0x004008a8   Section       16  rwip.o(.bss)
-    rwip_env                                 0x004008a8   Data          16  rwip.o(.bss)
-    .bss                                     0x004008b8   Section       40  gpio.o(.bss)
-    .bss                                     0x004008e0   Section       12  flash.o(.bss)
-    .bss                                     0x004008ec   Section      148  uart.o(.bss)
-    .bss                                     0x00400980   Section       64  uart.o(.bss)
-    .bss                                     0x004009c0   Section       64  rf_xvr.o(.bss)
-    .bss                                     0x00400a00   Section      192  oads.o(.bss)
-    .bss                                     0x00400ac0   Section      240  prf.o(.bss)
-    .bss                                     0x00400bb0   Section       40  app.o(.bss)
+    .data                                    0x0040083c   Section        4  adc.o(.data)
+    .data                                    0x00400840   Section       16  uart.o(.data)
+    str                                      0x00400843   Data           3  uart.o(.data)
+    usrt_rx_cb                               0x0040084c   Data           4  uart.o(.data)
+    .data                                    0x00400850   Section        2  wdt.o(.data)
+    wdt_enable_status                        0x00400851   Data           1  wdt.o(.data)
+    .data                                    0x00400852   Section        8  oads.o(.data)
+    oad_uid_check_status                     0x00400852   Data           1  oads.o(.data)
+    oadBlkNum                                0x00400854   Data           2  oads.o(.data)
+    oadBlkTot                                0x00400856   Data           2  oads.o(.data)
+    validBlockCnt                            0x00400858   Data           2  oads.o(.data)
+    .data                                    0x0040085a   Section        2  app_batt.o(.data)
+    .data                                    0x0040085c   Section        2  app_fff0.o(.data)
+    .data                                    0x0040085e   Section        1  app_oads.o(.data)
+    .data                                    0x0040085f   Section        1  app_task.o(.data)
+    .data                                    0x00400860   Section        9  rf_test.o(.data)
+    .data                                    0x0040086c   Section       38  rf_pn9_test.o(.data)
+    tst_mode                                 0x0040086c   Data           1  rf_pn9_test.o(.data)
+    .bss                                     0x00400894   Section       16  arch_main.o(.bss)
+    .bss                                     0x004008a4   Section       16  rwip.o(.bss)
+    rwip_env                                 0x004008a4   Data          16  rwip.o(.bss)
+    .bss                                     0x004008b4   Section       40  gpio.o(.bss)
+    .bss                                     0x004008dc   Section       12  flash.o(.bss)
+    .bss                                     0x004008e8   Section      148  uart.o(.bss)
+    .bss                                     0x0040097c   Section       64  rf_xvr.o(.bss)
+    .bss                                     0x004009bc   Section      192  oads.o(.bss)
+    .bss                                     0x00400a7c   Section      240  prf.o(.bss)
+    .bss                                     0x00400b6c   Section       40  app.o(.bss)
     ke_heap                                  0x00815000   Section     4696  rwip.o(ke_heap)
 
     Global Symbols
@@ -563,10 +565,10 @@ Image Symbol Table
     BuildAttributes$$THM_ISAv2$ARM_ISAv5$E$P$S$PE$A:L22$X:L11$S22$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OSPACE$ROPI$EBA8$MICROLIB$REQ8$PRES8$EABIv2 0x00000000   Number         0  anon$$obj.o ABSOLUTE
     Image$$RAM_BSS$$Length                   0x00000000   Number         0  anon$$obj.o ABSOLUTE
     Image$$RAM_STACK_UNUSED$$ZI$$Length      0x00000020   Number         0  anon$$obj.o ABSOLUTE
-    Image$$RAM_DATA$$Length                  0x00000098   Number         0  anon$$obj.o ABSOLUTE
+    Image$$RAM_DATA$$Length                  0x00000094   Number         0  anon$$obj.o ABSOLUTE
     Image$$RAM_STACK_FIQ$$ZI$$Length         0x000001f0   Number         0  anon$$obj.o ABSOLUTE
     Image$$RAM_STACK_IRQ$$ZI$$Length         0x000001f0   Number         0  anon$$obj.o ABSOLUTE
-    Image$$RAM_BSS$$ZI$$Length               0x00000340   Number         0  anon$$obj.o ABSOLUTE
+    Image$$RAM_BSS$$ZI$$Length               0x00000300   Number         0  anon$$obj.o ABSOLUTE
     Image$$RAM_STACK_SVC$$ZI$$Length         0x000004f0   Number         0  anon$$obj.o ABSOLUTE
     uart_stack_register                      0x00002181   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
     Undefined_Exception                      0x0000219d   Thumb Code     0  stack_rom_symbol.txt ABSOLUTE
@@ -1172,234 +1174,236 @@ Image Symbol Table
     sys_mode_init                            0x0001e651   Thumb Code     8  arch_main.o(.text)
     rom_env_init                             0x0001e659   Thumb Code    86  arch_main.o(.text)
     rwip_eif_api_init                        0x0001e6d3   Thumb Code    20  arch_main.o(.text)
-    rw_main                                  0x0001e6e7   Thumb Code   214  arch_main.o(.text)
-    rwip_eif_get                             0x0001e7bd   Thumb Code    16  arch_main.o(.text)
-    rwble_hl_init                            0x0001ea71   Thumb Code    28  rwble_hl.o(.text)
-    rwble_hl_reset                           0x0001ea8d   Thumb Code    28  rwble_hl.o(.text)
-    rwble_init                               0x0001eaa9   Thumb Code    28  rwble.o(.text)
-    rwble_reset                              0x0001eac5   Thumb Code    86  rwble.o(.text)
-    rwble_sleep_check                        0x0001eb1b   Thumb Code    16  rwble.o(.text)
-    rwble_activity_ongoing_check             0x0001eb2b   Thumb Code    30  rwble.o(.text)
-    rwble_version                            0x0001eb49   Thumb Code    44  rwble.o(.text)
-    rwble_isr                                0x0001eb75   Thumb Code   172  rwble.o(.text)
-    rwip_check_wakeup_boundary               0x0001ec29   Thumb Code    34  rwip.o(.text)
-    rwip_init                                0x0001ec4b   Thumb Code   182  rwip.o(.text)
-    rwip_reset                               0x0001ed01   Thumb Code    56  rwip.o(.text)
-    rwip_version                             0x0001ed39   Thumb Code     8  rwip.o(.text)
-    rwip_schedule                            0x0001ed41   Thumb Code    16  rwip.o(.text)
-    rwip_prevent_sleep_set                   0x0001ed51   Thumb Code    42  rwip.o(.text)
-    rwip_sleep                               0x0001ed7b   Thumb Code   144  rwip.o(.text)
-    rwip_wakeup                              0x0001ee0b   Thumb Code    24  rwip.o(.text)
-    rwip_prevent_sleep_clear                 0x0001ee23   Thumb Code    42  rwip.o(.text)
-    rwip_wakeup_end                          0x0001ee4d   Thumb Code    36  rwip.o(.text)
-    rwip_us_2_lpcycles                       0x0001ee71   Thumb Code    12  rwip.o(.text)
-    rwip_wakeup_delay_set                    0x0001ee7d   Thumb Code    12  rwip.o(.text)
-    rwip_prevent_sleep_get                   0x0001ee89   Thumb Code     6  rwip.o(.text)
-    rwip_sleep_enable                        0x0001ee8f   Thumb Code     6  rwip.o(.text)
-    rwip_ext_wakeup_enable                   0x0001ee95   Thumb Code     6  rwip.o(.text)
-    rwip_sleep_lpcycles_2_us                 0x0001ee9b   Thumb Code    32  rwip.o(.text)
-    system_sleep_init                        0x0001eee5   Thumb Code    20  icu.o(.text)
-    icu_init                                 0x0001eef9   Thumb Code    74  icu.o(.text)
-    icu_get_sleep_mode                       0x0001ef43   Thumb Code     6  icu.o(.text)
-    icu_set_sleep_mode                       0x0001ef49   Thumb Code     6  icu.o(.text)
-    cpu_reduce_voltage_sleep                 0x0001ef4f   Thumb Code    60  icu.o(.text)
-    cpu_wakeup                               0x0001ef8b   Thumb Code    28  icu.o(.text)
-    cpu_idle_sleep                           0x0001efa7   Thumb Code     8  icu.o(.text)
-    switch_clk                               0x0001efaf   Thumb Code    82  icu.o(.text)
-    bk3435_singleWaveCfg                     0x0001f001   Thumb Code    22  icu.o(.text)
-    bk3435_set_power                         0x0001f017   Thumb Code    48  icu.o(.text)
-    gpio_config                              0x0001f06d   Thumb Code   144  gpio.o(.text)
-    gpio_get_input                           0x0001f0fd   Thumb Code    28  gpio.o(.text)
-    gpio_set                                 0x0001f119   Thumb Code    36  gpio.o(.text)
-    gpio_init                                0x0001f13d   Thumb Code     2  gpio.o(.text)
-    gpio_triger                              0x0001f13f   Thumb Code    20  gpio.o(.text)
-    gpio_cb_register                         0x0001f153   Thumb Code    12  gpio.o(.text)
-    gpio_isr                                 0x0001f15f   Thumb Code    34  gpio.o(.text)
-    gpio_test_init                           0x0001f181   Thumb Code    54  gpio.o(.text)
-    gpio_sleep                               0x0001f1b7   Thumb Code    72  gpio.o(.text)
-    gpio_wakeup                              0x0001f1ff   Thumb Code    52  gpio.o(.text)
-    DEBUG_MSG                                0x0001f233   Thumb Code     2  gpio.o(.text)
-    set_flash_clk                            0x0001f249   Thumb Code    40  flash.o(.text)
-    get_flash_ID                             0x0001f271   Thumb Code    34  flash.o(.text)
-    flash_read_sr                            0x0001f293   Thumb Code    26  flash.o(.text)
-    flash_write_sr                           0x0001f2ad   Thumb Code   168  flash.o(.text)
-    flash_wp_256k                            0x0001f355   Thumb Code    70  flash.o(.text)
-    flash_wp_ALL                             0x0001f39b   Thumb Code    70  flash.o(.text)
-    flash_advance_init                       0x0001f3e1   Thumb Code   102  flash.o(.text)
-    clr_flash_qwfr                           0x0001f447   Thumb Code    76  flash.o(.text)
-    flash_set_dual_mode                      0x0001f493   Thumb Code    32  flash.o(.text)
-    flash_init                               0x0001f4b3   Thumb Code    34  flash.o(.text)
-    flash_set_line_mode                      0x0001f4d5   Thumb Code     2  flash.o(.text)
-    flash_erase_sector                       0x0001f4d7   Thumb Code    50  flash.o(.text)
-    flash_read_data                          0x0001f509   Thumb Code   134  flash.o(.text)
-    flash_write_data                         0x0001f58f   Thumb Code   300  flash.o(.text)
-    flash_set_qe                             0x0001f6bb   Thumb Code    68  flash.o(.text)
-    flash_read                               0x0001f6ff   Thumb Code    46  flash.o(.text)
-    flash_write                              0x0001f72d   Thumb Code   102  flash.o(.text)
-    udi_exchange_fdata_to_adjoining_next_sector 0x0001f793   Thumb Code   102  flash.o(.text)
-    udi_exchange_fdata_to_adjoining_previous_sector 0x0001f7f9   Thumb Code    98  flash.o(.text)
-    flash_erase                              0x0001f85b   Thumb Code   174  flash.o(.text)
-    emi_init                                 0x0001f931   Thumb Code    20  emi.o(.text)
-    intc_spurious                            0x0001f949   Thumb Code     2  intc.o(.text)
-    intc_init                                0x0001f94b   Thumb Code    28  intc.o(.text)
-    intc_stat_clear                          0x0001f967   Thumb Code     8  intc.o(.text)
-    IRQ_Exception                            0x0001f96f   Thumb Code    62  intc.o(.text)
-    FIQ_Exception                            0x0001f9ad   Thumb Code    22  intc.o(.text)
-    timer_init                               0x0001f9d1   Thumb Code     2  timer.o(.text)
-    timer_set_timeout                        0x0001f9d3   Thumb Code     6  timer.o(.text)
-    timer_get_time                           0x0001f9d9   Thumb Code     6  timer.o(.text)
-    timer_enable                             0x0001f9df   Thumb Code     6  timer.o(.text)
-    timer_isr                                0x0001f9e5   Thumb Code    20  timer.o(.text)
-    Read_Uart_Buf                            0x0001f9fd   Thumb Code    14  uart.o(.text)
-    Uart_Read_Byte                           0x0001fa0b   Thumb Code    10  uart.o(.text)
-    uart_putchar                             0x0001fa15   Thumb Code    34  uart.o(.text)
-    uart_printf                              0x0001fa37   Thumb Code    46  uart.o(.text)
-    uart_printf_null                         0x0001fa65   Thumb Code     4  uart.o(.text)
-    hex2Str                                  0x0001fa69   Thumb Code    46  uart.o(.text)
-    uart_print_int                           0x0001fa97   Thumb Code    48  uart.o(.text)
-    cpu_delay                                0x0001fac7   Thumb Code    26  uart.o(.text)
-    uart_init                                0x0001fae1   Thumb Code   130  uart.o(.text)
-    uart_flow_on                             0x0001fb63   Thumb Code     2  uart.o(.text)
-    uart_clear_rxfifo                        0x0001fb65   Thumb Code    26  uart.o(.text)
-    uart_flow_off                            0x0001fb7f   Thumb Code     4  uart.o(.text)
-    uart_finish_transfers                    0x0001fb83   Thumb Code    24  uart.o(.text)
-    uart_read                                0x0001fb9b   Thumb Code    10  uart.o(.text)
-    uart_write                               0x0001fba5   Thumb Code    64  uart.o(.text)
-    uart_send                                0x0001fbe5   Thumb Code    26  uart.o(.text)
-    uart_cb_register                         0x0001fbff   Thumb Code    10  uart.o(.text)
-    uart_cb_clear                            0x0001fc09   Thumb Code    14  uart.o(.text)
-    uart_isr                                 0x0001fc17   Thumb Code   224  uart.o(.text)
-    check_uart_stop                          0x0001fcf7   Thumb Code    10  uart.o(.text)
-    wdt_disable                              0x0001fd59   Thumb Code    28  wdt.o(.text)
-    wdt_enable                               0x0001fd75   Thumb Code    38  wdt.o(.text)
-    wdt_feed                                 0x0001fd9b   Thumb Code    28  wdt.o(.text)
-    Delay_ms                                 0x0001fdf7   Thumb Code    26  rf_xvr.o(.text)
-    kmod_calibration                         0x0001fe11   Thumb Code   280  rf_xvr.o(.text)
-    init_analog_xvr_reg                      0x0001ff29   Thumb Code   186  rf_xvr.o(.text)
-    initial_xver_BK3435V2_openLoop           0x0001ffe3   Thumb Code   260  rf_xvr.o(.text)
-    rf_init                                  0x000200e7   Thumb Code    36  rf_xvr.o(.text)
-    Delay_us                                 0x0002010b   Thumb Code    20  rf_xvr.o(.text)
-    Delay                                    0x0002011f   Thumb Code    20  rf_xvr.o(.text)
-    CLK32K_AutoCali_init                     0x00020133   Thumb Code    48  rf_xvr.o(.text)
-    bass_get_att_handle                      0x000203f3   Thumb Code   122  bass.o(.text)
-    bass_prf_itf_get                         0x000204ad   Thumb Code     6  bass.o(.text)
-    bass_get_att_idx                         0x000204b3   Thumb Code   112  bass.o(.text)
-    bass_exe_operation                       0x00020523   Thumb Code   238  bass.o(.text)
-    diss_compute_cfg_flag                    0x000208c5   Thumb Code    40  diss.o(.text)
-    diss_prf_itf_get                         0x00020997   Thumb Code     6  diss.o(.text)
-    diss_handle_to_value                     0x0002099d   Thumb Code    54  diss.o(.text)
-    diss_value_to_handle                     0x000209d3   Thumb Code    60  diss.o(.text)
-    diss_check_val_len                       0x00020a0f   Thumb Code    42  diss.o(.text)
-    fff0s_get_att_handle                     0x00020d19   Thumb Code    50  fff0s.o(.text)
-    fff0s_notify_fff1_lvl                    0x00020d4b   Thumb Code    64  fff0s.o(.text)
-    fff0s_prf_itf_get                        0x00020d8b   Thumb Code     6  fff0s.o(.text)
-    fff0s_get_att_idx                        0x00020d91   Thumb Code    62  fff0s.o(.text)
-    oad_save_reciveData                      0x00021103   Thumb Code    32  oads.o(.text)
-    oad_updating_user_section_begin          0x00021123   Thumb Code    38  oads.o(.text)
-    oad_updating_user_section_pro            0x00021149   Thumb Code   106  oads.o(.text)
-    oad_updating_user_section_end            0x000211b3   Thumb Code    18  oads.o(.text)
-    oadImgIdentifyWrite                      0x000212a7   Thumb Code   778  oads.o(.text)
-    oadImgBlockWrite                         0x000215b1   Thumb Code   364  oads.o(.text)
-    oads_prf_itf_get                         0x0002171d   Thumb Code     4  oads.o(.text)
-    prf_init                                 0x00021b13   Thumb Code   112  prf.o(.text)
-    prf_add_profile                          0x00021b83   Thumb Code   130  prf.o(.text)
-    prf_create                               0x00021c05   Thumb Code    44  prf.o(.text)
-    prf_cleanup                              0x00021c31   Thumb Code    48  prf.o(.text)
-    prf_env_get                              0x00021c61   Thumb Code    44  prf.o(.text)
-    prf_src_task_get                         0x00021c8d   Thumb Code    16  prf.o(.text)
-    prf_dst_task_get                         0x00021c9d   Thumb Code    16  prf.o(.text)
-    prf_get_id_from_task                     0x00021cad   Thumb Code    52  prf.o(.text)
-    prf_get_task_from_id                     0x00021ce1   Thumb Code    52  prf.o(.text)
-    prf_pack_char_pres_fmt                   0x00021d19   Thumb Code    30  prf_utils.o(.text)
-    prf_pack_date_time                       0x00021d37   Thumb Code    32  prf_utils.o(.text)
-    prf_unpack_date_time                     0x00021d57   Thumb Code    34  prf_utils.o(.text)
-    appm_init                                0x00021d79   Thumb Code    96  app.o(.text)
-    appm_add_svc                             0x00021dd9   Thumb Code    32  app.o(.text)
-    appm_disconnect                          0x00021df9   Thumb Code    34  app.o(.text)
-    appm_start_advertising                   0x00021e1b   Thumb Code   312  app.o(.text)
-    appm_stop_advertising                    0x00021f53   Thumb Code    48  app.o(.text)
-    appm_update_adv_data                     0x00021f83   Thumb Code    86  app.o(.text)
-    appm_update_param                        0x00021fd9   Thumb Code    68  app.o(.text)
-    appm_get_dev_name                        0x0002201d   Thumb Code    16  app.o(.text)
-    app_batt_init                            0x000220c5   Thumb Code    12  app_batt.o(.text)
-    app_batt_add_bas                         0x000220d1   Thumb Code    44  app_batt.o(.text)
-    app_batt_enable_prf                      0x000220fd   Thumb Code    44  app_batt.o(.text)
-    app_batt_send_lvl                        0x00022129   Thumb Code    34  app_batt.o(.text)
-    app_dis_init                             0x000221e5   Thumb Code     2  app_dis.o(.text)
-    app_dis_add_dis                          0x000221e7   Thumb Code    42  app_dis.o(.text)
-    app_fff0_init                            0x00022275   Thumb Code    10  app_fff0.o(.text)
-    app_fff0_add_fff0s                       0x0002227f   Thumb Code    42  app_fff0.o(.text)
-    app_fff1_send_lvl                        0x000222a9   Thumb Code    46  app_fff0.o(.text)
-    app_oads_init                            0x000223a5   Thumb Code     8  app_oads.o(.text)
-    app_oad_add_oads                         0x000223ad   Thumb Code    62  app_oads.o(.text)
-    app_oads_enable_prf                      0x000223eb   Thumb Code    42  app_oads.o(.text)
-    app_ffc1_ntf_req                         0x00022465   Thumb Code    44  app_oads.o(.text)
-    app_ffc2_ntf_req                         0x00022491   Thumb Code    46  app_oads.o(.text)
-    Init_LED                                 0x00022b45   Thumb Code   142  led.o(.text)
-    ANO_DT_Send_Version                      0x00022bd5   Thumb Code   116  ano_uart.o(.text)
-    BT_delayUs                               0x00022c4d   Thumb Code    20  rf_test.o(.text)
-    char_to_num                              0x00022c61   Thumb Code    44  rf_test.o(.text)
-    fCheckValue                              0x00022c8d   Thumb Code    58  rf_test.o(.text)
-    BT_singleWaveCfg                         0x00022cc7   Thumb Code    38  rf_test.o(.text)
-    rw_fcc_enter                             0x00022ced   Thumb Code   736  rf_test.o(.text)
-    XVR_Initial                              0x000230d9   Thumb Code   304  rf_pn9_test.o(.text)
-    Test_XVR_PN9_Rx_Ena                      0x00023209   Thumb Code    32  rf_pn9_test.o(.text)
-    Test_XVR_Single_Carrier_Tx_Ena1          0x00023229   Thumb Code    30  rf_pn9_test.o(.text)
-    LockPn9Test                              0x00023247   Thumb Code    26  rf_pn9_test.o(.text)
-    GetBER                                   0x00023261   Thumb Code    16  rf_pn9_test.o(.text)
-    rw_pn9_enter                             0x00023271   Thumb Code     2  rf_pn9_test.o(.text)
-    pn9_test_process                         0x00023273   Thumb Code   164  rf_pn9_test.o(.text)
-    strncmp                                  0x000233d5   Thumb Code    30  strncmp.o(.text)
-    __aeabi_uldivmod                         0x000233f3   Thumb Code    96  uldiv.o(.text)
-    __I$use$fp                               0x00023454   ARM Code       0  iusefp.o(.text)
-    __aeabi_dadd                             0x00023455   Thumb Code   328  dadd.o(.text)
-    __aeabi_dsub                             0x0002359d   Thumb Code    12  dadd.o(.text)
-    __aeabi_drsub                            0x000235a9   Thumb Code    12  dadd.o(.text)
-    __aeabi_dmul                             0x000235b9   Thumb Code   202  dmul.o(.text)
-    __aeabi_ddiv                             0x00023689   Thumb Code   234  ddiv.o(.text)
-    __aeabi_d2ulz                            0x00023779   Thumb Code    54  dfixul.o(.text)
-    __aeabi_cdrcmple                         0x000237b9   Thumb Code    38  cdrcmple.o(.text)
-    __aeabi_llsl                             0x000237e1   Thumb Code    32  llshl.o(.text)
-    _ll_shift_l                              0x000237e1   Thumb Code     0  llshl.o(.text)
-    __aeabi_llsr                             0x00023801   Thumb Code    34  llushr.o(.text)
-    _ll_ushift_r                             0x00023801   Thumb Code     0  llushr.o(.text)
-    __aeabi_lasr                             0x00023823   Thumb Code    38  llsshr.o(.text)
-    _ll_sshift_r                             0x00023823   Thumb Code     0  llsshr.o(.text)
-    _double_round                            0x00023849   Thumb Code    26  depilogue.o(.text)
-    _double_epilogue                         0x00023863   Thumb Code   164  depilogue.o(.text)
-    __0vsprintf                              0x00023909   Thumb Code    30  printfa.o(i.__0vsprintf)
-    __1vsprintf                              0x00023909   Thumb Code     0  printfa.o(i.__0vsprintf)
-    __2vsprintf                              0x00023909   Thumb Code     0  printfa.o(i.__0vsprintf)
-    __c89vsprintf                            0x00023909   Thumb Code     0  printfa.o(i.__0vsprintf)
-    vsprintf                                 0x00023909   Thumb Code     0  printfa.o(i.__0vsprintf)
-    bas_att_db                               0x00024218   Data          40  bass.o(.constdata)
-    bass_itf                                 0x00024240   Data          16  bass.o(.constdata)
-    bass_default_state                       0x00024250   Data          48  bass_task.o(.constdata)
-    bass_default_handler                     0x00024280   Data           8  bass_task.o(.constdata)
-    diss_att_db                              0x00024288   Data         152  diss.o(.constdata)
-    diss_itf                                 0x00024320   Data          16  diss.o(.constdata)
-    diss_default_state                       0x00024330   Data          24  diss_task.o(.constdata)
-    diss_default_handler                     0x00024348   Data           8  diss_task.o(.constdata)
-    fff0_att_db                              0x00024350   Data          48  fff0s.o(.constdata)
-    fff0s_itf                                0x00024380   Data          16  fff0s.o(.constdata)
-    fff0s_default_state                      0x00024390   Data          40  fff0s_task.o(.constdata)
-    fff0s_default_handler                    0x000243b8   Data           8  fff0s_task.o(.constdata)
-    oads_att_db                              0x000243c0   Data          72  oads.o(.constdata)
-    oads_itf                                 0x00024408   Data          16  oads.o(.constdata)
-    oads_default_state                       0x00024460   Data          48  oads_task.o(.constdata)
-    braces_default_handler                   0x00024490   Data           8  oads_task.o(.constdata)
-    app_batt_msg_handler_list                0x000244ec   Data          32  app_batt.o(.constdata)
-    app_batt_table_handler                   0x0002450c   Data           8  app_batt.o(.constdata)
-    app_dis_msg_handler_list                 0x00024514   Data           8  app_dis.o(.constdata)
-    app_dis_table_handler                    0x0002451c   Data           8  app_dis.o(.constdata)
-    app_fff0_msg_handler_list                0x00024524   Data          40  app_fff0.o(.constdata)
-    app_fff0_table_handler                   0x0002454c   Data           8  app_fff0.o(.constdata)
-    app_oads_msg_handler_list                0x00024570   Data          48  app_oads.o(.constdata)
-    app_oads_table_handler                   0x000245a0   Data           8  app_oads.o(.constdata)
-    appm_default_state                       0x00024650   Data         120  app_task.o(.constdata)
-    appm_default_handler                     0x000246c8   Data           8  app_task.o(.constdata)
-    RF_CHANNEL_TABLE                         0x00024785   Data          80  rf_test.o(.constdata)
-    Load$$RAM_DATA$$Base                     0x000247d8   Number         0  anon$$obj.o ABSOLUTE
+    rw_main                                  0x0001e6e7   Thumb Code   230  arch_main.o(.text)
+    rwip_eif_get                             0x0001e7cd   Thumb Code    16  arch_main.o(.text)
+    rwble_hl_init                            0x0001ea81   Thumb Code    28  rwble_hl.o(.text)
+    rwble_hl_reset                           0x0001ea9d   Thumb Code    28  rwble_hl.o(.text)
+    rwble_init                               0x0001eab9   Thumb Code    28  rwble.o(.text)
+    rwble_reset                              0x0001ead5   Thumb Code    86  rwble.o(.text)
+    rwble_sleep_check                        0x0001eb2b   Thumb Code    16  rwble.o(.text)
+    rwble_activity_ongoing_check             0x0001eb3b   Thumb Code    30  rwble.o(.text)
+    rwble_version                            0x0001eb59   Thumb Code    44  rwble.o(.text)
+    rwble_isr                                0x0001eb85   Thumb Code   172  rwble.o(.text)
+    rwip_check_wakeup_boundary               0x0001ec39   Thumb Code    34  rwip.o(.text)
+    rwip_init                                0x0001ec5b   Thumb Code   182  rwip.o(.text)
+    rwip_reset                               0x0001ed11   Thumb Code    56  rwip.o(.text)
+    rwip_version                             0x0001ed49   Thumb Code     8  rwip.o(.text)
+    rwip_schedule                            0x0001ed51   Thumb Code    16  rwip.o(.text)
+    rwip_prevent_sleep_set                   0x0001ed61   Thumb Code    42  rwip.o(.text)
+    rwip_sleep                               0x0001ed8b   Thumb Code   144  rwip.o(.text)
+    rwip_wakeup                              0x0001ee1b   Thumb Code    24  rwip.o(.text)
+    rwip_prevent_sleep_clear                 0x0001ee33   Thumb Code    42  rwip.o(.text)
+    rwip_wakeup_end                          0x0001ee5d   Thumb Code    36  rwip.o(.text)
+    rwip_us_2_lpcycles                       0x0001ee81   Thumb Code    12  rwip.o(.text)
+    rwip_wakeup_delay_set                    0x0001ee8d   Thumb Code    12  rwip.o(.text)
+    rwip_prevent_sleep_get                   0x0001ee99   Thumb Code     6  rwip.o(.text)
+    rwip_sleep_enable                        0x0001ee9f   Thumb Code     6  rwip.o(.text)
+    rwip_ext_wakeup_enable                   0x0001eea5   Thumb Code     6  rwip.o(.text)
+    rwip_sleep_lpcycles_2_us                 0x0001eeab   Thumb Code    32  rwip.o(.text)
+    system_sleep_init                        0x0001eef5   Thumb Code    20  icu.o(.text)
+    icu_init                                 0x0001ef09   Thumb Code    74  icu.o(.text)
+    icu_get_sleep_mode                       0x0001ef53   Thumb Code     6  icu.o(.text)
+    icu_set_sleep_mode                       0x0001ef59   Thumb Code     6  icu.o(.text)
+    cpu_reduce_voltage_sleep                 0x0001ef5f   Thumb Code    60  icu.o(.text)
+    cpu_wakeup                               0x0001ef9b   Thumb Code    28  icu.o(.text)
+    cpu_idle_sleep                           0x0001efb7   Thumb Code     8  icu.o(.text)
+    switch_clk                               0x0001efbf   Thumb Code    82  icu.o(.text)
+    bk3435_singleWaveCfg                     0x0001f011   Thumb Code    22  icu.o(.text)
+    bk3435_set_power                         0x0001f027   Thumb Code    48  icu.o(.text)
+    gpio_config                              0x0001f07d   Thumb Code   144  gpio.o(.text)
+    gpio_get_input                           0x0001f10d   Thumb Code    28  gpio.o(.text)
+    gpio_set                                 0x0001f129   Thumb Code    36  gpio.o(.text)
+    gpio_init                                0x0001f14d   Thumb Code     2  gpio.o(.text)
+    gpio_triger                              0x0001f14f   Thumb Code    20  gpio.o(.text)
+    gpio_cb_register                         0x0001f163   Thumb Code    12  gpio.o(.text)
+    gpio_isr                                 0x0001f16f   Thumb Code    34  gpio.o(.text)
+    gpio_test_init                           0x0001f191   Thumb Code    54  gpio.o(.text)
+    gpio_sleep                               0x0001f1c7   Thumb Code    72  gpio.o(.text)
+    gpio_wakeup                              0x0001f20f   Thumb Code    52  gpio.o(.text)
+    DEBUG_MSG                                0x0001f243   Thumb Code     2  gpio.o(.text)
+    set_flash_clk                            0x0001f259   Thumb Code    40  flash.o(.text)
+    get_flash_ID                             0x0001f281   Thumb Code    34  flash.o(.text)
+    flash_read_sr                            0x0001f2a3   Thumb Code    26  flash.o(.text)
+    flash_write_sr                           0x0001f2bd   Thumb Code   168  flash.o(.text)
+    flash_wp_256k                            0x0001f365   Thumb Code    70  flash.o(.text)
+    flash_wp_ALL                             0x0001f3ab   Thumb Code    70  flash.o(.text)
+    flash_advance_init                       0x0001f3f1   Thumb Code   102  flash.o(.text)
+    clr_flash_qwfr                           0x0001f457   Thumb Code    76  flash.o(.text)
+    flash_set_dual_mode                      0x0001f4a3   Thumb Code    32  flash.o(.text)
+    flash_init                               0x0001f4c3   Thumb Code    34  flash.o(.text)
+    flash_set_line_mode                      0x0001f4e5   Thumb Code     2  flash.o(.text)
+    flash_erase_sector                       0x0001f4e7   Thumb Code    50  flash.o(.text)
+    flash_read_data                          0x0001f519   Thumb Code   134  flash.o(.text)
+    flash_write_data                         0x0001f59f   Thumb Code   300  flash.o(.text)
+    flash_set_qe                             0x0001f6cb   Thumb Code    68  flash.o(.text)
+    flash_read                               0x0001f70f   Thumb Code    46  flash.o(.text)
+    flash_write                              0x0001f73d   Thumb Code   102  flash.o(.text)
+    udi_exchange_fdata_to_adjoining_next_sector 0x0001f7a3   Thumb Code   102  flash.o(.text)
+    udi_exchange_fdata_to_adjoining_previous_sector 0x0001f809   Thumb Code    98  flash.o(.text)
+    flash_erase                              0x0001f86b   Thumb Code   174  flash.o(.text)
+    emi_init                                 0x0001f941   Thumb Code    20  emi.o(.text)
+    adc_init                                 0x0001f959   Thumb Code    76  adc.o(.text)
+    adc_isr                                  0x0001f9a5   Thumb Code    18  adc.o(.text)
+    adc_get_value                            0x0001f9b7   Thumb Code    86  adc.o(.text)
+    intc_spurious                            0x0001fa31   Thumb Code     2  intc.o(.text)
+    intc_init                                0x0001fa33   Thumb Code    28  intc.o(.text)
+    intc_stat_clear                          0x0001fa4f   Thumb Code     8  intc.o(.text)
+    IRQ_Exception                            0x0001fa57   Thumb Code    76  intc.o(.text)
+    FIQ_Exception                            0x0001faa3   Thumb Code    22  intc.o(.text)
+    timer_init                               0x0001fac5   Thumb Code     2  timer.o(.text)
+    timer_set_timeout                        0x0001fac7   Thumb Code     6  timer.o(.text)
+    timer_get_time                           0x0001facd   Thumb Code     6  timer.o(.text)
+    timer_enable                             0x0001fad3   Thumb Code     6  timer.o(.text)
+    timer_isr                                0x0001fad9   Thumb Code    20  timer.o(.text)
+    Read_Uart_Buf                            0x0001faf1   Thumb Code    14  uart.o(.text)
+    Uart_Read_Byte                           0x0001faff   Thumb Code    10  uart.o(.text)
+    uart_putchar                             0x0001fb09   Thumb Code    34  uart.o(.text)
+    uart_printf                              0x0001fb2b   Thumb Code    46  uart.o(.text)
+    uart_printf_null                         0x0001fb59   Thumb Code     4  uart.o(.text)
+    hex2Str                                  0x0001fb5d   Thumb Code    46  uart.o(.text)
+    uart_print_int                           0x0001fb8b   Thumb Code    48  uart.o(.text)
+    cpu_delay                                0x0001fbbb   Thumb Code    26  uart.o(.text)
+    uart_init                                0x0001fbd5   Thumb Code   130  uart.o(.text)
+    uart_flow_on                             0x0001fc57   Thumb Code     2  uart.o(.text)
+    uart_clear_rxfifo                        0x0001fc59   Thumb Code    26  uart.o(.text)
+    uart_flow_off                            0x0001fc73   Thumb Code     4  uart.o(.text)
+    uart_finish_transfers                    0x0001fc77   Thumb Code    24  uart.o(.text)
+    uart_read                                0x0001fc8f   Thumb Code    10  uart.o(.text)
+    uart_write                               0x0001fc99   Thumb Code    64  uart.o(.text)
+    uart_send                                0x0001fcd9   Thumb Code    26  uart.o(.text)
+    uart_cb_register                         0x0001fcf3   Thumb Code    10  uart.o(.text)
+    uart_cb_clear                            0x0001fcfd   Thumb Code    14  uart.o(.text)
+    uart_isr                                 0x0001fd0b   Thumb Code   224  uart.o(.text)
+    check_uart_stop                          0x0001fdeb   Thumb Code    10  uart.o(.text)
+    wdt_disable                              0x0001fe4d   Thumb Code    28  wdt.o(.text)
+    wdt_enable                               0x0001fe69   Thumb Code    38  wdt.o(.text)
+    wdt_feed                                 0x0001fe8f   Thumb Code    28  wdt.o(.text)
+    Delay_ms                                 0x0001feeb   Thumb Code    26  rf_xvr.o(.text)
+    kmod_calibration                         0x0001ff05   Thumb Code   280  rf_xvr.o(.text)
+    init_analog_xvr_reg                      0x0002001d   Thumb Code   186  rf_xvr.o(.text)
+    initial_xver_BK3435V2_openLoop           0x000200d7   Thumb Code   260  rf_xvr.o(.text)
+    rf_init                                  0x000201db   Thumb Code    36  rf_xvr.o(.text)
+    Delay_us                                 0x000201ff   Thumb Code    20  rf_xvr.o(.text)
+    Delay                                    0x00020213   Thumb Code    20  rf_xvr.o(.text)
+    CLK32K_AutoCali_init                     0x00020227   Thumb Code    48  rf_xvr.o(.text)
+    bass_get_att_handle                      0x000204e7   Thumb Code   122  bass.o(.text)
+    bass_prf_itf_get                         0x000205a1   Thumb Code     6  bass.o(.text)
+    bass_get_att_idx                         0x000205a7   Thumb Code   112  bass.o(.text)
+    bass_exe_operation                       0x00020617   Thumb Code   238  bass.o(.text)
+    diss_compute_cfg_flag                    0x000209b9   Thumb Code    40  diss.o(.text)
+    diss_prf_itf_get                         0x00020a8b   Thumb Code     6  diss.o(.text)
+    diss_handle_to_value                     0x00020a91   Thumb Code    54  diss.o(.text)
+    diss_value_to_handle                     0x00020ac7   Thumb Code    60  diss.o(.text)
+    diss_check_val_len                       0x00020b03   Thumb Code    42  diss.o(.text)
+    fff0s_get_att_handle                     0x00020e0d   Thumb Code    50  fff0s.o(.text)
+    fff0s_notify_fff1_lvl                    0x00020e3f   Thumb Code    64  fff0s.o(.text)
+    fff0s_prf_itf_get                        0x00020e7f   Thumb Code     6  fff0s.o(.text)
+    fff0s_get_att_idx                        0x00020e85   Thumb Code    62  fff0s.o(.text)
+    oad_save_reciveData                      0x000211f7   Thumb Code    32  oads.o(.text)
+    oad_updating_user_section_begin          0x00021217   Thumb Code    38  oads.o(.text)
+    oad_updating_user_section_pro            0x0002123d   Thumb Code   106  oads.o(.text)
+    oad_updating_user_section_end            0x000212a7   Thumb Code    18  oads.o(.text)
+    oadImgIdentifyWrite                      0x0002139b   Thumb Code   778  oads.o(.text)
+    oadImgBlockWrite                         0x000216a5   Thumb Code   364  oads.o(.text)
+    oads_prf_itf_get                         0x00021811   Thumb Code     4  oads.o(.text)
+    prf_init                                 0x00021c07   Thumb Code   112  prf.o(.text)
+    prf_add_profile                          0x00021c77   Thumb Code   130  prf.o(.text)
+    prf_create                               0x00021cf9   Thumb Code    44  prf.o(.text)
+    prf_cleanup                              0x00021d25   Thumb Code    48  prf.o(.text)
+    prf_env_get                              0x00021d55   Thumb Code    44  prf.o(.text)
+    prf_src_task_get                         0x00021d81   Thumb Code    16  prf.o(.text)
+    prf_dst_task_get                         0x00021d91   Thumb Code    16  prf.o(.text)
+    prf_get_id_from_task                     0x00021da1   Thumb Code    52  prf.o(.text)
+    prf_get_task_from_id                     0x00021dd5   Thumb Code    52  prf.o(.text)
+    prf_pack_char_pres_fmt                   0x00021e0d   Thumb Code    30  prf_utils.o(.text)
+    prf_pack_date_time                       0x00021e2b   Thumb Code    32  prf_utils.o(.text)
+    prf_unpack_date_time                     0x00021e4b   Thumb Code    34  prf_utils.o(.text)
+    appm_init                                0x00021e6d   Thumb Code    96  app.o(.text)
+    appm_add_svc                             0x00021ecd   Thumb Code    32  app.o(.text)
+    appm_disconnect                          0x00021eed   Thumb Code    34  app.o(.text)
+    appm_start_advertising                   0x00021f0f   Thumb Code   312  app.o(.text)
+    appm_stop_advertising                    0x00022047   Thumb Code    48  app.o(.text)
+    appm_update_adv_data                     0x00022077   Thumb Code    86  app.o(.text)
+    appm_update_param                        0x000220cd   Thumb Code    68  app.o(.text)
+    appm_get_dev_name                        0x00022111   Thumb Code    16  app.o(.text)
+    app_batt_init                            0x000221b9   Thumb Code    12  app_batt.o(.text)
+    app_batt_add_bas                         0x000221c5   Thumb Code    44  app_batt.o(.text)
+    app_batt_enable_prf                      0x000221f1   Thumb Code    44  app_batt.o(.text)
+    app_batt_send_lvl                        0x0002221d   Thumb Code    34  app_batt.o(.text)
+    app_dis_init                             0x000222d9   Thumb Code     2  app_dis.o(.text)
+    app_dis_add_dis                          0x000222db   Thumb Code    42  app_dis.o(.text)
+    app_fff0_init                            0x00022369   Thumb Code    10  app_fff0.o(.text)
+    app_fff0_add_fff0s                       0x00022373   Thumb Code    42  app_fff0.o(.text)
+    app_fff1_send_lvl                        0x0002239d   Thumb Code    46  app_fff0.o(.text)
+    app_oads_init                            0x00022499   Thumb Code     8  app_oads.o(.text)
+    app_oad_add_oads                         0x000224a1   Thumb Code    62  app_oads.o(.text)
+    app_oads_enable_prf                      0x000224df   Thumb Code    42  app_oads.o(.text)
+    app_ffc1_ntf_req                         0x00022559   Thumb Code    44  app_oads.o(.text)
+    app_ffc2_ntf_req                         0x00022585   Thumb Code    46  app_oads.o(.text)
+    Init_LED                                 0x00022c39   Thumb Code   126  led.o(.text)
+    BT_delayUs                               0x00022cb9   Thumb Code    20  rf_test.o(.text)
+    char_to_num                              0x00022ccd   Thumb Code    44  rf_test.o(.text)
+    fCheckValue                              0x00022cf9   Thumb Code    58  rf_test.o(.text)
+    BT_singleWaveCfg                         0x00022d33   Thumb Code    38  rf_test.o(.text)
+    rw_fcc_enter                             0x00022d59   Thumb Code   736  rf_test.o(.text)
+    XVR_Initial                              0x00023145   Thumb Code   304  rf_pn9_test.o(.text)
+    Test_XVR_PN9_Rx_Ena                      0x00023275   Thumb Code    32  rf_pn9_test.o(.text)
+    Test_XVR_Single_Carrier_Tx_Ena1          0x00023295   Thumb Code    30  rf_pn9_test.o(.text)
+    LockPn9Test                              0x000232b3   Thumb Code    26  rf_pn9_test.o(.text)
+    GetBER                                   0x000232cd   Thumb Code    16  rf_pn9_test.o(.text)
+    rw_pn9_enter                             0x000232dd   Thumb Code     2  rf_pn9_test.o(.text)
+    pn9_test_process                         0x000232df   Thumb Code   164  rf_pn9_test.o(.text)
+    strncmp                                  0x00023441   Thumb Code    30  strncmp.o(.text)
+    __aeabi_uldivmod                         0x0002345f   Thumb Code    96  uldiv.o(.text)
+    __I$use$fp                               0x000234c0   ARM Code       0  iusefp.o(.text)
+    __aeabi_dadd                             0x000234c1   Thumb Code   328  dadd.o(.text)
+    __aeabi_dsub                             0x00023609   Thumb Code    12  dadd.o(.text)
+    __aeabi_drsub                            0x00023615   Thumb Code    12  dadd.o(.text)
+    __aeabi_dmul                             0x00023625   Thumb Code   202  dmul.o(.text)
+    __aeabi_ddiv                             0x000236f5   Thumb Code   234  ddiv.o(.text)
+    __aeabi_d2ulz                            0x000237e5   Thumb Code    54  dfixul.o(.text)
+    __aeabi_cdrcmple                         0x00023825   Thumb Code    38  cdrcmple.o(.text)
+    __aeabi_llsl                             0x0002384d   Thumb Code    32  llshl.o(.text)
+    _ll_shift_l                              0x0002384d   Thumb Code     0  llshl.o(.text)
+    __aeabi_llsr                             0x0002386d   Thumb Code    34  llushr.o(.text)
+    _ll_ushift_r                             0x0002386d   Thumb Code     0  llushr.o(.text)
+    __aeabi_lasr                             0x0002388f   Thumb Code    38  llsshr.o(.text)
+    _ll_sshift_r                             0x0002388f   Thumb Code     0  llsshr.o(.text)
+    _double_round                            0x000238b5   Thumb Code    26  depilogue.o(.text)
+    _double_epilogue                         0x000238cf   Thumb Code   164  depilogue.o(.text)
+    __0vsprintf                              0x00023975   Thumb Code    30  printfa.o(i.__0vsprintf)
+    __1vsprintf                              0x00023975   Thumb Code     0  printfa.o(i.__0vsprintf)
+    __2vsprintf                              0x00023975   Thumb Code     0  printfa.o(i.__0vsprintf)
+    __c89vsprintf                            0x00023975   Thumb Code     0  printfa.o(i.__0vsprintf)
+    vsprintf                                 0x00023975   Thumb Code     0  printfa.o(i.__0vsprintf)
+    bas_att_db                               0x00024284   Data          40  bass.o(.constdata)
+    bass_itf                                 0x000242ac   Data          16  bass.o(.constdata)
+    bass_default_state                       0x000242bc   Data          48  bass_task.o(.constdata)
+    bass_default_handler                     0x000242ec   Data           8  bass_task.o(.constdata)
+    diss_att_db                              0x000242f4   Data         152  diss.o(.constdata)
+    diss_itf                                 0x0002438c   Data          16  diss.o(.constdata)
+    diss_default_state                       0x0002439c   Data          24  diss_task.o(.constdata)
+    diss_default_handler                     0x000243b4   Data           8  diss_task.o(.constdata)
+    fff0_att_db                              0x000243bc   Data          48  fff0s.o(.constdata)
+    fff0s_itf                                0x000243ec   Data          16  fff0s.o(.constdata)
+    fff0s_default_state                      0x000243fc   Data          40  fff0s_task.o(.constdata)
+    fff0s_default_handler                    0x00024424   Data           8  fff0s_task.o(.constdata)
+    oads_att_db                              0x0002442c   Data          72  oads.o(.constdata)
+    oads_itf                                 0x00024474   Data          16  oads.o(.constdata)
+    oads_default_state                       0x000244cc   Data          48  oads_task.o(.constdata)
+    braces_default_handler                   0x000244fc   Data           8  oads_task.o(.constdata)
+    app_batt_msg_handler_list                0x00024558   Data          32  app_batt.o(.constdata)
+    app_batt_table_handler                   0x00024578   Data           8  app_batt.o(.constdata)
+    app_dis_msg_handler_list                 0x00024580   Data           8  app_dis.o(.constdata)
+    app_dis_table_handler                    0x00024588   Data           8  app_dis.o(.constdata)
+    app_fff0_msg_handler_list                0x00024590   Data          40  app_fff0.o(.constdata)
+    app_fff0_table_handler                   0x000245b8   Data           8  app_fff0.o(.constdata)
+    app_oads_msg_handler_list                0x000245dc   Data          48  app_oads.o(.constdata)
+    app_oads_table_handler                   0x0002460c   Data           8  app_oads.o(.constdata)
+    appm_default_state                       0x000246bc   Data         120  app_task.o(.constdata)
+    appm_default_handler                     0x00024734   Data           8  app_task.o(.constdata)
+    RF_CHANNEL_TABLE                         0x000247f1   Data          80  rf_test.o(.constdata)
+    Load$$RAM_DATA$$Base                     0x00024844   Number         0  anon$$obj.o ABSOLUTE
     co_default_bdaddr                        0x00400024   Data           0  stack_rom_symbol.txt ABSOLUTE
     llc_env                                  0x0040002c   Data           0  stack_rom_symbol.txt ABSOLUTE
     llc_state                                0x00400030   Data           0  stack_rom_symbol.txt ABSOLUTE
@@ -1439,45 +1443,44 @@ Image Symbol Table
     flash_enable_erase_flag1                 0x00400834   Data           1  flash.o(.data)
     flash_enable_erase_flag2                 0x00400835   Data           1  flash.o(.data)
     flash_mid                                0x00400838   Data           4  flash.o(.data)
-    uart_rx_done                             0x0040083c   Data           1  uart.o(.data)
-    cur_read_buf_idx                         0x0040083d   Data           1  uart.o(.data)
-    uart_dut_reg_flag                        0x0040083e   Data           1  uart.o(.data)
-    uart_rx_index                            0x00400844   Data           4  uart.o(.data)
-    wdt_disable_flag                         0x0040084c   Data           1  wdt.o(.data)
-    oad_firmware_type                        0x0040084f   Data           1  oads.o(.data)
-    app_batt_env                             0x00400856   Data           2  app_batt.o(.data)
-    app_fff0_env                             0x00400858   Data           2  app_fff0.o(.data)
-    app_oads_env                             0x0040085a   Data           1  app_oads.o(.data)
-    appm_state                               0x0040085b   Data           1  app_task.o(.data)
-    uart_send_cb                             0x0040085c   Data           4  ano_uart.o(.data)
-    data_to_send                             0x00400860   Data           4  ano_uart.o(.data)
-    ch_status                                0x00400864   Data           1  rf_test.o(.data)
-    freq                                     0x00400865   Data           1  rf_test.o(.data)
-    powerlevel                               0x00400866   Data           1  rf_test.o(.data)
-    p_mode                                   0x00400867   Data           1  rf_test.o(.data)
-    d_mode                                   0x00400868   Data           1  rf_test.o(.data)
-    hopping                                  0x00400869   Data           1  rf_test.o(.data)
-    freq_value                               0x0040086a   Data           1  rf_test.o(.data)
-    temp                                     0x0040086b   Data           1  rf_test.o(.data)
-    index                                    0x0040086c   Data           1  rf_test.o(.data)
-    p_APB_XVER_ADDR                          0x00400874   Data           4  rf_pn9_test.o(.data)
-    tx_rsp_buffer                            0x00400878   Data           7  rf_pn9_test.o(.data)
-    rx_rsp_buffer                            0x0040087f   Data           7  rf_pn9_test.o(.data)
-    error_cmd_rsp                            0x00400886   Data           7  rf_pn9_test.o(.data)
-    test_end_rsp_buffer                      0x0040088d   Data           9  rf_pn9_test.o(.data)
-    Image$$RAM_BSS$$Base                     0x00400898   Number         0  anon$$obj.o ABSOLUTE
-    uart_api                                 0x00400898   Data          16  arch_main.o(.bss)
-    GPIO_CFG_BACKUP                          0x004008b8   Data          20  gpio.o(.bss)
-    GPIO_DATA_BACKUP                         0x004008cc   Data          20  gpio.o(.bss)
-    flash_env                                0x004008e0   Data          12  flash.o(.bss)
-    uart_rx_buf                              0x004008ec   Data          64  uart.o(.bss)
-    uart_env                                 0x0040092c   Data          20  uart.o(.bss)
-    uart_buff                                0x00400940   Data          64  uart.o(.bss)
-    uart_tx_buf                              0x00400980   Data          64  uart.o(.bss)
-    XVR_ANALOG_REG_BAK                       0x004009c0   Data          64  rf_xvr.o(.bss)
-    bsec                                     0x00400a00   Data         192  oads.o(.bss)
-    prf_env                                  0x00400ac0   Data         240  prf.o(.bss)
-    app_env                                  0x00400bb0   Data          40  app.o(.bss)
+    g_adc_value                              0x0040083c   Data           2  adc.o(.data)
+    adc_flag                                 0x0040083e   Data           2  adc.o(.data)
+    uart_rx_done                             0x00400840   Data           1  uart.o(.data)
+    cur_read_buf_idx                         0x00400841   Data           1  uart.o(.data)
+    uart_dut_reg_flag                        0x00400842   Data           1  uart.o(.data)
+    uart_rx_index                            0x00400848   Data           4  uart.o(.data)
+    wdt_disable_flag                         0x00400850   Data           1  wdt.o(.data)
+    oad_firmware_type                        0x00400853   Data           1  oads.o(.data)
+    app_batt_env                             0x0040085a   Data           2  app_batt.o(.data)
+    app_fff0_env                             0x0040085c   Data           2  app_fff0.o(.data)
+    app_oads_env                             0x0040085e   Data           1  app_oads.o(.data)
+    appm_state                               0x0040085f   Data           1  app_task.o(.data)
+    ch_status                                0x00400860   Data           1  rf_test.o(.data)
+    freq                                     0x00400861   Data           1  rf_test.o(.data)
+    powerlevel                               0x00400862   Data           1  rf_test.o(.data)
+    p_mode                                   0x00400863   Data           1  rf_test.o(.data)
+    d_mode                                   0x00400864   Data           1  rf_test.o(.data)
+    hopping                                  0x00400865   Data           1  rf_test.o(.data)
+    freq_value                               0x00400866   Data           1  rf_test.o(.data)
+    temp                                     0x00400867   Data           1  rf_test.o(.data)
+    index                                    0x00400868   Data           1  rf_test.o(.data)
+    p_APB_XVER_ADDR                          0x00400870   Data           4  rf_pn9_test.o(.data)
+    tx_rsp_buffer                            0x00400874   Data           7  rf_pn9_test.o(.data)
+    rx_rsp_buffer                            0x0040087b   Data           7  rf_pn9_test.o(.data)
+    error_cmd_rsp                            0x00400882   Data           7  rf_pn9_test.o(.data)
+    test_end_rsp_buffer                      0x00400889   Data           9  rf_pn9_test.o(.data)
+    Image$$RAM_BSS$$Base                     0x00400894   Number         0  anon$$obj.o ABSOLUTE
+    uart_api                                 0x00400894   Data          16  arch_main.o(.bss)
+    GPIO_CFG_BACKUP                          0x004008b4   Data          20  gpio.o(.bss)
+    GPIO_DATA_BACKUP                         0x004008c8   Data          20  gpio.o(.bss)
+    flash_env                                0x004008dc   Data          12  flash.o(.bss)
+    uart_rx_buf                              0x004008e8   Data          64  uart.o(.bss)
+    uart_env                                 0x00400928   Data          20  uart.o(.bss)
+    uart_buff                                0x0040093c   Data          64  uart.o(.bss)
+    XVR_ANALOG_REG_BAK                       0x0040097c   Data          64  rf_xvr.o(.bss)
+    bsec                                     0x004009bc   Data         192  oads.o(.bss)
+    prf_env                                  0x00400a7c   Data         240  prf.o(.bss)
+    app_env                                  0x00400b6c   Data          40  app.o(.bss)
     Image$$RAM_STACK_UNUSED$$Base            0x0040b70c   Number         0  anon$$obj.o ABSOLUTE
     Image$$RAM_STACK_SVC$$Base               0x0040b72c   Number         0  anon$$obj.o ABSOLUTE
     Image$$RAM_STACK_IRQ$$Base               0x0040bc1c   Number         0  anon$$obj.o ABSOLUTE
@@ -1495,7 +1498,7 @@ Memory Map of the image
 
   Image Entry point : 0x0001e284
 
-  Load Region SECTIONS (Base: 0x0001e200, Size: 0x00006670, Max: 0xffffffff, ABSOLUTE)
+  Load Region SECTIONS (Base: 0x0001e200, Size: 0x000066d8, Max: 0xffffffff, ABSOLUTE)
 
     Execution Region ROM_SYS (Exec base: 0x0001e200, Load base: 0x0001e200, Size: 0x00000280, Max: 0xffffffff, ABSOLUTE)
 
@@ -1520,164 +1523,163 @@ Memory Map of the image
     0x0001e520   0x0001e520   0x00000010   Code   RO           34    sys_irq_entry       intc.o
 
 
-    Execution Region ROM (Exec base: 0x0001e530, Load base: 0x0001e530, Size: 0x000062a8, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ROM (Exec base: 0x0001e530, Load base: 0x0001e530, Size: 0x00006314, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x0001e530   0x0001e530   0x00000540   Code   RO            5    .text               arch_main.o
-    0x0001ea70   0x0001ea70   0x00000038   Code   RO           16    .text               rwble_hl.o
-    0x0001eaa8   0x0001eaa8   0x00000180   Code   RO           17    .text               rwble.o
-    0x0001ec28   0x0001ec28   0x000002bc   Code   RO           18    .text               rwip.o
-    0x0001eee4   0x0001eee4   0x00000188   Code   RO           21    .text               icu.o
-    0x0001f06c   0x0001f06c   0x000001dc   Code   RO           23    .text               gpio.o
-    0x0001f248   0x0001f248   0x000006e8   Code   RO           26    .text               flash.o
-    0x0001f930   0x0001f930   0x00000018   Code   RO           29    .text               emi.o
-    0x0001f948   0x0001f948   0x00000088   Code   RO           32    .text               intc.o
-    0x0001f9d0   0x0001f9d0   0x0000002c   Code   RO           37    .text               timer.o
-    0x0001f9fc   0x0001f9fc   0x0000035c   Code   RO           38    .text               uart.o
-    0x0001fd58   0x0001fd58   0x00000068   Code   RO           42    .text               wdt.o
-    0x0001fdc0   0x0001fdc0   0x000004ac   Code   RO           44    .text               rf_xvr.o
-    0x0002026c   0x0002026c   0x000003b4   Code   RO           46    .text               bass.o
-    0x00020620   0x00020620   0x000002a4   Code   RO           48    .text               bass_task.o
-    0x000208c4   0x000208c4   0x00000180   Code   RO           51    .text               diss.o
-    0x00020a44   0x00020a44   0x000001d0   Code   RO           53    .text               diss_task.o
-    0x00020c14   0x00020c14   0x000001c8   Code   RO           56    .text               fff0s.o
-    0x00020ddc   0x00020ddc   0x00000228   Code   RO           58    .text               fff0s_task.o
-    0x00021004   0x00021004   0x000007cc   Code   RO           61    .text               oads.o
-    0x000217d0   0x000217d0   0x00000310   Code   RO           65    .text               oads_task.o
-    0x00021ae0   0x00021ae0   0x00000238   Code   RO           69    .text               prf.o
-    0x00021d18   0x00021d18   0x00000060   Code   RO           71    .text               prf_utils.o
-    0x00021d78   0x00021d78   0x0000034c   Code   RO           72    .text               app.o
-    0x000220c4   0x000220c4   0x000000a4   Code   RO           75    .text               app_batt.o
-    0x00022168   0x00022168   0x0000010c   Code   RO           79    .text               app_dis.o
-    0x00022274   0x00022274   0x00000130   Code   RO           83    .text               app_fff0.o
-    0x000223a4   0x000223a4   0x000001b8   Code   RO           88    .text               app_oads.o
-    0x0002255c   0x0002255c   0x000005e8   Code   RO           93    .text               app_task.o
-    0x00022b44   0x00022b44   0x0000008e   Code   RO           98    .text               led.o
-    0x00022bd2   0x00022bd2   0x00000002   PAD
-    0x00022bd4   0x00022bd4   0x00000078   Code   RO           99    .text               ano_uart.o
-    0x00022c4c   0x00022c4c   0x0000048c   Code   RO          101    .text               bk3435_fcc_mode.lib(rf_test.o)
-    0x000230d8   0x000230d8   0x000002fc   Code   RO          104    .text               bk3435_pn9_mode.lib(rf_pn9_test.o)
-    0x000233d4   0x000233d4   0x0000001e   Code   RO          108    .text               mc_5.l(strncmp.o)
-    0x000233f2   0x000233f2   0x00000060   Code   RO          125    .text               mc_5.l(uldiv.o)
-    0x00023452   0x00023452   0x00000002   PAD
-    0x00023454   0x00023454   0x00000000   Code   RO          126    .text               mc_5.l(iusefp.o)
-    0x00023454   0x00023454   0x00000164   Code   RO          127    .text               mf_5.l(dadd.o)
-    0x000235b8   0x000235b8   0x000000d0   Code   RO          128    .text               mf_5.l(dmul.o)
-    0x00023688   0x00023688   0x000000f0   Code   RO          129    .text               mf_5.l(ddiv.o)
-    0x00023778   0x00023778   0x00000040   Code   RO          130    .text               mf_5.l(dfixul.o)
-    0x000237b8   0x000237b8   0x00000028   Code   RO          131    .text               mf_5.l(cdrcmple.o)
-    0x000237e0   0x000237e0   0x00000020   Code   RO          133    .text               mc_5.l(llshl.o)
-    0x00023800   0x00023800   0x00000022   Code   RO          134    .text               mc_5.l(llushr.o)
-    0x00023822   0x00023822   0x00000026   Code   RO          135    .text               mc_5.l(llsshr.o)
-    0x00023848   0x00023848   0x000000be   Code   RO          137    .text               mf_5.l(depilogue.o)
-    0x00023906   0x00023906   0x00000002   PAD
-    0x00023908   0x00023908   0x00000024   Code   RO          116    i.__0vsprintf       mc_5.l(printfa.o)
-    0x0002392c   0x0002392c   0x00000174   Code   RO          117    i._fp_digits        mc_5.l(printfa.o)
-    0x00023aa0   0x00023aa0   0x000006f4   Code   RO          118    i._printf_core      mc_5.l(printfa.o)
-    0x00024194   0x00024194   0x00000020   Code   RO          119    i._printf_post_padding  mc_5.l(printfa.o)
-    0x000241b4   0x000241b4   0x0000002c   Code   RO          120    i._printf_pre_padding  mc_5.l(printfa.o)
-    0x000241e0   0x000241e0   0x0000000a   Code   RO          122    i._sputc            mc_5.l(printfa.o)
-    0x000241ea   0x000241ea   0x0000002e   Data   RO            7    .constdata          arch_main.o
-    0x00024218   0x00024218   0x00000038   Data   RO           47    .constdata          bass.o
-    0x00024250   0x00024250   0x00000030   Data   RO           49    .constdata          bass_task.o
-    0x00024280   0x00024280   0x00000008   Data   RO           50    .constdata          bass_task.o
-    0x00024288   0x00024288   0x000000a8   Data   RO           52    .constdata          diss.o
-    0x00024330   0x00024330   0x00000018   Data   RO           54    .constdata          diss_task.o
-    0x00024348   0x00024348   0x00000008   Data   RO           55    .constdata          diss_task.o
-    0x00024350   0x00024350   0x00000040   Data   RO           57    .constdata          fff0s.o
-    0x00024390   0x00024390   0x00000028   Data   RO           59    .constdata          fff0s_task.o
-    0x000243b8   0x000243b8   0x00000008   Data   RO           60    .constdata          fff0s_task.o
-    0x000243c0   0x000243c0   0x0000009e   Data   RO           63    .constdata          oads.o
-    0x0002445e   0x0002445e   0x00000002   PAD
-    0x00024460   0x00024460   0x00000030   Data   RO           66    .constdata          oads_task.o
-    0x00024490   0x00024490   0x00000008   Data   RO           67    .constdata          oads_task.o
-    0x00024498   0x00024498   0x00000032   Data   RO           68    .constdata          oads_task.o
+    0x0001e530   0x0001e530   0x00000550   Code   RO            5    .text               arch_main.o
+    0x0001ea80   0x0001ea80   0x00000038   Code   RO           16    .text               rwble_hl.o
+    0x0001eab8   0x0001eab8   0x00000180   Code   RO           17    .text               rwble.o
+    0x0001ec38   0x0001ec38   0x000002bc   Code   RO           18    .text               rwip.o
+    0x0001eef4   0x0001eef4   0x00000188   Code   RO           21    .text               icu.o
+    0x0001f07c   0x0001f07c   0x000001dc   Code   RO           23    .text               gpio.o
+    0x0001f258   0x0001f258   0x000006e8   Code   RO           26    .text               flash.o
+    0x0001f940   0x0001f940   0x00000018   Code   RO           29    .text               emi.o
+    0x0001f958   0x0001f958   0x000000d8   Code   RO           30    .text               adc.o
+    0x0001fa30   0x0001fa30   0x00000094   Code   RO           32    .text               intc.o
+    0x0001fac4   0x0001fac4   0x0000002c   Code   RO           37    .text               timer.o
+    0x0001faf0   0x0001faf0   0x0000035c   Code   RO           38    .text               uart.o
+    0x0001fe4c   0x0001fe4c   0x00000068   Code   RO           42    .text               wdt.o
+    0x0001feb4   0x0001feb4   0x000004ac   Code   RO           44    .text               rf_xvr.o
+    0x00020360   0x00020360   0x000003b4   Code   RO           46    .text               bass.o
+    0x00020714   0x00020714   0x000002a4   Code   RO           48    .text               bass_task.o
+    0x000209b8   0x000209b8   0x00000180   Code   RO           51    .text               diss.o
+    0x00020b38   0x00020b38   0x000001d0   Code   RO           53    .text               diss_task.o
+    0x00020d08   0x00020d08   0x000001c8   Code   RO           56    .text               fff0s.o
+    0x00020ed0   0x00020ed0   0x00000228   Code   RO           58    .text               fff0s_task.o
+    0x000210f8   0x000210f8   0x000007cc   Code   RO           61    .text               oads.o
+    0x000218c4   0x000218c4   0x00000310   Code   RO           65    .text               oads_task.o
+    0x00021bd4   0x00021bd4   0x00000238   Code   RO           69    .text               prf.o
+    0x00021e0c   0x00021e0c   0x00000060   Code   RO           71    .text               prf_utils.o
+    0x00021e6c   0x00021e6c   0x0000034c   Code   RO           72    .text               app.o
+    0x000221b8   0x000221b8   0x000000a4   Code   RO           75    .text               app_batt.o
+    0x0002225c   0x0002225c   0x0000010c   Code   RO           79    .text               app_dis.o
+    0x00022368   0x00022368   0x00000130   Code   RO           83    .text               app_fff0.o
+    0x00022498   0x00022498   0x000001b8   Code   RO           88    .text               app_oads.o
+    0x00022650   0x00022650   0x000005e8   Code   RO           93    .text               app_task.o
+    0x00022c38   0x00022c38   0x0000007e   Code   RO           98    .text               led.o
+    0x00022cb6   0x00022cb6   0x00000002   PAD
+    0x00022cb8   0x00022cb8   0x0000048c   Code   RO          101    .text               bk3435_fcc_mode.lib(rf_test.o)
+    0x00023144   0x00023144   0x000002fc   Code   RO          104    .text               bk3435_pn9_mode.lib(rf_pn9_test.o)
+    0x00023440   0x00023440   0x0000001e   Code   RO          108    .text               mc_5.l(strncmp.o)
+    0x0002345e   0x0002345e   0x00000060   Code   RO          125    .text               mc_5.l(uldiv.o)
+    0x000234be   0x000234be   0x00000002   PAD
+    0x000234c0   0x000234c0   0x00000000   Code   RO          126    .text               mc_5.l(iusefp.o)
+    0x000234c0   0x000234c0   0x00000164   Code   RO          127    .text               mf_5.l(dadd.o)
+    0x00023624   0x00023624   0x000000d0   Code   RO          128    .text               mf_5.l(dmul.o)
+    0x000236f4   0x000236f4   0x000000f0   Code   RO          129    .text               mf_5.l(ddiv.o)
+    0x000237e4   0x000237e4   0x00000040   Code   RO          130    .text               mf_5.l(dfixul.o)
+    0x00023824   0x00023824   0x00000028   Code   RO          131    .text               mf_5.l(cdrcmple.o)
+    0x0002384c   0x0002384c   0x00000020   Code   RO          133    .text               mc_5.l(llshl.o)
+    0x0002386c   0x0002386c   0x00000022   Code   RO          134    .text               mc_5.l(llushr.o)
+    0x0002388e   0x0002388e   0x00000026   Code   RO          135    .text               mc_5.l(llsshr.o)
+    0x000238b4   0x000238b4   0x000000be   Code   RO          137    .text               mf_5.l(depilogue.o)
+    0x00023972   0x00023972   0x00000002   PAD
+    0x00023974   0x00023974   0x00000024   Code   RO          116    i.__0vsprintf       mc_5.l(printfa.o)
+    0x00023998   0x00023998   0x00000174   Code   RO          117    i._fp_digits        mc_5.l(printfa.o)
+    0x00023b0c   0x00023b0c   0x000006f4   Code   RO          118    i._printf_core      mc_5.l(printfa.o)
+    0x00024200   0x00024200   0x00000020   Code   RO          119    i._printf_post_padding  mc_5.l(printfa.o)
+    0x00024220   0x00024220   0x0000002c   Code   RO          120    i._printf_pre_padding  mc_5.l(printfa.o)
+    0x0002424c   0x0002424c   0x0000000a   Code   RO          122    i._sputc            mc_5.l(printfa.o)
+    0x00024256   0x00024256   0x0000002e   Data   RO            7    .constdata          arch_main.o
+    0x00024284   0x00024284   0x00000038   Data   RO           47    .constdata          bass.o
+    0x000242bc   0x000242bc   0x00000030   Data   RO           49    .constdata          bass_task.o
+    0x000242ec   0x000242ec   0x00000008   Data   RO           50    .constdata          bass_task.o
+    0x000242f4   0x000242f4   0x000000a8   Data   RO           52    .constdata          diss.o
+    0x0002439c   0x0002439c   0x00000018   Data   RO           54    .constdata          diss_task.o
+    0x000243b4   0x000243b4   0x00000008   Data   RO           55    .constdata          diss_task.o
+    0x000243bc   0x000243bc   0x00000040   Data   RO           57    .constdata          fff0s.o
+    0x000243fc   0x000243fc   0x00000028   Data   RO           59    .constdata          fff0s_task.o
+    0x00024424   0x00024424   0x00000008   Data   RO           60    .constdata          fff0s_task.o
+    0x0002442c   0x0002442c   0x0000009e   Data   RO           63    .constdata          oads.o
     0x000244ca   0x000244ca   0x00000002   PAD
-    0x000244cc   0x000244cc   0x00000020   Data   RO           74    .constdata          app.o
-    0x000244ec   0x000244ec   0x00000020   Data   RO           76    .constdata          app_batt.o
-    0x0002450c   0x0002450c   0x00000008   Data   RO           77    .constdata          app_batt.o
-    0x00024514   0x00024514   0x00000008   Data   RO           80    .constdata          app_dis.o
-    0x0002451c   0x0002451c   0x00000008   Data   RO           81    .constdata          app_dis.o
-    0x00024524   0x00024524   0x00000028   Data   RO           84    .constdata          app_fff0.o
-    0x0002454c   0x0002454c   0x00000008   Data   RO           85    .constdata          app_fff0.o
-    0x00024554   0x00024554   0x0000001a   Data   RO           86    .constdata          app_fff0.o
-    0x0002456e   0x0002456e   0x00000002   PAD
-    0x00024570   0x00024570   0x00000030   Data   RO           89    .constdata          app_oads.o
-    0x000245a0   0x000245a0   0x00000008   Data   RO           90    .constdata          app_oads.o
-    0x000245a8   0x000245a8   0x000000a8   Data   RO           91    .constdata          app_oads.o
-    0x00024650   0x00024650   0x00000078   Data   RO           94    .constdata          app_task.o
-    0x000246c8   0x000246c8   0x00000008   Data   RO           95    .constdata          app_task.o
-    0x000246d0   0x000246d0   0x000000b5   Data   RO           96    .constdata          app_task.o
-    0x00024785   0x00024785   0x00000050   Data   RO          102    .constdata          bk3435_fcc_mode.lib(rf_test.o)
+    0x000244cc   0x000244cc   0x00000030   Data   RO           66    .constdata          oads_task.o
+    0x000244fc   0x000244fc   0x00000008   Data   RO           67    .constdata          oads_task.o
+    0x00024504   0x00024504   0x00000032   Data   RO           68    .constdata          oads_task.o
+    0x00024536   0x00024536   0x00000002   PAD
+    0x00024538   0x00024538   0x00000020   Data   RO           74    .constdata          app.o
+    0x00024558   0x00024558   0x00000020   Data   RO           76    .constdata          app_batt.o
+    0x00024578   0x00024578   0x00000008   Data   RO           77    .constdata          app_batt.o
+    0x00024580   0x00024580   0x00000008   Data   RO           80    .constdata          app_dis.o
+    0x00024588   0x00024588   0x00000008   Data   RO           81    .constdata          app_dis.o
+    0x00024590   0x00024590   0x00000028   Data   RO           84    .constdata          app_fff0.o
+    0x000245b8   0x000245b8   0x00000008   Data   RO           85    .constdata          app_fff0.o
+    0x000245c0   0x000245c0   0x0000001a   Data   RO           86    .constdata          app_fff0.o
+    0x000245da   0x000245da   0x00000002   PAD
+    0x000245dc   0x000245dc   0x00000030   Data   RO           89    .constdata          app_oads.o
+    0x0002460c   0x0002460c   0x00000008   Data   RO           90    .constdata          app_oads.o
+    0x00024614   0x00024614   0x000000a8   Data   RO           91    .constdata          app_oads.o
+    0x000246bc   0x000246bc   0x00000078   Data   RO           94    .constdata          app_task.o
+    0x00024734   0x00024734   0x00000008   Data   RO           95    .constdata          app_task.o
+    0x0002473c   0x0002473c   0x000000b5   Data   RO           96    .constdata          app_task.o
+    0x000247f1   0x000247f1   0x00000050   Data   RO          102    .constdata          bk3435_fcc_mode.lib(rf_test.o)
 
 
-    Execution Region RAM_DATA (Exec base: 0x00400800, Load base: 0x000247d8, Size: 0x00000098, Max: 0xffffffff, ABSOLUTE)
-
-    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
-
-    0x00400800   0x000247d8   0x00000002   Data   RW           22    .data               icu.o
-    0x00400802   0x000247da   0x00000002   PAD
-    0x00400804   0x000247dc   0x0000002c   Data   RW           25    .data               gpio.o
-    0x00400830   0x00024808   0x0000000c   Data   RW           28    .data               flash.o
-    0x0040083c   0x00024814   0x00000010   Data   RW           41    .data               uart.o
-    0x0040084c   0x00024824   0x00000002   Data   RW           43    .data               wdt.o
-    0x0040084e   0x00024826   0x00000008   Data   RW           64    .data               oads.o
-    0x00400856   0x0002482e   0x00000002   Data   RW           78    .data               app_batt.o
-    0x00400858   0x00024830   0x00000002   Data   RW           87    .data               app_fff0.o
-    0x0040085a   0x00024832   0x00000001   Data   RW           92    .data               app_oads.o
-    0x0040085b   0x00024833   0x00000001   Data   RW           97    .data               app_task.o
-    0x0040085c   0x00024834   0x00000008   Data   RW          100    .data               ano_uart.o
-    0x00400864   0x0002483c   0x00000009   Data   RW          103    .data               bk3435_fcc_mode.lib(rf_test.o)
-    0x0040086d   0x00024845   0x00000003   PAD
-    0x00400870   0x00024848   0x00000026   Data   RW          105    .data               bk3435_pn9_mode.lib(rf_pn9_test.o)
-
-
-    Execution Region RAM_BSS (Exec base: 0x00400898, Load base: 0x00024870, Size: 0x00000340, Max: 0xffffffff, ABSOLUTE)
+    Execution Region RAM_DATA (Exec base: 0x00400800, Load base: 0x00024844, Size: 0x00000094, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x00400898        -       0x00000010   Zero   RW            6    .bss                arch_main.o
-    0x004008a8        -       0x00000010   Zero   RW           19    .bss                rwip.o
-    0x004008b8        -       0x00000028   Zero   RW           24    .bss                gpio.o
-    0x004008e0        -       0x0000000c   Zero   RW           27    .bss                flash.o
-    0x004008ec        -       0x00000094   Zero   RW           39    .bss                uart.o
-    0x00400980        -       0x00000040   Zero   RW           40    .bss                uart.o
-    0x004009c0        -       0x00000040   Zero   RW           45    .bss                rf_xvr.o
-    0x00400a00        -       0x000000c0   Zero   RW           62    .bss                oads.o
-    0x00400ac0        -       0x000000f0   Zero   RW           70    .bss                prf.o
-    0x00400bb0        -       0x00000028   Zero   RW           73    .bss                app.o
+    0x00400800   0x00024844   0x00000002   Data   RW           22    .data               icu.o
+    0x00400802   0x00024846   0x00000002   PAD
+    0x00400804   0x00024848   0x0000002c   Data   RW           25    .data               gpio.o
+    0x00400830   0x00024874   0x0000000c   Data   RW           28    .data               flash.o
+    0x0040083c   0x00024880   0x00000004   Data   RW           31    .data               adc.o
+    0x00400840   0x00024884   0x00000010   Data   RW           41    .data               uart.o
+    0x00400850   0x00024894   0x00000002   Data   RW           43    .data               wdt.o
+    0x00400852   0x00024896   0x00000008   Data   RW           64    .data               oads.o
+    0x0040085a   0x0002489e   0x00000002   Data   RW           78    .data               app_batt.o
+    0x0040085c   0x000248a0   0x00000002   Data   RW           87    .data               app_fff0.o
+    0x0040085e   0x000248a2   0x00000001   Data   RW           92    .data               app_oads.o
+    0x0040085f   0x000248a3   0x00000001   Data   RW           97    .data               app_task.o
+    0x00400860   0x000248a4   0x00000009   Data   RW          103    .data               bk3435_fcc_mode.lib(rf_test.o)
+    0x00400869   0x000248ad   0x00000003   PAD
+    0x0040086c   0x000248b0   0x00000026   Data   RW          105    .data               bk3435_pn9_mode.lib(rf_pn9_test.o)
 
 
-    Execution Region RAM_STACK_UNUSED (Exec base: 0x0040b70c, Load base: 0x00024870, Size: 0x00000020, Max: 0x00000020, ABSOLUTE)
+    Execution Region RAM_BSS (Exec base: 0x00400894, Load base: 0x000248d8, Size: 0x00000300, Max: 0xffffffff, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x00400894        -       0x00000010   Zero   RW            6    .bss                arch_main.o
+    0x004008a4        -       0x00000010   Zero   RW           19    .bss                rwip.o
+    0x004008b4        -       0x00000028   Zero   RW           24    .bss                gpio.o
+    0x004008dc        -       0x0000000c   Zero   RW           27    .bss                flash.o
+    0x004008e8        -       0x00000094   Zero   RW           39    .bss                uart.o
+    0x0040097c        -       0x00000040   Zero   RW           45    .bss                rf_xvr.o
+    0x004009bc        -       0x000000c0   Zero   RW           62    .bss                oads.o
+    0x00400a7c        -       0x000000f0   Zero   RW           70    .bss                prf.o
+    0x00400b6c        -       0x00000028   Zero   RW           73    .bss                app.o
+
+
+    Execution Region RAM_STACK_UNUSED (Exec base: 0x0040b70c, Load base: 0x000248d8, Size: 0x00000020, Max: 0x00000020, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x0040b70c        -       0x00000020   Zero   RW            1    RAM_STACK_UNUSED.bss  anon$$obj.o
 
 
-    Execution Region RAM_STACK_SVC (Exec base: 0x0040b72c, Load base: 0x00024870, Size: 0x000004f0, Max: 0x000004f0, ABSOLUTE)
+    Execution Region RAM_STACK_SVC (Exec base: 0x0040b72c, Load base: 0x000248d8, Size: 0x000004f0, Max: 0x000004f0, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x0040b72c        -       0x000004f0   Zero   RW            2    RAM_STACK_SVC.bss   anon$$obj.o
 
 
-    Execution Region RAM_STACK_IRQ (Exec base: 0x0040bc1c, Load base: 0x00024870, Size: 0x000001f0, Max: 0x000001f0, ABSOLUTE)
+    Execution Region RAM_STACK_IRQ (Exec base: 0x0040bc1c, Load base: 0x000248d8, Size: 0x000001f0, Max: 0x000001f0, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x0040bc1c        -       0x000001f0   Zero   RW            3    RAM_STACK_IRQ.bss   anon$$obj.o
 
 
-    Execution Region RAM_STACK_FIQ (Exec base: 0x0040be0c, Load base: 0x00024870, Size: 0x000001f0, Max: 0x000001f0, ABSOLUTE)
+    Execution Region RAM_STACK_FIQ (Exec base: 0x0040be0c, Load base: 0x000248d8, Size: 0x000001f0, Max: 0x000001f0, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x0040be0c        -       0x000001f0   Zero   RW            4    RAM_STACK_FIQ.bss   anon$$obj.o
 
 
-    Execution Region RAM_BSS_1 (Exec base: 0x00815000, Load base: 0x00024870, Size: 0x00001258, Max: 0xffffffff, ABSOLUTE)
+    Execution Region RAM_BSS_1 (Exec base: 0x00815000, Load base: 0x000248d8, Size: 0x00001258, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -1691,14 +1693,14 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       120          4          0          8          0          0   ano_uart.o
+       216         36          0          4          0          0   adc.o
        844        152         32          0         40          0   app.o
        164         14         40          2          0          0   app_batt.o
        268        112         16          0          0          0   app_dis.o
        304         86         74          2          0          0   app_fff0.o
        440        126        224          1          0          0   app_oads.o
       1512        592        309          1          0          0   app_task.o
-      1344        592         46          0         16          0   arch_main.o
+      1360        592         46          0         16          0   arch_main.o
        948         16         56          0          0          0   bass.o
        676         12         56          0          0          0   bass_task.o
        500         76          0          0          0          0   boot_handlers.o
@@ -1711,8 +1713,8 @@ Image component sizes
       1768        116          0         12         12          0   flash.o
        476         20          0         44         40          0   gpio.o
        392         38          0          2          0          0   icu.o
-       168         14          0          0          0          0   intc.o
-       142          0          0          0          0          0   led.o
+       180         12          0          0          0          0   intc.o
+       126          0          0          0          0          0   led.o
       1996        544        158          8        192          0   oads.o
        784        138        106          0          0          0   oads_task.o
        568          4          0          0        240          0   prf.o
@@ -1722,11 +1724,11 @@ Image component sizes
         56          0          0          0          0          0   rwble_hl.o
        700         42          0          0       4712          0   rwip.o
         44          4          0          0          0          0   timer.o
-       860         88          0         16        212          0   uart.o
+       860         88          0         16        148          0   uart.o
        104         10          0          2          0          0   wdt.o
 
     ----------------------------------------------------------------------
-     18892       3176       1435        100       7816          0   Object Totals
+     19000       3206       1435         96       7752          0   Object Totals
         48         24          0          0       2288          0   (incl. Generated)
         18          0          6          2          0          0   (incl. Padding)
 
@@ -1773,15 +1775,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     24426       3756       1518        152       7816          0   Grand Totals
-     24426       3756       1518        152       7816          0   ELF Image Totals
-     24426       3756       1518        152          0          0   ROM Totals
+     24534       3786       1518        148       7752          0   Grand Totals
+     24534       3786       1518        148       7752          0   ELF Image Totals
+     24534       3786       1518        148          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                25944 (  25.34kB)
-    Total RW  Size (RW Data + ZI Data)              7968 (   7.78kB)
-    Total ROM Size (Code + RO Data + RW Data)      26096 (  25.48kB)
+    Total RO  Size (Code + RO Data)                26052 (  25.44kB)
+    Total RW  Size (RW Data + ZI Data)              7900 (   7.71kB)
+    Total ROM Size (Code + RO Data + RW Data)      26200 (  25.59kB)
 
 ==============================================================================
 

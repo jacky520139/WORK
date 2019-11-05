@@ -7,6 +7,7 @@
 
 
 /**************¡¾Í·ÎÄ¼þ¡¿********************/
+#include "adc.h"
 #include "uart.h"       // uart definition
 #include "ANO_UART.h"
 #include "LED.h"

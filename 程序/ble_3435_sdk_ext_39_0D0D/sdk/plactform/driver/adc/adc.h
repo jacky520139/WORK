@@ -14,7 +14,7 @@
 
 void adc_init(uint8_t chanle,uint8_t mode);
 void adc_isr(void);
-
+uint16_t adc_get_value(uint8_t chanle);
 
 #endif //
 

@@ -47,8 +47,8 @@ if(gpio_get_input(ButtonPort))
   gpio_set(BlueLedPort, 0);
 	gpio_set(RedLedPort, 0);
 	gpio_set(MotorPort, 1);}	
-	
-	ANO_DT_Send_Version(0xf1,1, 2, 3, 4, 5);
+	adc_get_value(1);
+	//ANO_DT_Send_Version(0xf1,1, 2, 3, 4, 5);
 	}
 
 

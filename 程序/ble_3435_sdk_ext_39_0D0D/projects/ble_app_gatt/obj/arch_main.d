@@ -77,4 +77,5 @@
 .\obj\arch_main.o: ..\..\sdk\ble_stack\inc\ble\hl\l2c\l2cc\l2cc_task.h
 .\obj\arch_main.o: ..\..\sdk\ble_stack\inc\ble\hl\l2c\l2cc\l2cc_pdu.h
 .\obj\arch_main.o: ..\..\sdk\plactform\driver\wdt\wdt.h
+.\obj\arch_main.o: ..\..\sdk\plactform\driver\adc\ADC.h
 .\obj\arch_main.o: .\user\LED.h

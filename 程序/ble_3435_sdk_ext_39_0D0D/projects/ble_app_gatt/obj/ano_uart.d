@@ -1,8 +1,9 @@
 .\obj\ano_uart.o: user\ANO_UART.C
 .\obj\ano_uart.o: user\ALL_Includes.h
-.\obj\ano_uart.o: ..\..\sdk\plactform\driver\uart\uart.h
+.\obj\ano_uart.o: ..\..\sdk\plactform\driver\adc\adc.h
 .\obj\ano_uart.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdbool.h
 .\obj\ano_uart.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+.\obj\ano_uart.o: ..\..\sdk\plactform\driver\uart\uart.h
 .\obj\ano_uart.o: .\config\rwip_config.h
 .\obj\ano_uart.o: ..\..\sdk\ble_stack\com\rwble\rwble_config.h
 .\obj\ano_uart.o: .\config\rwip_config.h
