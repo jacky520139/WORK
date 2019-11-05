@@ -1,0 +1,3 @@
+Change Component Footprint: Designator=R2 Old Footprint=0402_R New Footprint=0603_R
+Change Component Footprint: Designator=R8 Old Footprint=0603_R New Footprint=0402_R
+Added Member To Class: ClassName=LED_12T Member=Component R3 100K

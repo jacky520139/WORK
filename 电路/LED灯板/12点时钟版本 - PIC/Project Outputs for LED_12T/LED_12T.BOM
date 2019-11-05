@@ -1,0 +1,22 @@
+Bill of Material for 
+On 2019/10/10 at 10:52:00
+
+ Comment             Pattern     Quantity  Components
+------------------------------------------------------------------------------
+ 100K                0402_R           1    R3                                                
+ 100K                0603P            1    R15                                               
+ 104                 0402_C           2    C18, C19                     Capac                
+ 104                 0603P            1    C1                                                
+ 1K                  0402_R           4    R1, R4, R5, R22                                   
+ 1K                  0603_R           1    R2                                                
+ 2.2uF               0603_C           1    C6                           Capac                
+ 4.7K                0402_R           2    R13, R14                                          
+ KEY_M               轻触开关 2x4         1    RE1                                               
+ LED                 0402_LED        11    LED1, LED2, LED3, LED4, LED5                      
+                                           LED6, LED7, LED8, LED9, LED10
+                                           LED11
+ N76E003             STSOP20          1    U2                                                
+ R_G_LED             0603_R_G_LED     1    LED12                                             
+ SC7A21              LGA-12-2*2*1     1    U3                                                
+ 测试点                 测试点              7    BAT, CLK, DAT, GND, RESET                         
+                                           RXD, TXD

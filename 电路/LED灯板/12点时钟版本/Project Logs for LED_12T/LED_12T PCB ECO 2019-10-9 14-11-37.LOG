@@ -1,0 +1,9 @@
+Removed Pin From Net: NetName=LIGNT_IN Pin=R3-2
+Change Component Designator: OldDesignator=R3 NewDesignator=R2
+Change Component Designator: OldDesignator=R3 NewDesignator=R5
+Added Pin To Net: NetName=NetQ1_D Pin=R2-2
+Added Pin To Net: NetName=BAT Pin=R3-1
+Added Pin To Net: NetName=LIGNT_IN Pin=R3-2
+Added Member To Class: ClassName=LED_12T Member=Component R2 1K
+Added Member To Class: ClassName=LED_12T Member=Component R5 1K
+Added Room: Name=LED_12T

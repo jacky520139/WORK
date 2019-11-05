@@ -1,0 +1,2 @@
+Removed Pin From Net: NetName=LED_SING Pin=R22-1
+Added Pin To Net: NetName=NetLED12_1 Pin=R22-1

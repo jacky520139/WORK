@@ -1,0 +1,60 @@
+Removed Pin From Net: NetName=GND Pin=U?-1
+Removed Pin From Net: NetName=NetR?_2 Pin=U?-2
+Removed Pin From Net: NetName=TP4056_VCC Pin=U?-8
+Removed Member From Class: ClassName=WATSH2 Member=R?
+Change Component DesignItemId : Designator=R1 Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=R2 Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=R3 Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=R4 Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=R5 Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=R6 Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=R7 Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=R8 Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=R9 Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=R10 Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=R? Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=R? Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=XTAL1 Old DesignItemId= New DesignItemId=¾§Õñ
+Change Component DesignItemId : Designator=U1 Old DesignItemId=BK3 New DesignItemId=BK3431Q
+Change Component DesignItemId : Designator=L3 Old DesignItemId=INDUCT New DesignItemId=INDUCTOR
+Change Component DesignItemId : Designator=LED1 Old DesignItemId=L New DesignItemId=LED
+Change Component DesignItemId : Designator=LED2 Old DesignItemId=L New DesignItemId=LED
+Change Component DesignItemId : Designator=U3 Old DesignItemId=SC New DesignItemId=SC7A21
+Change Component DesignItemId : Designator=U? Old DesignItemId=TP New DesignItemId=TP4056
+Change Component DesignItemId : Designator=U2 Old DesignItemId=TPS6273 New DesignItemId=TPS62730
+Change Component Footprint: Designator=B1 Old Footprint=MODER New Footprint=HDR1X2
+Change Component Footprint: Designator=Q1 Old Footprint=SOT-23 New Footprint=SOT-523
+Change Component Footprint: Designator=Y1 Old Footprint=¾§Õñ1.5*3.2 New Footprint=¾§Õñ3.2*1.5
+Change Component Designator: OldDesignator=R? NewDesignator=R9
+Change Component Designator: OldDesignator=R? NewDesignator=R9
+Change Component Description : Designator=D1 Old Description=1 Amp General Purpose Rectifi New Description=1 Amp General Purpose Rectifier
+Change Component Description : Designator=D2 Old Description=1 Amp General Purpose Rectifi New Description=1 Amp General Purpose Rectifier
+Change Component Description : Designator=C2 Old Description=Capac New Description=Capacitor
+Change Component Description : Designator=C4 Old Description=Capac New Description=Capacitor
+Change Component Description : Designator=C1 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C3 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C5 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C6 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C7 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C8 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C9 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C10 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C11 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C12 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C13 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C14 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C15 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C16 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C17 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C18 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C19 Old Description=Capacit New Description=Capacitor
+Added Pin To Net: NetName=GND Pin=R9-1
+Added Pin To Net: NetName=NetR?_2 Pin=U1-12
+Added Pin To Net: NetName=GND Pin=U?-2
+Added Pin To Net: NetName=NetR?_2 Pin=U?-8
+Change Net Name : Old Net Name=NetR?_2 New Net Name=TP4056_CE
+Added Pin To Net: NetName=DET Pin=U?-7
+Added Net: Name=DET
+Added Pin To Net: NetName=NetR9_2 Pin=R9-2
+Added Pin To Net: NetName=NetR9_2 Pin=U?-5
+Added Net: Name=NetR9_2

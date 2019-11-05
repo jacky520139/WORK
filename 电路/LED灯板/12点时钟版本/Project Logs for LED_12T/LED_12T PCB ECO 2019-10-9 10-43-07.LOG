@@ -1,0 +1,24 @@
+Removed Pin From Net: NetName=NetLED1_1 Pin=LED4-1
+Removed Pin From Net: NetName=COM4 Pin=LED4-2
+Removed Pin From Net: NetName=COM1 Pin=LED5-2
+Removed Pin From Net: NetName=COM2 Pin=LED6-2
+Removed Pin From Net: NetName=NetLED5_1 Pin=LED7-1
+Removed Pin From Net: NetName=COM3 Pin=LED7-2
+Removed Pin From Net: NetName=NetLED5_1 Pin=LED8-1
+Removed Pin From Net: NetName=COM4 Pin=LED8-2
+Removed Pin From Net: NetName=COM1 Pin=LED9-2
+Removed Pin From Net: NetName=COM2 Pin=LED10-2
+Removed Pin From Net: NetName=COM3 Pin=LED11-2
+Removed Pin From Net: NetName=LED12_A Pin=LED12-2
+Added Pin To Net: NetName=COM1 Pin=LED4-2
+Added Pin To Net: NetName=COM2 Pin=LED5-2
+Added Pin To Net: NetName=COM3 Pin=LED6-2
+Added Pin To Net: NetName=COM4 Pin=LED7-2
+Added Pin To Net: NetName=LED12_A Pin=LED8-1
+Added Pin To Net: NetName=COM1 Pin=LED8-2
+Added Pin To Net: NetName=COM2 Pin=LED9-2
+Added Pin To Net: NetName=COM3 Pin=LED10-2
+Added Pin To Net: NetName=COM4 Pin=LED11-2
+Added Pin To Net: NetName=NetLED1_1 Pin=LED12-2
+Change Net Name : Old Net Name=LED12_A New Net Name=NetLED8_1
+Change Net Name : Old Net Name=NetLED1_1 New Net Name=LED12_A

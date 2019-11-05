@@ -1,0 +1,23 @@
+Removed Pin From Net: NetName=LED1 Pin=U2-1
+Removed Pin From Net: NetName=LED5 Pin=U2-10
+Added Component: Designator=Q1(SOT-523)
+Added Component: Designator=R3(0402_R)
+Added Component: Designator=R3(0402_R)
+Added Component: Designator=R8(0603_R)
+Added Pin To Net: NetName=LED5 Pin=Q1-1
+Added Pin To Net: NetName=GND Pin=Q1-2
+Added Pin To Net: NetName=LED1 Pin=Q1-3
+Added Pin To Net: NetName=BAT Pin=R3-1
+Added Pin To Net: NetName=LED1 Pin=R3-2
+Added Pin To Net: NetName=LED5 Pin=R8-2
+Change Net Name : Old Net Name=LED1 New Net Name=NetQ1_D
+Change Net Name : Old Net Name=LED5 New Net Name=NetQ1_G
+Added Pin To Net: NetName=LIGNT_IN Pin=R3-1
+Added Pin To Net: NetName=LIGNT_IN Pin=R3-2
+Added Pin To Net: NetName=LIGNT_IN Pin=U2-1
+Added Net: Name=LIGNT_IN
+Added Pin To Net: NetName=LIGNT_TEXT Pin=R8-1
+Added Pin To Net: NetName=LIGNT_TEXT Pin=U2-10
+Added Net: Name=LIGNT_TEXT
+Added Member To Class: ClassName=LED_12T Member=Component Q1 SI2300
+Added Member To Class: ClassName=LED_12T Member=Component R8 47

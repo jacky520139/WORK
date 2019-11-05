@@ -1,0 +1,15 @@
+Change Component Designator: OldDesignator=R9 NewDesignator=R?
+Change Component Designator: OldDesignator=R9 NewDesignator=R?
+Added Component: Designator=U?(EMSOP8)
+Added Pin To Net: NetName=GND Pin=R?-1
+Added Pin To Net: NetName=NetR9_2 Pin=R?-2
+Added Pin To Net: NetName=GND Pin=U?-1
+Added Pin To Net: NetName=NetR9_2 Pin=U?-2
+Added Pin To Net: NetName=GND Pin=U?-3
+Added Pin To Net: NetName=TP4056_VCC Pin=U?-4
+Added Pin To Net: NetName=BAT Pin=U?-5
+Added Pin To Net: NetName=TP4056_VCC Pin=U?-8
+Change Net Name : Old Net Name=NetR9_2 New Net Name=NetR?_2
+Added Member To Class: ClassName=WATSH2 Member=Component R? 100R
+Added Member To Class: ClassName=WATSH2 Member=Component U? TP4056
+Added Room: Name=WATSH2

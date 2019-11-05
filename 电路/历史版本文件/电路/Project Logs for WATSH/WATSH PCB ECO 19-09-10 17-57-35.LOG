@@ -1,0 +1,21 @@
+Removed Pin From Net: NetName=MOTOR Pin=R12-1
+Removed Pin From Net: NetName=NetQ1_G Pin=R12-2
+Removed Member From Class: ClassName=WATSH2 Member=T3
+Change Component Comment : Designator=T1 Old Comment=≤‚ ‘µ„ New Comment=RX
+Change Component Designator: OldDesignator=T1 NewDesignator=TX
+Change Component Designator: OldDesignator=T2 NewDesignator=NSS
+Change Component Designator: OldDesignator=T3 NewDesignator=GND
+Change Component Designator: OldDesignator=T4 NewDesignator=BAT
+Change Component Designator: OldDesignator=T5 NewDesignator=SCK
+Change Component Designator: OldDesignator=T6 NewDesignator=SO
+Change Component Designator: OldDesignator=T7 NewDesignator=RX
+Change Component Designator: OldDesignator=T8 NewDesignator=RSTN
+Change Component Designator: OldDesignator=T9 NewDesignator=SI
+Change Component Designator: OldDesignator=T10 NewDesignator=GND
+Change Component Designator: OldDesignator=T11 NewDesignator=SDA
+Change Component Designator: OldDesignator=T12 NewDesignator=SCL
+Added Component: Designator=R12(0402_R)
+Added Pin To Net: NetName=MOTOR Pin=R12-1
+Added Pin To Net: NetName=NetQ1_G Pin=R12-2
+Added Member To Class: ClassName=WATSH2 Member=Component R12 1K
+Added Room: Name=WATSH2

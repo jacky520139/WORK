@@ -1,0 +1,92 @@
+Removed Pin From Net: NetName=BAT Pin=B1-1
+Removed Pin From Net: NetName=NetB1_2 Pin=C11-1
+Removed Pin From Net: NetName=BAT Pin=C11-2
+Removed Pin From Net: NetName=USB Pin=D1-1
+Removed Pin From Net: NetName=BAT Pin=D1-2
+Removed Pin From Net: NetName=BAT Pin=D2-2
+Removed Pin From Net: NetName=USB Pin=P4-2
+Removed Pin From Net: NetName=MOTOR Pin=R6-1
+Removed Pin From Net: NetName=NetQ1_G Pin=R6-2
+Removed Pin From Net: NetName=USB Pin=R9-1
+Removed Pin From Net: NetName=TP4056_VCC Pin=R9-2
+Removed Pin From Net: NetName=TP4056_CE Pin=U1-12
+Removed Pin From Net: NetName=GND Pin=U?-2
+Removed Pin From Net: NetName=GND Pin=U?-3
+Removed Pin From Net: NetName=TP4056_VCC Pin=U?-4
+Removed Pin From Net: NetName=NetR9_2 Pin=U?-5
+Removed Pin From Net: NetName=DET Pin=U?-7
+Removed Pin From Net: NetName=TP4056_CE Pin=U?-8
+Removed Member From Class: ClassName=WATSH2 Member=C11
+Removed Member From Class: ClassName=WATSH2 Member=U?
+Change Component DesignItemId : Designator=R1 Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=R2 Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=R3 Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=R4 Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=R5 Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=R6 Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=R7 Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=R8 Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=R9 Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=R9 Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=R10 Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=XTAL1 Old DesignItemId= New DesignItemId=¾§Õñ
+Change Component DesignItemId : Designator=U1 Old DesignItemId=BK3 New DesignItemId=BK3431Q
+Change Component DesignItemId : Designator=L3 Old DesignItemId=INDUCT New DesignItemId=INDUCTOR
+Change Component DesignItemId : Designator=LED1 Old DesignItemId=L New DesignItemId=LED
+Change Component DesignItemId : Designator=LED2 Old DesignItemId=L New DesignItemId=LED
+Change Component DesignItemId : Designator=U3 Old DesignItemId=SC New DesignItemId=SC7A21
+Change Component DesignItemId : Designator=U2 Old DesignItemId=TPS6273 New DesignItemId=TPS62730
+Change Component Footprint: Designator=R6 Old Footprint=0402_R New Footprint=0603_R
+Change Component Footprint: Designator=D2 Old Footprint=SOD-323 New Footprint=SOD-523
+Change Component Comment : Designator=R6 Old Comment=1K New Comment=10R
+Change Component Designator: OldDesignator=R9 NewDesignator=R11
+Change Component Description : Designator=D1 Old Description=1 Amp General Purpose Rectifi New Description=1 Amp General Purpose Rectifier
+Change Component Description : Designator=C2 Old Description=Capac New Description=Capacitor
+Change Component Description : Designator=C4 Old Description=Capac New Description=Capacitor
+Change Component Description : Designator=C1 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C3 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C5 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C6 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C7 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C8 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C9 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C10 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C12 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C13 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C14 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C15 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C16 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C17 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C18 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C19 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=Y1 Old Description=Crystal Osc New Description=Crystal Oscillator
+Change Component Description : Designator=Q1 Old Description=N-Channel MOSF New Description=N-Channel MOSFET
+Added Component: Designator=R12(0402_R)
+Added Component: Designator=U4(SOT-23-5L)
+Added Pin To Net: NetName=NetR9_2 Pin=B1-1
+Added Pin To Net: NetName=TP4056_CE Pin=D1-1
+Added Pin To Net: NetName=TP4056_VCC Pin=D1-2
+Added Pin To Net: NetName=NetR9_2 Pin=D2-2
+Added Pin To Net: NetName=TP4056_CE Pin=P4-2
+Added Pin To Net: NetName=BAT Pin=R6-1
+Added Pin To Net: NetName=NetR9_2 Pin=R6-2
+Added Pin To Net: NetName=BAT_TEXT Pin=R9-1
+Added Pin To Net: NetName=BAT Pin=R9-2
+Added Pin To Net: NetName=GND Pin=R11-2
+Added Pin To Net: NetName=MOTOR Pin=R12-1
+Added Pin To Net: NetName=NetQ1_G Pin=R12-2
+Added Pin To Net: NetName=DET Pin=U1-12
+Added Pin To Net: NetName=DET Pin=U4-1
+Added Pin To Net: NetName=GND Pin=U4-2
+Added Pin To Net: NetName=BAT Pin=U4-3
+Added Pin To Net: NetName=TP4056_VCC Pin=U4-4
+Change Net Name : Old Net Name=DET New Net Name=XT4051_CHRG
+Change Net Name : Old Net Name=NetR9_2 New Net Name=NetB1_1
+Change Net Name : Old Net Name=TP4056_CE New Net Name=NetD1_1
+Change Net Name : Old Net Name=TP4056_VCC New Net Name=NetD1_2
+Added Pin To Net: NetName=NetR11_1 Pin=R11-1
+Added Pin To Net: NetName=NetR11_1 Pin=U4-5
+Added Net: Name=NetR11_1
+Added Member To Class: ClassName=WATSH2 Member=Component R11 100R
+Added Member To Class: ClassName=WATSH2 Member=Component R12 1K
+Added Member To Class: ClassName=WATSH2 Member=Component U4 XT4051

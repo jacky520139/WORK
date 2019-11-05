@@ -1,0 +1,11 @@
+Removed Pin From Net: NetName=MOTOR Pin=R12-1
+Removed Pin From Net: NetName=NetQ1_G Pin=R12-2
+Added Component: Designator=ANT1(1206)
+Added Component: Designator=R12(0402_R)
+Added Pin To Net: NetName=NetANT1_1 Pin=ANT1-1
+Added Pin To Net: NetName=GND Pin=ANT1-2
+Added Pin To Net: NetName=MOTOR Pin=R12-1
+Added Pin To Net: NetName=NetQ1_G Pin=R12-2
+Added Member To Class: ClassName=WATSH2 Member=Component ANT1 ANT
+Added Member To Class: ClassName=WATSH2 Member=Component R12 1K
+Added Room: Name=WATSH2

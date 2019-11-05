@@ -1,0 +1,43 @@
+Removed Pin From Net: NetName=MOTOR Pin=R12-1
+Removed Pin From Net: NetName=NetQ1_G Pin=R12-2
+Added Component: Designator=R12(0402_R)
+Added Component: Designator=T1(TEXT_POINT)
+Added Component: Designator=T2(TEXT_POINT)
+Added Component: Designator=T3(TEXT_POINT)
+Added Component: Designator=T4(TEXT_POINT)
+Added Component: Designator=T5(TEXT_POINT)
+Added Component: Designator=T6(TEXT_POINT)
+Added Component: Designator=T7(TEXT_POINT)
+Added Component: Designator=T8(TEXT_POINT)
+Added Component: Designator=T9(TEXT_POINT)
+Added Component: Designator=T10(TEXT_POINT)
+Added Component: Designator=T11(TEXT_POINT)
+Added Component: Designator=T12(TEXT_POINT)
+Added Pin To Net: NetName=MOTOR Pin=R12-1
+Added Pin To Net: NetName=NetQ1_G Pin=R12-2
+Added Pin To Net: NetName=P00/UART1_TX Pin=T1-1
+Added Pin To Net: NetName=P07/SPI_NSS Pin=T2-1
+Added Pin To Net: NetName=GND Pin=T3-1
+Added Pin To Net: NetName=BAT Pin=T4-1
+Added Pin To Net: NetName=P04/SPI_SCK Pin=T5-1
+Added Pin To Net: NetName=P06/SPI_SO Pin=T6-1
+Added Pin To Net: NetName=P01/UART1_RX Pin=T7-1
+Added Pin To Net: NetName=RSTN Pin=T8-1
+Added Pin To Net: NetName=P05/SPI_SI Pin=T9-1
+Added Pin To Net: NetName=GND Pin=T10-1
+Added Pin To Net: NetName=P03/I2C_SDA Pin=T11-1
+Added Pin To Net: NetName=P02/I2C_SCL Pin=T12-1
+Added Member To Class: ClassName=WATSH2 Member=Component R9 1M
+Added Member To Class: ClassName=WATSH2 Member=Component T1 ≤‚ ‘µ„
+Added Member To Class: ClassName=WATSH2 Member=Component T2 ≤‚ ‘µ„
+Added Member To Class: ClassName=WATSH2 Member=Component T3 ≤‚ ‘µ„
+Added Member To Class: ClassName=WATSH2 Member=Component T4 ≤‚ ‘µ„
+Added Member To Class: ClassName=WATSH2 Member=Component T5 ≤‚ ‘µ„
+Added Member To Class: ClassName=WATSH2 Member=Component T6 ≤‚ ‘µ„
+Added Member To Class: ClassName=WATSH2 Member=Component T7 ≤‚ ‘µ„
+Added Member To Class: ClassName=WATSH2 Member=Component T8 ≤‚ ‘µ„
+Added Member To Class: ClassName=WATSH2 Member=Component T9 ≤‚ ‘µ„
+Added Member To Class: ClassName=WATSH2 Member=Component T10 ≤‚ ‘µ„
+Added Member To Class: ClassName=WATSH2 Member=Component T11 ≤‚ ‘µ„
+Added Member To Class: ClassName=WATSH2 Member=Component T12 ≤‚ ‘µ„
+Added Room: Name=WATSH2

@@ -1,0 +1,26 @@
+Removed Pin From Net: NetName=GET3 Pin=U2-18
+Removed Pin From Net: NetName=GET2 Pin=U2-19
+Change Component DesignItemId : Designator=C1 Old DesignItemId= New DesignItemId=C
+Change Component DesignItemId : Designator=RE1 Old DesignItemId= New DesignItemId=KEY_M
+Change Component DesignItemId : Designator=R1 Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=R3 Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=R4 Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=R13 Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=R14 Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=R22 Old DesignItemId= New DesignItemId=R
+Change Component DesignItemId : Designator=3V3 Old DesignItemId= New DesignItemId=≤‚ ‘µ„
+Change Component DesignItemId : Designator=CLK Old DesignItemId= New DesignItemId=≤‚ ‘µ„
+Change Component DesignItemId : Designator=DAT Old DesignItemId= New DesignItemId=≤‚ ‘µ„
+Change Component DesignItemId : Designator=GND Old DesignItemId= New DesignItemId=≤‚ ‘µ„
+Change Component DesignItemId : Designator=RESET Old DesignItemId= New DesignItemId=≤‚ ‘µ„
+Change Component DesignItemId : Designator=RXD Old DesignItemId= New DesignItemId=≤‚ ‘µ„
+Change Component DesignItemId : Designator=TXD Old DesignItemId= New DesignItemId=≤‚ ‘µ„
+Change Component DesignItemId : Designator=U2 Old DesignItemId=N76 New DesignItemId=N76E003
+Change Component DesignItemId : Designator=LED12 Old DesignItemId=R_G New DesignItemId=R_G_LED
+Change Component DesignItemId : Designator=U3 Old DesignItemId=SC New DesignItemId=SC7A21
+Change Component Description : Designator=C6 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C18 Old Description=Capacit New Description=Capacitor
+Change Component Description : Designator=C19 Old Description=Capacit New Description=Capacitor
+Added Pin To Net: NetName=BAT Pin=3V3-1
+Added Pin To Net: NetName=GET2 Pin=U2-18
+Added Pin To Net: NetName=GET3 Pin=U2-19

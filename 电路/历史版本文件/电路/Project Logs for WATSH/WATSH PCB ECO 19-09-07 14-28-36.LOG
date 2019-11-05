@@ -1,0 +1,10 @@
+Removed Pin From Net: NetName=GND Pin=R9-1
+Removed Pin From Net: NetName=NetR9_2 Pin=R9-2
+Added Component: Designator=Y1(¾§Õñ1.5*3.2)
+Added Pin To Net: NetName=GND Pin=R9-1
+Added Pin To Net: NetName=USB Pin=R9-1
+Added Pin To Net: NetName=NetR9_2 Pin=R9-2
+Added Pin To Net: NetName=TP4056_VCC Pin=R9-2
+Added Pin To Net: NetName=NetU1_9 Pin=Y1-1
+Added Pin To Net: NetName=GND Pin=Y1-2
+Added Member To Class: ClassName=WATSH2 Member=Component Y1 32.768K

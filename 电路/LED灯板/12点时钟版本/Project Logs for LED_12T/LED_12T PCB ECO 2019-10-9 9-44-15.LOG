@@ -1,0 +1,6 @@
+Removed Pin From Net: NetName=GND Pin=P1-1
+Removed Pin From Net: NetName=GND Pin=P1-2
+Removed Pin From Net: NetName=BAT Pin=P1-5
+Removed Pin From Net: NetName=BAT Pin=P1-6
+Removed Member From Class: ClassName=LED_12T Member=P1
+Added Room: Name=LED_12T

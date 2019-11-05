@@ -1,0 +1,11 @@
+Removed Pin From Net: NetName=LED12_A Pin=LED12-1
+Removed Pin From Net: NetName=NetLED12_2 Pin=LED12-2
+Removed Pin From Net: NetName=GND Pin=LED12-3
+Removed Pin From Net: NetName=COM4 Pin=LED12-4
+Change Component Footprint: Designator=C6 Old Footprint=0603_C New Footprint=0402_C
+Added Pin To Net: NetName=NetLED12_2 Pin=LED12-1
+Added Pin To Net: NetName=LED12_A Pin=LED12-2
+Added Pin To Net: NetName=COM4 Pin=LED12-3
+Added Pin To Net: NetName=GND Pin=LED12-4
+Change Net Name : Old Net Name=NetLED12_2 New Net Name=NetLED12_1
+Added Room: Name=LED_12T

@@ -1,0 +1,8 @@
+Removed Pin From Net: NetName=GND Pin=Q1-2
+Removed Pin From Net: NetName=BAT Pin=R3-1
+Removed Pin From Net: NetName=LIGNT_TEXT Pin=R8-1
+Removed Member From Class: ClassName=LED_12T Member=Q1
+Removed Member From Class: ClassName=LED_12T Member=R8
+Added Pin To Net: NetName=GND Pin=R2-2
+Added Pin To Net: NetName=LIGNT_TEXT Pin=R3-1
+Change Net Name : Old Net Name=LIGNT_TEXT New Net Name=LIGNT_VDD
