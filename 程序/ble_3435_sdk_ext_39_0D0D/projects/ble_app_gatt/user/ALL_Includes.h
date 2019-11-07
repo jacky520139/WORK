@@ -8,9 +8,11 @@
 
 /**************¡¾Í·ÎÄ¼þ¡¿********************/
 #include "adc.h"
+#include "pwm.h"
 #include "uart.h"       // uart definition
 #include "ANO_UART.h"
 #include "LED.h"
+#include "rtc.h"
 #endif 
 
 

@@ -323,8 +323,7 @@ void rw_main(void)
 	uart_init(115200);
 	uart_cb_register(uart_rx_handler);
 #endif
-  adc_init(1,1);//初始化ADC,软件模式
-		GLOBAL_INT_START();//使能全局中断
+
 	Init_LED();
     uart_stack_register(uart_printf);
 

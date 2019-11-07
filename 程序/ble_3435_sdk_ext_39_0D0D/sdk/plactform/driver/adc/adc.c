@@ -54,12 +54,11 @@ extern void Delay_us(int num);
 uint16_t adc_get_value(uint8_t chanle)
 {
     uint16_t adc_cnt;
-		uint32_t cfg;
     adc_cnt=0;
     adc_flag =0;
-		cfg  = ( (1 << BIT_ADC_MODE ) | (chanle << BIT_ADC_CHNL) | (0x01 << BIT_ADC_WAIT_CLK_SETTING));
-	REG_APB7_ADC_CFG =  cfg;
-    REG_APB7_ADC_CFG |= SET_ADC_EN+(0x01 << BIT_ADC_MODE );
+
+	  REG_APB7_ADC_CFG &=0X83;
+    REG_APB7_ADC_CFG |= (chanle << BIT_ADC_CHNL)+SET_ADC_EN;
     
     while (!adc_flag)  
     {

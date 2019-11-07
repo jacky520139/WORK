@@ -817,6 +817,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\sdk\plactform\core_modules\rf\src\rf_xvr.c</FilePath>
             </File>
+            <File>
+              <FileName>rtc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\sdk\plactform\driver\rtc\rtc.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

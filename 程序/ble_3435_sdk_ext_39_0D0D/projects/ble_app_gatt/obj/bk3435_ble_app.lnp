@@ -17,6 +17,7 @@
 ".\obj\uart.o"
 ".\obj\wdt.o"
 ".\obj\rf_xvr.o"
+".\obj\rtc.o"
 ".\obj\bass.o"
 ".\obj\bass_task.o"
 ".\obj\diss.o"
