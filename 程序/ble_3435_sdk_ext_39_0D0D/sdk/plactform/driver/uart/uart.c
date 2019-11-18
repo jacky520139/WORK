@@ -548,7 +548,7 @@ void uart_isr(void)
 	}
 	else
 	{
-		uart_rx_done = 1;
+		uart_rx_done = 1;//接收完成
 		if(usrt_rx_cb)
 		{
 			(*usrt_rx_cb)(uart_rx_buf, uart_rx_index);

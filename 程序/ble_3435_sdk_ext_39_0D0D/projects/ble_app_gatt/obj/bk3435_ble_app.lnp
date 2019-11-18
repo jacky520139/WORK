@@ -39,6 +39,9 @@
 "..\..\libs\bk3435_ble_encrypt.lib"
 "..\..\libs\bk3435_fcc_mode.lib"
 "..\..\libs\bk3435_pn9_mode.lib"
+".\obj\usmart.o"
+".\obj\usmart_config.o"
+".\obj\usmart_str.o"
 --library_type=microlib --nodebug --scatter "..\..\sdk\project_files\gatt_link_app.txt"
 --entry sys_Reset --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

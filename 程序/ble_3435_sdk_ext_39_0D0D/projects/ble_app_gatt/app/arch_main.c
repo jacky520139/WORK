@@ -321,11 +321,11 @@ void rw_main(void)
 	// Initialize UART component
 #if (UART_DRIVER)
 	uart_init(115200);
-	uart_cb_register(uart_rx_handler);
+	uart_cb_register(uart_rx_handler);//串口注册接收回调函数
 #endif
 
-	Init_LED();
-    uart_stack_register(uart_printf);
+//	Init_LED();
+  uart_stack_register(uart_printf);
 
 	flash_advance_init();
 	bdaddr_env_init();

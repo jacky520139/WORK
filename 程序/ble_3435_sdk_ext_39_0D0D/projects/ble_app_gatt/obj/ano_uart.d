@@ -15,5 +15,8 @@
 .\obj\ano_uart.o: .\config\user_config.h
 .\obj\ano_uart.o: user\ANO_UART.h
 .\obj\ano_uart.o: user\ALL_Includes.h
+.\obj\ano_uart.o: .\USMAR\usmart.h
+.\obj\ano_uart.o: .\USMAR\usmart_str.h
+.\obj\ano_uart.o: .\USMAR\usart.h
 .\obj\ano_uart.o: user\LED.h
 .\obj\ano_uart.o: ..\..\sdk\plactform\driver\rtc\rtc.h

@@ -77,5 +77,8 @@
 .\obj\led.o: ..\..\sdk\plactform\driver\pwm\pwm.h
 .\obj\led.o: user\ANO_UART.h
 .\obj\led.o: user\ALL_Includes.h
+.\obj\led.o: .\USMAR\usmart.h
+.\obj\led.o: .\USMAR\usmart_str.h
+.\obj\led.o: .\USMAR\usart.h
 .\obj\led.o: user\LED.h
 .\obj\led.o: ..\..\sdk\plactform\driver\rtc\rtc.h
