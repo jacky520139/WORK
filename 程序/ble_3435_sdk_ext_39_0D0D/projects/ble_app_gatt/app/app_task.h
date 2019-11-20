@@ -47,7 +47,7 @@
  ****************************************************************************************
  */
 
-/// Number of APP Task Instances
+/// Number of APP Task Instances应用程序任务实例数
 #define APP_IDX_MAX                 (1)
 
 

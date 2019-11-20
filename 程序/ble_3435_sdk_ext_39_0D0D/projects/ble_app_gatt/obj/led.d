@@ -1,4 +1,4 @@
-.\obj\led.o: user\LED.c
+.\obj\led.o: HARDWARE\src\LED.c
 .\obj\led.o: .\config\rwip_config.h
 .\obj\led.o: ..\..\sdk\ble_stack\com\rwble\rwble_config.h
 .\obj\led.o: .\config\rwip_config.h
@@ -72,14 +72,14 @@
 .\obj\led.o: ..\..\sdk\ble_stack\inc\ble\ll\llm\llm_task.h
 .\obj\led.o: ..\..\sdk\ble_stack\inc\ea\ea.h
 .\obj\led.o: ..\..\sdk\ble_stack\inc\ble\ll\llc\llc_task.h
-.\obj\led.o: user\ALL_Includes.h
+.\obj\led.o: .\HARDWARE\interface\ALL_Includes.h
 .\obj\led.o: ..\..\sdk\plactform\driver\adc\adc.h
 .\obj\led.o: ..\..\sdk\plactform\driver\pwm\pwm.h
-.\obj\led.o: user\ANO_UART.h
-.\obj\led.o: user\ALL_Includes.h
+.\obj\led.o: .\HARDWARE\interface\ANO_UART.h
+.\obj\led.o: .\HARDWARE\interface\ALL_Includes.h
 .\obj\led.o: .\USMART\usmart.h
 .\obj\led.o: .\USMART\usmart_str.h
 .\obj\led.o: .\USMART\usart.h
 .\obj\led.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-.\obj\led.o: user\LED.h
+.\obj\led.o: .\HARDWARE\interface\LED.h
 .\obj\led.o: ..\..\sdk\plactform\driver\rtc\rtc.h

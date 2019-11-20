@@ -78,12 +78,12 @@
 .\obj\arch_main.o: ..\..\sdk\ble_stack\inc\ble\hl\l2c\l2cc\l2cc_pdu.h
 .\obj\arch_main.o: ..\..\sdk\plactform\driver\wdt\wdt.h
 .\obj\arch_main.o: ..\..\sdk\plactform\driver\adc\ADC.h
-.\obj\arch_main.o: .\user\ALL_Includes.h
-.\obj\arch_main.o: .\user\ANO_UART.h
-.\obj\arch_main.o: .\user\ALL_Includes.h
+.\obj\arch_main.o: .\HARDWARE\interface\ALL_Includes.h
+.\obj\arch_main.o: .\HARDWARE\interface\ANO_UART.h
+.\obj\arch_main.o: .\HARDWARE\interface\ALL_Includes.h
 .\obj\arch_main.o: .\USMART\usmart.h
 .\obj\arch_main.o: .\USMART\usmart_str.h
 .\obj\arch_main.o: .\USMART\usart.h
 .\obj\arch_main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-.\obj\arch_main.o: .\user\LED.h
+.\obj\arch_main.o: .\HARDWARE\interface\LED.h
 .\obj\arch_main.o: ..\..\sdk\plactform\driver\rtc\rtc.h

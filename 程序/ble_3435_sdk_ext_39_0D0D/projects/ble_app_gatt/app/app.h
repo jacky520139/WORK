@@ -59,6 +59,7 @@
  */
 
 /// List of Application NVDS TAG identifiers
+//应用程序NVDS标记标识符列表
 enum app_nvds_tag
 {
     /// BLE Application Advertising data

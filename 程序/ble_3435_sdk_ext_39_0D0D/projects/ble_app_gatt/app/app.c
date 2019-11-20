@@ -87,7 +87,7 @@ enum appm_svc_list
 static const struct ke_task_desc TASK_DESC_APP = {NULL, &appm_default_handler,
                                                   appm_state, APPM_STATE_MAX, APP_IDX_MAX};
 
-/// List of functions used to create the database
+/// List of functions used to create the database用于创建数据库的函数列表
 static const appm_add_svc_func_t appm_add_svc_func_list[APPM_SVC_LIST_STOP] =
 {
     (appm_add_svc_func_t)app_fff0_add_fff0s,
@@ -127,13 +127,13 @@ void appm_init()
     {
         uint8_t counter;
 
-        // generate a new IRK
+        // generate a new IRK  生成新IRK
         for (counter = 0; counter < KEY_LEN; counter++)
         {
-            app_env.loc_irk[counter]    = (uint8_t)co_rand_word();
+            app_env.loc_irk[counter]    = (uint8_t)co_rand_word();//函数获取32位随机数。
         }
 
-        // Store the generated value in NVDS
+        // Store the generated value in NVDS   将生成的值存储在NVDS中
         if (nvds_put(NVDS_TAG_LOC_IRK, KEY_LEN, (uint8_t *)&app_env.loc_irk) != NVDS_OK)
         {
             ASSERT_INFO(0, NVDS_TAG_LOC_IRK, 0);

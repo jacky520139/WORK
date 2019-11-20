@@ -840,6 +840,7 @@ static int app_led_handler(ke_msg_id_t const msgid,
 const struct ke_msg_handler appm_default_state[] =
 {
     // Note: first message is latest message checked by kernel so default is put on top.
+	//第一条消息是内核检查的最新消息，所以默认值放在最上面。
     {KE_MSG_DEFAULT_HANDLER,    	(ke_msg_func_t)appm_msg_handler},
     {GAPM_DEVICE_READY_IND,     	(ke_msg_func_t)gapm_device_ready_ind_handler},
     {GAPM_CMP_EVT,             		(ke_msg_func_t)gapm_cmp_evt_handler},
@@ -849,12 +850,12 @@ const struct ke_msg_handler appm_default_state[] =
     {GAPC_CMP_EVT,             		(ke_msg_func_t)gapc_cmp_evt_handler},
     {GAPC_DISCONNECT_IND,       	(ke_msg_func_t)gapc_disconnect_ind_handler},
     {GAPM_PROFILE_ADDED_IND,    	(ke_msg_func_t)gapm_profile_added_ind_handler},
-    {GAPC_LE_PKT_SIZE_IND,			(ke_msg_func_t)gapc_le_pkt_size_ind_handler},
-    {GAPC_PARAM_UPDATED_IND,		(ke_msg_func_t)gapc_param_updated_ind_handler},
-    {GATTC_MTU_CHANGED_IND,			(ke_msg_func_t)gattc_mtu_changed_ind_handler},	
+    {GAPC_LE_PKT_SIZE_IND,			  (ke_msg_func_t)gapc_le_pkt_size_ind_handler},
+    {GAPC_PARAM_UPDATED_IND,		  (ke_msg_func_t)gapc_param_updated_ind_handler},
+    {GATTC_MTU_CHANGED_IND,			  (ke_msg_func_t)gattc_mtu_changed_ind_handler},	
     {GAPC_PARAM_UPDATE_REQ_IND, 	(ke_msg_func_t)gapc_param_update_req_ind_handler},
     {APP_PARAM_UPDATE_REQ_IND, 		(ke_msg_func_t)gapc_update_conn_param_req_ind_handler},
-    {APP_PERIOD_TIMER,				(ke_msg_func_t)app_period_timer_handler},
+    {APP_PERIOD_TIMER,				    (ke_msg_func_t)app_period_timer_handler},
 		{APP_LED_SCAN, 		            (ke_msg_func_t)app_led_handler},
 };
 

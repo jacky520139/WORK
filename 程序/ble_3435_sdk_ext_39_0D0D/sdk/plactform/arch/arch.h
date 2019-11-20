@@ -227,6 +227,7 @@ extern struct rom_env_tag rom_env;
 #define ASSERT_ERR(cond)
 
 /// Assertions showing a critical error that could require a full system reset
+//显示可能需要完全系统重置的严重错误的断言
 #define ASSERT_INFO(cond, param0, param1)
 
 /// Assertions showing a non-critical problem that has to be fixed by the SW
