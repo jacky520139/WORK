@@ -87,7 +87,7 @@ extern const unsigned int boot_stack_len_FIQ;
 #define STACK_LEN_FIQ   ((uint32_t)boot_stack_len_FIQ)
 
 #define BOOT_PATTERN_UNUSED   0xAAAAAAAA      // Pattern to fill UNUSED stack
-#define BOOT_PATTERN_SVC      0xBBBBBBBB      // Pattern to fill SVC stack
+#define BOOT_PATTERN_SVC      0xBBBBBBBB      // Pattern to fill SVC stackÌî³äSVC¶ÑÕ»µÄÄ£Ê½
 #define BOOT_PATTERN_IRQ      0xCCCCCCCC      // Pattern to fill IRQ stack
 #define BOOT_PATTERN_FIQ      0xDDDDDDDD      // Pattern to fill FIQ stack
 

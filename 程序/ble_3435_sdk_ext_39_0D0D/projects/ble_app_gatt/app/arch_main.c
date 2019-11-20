@@ -57,6 +57,7 @@
 #include "wdt.h"
 #include "user_config.h"
 #include "ADC.h"
+#include "ALL_Includes.h"
 /**
  ****************************************************************************************
  * @addtogroup DRIVERS
@@ -232,11 +233,15 @@ void rw_app_enter(void)
 
 	while(1)
 	{
-		//schedule all pending events
+		//schedule all pending events调度所有挂起事件
 		rwip_schedule();
-
+//ANO_DT_Send_Version(0xf1,1, 2, 3, 4, 5);
+//		printf("Run Time Calculation ON\r\n");
+//		usmart_scan();
+//		printf("Run Time Calculation OFF\r\n");
 		// Checks for sleep have to be done with interrupt disabled
-		GLOBAL_INT_DISABLE();
+		//睡眠检查必须在中断被禁用的情况下进行
+		GLOBAL_INT_DISABLE();//禁止全局中断
 
 		oad_updating_user_section_pro();
 
@@ -246,26 +251,27 @@ void rw_app_enter(void)
 		}
 #if SYSTEM_SLEEP
 		// Check if the processor clock can be gated
+		//检查处理器时钟是否可以选通
 		sleep_type = rwip_sleep();
 		if((sleep_type & RW_MCU_DEEP_SLEEP) == RW_MCU_DEEP_SLEEP)
 		{
-			// 1:idel  0:reduce voltage
+			// 1:idel  0:reduce voltage减压休眠
 			if(icu_get_sleep_mode())
 			{
-				cpu_idle_sleep();
+				cpu_idle_sleep();//休闲
 			}
 			else
 			{
-				cpu_reduce_voltage_sleep();
+				cpu_reduce_voltage_sleep();//休眠
 			}
 		}
 		else if((sleep_type & RW_MCU_IDLE_SLEEP) == RW_MCU_IDLE_SLEEP)
 		{
-			cpu_idle_sleep();
+			cpu_idle_sleep();//休眠
 		}
 #endif
-		Stack_Integrity_Check();
-		GLOBAL_INT_RESTORE();
+		Stack_Integrity_Check();//堆叠完整检查
+		GLOBAL_INT_RESTORE();//打开全局中断
 	}
 }
 
@@ -285,7 +291,7 @@ void sys_mode_init(void)
  *******************************************************************************
  */
 #include "LED.h"
-
+#include "usart.h"
 extern struct rom_env_tag rom_env;
 extern void uart_stack_register(void *cb);
 
@@ -321,7 +327,10 @@ void rw_main(void)
 	// Initialize UART component
 #if (UART_DRIVER)
 	uart_init(115200);
-	uart_cb_register(uart_rx_handler);//串口注册接收回调函数
+	//uart_cb_register(uart_rx_handler);//串口注册接收回调函数
+	uart_cb_register(USART1_IRQHandler);//串口注册接收回调函数
+	
+	//uart_cb_register(app_fff1_send_lvl);//串口注册接收回调函数
 #endif
 
 //	Init_LED();
@@ -349,15 +358,16 @@ void rw_main(void)
 	  * RW SW stack initialization
 	  ***************************************************************************
 	  */
-	// Initialize RW SW stack
+	// 初始化 RW SW 堆栈
 	rwip_init(0);
 
 	icu_init();
 
 	flash_init();
 	
-	gpio_config(0x10, OUTPUT, PULL_NONE);
-	gpio_set(0x10, 1);
+//	gpio_config(0x10, OUTPUT, PULL_NONE);
+	gpio_config(BlueLedPort, OUTPUT, PULL_NONE);
+//	gpio_set(0x10, 1);
 
 	REG_AHB0_ICU_INT_ENABLE |= (0x01 << 15); //BLE INT
 	REG_AHB0_ICU_IRQ_ENABLE = 0x03;
@@ -395,14 +405,14 @@ void rw_main(void)
 
 
 #if (UART_DRIVER)
-static void uart_rx_handler(uint8_t *buf, uint8_t len)
-{
-	for(uint8_t i=0; i<len; i++)
-	{
-		UART_PRINTF("0x%x ", buf[i]);
-	}
-	uart_printf("\r\n");
-}
+//static void uart_rx_handler(uint8_t *buf, uint8_t len)
+//{
+//	for(uint8_t i=0; i<len; i++)
+//	{
+//		UART_PRINTF("0x%x ", buf[i]);
+//	}
+//	uart_printf("\r\n");
+//}
 #endif
 
 void rwip_eif_api_init(void)

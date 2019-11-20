@@ -81,7 +81,9 @@ enum appm_msg
 		
     APP_PARAM_UPDATE_REQ_IND,
 	
-	APP_PERIOD_TIMER,	
+	APP_PERIOD_TIMER,
+  APP_USMART_SCAN,	
+	APP_LED_SCAN,
 };
 
 

@@ -38,6 +38,7 @@
 #include "ke_msg.h"          // kernel message defines
  
 /* Default Message handler code to handle several message type in same handler. */
+//处理同一处理程序中多个消息类型的默认消息处理程序代码
 #define KE_MSG_DEFAULT_HANDLER  (0xFFFF)
 /* Invalid task */
 #define KE_TASK_INVALID         (0xFFFF)
@@ -58,7 +59,7 @@ enum KE_TASK_STATUS
 #define MSG_T(msg)         ((ke_task_id_t)((msg) >> 8))
 #define MSG_I(msg)         ((msg) & ((1<<8)-1))
 
-/// Format of a task message handler function
+/// 任务消息处理程序函数的格式
 typedef int (*ke_msg_func_t)(ke_msg_id_t const msgid, void const *param,
                              ke_task_id_t const dest_id, ke_task_id_t const src_id);
 
@@ -78,17 +79,17 @@ typedef int (*ke_msg_func_t)(ke_msg_id_t const msgid, void const *param,
 struct ke_msg_handler
 {
     /// Id of the handled message.
-    ke_msg_id_t id;
+    ke_msg_id_t id;//已处理邮件的Id
     /// Pointer to the handler function for the msgid above.
-    ke_msg_func_t func;
+    ke_msg_func_t func;//指向上面msgid的handler函数的指针。
 };
 
 /// Element of a state handler table.
 struct ke_state_handler
 {
-    /// Pointer to the message handler table of this state.
+    /// Pointer to the message handler table of this state.指向此状态的消息处理程序表的指针。
     const struct ke_msg_handler *msg_table;
-    /// Number of messages handled in this state.
+    /// Number of messages handled in this state.在此状态下处理的邮件数。
     uint16_t msg_cnt;
 };
 
@@ -99,17 +100,21 @@ struct ke_state_handler
 #define KE_STATE_HANDLER_NONE {NULL, 0}
 
 /// Task descriptor grouping all information required by the kernel for the scheduling.
+//任务描述符，将内核调度所需的所有信息分组。
 struct ke_task_desc
 {
     /// Pointer to the state handler table (one element for each state).
+	//指向状态处理程序表的指针（每个状态一个元素）
     const struct ke_state_handler* state_handler;
     /// Pointer to the default state handler (element parsed after the current state).
+	//指向默认状态处理程序（在当前状态之后分析的元素）的指针。
     const struct ke_state_handler* default_handler;
     /// Pointer to the state table (one element for each instance).
+	//指向状态表的指针（每个实例一个元素）。
     ke_state_t* state;
-    /// Maximum number of states in the task.
+    /// Maximum number of states in the task.任务中的最大状态数。
     uint16_t state_max;
-    /// Maximum index of supported instances of the task.
+    /// Maximum index of supported instances of the task.任务的支持实例的最大索引。
     uint16_t idx_max;
 };
 
@@ -131,7 +136,7 @@ void ke_task_init(void);
  * @brief Create a task.
  *
  * @param[in]  task_type       Task type.
- * @param[in]  p_task_desc     Pointer to task descriptor.
+ * @param[in]  p_task_desc     Pointer to task descriptor.指向任务描述符的指针
  *
  * @return                     Status
  ****************************************************************************************

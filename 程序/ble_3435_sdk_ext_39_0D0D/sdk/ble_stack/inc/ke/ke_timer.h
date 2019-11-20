@@ -17,11 +17,11 @@
 /**
  ****************************************************************************************
  * @defgroup TIMER BT Time
- * @ingroup KERNEL
- * @brief Timer management module.
+ * @ingroup KERNEL 内核
+ * @brief Timer management module.定时器管理模块。
  *
  * This module implements the functions used for managing kernel timers.
- *
+ * 此模块实现用于管理内核计时器的函数。
  ****************************************************************************************
  */
 
@@ -34,7 +34,7 @@
  ****************************************************************************************
  */
 
-///  Convert timer from second to timer accuracy (10ms)
+///  Convert timer from second to timer accuracy (10ms)将计时器从秒精度转换为计时器精度（10毫秒）
 #define KE_TIME_IN_SEC(_time) (_time * 100)
 
 

@@ -4,7 +4,7 @@
 #include "BK3435_reg.h"
 #include "wdt.h"
 
-uint8_t wdt_disable_flag=0;
+uint8_t wdt_disable_flag=0;//看门狗使能标志位
 static uint8_t wdt_enable_status=0;
 
 void wdt_disable(void)

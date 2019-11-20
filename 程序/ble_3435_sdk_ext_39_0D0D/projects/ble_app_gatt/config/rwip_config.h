@@ -26,8 +26,8 @@
  *        BLE_STD_MODE             BLE Only
  *
  *        BT_EMB_PRESENT           BT controller exists
- *        BLE_EMB_PRESENT          BLE controller exists
- *        BLE_HOST_PRESENT         BLE host exists
+ *        BLE_EMB_PRESENT          BLE controller exists  BLE控制器
+ *        BLE_HOST_PRESENT         BLE host exists  BLE主机存在
  *
  * @name RW Stack Configuration
  * @{
@@ -55,13 +55,13 @@
 #define CFG_APP 
 #endif
 
-//   <o> CFG_BLE Role
-// 		<0=> BROADCASTER  
-// 		<1=> OBSERVER
-// 		<2=> PERIPHERAL 
-// 		<3=> CENTRAL
-// 		<4=> ALLROLES
-//    <i> Select Role 
+//   <o> CFG_BLE Role配置蓝牙角色
+// 		<0=> BROADCASTER  播音员
+// 		<1=> OBSERVER观察员
+// 		<2=> PERIPHERAL 外围设备
+// 		<3=> CENTRAL中央
+// 		<4=> ALLROLES所有角色
+//    <i> Select Role 选择角色
 #define CFG_ROLE 2
 
 #if ( CFG_ROLE == 0)
@@ -84,9 +84,9 @@
 #define CFG_ALLROLES 
 #endif
 //  
-
+//、、、、、、、、、、、、、、、、、、、、、
 //   <e> CFG_EMB 
-//   <i> enable Exchange Memeory 
+//   <i> enable Exchange Memeory  	启用交互内存
 //   </e>
 #if ( 1 )
 #define CFG_EMB 
@@ -100,7 +100,7 @@
 #endif
 
 //   <e> CFG_BLE_2MBPS
-//   	<i> select BLE at 2MBPS Mode
+//   	<i> 以2MBPS模式选择BLE
 //   </e> 
 #if ( 0 )
 #define CFG_BLE_2MBPS
@@ -108,7 +108,7 @@
 
 
 //   <e> CFG_CHNL_ASSESS
-//   <i> select BLE CHNL_ASSESS
+//   <i> select BLE CHNL_ASSESS 选择蓝牙 频道评估
 //   </e> 
 #if ( 0 )
 #define CFG_CHNL_ASSESS
@@ -125,21 +125,21 @@
 
 
 //   <e> CFG_HOST
-//   	<i> enable BLE HOST 
+//   	<i> enable BLE HOST 使能蓝牙为主设备
 //   </e>
 #if ( 1 )
 #define CFG_HOST
 #endif
 
 //   <e> CFG_AHITL
-//   	<i> enable Application Host Interface
+//   	<i> 启用应用程序主机接口
 //   </e>
 #if ( 1 )
 #define CFG_AHITL
 #endif
 
 //   <e> CFG_HCITL
-//   	<i> enable Host Controller Interface Support
+//   	<i> enable Host Controller Interface Support启用主机控制器接口支持
 //   </e>
 #if ( 1 )
 #define CFG_HCITL
@@ -176,7 +176,7 @@
 
 
 //   <e> CFG_SLEEP
-//   <i> enable DEEP_SLEEP
+//   <i> enable DEEP_SLEEP 使能深度睡眠
 //   </e>
 #if ( 1 )
 #define CFG_SLEEP 
@@ -186,7 +186,7 @@
 
 
 
-// <h>  Config MAX Connect Device Numble
+// <h>  配置最大连接设备数
 // <o>  CFG_CON <1-10>
 // <i>  CFG MAX CONNECT NUM (1 -- 10)
 #define CFG_CON			1
@@ -220,8 +220,8 @@
 
 
 /******************************************************************************************/
-/* --------------------------   GENERAL SETUP       --------------------------------------*/
-/* -------------------------    don't change  format       -------------------------------*/
+/* --------------------------   一般设置       --------------------------------------*/
+/* -------------------------    无需更改格式       -------------------------------*/
 /******************************************************************************************/
 
 
@@ -244,7 +244,7 @@
 #endif // CFG_BT
 
 /******************************************************************************************/
-/* -------------------------   STACK PARTITIONING      -----------------------------------*/
+/* -------------------------   栈划分      -----------------------------------*/
 /******************************************************************************************/
 
 #if (BT_DUAL_MODE)
@@ -282,7 +282,7 @@
 #define EA_PRESENT                      (BT_EMB_PRESENT || BLE_EMB_PRESENT)
 
 /******************************************************************************************/
-/* -------------------------   INTERFACES DEFINITIONS      -------------------------------*/
+/* -------------------------   界面定义      -------------------------------*/
 /******************************************************************************************/
 
 /// Application Host Interface
@@ -686,11 +686,11 @@
 /* -------------------------   KERNEL SETUP          -------------------------------------*/
 /******************************************************************************************/
 
-/// Flag indicating Kernel is supported
+/// Flag indicating Kernel is supported表示支持内核的标志
 #define KE_SUPPORT  (BLE_EMB_PRESENT || BT_EMB_PRESENT || BLE_HOST_PRESENT || BLE_APP_PRESENT)
 
 
-/// Event types definition
+/// Event types definition事件类型定义
 enum KE_EVENT_TYPE
 {
     #if DISPLAY_SUPPORT
@@ -751,7 +751,7 @@ enum KE_EVENT_TYPE
     KE_EVENT_MAX             ,
 };
 
-/// Tasks types definition
+/// 任务类型定义
 enum KE_TASK_TYPE
 {
 #if (BT_EMB_PRESENT)
@@ -795,10 +795,10 @@ enum KE_TASK_TYPE
 
 #if (BLE_HOST_PRESENT)
     TASK_L2CC = 6,    // L2CAP Controller Task
-    TASK_GATTM = 7,   // Generic Attribute Profile Manager Task
-    TASK_GATTC = 8,   // Generic Attribute Profile Controller Task
-    TASK_GAPM = 9,    // Generic Access Profile Manager
-    TASK_GAPC = 10,    // Generic Access Profile Controller
+    TASK_GATTM = 7,   // Generic Attribute Profile Manager Task通用属性配置文件管理器任务
+    TASK_GATTC = 8,   // Generic Attribute Profile Controller Task通用属性配置文件控制器任务
+    TASK_GAPM = 9,    // Generic Access Profile Manager通用访问配置文件管理器
+    TASK_GAPC = 10,    // Generic Access Profile Controller通用访问配置文件控制器
 
     // allocate a certain number of profiles task
     TASK_PRF_MAX = (TASK_GAPC + BLE_NB_PROFILES),//BLE_NB_PROFILES MAX ROM USE == 6 

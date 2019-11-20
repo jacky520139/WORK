@@ -1,8 +1,8 @@
 .\obj\ano_uart.o: user\ANO_UART.C
 .\obj\ano_uart.o: user\ALL_Includes.h
 .\obj\ano_uart.o: ..\..\sdk\plactform\driver\adc\adc.h
-.\obj\ano_uart.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdbool.h
-.\obj\ano_uart.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+.\obj\ano_uart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\obj\ano_uart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\obj\ano_uart.o: ..\..\sdk\plactform\driver\pwm\pwm.h
 .\obj\ano_uart.o: ..\..\sdk\plactform\arch\BK3435_reg.h
 .\obj\ano_uart.o: ..\..\sdk\plactform\driver\uart\uart.h
@@ -15,8 +15,9 @@
 .\obj\ano_uart.o: .\config\user_config.h
 .\obj\ano_uart.o: user\ANO_UART.h
 .\obj\ano_uart.o: user\ALL_Includes.h
-.\obj\ano_uart.o: .\USMAR\usmart.h
-.\obj\ano_uart.o: .\USMAR\usmart_str.h
-.\obj\ano_uart.o: .\USMAR\usart.h
+.\obj\ano_uart.o: .\USMART\usmart.h
+.\obj\ano_uart.o: .\USMART\usmart_str.h
+.\obj\ano_uart.o: .\USMART\usart.h
+.\obj\ano_uart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\obj\ano_uart.o: user\LED.h
 .\obj\ano_uart.o: ..\..\sdk\plactform\driver\rtc\rtc.h

@@ -211,7 +211,7 @@ void FIQ_Exception(void)
 
 #if (SYSTEM_SLEEP)
     if((system_mode & RW_NO_MODE) == RW_NO_MODE)
-	    cpu_wakeup();
+	    cpu_wakeup();   //»½ÐÑ
 #endif
 
     // call the function handler

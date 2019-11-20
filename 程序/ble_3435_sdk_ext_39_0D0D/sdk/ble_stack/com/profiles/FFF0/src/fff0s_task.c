@@ -39,13 +39,13 @@ static int fff0s_fff1_level_upd_req_handler(ke_msg_id_t const msgid,
                                             ke_task_id_t const dest_id,
                                             ke_task_id_t const src_id)
 {
-    int msg_status = KE_MSG_SAVED;
+    int msg_status = KE_MSG_SAVED;//默认返回
     uint8_t state = ke_state_get(dest_id);
 	
     // check state of the task
     if(state == FFF0S_IDLE)
     {
-        struct fff0s_env_tag* fff0s_env = PRF_ENV_GET(FFF0S, fff0s);
+        struct fff0s_env_tag* fff0s_env = PRF_ENV_GET(FFF0S, fff0s);//配置文件任务ID
 
         // put task in a busy state
         ke_state_set(dest_id, FFF0S_BUSY);						
@@ -67,7 +67,7 @@ static int gattc_att_info_req_ind_handler(ke_msg_id_t const msgid,
 
     struct gattc_att_info_cfm * cfm;
     uint8_t  att_idx = 0;
-    // retrieve handle information
+    // retrieve handle information检索句柄信息
     uint8_t status = fff0s_get_att_idx(param->handle, &att_idx);
 
     //Send write response

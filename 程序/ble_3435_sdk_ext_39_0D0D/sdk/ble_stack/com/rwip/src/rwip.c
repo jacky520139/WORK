@@ -375,7 +375,7 @@ extern uint8_t cur_read_buf_idx ;
 void rwip_init(uint32_t error)
 {
 	
-	(*((volatile unsigned long *)   0x00800018)) =  0;  //enable ble clock
+	(*((volatile unsigned long *)   0x00800018)) =  0;  //使能蓝牙时钟
     #if (SYSTEM_SLEEP)
     uint8_t length = 1;
     uint8_t sleep_enable;
@@ -386,7 +386,7 @@ void rwip_init(uint32_t error)
     memset(&rwip_env, 0, sizeof(rwip_env));
     #endif //DEEPSLEEP
     #if (KE_SUPPORT)
-    // Initialize kernel
+    // 初始化内核
     ke_init();
     // Initialize memory heap used by kernel.
     #if (KE_MEM_RW)
@@ -523,7 +523,7 @@ void rwip_init(uint32_t error)
 
     /*
      ************************************************************************************
-     * Application initialization
+     * 应用程序初始化
      ************************************************************************************
      */
     #if ((BLE_APP_PRESENT)&& (!BLE_RF_TEST))

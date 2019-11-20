@@ -68,12 +68,13 @@ typedef void (*appm_add_svc_func_t)(void);
  */
 
 /// List of service to add in the database
+//要添加到数据库中的服务列表
 enum appm_svc_list
 {
     APPM_SVC_FFF0,
     APPM_SVC_DIS,
     APPM_SVC_BATT,
-	APPM_SVC_OADS,
+	  APPM_SVC_OADS,
     APPM_SVC_LIST_STOP ,
 };
 
@@ -82,7 +83,7 @@ enum appm_svc_list
  ****************************************************************************************
  */
 
-/// Application Task Descriptor
+/// Application Task Descriptor应用程序任务描述符
 static const struct ke_task_desc TASK_DESC_APP = {NULL, &appm_default_handler,
                                                   appm_state, APPM_STATE_MAX, APP_IDX_MAX};
 
@@ -113,9 +114,10 @@ void appm_init()
     uint8_t key_len = KEY_LEN;
 
     // Reset the application manager environment
+	  //重置应用程序管理器环境
     memset(&app_env, 0, sizeof(app_env));
 
-    // Create APP task
+    // Create APP task创建APP任务
     ke_task_create(TASK_APP, &TASK_DESC_APP);
 
     // Initialize Task state
@@ -142,7 +144,7 @@ void appm_init()
      * INITIALIZE ALL MODULES
      *------------------------------------------------------*/
 
-    // Device Information Module
+    // Device Information Module设备信息模块
     app_dis_init();
 
     // Battery Module
@@ -187,13 +189,15 @@ void appm_disconnect(void)
     ke_msg_send(cmd);
 }
 
-
+//开始发广播
 void appm_start_advertising(void)
 {	
     // Check if the advertising procedure is already is progress
+	   //检查广告程序是否已在进行中
     if (ke_state_get(TASK_APP) == APPM_READY)
     {				
         // Prepare the GAPM_START_ADVERTISE_CMD message
+			  //准备GAPM_START_advertize_CMD消息
         struct gapm_start_advertise_cmd *cmd = KE_MSG_ALLOC(GAPM_START_ADVERTISE_CMD,
                                                             TASK_GAPM, TASK_APP,
                                                             gapm_start_advertise_cmd);
@@ -285,7 +289,7 @@ void appm_start_advertising(void)
           
         }
 
-        // Scan Response Data
+        // Scan Response Data 扫描应答数据
         if(nvds_get(NVDS_TAG_APP_BLE_SCAN_RESP_DATA, &cmd->info.host.scan_rsp_data_len,
                     &cmd->info.host.scan_rsp_data[0]) != NVDS_OK)
         {
@@ -302,7 +306,7 @@ void appm_start_advertising(void)
 
 		wdt_enable(0x3fff);
 
-        // Set the state of the task to APPM_ADVERTISING
+        // Set the state of the task to APPM_ADVERTISING 将任务的状态设置为APPM_ADVERTISING广播
         ke_state_set(TASK_APP, APPM_ADVERTISING);	
 
     }

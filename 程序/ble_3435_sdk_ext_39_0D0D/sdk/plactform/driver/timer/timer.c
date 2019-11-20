@@ -57,7 +57,7 @@ void timer_enable(bool enable)
 
 
 /**
- * used to check if timeout occurs.
+ * used to check if timeout occurs.用于检查是否发生超时。
  */
 void timer_isr(void)
 {

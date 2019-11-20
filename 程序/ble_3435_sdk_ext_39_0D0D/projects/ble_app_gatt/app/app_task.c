@@ -101,7 +101,7 @@ static int gapm_device_ready_ind_handler(ke_msg_id_t const msgid,
                                          ke_task_id_t const dest_id,
                                          ke_task_id_t const src_id)
 {
-    // Application has not been initialized
+    // 应用程序尚未初始化
     ASSERT_ERR(ke_state_get(dest_id) == APPM_INIT);
 
     // Reset the stack
@@ -317,7 +317,7 @@ static int gapc_set_dev_info_req_ind_handler(ke_msg_id_t const msgid,
 /**
  ****************************************************************************************
  * @brief Handles connection complete event from the GAP. Enable all required profiles
- *
+ *从间隙处理连接完成事件。启用所有必需的配置文件
  * @param[in] msgid     Id of the message received.
  * @param[in] param     Pointer to the parameters of the message.
  * @param[in] dest_id   ID of the receiving task instance (TASK_GAP).
@@ -335,12 +335,14 @@ static int gapc_connection_req_ind_handler(ke_msg_id_t const msgid,
 	
     app_env.conidx = KE_IDX_GET(src_id);
     // Check if the received Connection Handle was valid
+	  //检查接收到的连接句柄是否有效
     if (app_env.conidx != GAP_INVALID_CONIDX)
     {
         // Retrieve the connection info from the parameters
+			  //从参数中检索连接信息
         app_env.conhdl = param->conhdl;
 
-        // Send connection confirmation
+        // Send connection confirmation发送连接确认
         struct gapc_connection_cfm *cfm = KE_MSG_ALLOC(GAPC_CONNECTION_CFM,
                 KE_BUILD_ID(TASK_GAPC, app_env.conidx), TASK_APP,
                 gapc_connection_cfm);
@@ -353,14 +355,15 @@ static int gapc_connection_req_ind_handler(ke_msg_id_t const msgid,
          * ENABLE REQUIRED PROFILES
          *--------------------------------------------------------------*/
          
-        // Enable Battery Service
+        // Enable Battery Service启用电池服务
         app_batt_enable_prf(app_env.conhdl);
 		
         // We are now in connected State
         ke_state_set(dest_id, APPM_CONNECTED);
 		
 		#if UPDATE_CONNENCT_PARAM
-		ke_timer_set(APP_PARAM_UPDATE_REQ_IND,TASK_APP,100); 
+		ke_timer_set(APP_PARAM_UPDATE_REQ_IND,TASK_APP,100);
+    ke_timer_set(APP_LED_SCAN,TASK_APP,100); 				
 		#endif	
 	        
     }
@@ -795,14 +798,45 @@ static int gapc_param_update_req_ind_handler(ke_msg_id_t const msgid,
 	 
 	return (KE_MSG_CONSUMED);
 }
+/**
+ ****************************************************************************************
+ * @brief   GAPC_PARAM_UPDATE_REQ_IND
+ * @param[in] msgid     Id of the message received.
+ * @param[in] param     Pointer to the parameters of the message.
+ * @param[in] dest_id   ID of the receiving task instance
+ * @param[in] src_id    ID of the sending task instance.
+ *
+ * @return If the message was consumed or not.
+ ****************************************************************************************
+ */
+static int app_led_handler(ke_msg_id_t const msgid,
+                                struct gapc_param_update_req_ind const *param,
+                                ke_task_id_t const dest_id,
+                                ke_task_id_t const src_id)
+{
+//	UART_PRINTF("%s \r\n", __func__);
+//	// Prepare the GAPC_PARAM_UPDATE_CFM message
+//    struct gapc_param_update_cfm *cfm = KE_MSG_ALLOC(GAPC_PARAM_UPDATE_CFM,
+//                                             src_id, dest_id,
+//                                             gapc_param_update_cfm);
+//	 
+//	cfm->ce_len_max = 0xffff;
+//	cfm->ce_len_min = 0xffff;
+//	cfm->accept = true; 
 
+//	// Send message
+//    ke_msg_send(cfm);
+	    RedLedToggle();
+	return (KE_MSG_CONSUMED);
+}
 /*
- * GLOBAL VARIABLES DEFINITION
+ * GLOBAL VARIABLES DEFINITION全局变量定义
  ****************************************************************************************
  */
 
 
 /* Default State handlers definition. */
+//定义默认状态处理程序
 const struct ke_msg_handler appm_default_state[] =
 {
     // Note: first message is latest message checked by kernel so default is put on top.
@@ -821,9 +855,11 @@ const struct ke_msg_handler appm_default_state[] =
     {GAPC_PARAM_UPDATE_REQ_IND, 	(ke_msg_func_t)gapc_param_update_req_ind_handler},
     {APP_PARAM_UPDATE_REQ_IND, 		(ke_msg_func_t)gapc_update_conn_param_req_ind_handler},
     {APP_PERIOD_TIMER,				(ke_msg_func_t)app_period_timer_handler},
+		{APP_LED_SCAN, 		            (ke_msg_func_t)app_led_handler},
 };
 
 /* Specifies the message handlers that are common to all states. */
+//指定所有状态通用的消息处理程序
 const struct ke_state_handler appm_default_handler = KE_STATE_HANDLER(appm_default_state);
 
 /* Defines the place holder for the states of all the task instances. */

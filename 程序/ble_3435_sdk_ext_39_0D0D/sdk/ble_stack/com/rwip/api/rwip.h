@@ -127,6 +127,7 @@ enum rwip_rf_mod
 };
 
 /// API functions of the RF driver that are used by the BLE or BT software
+//BLE或BT软件使用的射频驱动器的API功能
 struct rwip_rf_api
 {
     /// Function called upon HCI reset command reception

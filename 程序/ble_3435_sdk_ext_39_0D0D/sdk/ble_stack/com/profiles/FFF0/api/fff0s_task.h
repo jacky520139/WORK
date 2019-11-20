@@ -53,7 +53,7 @@ enum fff0s_msg_id
     /// Start the FFF0 Server - at connection used to restore bond data
 	FFF0S_CREATE_DB_REQ   = TASK_FIRST_MSG(TASK_ID_FFF0S),
 	
-    /// FFF1 Level Value Update Request
+    /// FFF1 Level Value Update Request FFF1级别值更新请求
     FFF0S_FFF1_LEVEL_UPD_REQ,
     /// Inform APP if FFF1 Level value has been notified or not
     FFF0S_FFF1_LEVEL_UPD_RSP,

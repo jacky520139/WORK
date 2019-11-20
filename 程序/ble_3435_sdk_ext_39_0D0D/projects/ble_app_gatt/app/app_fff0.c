@@ -97,12 +97,12 @@ void app_fff0_add_fff0s(void)
 
 void app_fff1_send_lvl(uint8_t* buf, uint8_t len)
 {
-    // Allocate the message
+    // Allocate the message分配消息（内存申请）
     struct fff0s_fff1_level_upd_req * req = KE_MSG_ALLOC(FFF0S_FFF1_LEVEL_UPD_REQ,
                                                         prf_get_task_from_id(TASK_ID_FFF0S),
                                                         TASK_APP,
                                                         fff0s_fff1_level_upd_req);
-    // Fill in the parameter structure	
+    // 填写参数结构
     req->length = len;
 	memcpy(req->fff1_level, buf, len);
 
@@ -110,7 +110,7 @@ void app_fff1_send_lvl(uint8_t* buf, uint8_t len)
     ke_msg_send(req);
 }
 
-
+//通知开关
 static int fff0s_fff1_level_ntf_cfg_ind_handler(ke_msg_id_t const msgid,
                                                struct fff0s_fff1_level_ntf_cfg_ind const *param,
                                                ke_task_id_t const dest_id,
@@ -127,7 +127,7 @@ static int fff0s_fff1_level_ntf_cfg_ind_handler(ke_msg_id_t const msgid,
     
     return (KE_MSG_CONSUMED);
 }
-
+///蓝牙数据发送接口
 static int fff1_level_upd_handler(ke_msg_id_t const msgid,
                                       struct fff0s_fff1_level_upd_rsp const *param,
                                       ke_task_id_t const dest_id,
@@ -137,7 +137,7 @@ static int fff1_level_upd_handler(ke_msg_id_t const msgid,
 	{
 		uint8_t buf[128];
 		memset(buf, 0xcc, 128);
-		//app_fff1_send_lvl(buf, 128);
+//		app_fff1_send_lvl(buf, 128);
 	}
 	
     return (KE_MSG_CONSUMED);
@@ -157,6 +157,7 @@ static int fff1_level_upd_handler(ke_msg_id_t const msgid,
  * @return If the message was consumed or not.
  ****************************************************************************************
  */
+//默认程序
 static int app_fff0_msg_dflt_handler(ke_msg_id_t const msgid,
                                      void const *param,
                                      ke_task_id_t const dest_id,
@@ -168,7 +169,7 @@ static int app_fff0_msg_dflt_handler(ke_msg_id_t const msgid,
     return (KE_MSG_CONSUMED);
 }
 
-
+///蓝牙数据接收接口
 static int fff2_writer_req_handler(ke_msg_id_t const msgid,
                                      struct fff0s_fff2_writer_ind *param,
                                      ke_task_id_t const dest_id,
@@ -186,7 +187,7 @@ static int fff2_writer_req_handler(ke_msg_id_t const msgid,
     return (KE_MSG_CONSUMED);
 }
 
-
+//通知
 static int fff1_period_ntf_handler(ke_msg_id_t const msgid,
                                                struct fff0s_fff1_level_ntf_cfg_ind const *param,
                                                ke_task_id_t const dest_id,
@@ -207,15 +208,16 @@ static int fff1_period_ntf_handler(ke_msg_id_t const msgid,
  ****************************************************************************************
  */
 
-/// Default State handlers definition
+/// Default State handlers definition默认状态处理程序定义
 const struct ke_msg_handler app_fff0_msg_handler_list[] =
 {
     // Note: first message is latest message checked by kernel so default is put on top.
-    {KE_MSG_DEFAULT_HANDLER,        (ke_msg_func_t)app_fff0_msg_dflt_handler},
-    {FFF0S_FFF1_LEVEL_NTF_CFG_IND,  (ke_msg_func_t)fff0s_fff1_level_ntf_cfg_ind_handler},
-    {FFF0S_FFF1_LEVEL_UPD_RSP,      (ke_msg_func_t)fff1_level_upd_handler},
-    {FFF0S_FFF2_WRITER_REQ_IND,		(ke_msg_func_t)fff2_writer_req_handler},
-    {FFF0S_FFF1_LEVEL_PERIOD_NTF,	(ke_msg_func_t)fff1_period_ntf_handler},
+	   //第一条消息是内核检查的最新消息，所以默认值放在最上面。
+    {KE_MSG_DEFAULT_HANDLER,        (ke_msg_func_t)app_fff0_msg_dflt_handler},/*内核检查*/
+    {FFF0S_FFF1_LEVEL_NTF_CFG_IND,  (ke_msg_func_t)fff0s_fff1_level_ntf_cfg_ind_handler},/*通知开关*/
+    {FFF0S_FFF1_LEVEL_UPD_RSP,      (ke_msg_func_t)fff1_level_upd_handler},/*蓝牙数据发送*/
+    {FFF0S_FFF2_WRITER_REQ_IND,		(ke_msg_func_t)fff2_writer_req_handler},/*蓝牙数据接收*/
+    {FFF0S_FFF1_LEVEL_PERIOD_NTF,	(ke_msg_func_t)fff1_period_ntf_handler},/*通知句柄*/
 };
 
 const struct ke_state_handler app_fff0_table_handler =

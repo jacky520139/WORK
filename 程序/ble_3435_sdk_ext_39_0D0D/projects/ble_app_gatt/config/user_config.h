@@ -52,7 +52,7 @@
 
 
 //设备名称
-#define APP_DFLT_DEVICE_NAME           ("BK3435-GATT")
+#define APP_DFLT_DEVICE_NAME           ("BK3435-jack")
 
 
  //广播包UUID配置
@@ -60,9 +60,10 @@
 #define APP_FFF0_ADV_DATA_UUID_LEN    (4)
 
 //扫描响应包数据
-#define APP_SCNRSP_DATA        "\x0c\x08\x42\x4B\x33\x34\x33\x35\x2D\x47\x41\x54\x54" //BK3435-GATT"
+//#define APP_SCNRSP_DATA        "\x0c\x08\x42\x4B\x33\x34\x33\x35\x2D\x47\x41\x54\x54" //BK3435-GATT"
+#define APP_SCNRSP_DATA          "\x0c\x08\x4c\x49\x4e\x5a\x45\x4a\x49\x45\x00\x00\x00" //BK3435-GATT"
 #define APP_SCNRSP_DATA_LEN     (13)
-
+//#define APP_SCNRSP_DATA_LEN     (13)
 
 //广播参数配置
 /// Advertising channel map - 37, 38, 39

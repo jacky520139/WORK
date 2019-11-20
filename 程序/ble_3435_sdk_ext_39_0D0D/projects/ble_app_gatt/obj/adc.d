@@ -1,10 +1,10 @@
 .\obj\adc.o: ..\..\sdk\plactform\driver\adc\adc.c
-.\obj\adc.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
-.\obj\adc.o: C:\Keil\ARM\ARMCC\Bin\..\include\string.h
-.\obj\adc.o: C:\Keil\ARM\ARMCC\Bin\..\include\stddef.h
+.\obj\adc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\obj\adc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\obj\adc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\obj\adc.o: ..\..\sdk\plactform\arch\BK3435_reg.h
 .\obj\adc.o: ..\..\sdk\plactform\driver\uart\uart.h
-.\obj\adc.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdbool.h
+.\obj\adc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\obj\adc.o: .\config\rwip_config.h
 .\obj\adc.o: ..\..\sdk\ble_stack\com\rwble\rwble_config.h
 .\obj\adc.o: .\config\rwip_config.h
