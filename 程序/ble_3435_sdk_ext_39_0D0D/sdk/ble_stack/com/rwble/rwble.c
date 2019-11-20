@@ -168,9 +168,9 @@ void rwble_version(uint8_t* fw_version, uint8_t* hw_version)
     *(hw_version)   = ble_build_getf();
 }
 
-__BLEIRQ void rwble_isr(void)
+__BLEIRQ void rwble_isr(void)//蓝牙中断服务
 {
-    // Loop until no more interrupts have to be handled
+    // Loop until no more interrupts have to be handled循环直到不再需要处理中断
     while (1)
     {
         // Check BLE interrupt status and call the appropriate handlers

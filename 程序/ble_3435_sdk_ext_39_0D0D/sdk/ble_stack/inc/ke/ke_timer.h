@@ -127,9 +127,9 @@ void ke_timer_adjust_all(uint32_t delay);
 
 /**
  ****************************************************************************************
- * @brief Get the first timer target (in Slot) used for deep sleep decision
+ * @brief Get the first timer target (in Slot) used for deep sleep decision获取用于深度睡眠决策的第一个计时器目标（在插槽中）
  *
- * @return Invalid time if nothing programmed; target time else.
+ * @return Invalid time if nothing programmed; target time else.如果没有编程，则时间无效；否则为目标时间
  ****************************************************************************************
  */
 bool ke_timer_sleep_check(uint32_t *sleep_duration, uint32_t wakeup_delay);

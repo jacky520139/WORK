@@ -95,101 +95,101 @@ u8 usmart_sys_cmd_exe(u8 *str)
 	{					   
 		case 0:
 		case 1://帮助指令
-			printf("\r\n");
+			UART_PRINTF("\r\n");
 #if USMART_USE_HELP
-			printf("------------------------USMART V3.1------------------------ \r\n");
-			printf("    USMART是由ALIENTEK开发的一个灵巧的串口调试互交组件,通过 \r\n");
-			printf("它,你可以通过串口助手调用程序里面的任何函数,并执行.因此,你可\r\n");
-			printf("以随意更改函数的输入参数(支持数字(10/16进制)、字符串、函数入\r\n");	  
-			printf("口地址等作为参数),单个函数最多支持10个输入参数,并支持函数返 \r\n");
-			printf("回值显示.新增参数显示进制设置功能,新增进制转换功能.\r\n");
-			printf("技术支持:www.openedv.com\r\n");
-			printf("USMART有7个系统命令:\r\n");
-			printf("?:      获取帮助信息\r\n");
-			printf("help:   获取帮助信息\r\n");
-			printf("list:   可用的函数列表\r\n\n");
-			printf("id:     可用函数的ID列表\r\n\n");
-			printf("hex:    参数16进制显示,后跟空格+数字即执行进制转换\r\n\n");
-			printf("dec:    参数10进制显示,后跟空格+数字即执行进制转换\r\n\n");
-			printf("runtime:1,开启函数运行计时;0,关闭函数运行计时;\r\n\n");
-			printf("请按照程序编写格式输入函数名及参数并以回车键结束.\r\n");    
-			printf("--------------------------ALIENTEK------------------------- \r\n");
+			UART_PRINTF("------------------------USMART V3.1------------------------ \r\n");
+			UART_PRINTF("    USMART是由ALIENTEK开发的一个灵巧的串口调试互交组件,通过 \r\n");
+			UART_PRINTF("它,你可以通过串口助手调用程序里面的任何函数,并执行.因此,你可\r\n");
+			UART_PRINTF("以随意更改函数的输入参数(支持数字(10/16进制)、字符串、函数入\r\n");	  
+			UART_PRINTF("口地址等作为参数),单个函数最多支持10个输入参数,并支持函数返 \r\n");
+			UART_PRINTF("回值显示.新增参数显示进制设置功能,新增进制转换功能.\r\n");
+			UART_PRINTF("技术支持:www.openedv.com\r\n");
+			UART_PRINTF("USMART有7个系统命令:\r\n");
+			UART_PRINTF("?:      获取帮助信息\r\n");
+			UART_PRINTF("help:   获取帮助信息\r\n");
+			UART_PRINTF("list:   可用的函数列表\r\n\n");
+			UART_PRINTF("id:     可用函数的ID列表\r\n\n");
+			UART_PRINTF("hex:    参数16进制显示,后跟空格+数字即执行进制转换\r\n\n");
+			UART_PRINTF("dec:    参数10进制显示,后跟空格+数字即执行进制转换\r\n\n");
+			UART_PRINTF("runtime:1,开启函数运行计时;0,关闭函数运行计时;\r\n\n");
+			UART_PRINTF("请按照程序编写格式输入函数名及参数并以回车键结束.\r\n");    
+			UART_PRINTF("--------------------------ALIENTEK------------------------- \r\n");
 #else
-			printf("指令失效\r\n");
+			UART_PRINTF("指令失效\r\n");
 #endif
 			break;
 		case 2://查询指令
-			printf("\r\n");
-			printf("-------------------------函数清单--------------------------- \r\n");
-			for(i=0;i<usmart_dev.fnum;i++)printf("%s\r\n",usmart_dev.funs[i].name);
-			printf("\r\n");
+			UART_PRINTF("\r\n");
+			UART_PRINTF("-------------------------函数清单--------------------------- \r\n");
+			for(i=0;i<usmart_dev.fnum;i++)UART_PRINTF("%s\r\n",usmart_dev.funs[i].name);
+			UART_PRINTF("\r\n");
 			break;	 
 		case 3://查询ID
-			printf("\r\n");
-			printf("-------------------------函数 ID --------------------------- \r\n");
+			UART_PRINTF("\r\n");
+			UART_PRINTF("-------------------------函数 ID --------------------------- \r\n");
 			for(i=0;i<usmart_dev.fnum;i++)
 			{
 				usmart_get_fname((u8*)usmart_dev.funs[i].name,sfname,&pnum,&rval);//得到本地函数名 
-				printf("%s id is:\r\n0X%08X\r\n",sfname,usmart_dev.funs[i].func); //显示ID
+				UART_PRINTF("%s id is:\r\n0X%08X\r\n",sfname,usmart_dev.funs[i].func); //显示ID
 			}
-			printf("\r\n");
+			UART_PRINTF("\r\n");
 			break;
 		case 4://hex指令
-			printf("\r\n");
+			UART_PRINTF("\r\n");
 			usmart_get_aparm(str,sfname,&i);
 			if(i==0)//参数正常
 			{
 				i=usmart_str2num(sfname,&res);	   	//记录该参数	
 				if(i==0)						  	//进制转换功能
 				{
-					printf("HEX:0X%X\r\n",res);	   	//转为16进制
+					UART_PRINTF("HEX:0X%X\r\n",res);	   	//转为16进制
 				}else if(i!=4)return USMART_PARMERR;//参数错误.
 				else 				   				//参数显示设定功能
 				{
-					printf("16进制参数显示!\r\n");
+					UART_PRINTF("16进制参数显示!\r\n");
 					usmart_dev.sptype=SP_TYPE_HEX;  
 				}
 
 			}else return USMART_PARMERR;			//参数错误.
-			printf("\r\n"); 
+			UART_PRINTF("\r\n"); 
 			break;
 		case 5://dec指令
-			printf("\r\n");
+			UART_PRINTF("\r\n");
 			usmart_get_aparm(str,sfname,&i);
 			if(i==0)//参数正常
 			{
 				i=usmart_str2num(sfname,&res);	   	//记录该参数	
 				if(i==0)						   	//进制转换功能
 				{
-					printf("DEC:%lu\r\n",res);	   	//转为10进制
+					UART_PRINTF("DEC:%lu\r\n",res);	   	//转为10进制
 				}else if(i!=4)return USMART_PARMERR;//参数错误.
 				else 				   				//参数显示设定功能
 				{
-					printf("10进制参数显示!\r\n");
+					UART_PRINTF("10进制参数显示!\r\n");
 					usmart_dev.sptype=SP_TYPE_DEC;  
 				}
 
 			}else return USMART_PARMERR;			//参数错误. 
-			printf("\r\n"); 
+			UART_PRINTF("\r\n"); 
 			break;	 
 		case 6://runtime指令,设置是否显示函数执行时间
-			printf("\r\n");
+			UART_PRINTF("\r\n");
 			usmart_get_aparm(str,sfname,&i);
 			if(i==0)//参数正常
 			{
 				i=usmart_str2num(sfname,&res);	   		//记录该参数	
 				if(i==0)						   		//读取指定地址数据功能
 				{
-					if(USMART_ENTIMX_SCAN==0)printf("\r\nError! \r\nTo EN RunTime function,Please set USMART_ENTIMX_SCAN = 1 first!\r\n");//报错
+					if(USMART_ENTIMX_SCAN==0)UART_PRINTF("\r\nError! \r\nTo EN RunTime function,Please set USMART_ENTIMX_SCAN = 1 first!\r\n");//报错
 					else
 					{
 						usmart_dev.runtimeflag=res;
-						if(usmart_dev.runtimeflag)printf("Run Time Calculation ON\r\n");
-						else printf("Run Time Calculation OFF\r\n"); 
+						if(usmart_dev.runtimeflag)UART_PRINTF("Run Time Calculation ON\r\n");
+						else UART_PRINTF("Run Time Calculation OFF\r\n"); 
 					}
 				}else return USMART_PARMERR;   			//未带参数,或者参数错误	 
  			}else return USMART_PARMERR;				//参数错误. 
-			printf("\r\n"); 
+			UART_PRINTF("\r\n"); 
 			break;	    
 		default://非法指令
 			return USMART_FUNCERR;
@@ -269,6 +269,7 @@ u8 usmart_cmd_rec(u8*str)
 	u8 sfname[MAX_FNAME_LEN];//存放本地函数名
 	sta=usmart_get_fname(str,rfname,&rpnum,&rval);//得到接收到的数据的函数名及参数个数	  
 	if(sta)return sta;//错误
+
 	for(i=0;i<usmart_dev.fnum;i++)
 	{
 		sta=usmart_get_fname((u8*)usmart_dev.funs[i].name,sfname,&spnum,&rval);//得到本地函数名及参数个数
@@ -280,10 +281,20 @@ u8 usmart_cmd_rec(u8*str)
 			break;//跳出.
 		}	
 	}
+//	UART_PRINTF((const char*)rfname);
+//	UART_PRINTF("0x%x ", rpnum);
+
+//	UART_PRINTF((const char*)sfname);
+//	UART_PRINTF("0x%x ", spnum);
+//	
+//		UART_PRINTF("0x%x ", 	usmart_dev.id);
+//UART_PRINTF("0x%x ", 	usmart_dev.fnum);
+	
 	if(i==usmart_dev.fnum)return USMART_NOFUNCFIND;	//未找到匹配的函数
  	sta=usmart_get_fparam(str,&i);					//得到函数参数个数	
 	if(sta)return sta;								//返回错误
 	usmart_dev.pnum=i;								//参数个数记录
+//UART_PRINTF("0x%x ", 	usmart_dev.pnum);	
     return USMART_OK;
 }
 //usamrt执行函数
@@ -301,24 +312,24 @@ void usmart_exe(void)
 	id=usmart_dev.id;
 	if(id>=usmart_dev.fnum)return;//不执行.
 	usmart_get_fname((u8*)usmart_dev.funs[id].name,sfname,&pnum,&rval);//得到本地函数名,及参数个数 
-	printf("\r\n%s(",sfname);//输出正要执行的函数名
+	UART_PRINTF("\r\n%s(",sfname);//输出正要执行的函数名
 	for(i=0;i<pnum;i++)//输出参数
 	{
 		if(usmart_dev.parmtype&(1<<i))//参数是字符串
 		{
-			printf("%c",'"');			 
-			printf("%s",usmart_dev.parm+usmart_get_parmpos(i));
-			printf("%c",'"');
+			UART_PRINTF("%c",'"');			 
+			UART_PRINTF("%s",usmart_dev.parm+usmart_get_parmpos(i));
+			UART_PRINTF("%c",'"');
 			temp[i]=(u32)&(usmart_dev.parm[usmart_get_parmpos(i)]);
 		}else						  //参数是数字
 		{
 			temp[i]=*(u32*)(usmart_dev.parm+usmart_get_parmpos(i));
-			if(usmart_dev.sptype==SP_TYPE_DEC)printf("%lu",temp[i]);//10进制参数显示
-			else printf("0X%X",temp[i]);//16进制参数显示 	   
+			if(usmart_dev.sptype==SP_TYPE_DEC)UART_PRINTF("%lu",temp[i]);//10进制参数显示
+			else UART_PRINTF("0X%X",temp[i]);//16进制参数显示 	   
 		}
-		if(i!=pnum-1)printf(",");
+		if(i!=pnum-1)UART_PRINTF(",");
 	}
-	printf(")");
+	UART_PRINTF(")");
 	usmart_reset_runtime();	//计时器清零,开始计时
 	switch(usmart_dev.pnum)
 	{
@@ -364,12 +375,12 @@ void usmart_exe(void)
 	usmart_get_runtime();//获取函数执行时间
 	if(rval==1)//需要返回值.
 	{
-		if(usmart_dev.sptype==SP_TYPE_DEC)printf("=%lu;\r\n",res);//输出执行结果(10进制参数显示)
-		else printf("=0X%X;\r\n",res);//输出执行结果(16进制参数显示)	   
-	}else printf(";\r\n");		//不需要返回值,直接输出结束
+		if(usmart_dev.sptype==SP_TYPE_DEC)UART_PRINTF("=%lu;\r\n",res);//输出执行结果(10进制参数显示)
+		else UART_PRINTF("=0X%X;\r\n",res);//输出执行结果(16进制参数显示)	   
+	}else UART_PRINTF(";\r\n");		//不需要返回值,直接输出结束
 	if(usmart_dev.runtimeflag)	//需要显示函数执行时间
 	{ 
-		printf("Function Run Time:%d.%1dms\r\n",usmart_dev.runtime/10,usmart_dev.runtime%10);//打印函数执行时间 
+		UART_PRINTF("Function Run Time:%d.%1dms\r\n",usmart_dev.runtime/10,usmart_dev.runtime%10);//打印函数执行时间 
 	}	
 }
 //usmart扫描函数
@@ -395,16 +406,16 @@ void usmart_scan(void)
 				switch(sta)
 				{
 					case USMART_FUNCERR:
-						printf("函数错误!\r\n");   			
+						UART_PRINTF("函数错误!\r\n");   			
 						break;	
 					case USMART_PARMERR:
-						printf("参数错误!\r\n");   			
+						UART_PRINTF("参数错误!\r\n");   			
 						break;				
 					case USMART_PARMOVER:
-						printf("参数太多!\r\n");   			
+						UART_PRINTF("参数太多!\r\n");   			
 						break;		
 					case USMART_NOFUNCFIND:
-						printf("未找到匹配的函数!\r\n");   			
+						UART_PRINTF("未找到匹配的函数!\r\n");   			
 						break;		
 				}
 			}

@@ -63,7 +63,7 @@ void timer_isr(void)
 {
     if(tmr_expire_getf())
     {
-        // Set kernel event for deferred handling
+        // Set kernel event for deferred handling为延迟处理设置内核事件
         ke_event_set(KE_EVENT_KE_TIMER);
     }
 }

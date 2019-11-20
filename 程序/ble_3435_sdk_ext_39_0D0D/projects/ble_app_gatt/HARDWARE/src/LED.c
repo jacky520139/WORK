@@ -80,9 +80,9 @@ if(gpio_get_input(ButtonPort))
 }
 void BlueLed(void)
 {
-	gpio_config(ButtonPort, INPUT, PULL_HIGH);
+	
 BlueLedToggle();
-
+RedLedToggle();
 
 }
 

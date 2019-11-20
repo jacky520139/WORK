@@ -5,14 +5,14 @@
 .\obj\app_oads.o: ..\..\sdk\ble_stack\com\rwble_hl\rwble_hl_config.h
 .\obj\app_oads.o: ..\..\sdk\ble_stack\com\rwble_hl\rwble_hl_error.h
 .\obj\app_oads.o: .\config\rwprf_config.h
-.\obj\app_oads.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\obj\app_oads.o: C:\Keil\ARM\ARMCC\Bin\..\include\string.h
 .\obj\app_oads.o: app\app_oads.h
-.\obj\app_oads.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\obj\app_oads.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
 .\obj\app_oads.o: ..\..\sdk\ble_stack\inc\ke\ke_task.h
-.\obj\app_oads.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\obj\app_oads.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdbool.h
 .\obj\app_oads.o: ..\..\sdk\plactform\arch\compiler\compiler.h
 .\obj\app_oads.o: ..\..\sdk\ble_stack\inc\ke\ke_msg.h
-.\obj\app_oads.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\obj\app_oads.o: C:\Keil\ARM\ARMCC\Bin\..\include\stddef.h
 .\obj\app_oads.o: ..\..\sdk\plactform\arch\arch.h
 .\obj\app_oads.o: ..\..\sdk\plactform\arch\ll\ll.h
 .\obj\app_oads.o: ..\..\sdk\ble_stack\inc\ke\ke_config.h
@@ -62,7 +62,7 @@
 .\obj\app_oads.o: ..\..\sdk\plactform\reg\_reg_ble_em_cs.h
 .\obj\app_oads.o: ..\..\sdk\ble_stack\inc\ble\ll\llm\llm.h
 .\obj\app_oads.o: ..\..\sdk\plactform\core_modules\common\api\co_math.h
-.\obj\app_oads.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\obj\app_oads.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
 .\obj\app_oads.o: ..\..\sdk\ble_stack\inc\ble\ll\em\em_buf.h
 .\obj\app_oads.o: ..\..\sdk\plactform\core_modules\common\api\co_endian.h
 .\obj\app_oads.o: ..\..\sdk\plactform\reg\reg_ble_em_tx_desc.h

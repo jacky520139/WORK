@@ -1,9 +1,9 @@
 .\obj\gpio.o: ..\..\sdk\plactform\driver\gpio\gpio.c
-.\obj\gpio.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\obj\gpio.o: C:\Keil\ARM\ARMCC\Bin\..\include\stddef.h
 .\obj\gpio.o: ..\..\sdk\plactform\arch\BK3435_reg.h
 .\obj\gpio.o: ..\..\sdk\plactform\driver\gpio\gpio.h
-.\obj\gpio.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
-.\obj\gpio.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\obj\gpio.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdbool.h
+.\obj\gpio.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
 .\obj\gpio.o: ..\..\sdk\plactform\driver\timer\timer.h
 .\obj\gpio.o: ..\..\sdk\ble_stack\com\rwip\api\rwip.h
 .\obj\gpio.o: .\config\rwip_config.h

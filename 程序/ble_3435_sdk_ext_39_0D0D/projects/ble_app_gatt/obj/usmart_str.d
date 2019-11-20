@@ -1,6 +1,5 @@
-.\obj\usmart_str.o: USMAR\usmart_str.c
-.\obj\usmart_str.o: USMAR\usmart_str.h
-.\obj\usmart_str.o: .\user\ALL_Includes.h
+.\obj\usmart_str.o: USMART\usmart_str.c
+.\obj\usmart_str.o: .\HARDWARE\interface\ALL_Includes.h
 .\obj\usmart_str.o: ..\..\sdk\plactform\driver\adc\adc.h
 .\obj\usmart_str.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdbool.h
 .\obj\usmart_str.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
@@ -14,10 +13,11 @@
 .\obj\usmart_str.o: ..\..\sdk\ble_stack\com\rwble_hl\rwble_hl_error.h
 .\obj\usmart_str.o: .\config\rwprf_config.h
 .\obj\usmart_str.o: .\config\user_config.h
-.\obj\usmart_str.o: .\user\ANO_UART.h
-.\obj\usmart_str.o: .\user\ALL_Includes.h
-.\obj\usmart_str.o: .\USMAR\usmart.h
-.\obj\usmart_str.o: .\USMAR\usmart_str.h
-.\obj\usmart_str.o: .\USMAR\usart.h
-.\obj\usmart_str.o: .\user\LED.h
+.\obj\usmart_str.o: .\HARDWARE\interface\ANO_UART.h
+.\obj\usmart_str.o: .\HARDWARE\interface\ALL_Includes.h
+.\obj\usmart_str.o: .\USMART\usmart.h
+.\obj\usmart_str.o: .\USMART\usmart_str.h
+.\obj\usmart_str.o: .\USMART\usart.h
+.\obj\usmart_str.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdio.h
+.\obj\usmart_str.o: .\HARDWARE\interface\LED.h
 .\obj\usmart_str.o: ..\..\sdk\plactform\driver\rtc\rtc.h

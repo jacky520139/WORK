@@ -6,10 +6,10 @@
 .\obj\rwip.o: ..\..\sdk\ble_stack\com\rwble_hl\rwble_hl_error.h
 .\obj\rwip.o: .\config\rwprf_config.h
 .\obj\rwip.o: .\config\user_config.h
-.\obj\rwip.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\obj\rwip.o: C:\Keil\ARM\ARMCC\Bin\..\include\string.h
 .\obj\rwip.o: ..\..\sdk\ble_stack\com\rwip\api\rwip.h
-.\obj\rwip.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
-.\obj\rwip.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\obj\rwip.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+.\obj\rwip.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdbool.h
 .\obj\rwip.o: ..\..\sdk\plactform\arch\arch.h
 .\obj\rwip.o: ..\..\sdk\plactform\arch\compiler\compiler.h
 .\obj\rwip.o: ..\..\sdk\plactform\arch\ll\ll.h
@@ -21,7 +21,7 @@
 .\obj\rwip.o: ..\..\sdk\ble_stack\inc\ble\hl\gap\gapc\gapc.h
 .\obj\rwip.o: ..\..\sdk\ble_stack\inc\ke\ke_task.h
 .\obj\rwip.o: ..\..\sdk\ble_stack\inc\ke\ke_msg.h
-.\obj\rwip.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\obj\rwip.o: C:\Keil\ARM\ARMCC\Bin\..\include\stddef.h
 .\obj\rwip.o: ..\..\sdk\ble_stack\inc\ke\ke_config.h
 .\obj\rwip.o: ..\..\sdk\plactform\core_modules\common\api\co_list.h
 .\obj\rwip.o: ..\..\sdk\ble_stack\inc\ble\hl\gap\gap.h
@@ -45,7 +45,7 @@
 .\obj\rwip.o: ..\..\sdk\ble_stack\inc\ble\ll\llc\llc_task.h
 .\obj\rwip.o: ..\..\sdk\ble_stack\inc\ble\ll\llm\llm.h
 .\obj\rwip.o: ..\..\sdk\plactform\core_modules\common\api\co_math.h
-.\obj\rwip.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\obj\rwip.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
 .\obj\rwip.o: ..\..\sdk\plactform\core_modules\common\api\co_utils.h
 .\obj\rwip.o: ..\..\sdk\ble_stack\inc\ble\ll\em\em_buf.h
 .\obj\rwip.o: ..\..\sdk\plactform\core_modules\common\api\co_endian.h
