@@ -1,13 +1,8 @@
 .\obj\usmart.o: USMART\usmart.c
 .\obj\usmart.o: .\HARDWARE\interface\ALL_Includes.h
 .\obj\usmart.o: ..\..\sdk\plactform\driver\adc\adc.h
-<<<<<<< HEAD
 .\obj\usmart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\obj\usmart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
-=======
-.\obj\usmart.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdbool.h
-.\obj\usmart.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
->>>>>>> 169df4f2aea882862f23c0cd234e9352ce43ec19
 .\obj\usmart.o: ..\..\sdk\plactform\driver\pwm\pwm.h
 .\obj\usmart.o: ..\..\sdk\plactform\arch\BK3435_reg.h
 .\obj\usmart.o: ..\..\sdk\plactform\driver\uart\uart.h
@@ -23,10 +18,7 @@
 .\obj\usmart.o: .\USMART\usmart.h
 .\obj\usmart.o: .\USMART\usmart_str.h
 .\obj\usmart.o: .\USMART\usart.h
-<<<<<<< HEAD
 .\obj\usmart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-=======
-.\obj\usmart.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdio.h
->>>>>>> 169df4f2aea882862f23c0cd234e9352ce43ec19
 .\obj\usmart.o: .\HARDWARE\interface\LED.h
 .\obj\usmart.o: ..\..\sdk\plactform\driver\rtc\rtc.h
+.\obj\usmart.o: .\HARDWARE\interface\User_Timer.h

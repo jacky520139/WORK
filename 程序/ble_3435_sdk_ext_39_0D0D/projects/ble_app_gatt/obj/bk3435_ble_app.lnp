@@ -36,6 +36,7 @@
 ".\obj\app_task.o"
 ".\obj\ano_uart.o"
 ".\obj\led.o"
+".\obj\user_timer.o"
 "..\..\libs\bk3435_ble_encrypt.lib"
 "..\..\libs\bk3435_fcc_mode.lib"
 "..\..\libs\bk3435_pn9_mode.lib"

@@ -45,7 +45,7 @@
 /// Retrieves task index number from task id.
 #define TASK_IDX_GET(ke_task_id) (((uint16_t) >> 8) & 0xFF)
 
-
+//ÈÎÎñID
 /// Tasks types definition, this value shall be in [0-254] range
 enum TASK_API_ID
 {

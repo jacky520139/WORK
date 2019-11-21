@@ -187,50 +187,50 @@ enum gapc_msg_id
 
 
 
-
+//请求操作类型-应用程序接口
 /// request operation type - application interface
 enum gapc_operation
 {
     /*                 Operation Flags                  */
     /* No Operation (if nothing has been requested)     */
     /* ************************************************ */
-    /// No operation
+    /// 无操作
     GAPC_NO_OP                                    = 0x00,
 
-    /* Connection management */
-    /// Disconnect link
+    /* Connection management 连接管理 */
+    /// Disconnect link 断开连接
     GAPC_DISCONNECT,
 
-    /* Connection information */
-    /// Retrieve name of peer device.
+    /* 连接信息 */
+    /// 检索同款设备名称
     GAPC_GET_PEER_NAME,
-    /// Retrieve peer device version info.
+    /// 检索同款设备版本信息
     GAPC_GET_PEER_VERSION,
-    /// Retrieve peer device features.
+    /// 检索同款设备功能
     GAPC_GET_PEER_FEATURES,
-    /// Get Peer device appearance
+    /// Get Peer device appearance获取同款设备外观
     GAPC_GET_PEER_APPEARANCE,
-    /// Get Peer device Slaved Preferred Parameters
+    /// Get Peer device Slaved Preferred Parameters获取同款设备从属首选参数
     GAPC_GET_PEER_SLV_PREF_PARAMS,
-    /// Retrieve connection RSSI.
+    /// Retrieve connection RSSI.检索连接RSSI。
     GAPC_GET_CON_RSSI,
-    /// Retrieve Connection Channel MAP.
+    /// Retrieve Connection Channel MAP.检索连接频道
     GAPC_GET_CON_CHANNEL_MAP,
 
-    /* Connection parameters update */
-    /// Perform update of connection parameters.
+    /* 连接参数更新 */
+    /// 执行连接参数的更新
     GAPC_UPDATE_PARAMS,
 
-    /* Security procedures */
-    /// Start bonding procedure.
+    /* 安全程序 */
+    /// Start bonding procedure.开始粘合程序
     GAPC_BOND,
-    /// Start encryption procedure.
+    /// Start encryption procedure.启动加密过程
     GAPC_ENCRYPT,
-    /// Start security request procedure
+    /// Start security request procedure启动安全请求过程
     GAPC_SECURITY_REQ,
 
-    /* Deprecated */
-    /// Deprecated operation
+    /* Deprecated不赞成 */
+    /// Deprecated operation不推荐的操作
     GAPC_OP_DEPRECATED_0,
     GAPC_OP_DEPRECATED_1,
     GAPC_OP_DEPRECATED_2,
@@ -260,11 +260,11 @@ enum gapc_operation
     /// Retrieve PHY configuration of active link
     GAPC_GET_PHY,
 
-    // ---------------------- INTERNAL API ------------------------
+    // ---------------------- 内部 API ------------------------
     /* Packet signature */
-    /// sign an attribute packet
+    /// sign an attribute packet签署属性包
     GAPC_SIGN_PACKET,
-    /// Verify signature or an attribute packet
+    /// Verify signature or an attribute packet验证签名或属性包
     GAPC_SIGN_CHECK,
 };
 
@@ -346,9 +346,9 @@ struct gapc_operation_cmd
 /// Command complete event data structure
 struct gapc_cmp_evt
 {
-    /// GAP request type
-    uint8_t operation;
-    /// Status of the request
+    /// GAP request type   GAP请求类型
+    uint8_t operation;//请求操作类型
+    /// Status of the request 请求状态
     uint8_t status;
 };
 
@@ -416,7 +416,7 @@ struct gapc_disconnect_ind
 };
 
 
-/// Retrieve information command
+/// 检索信息命令
 struct gapc_get_info_cmd
 {
     /// GAP request type:

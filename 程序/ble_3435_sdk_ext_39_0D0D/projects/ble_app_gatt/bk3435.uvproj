@@ -1065,25 +1065,10 @@
               <FileType>1</FileType>
               <FilePath>.\HARDWARE\src\LED.c</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>lib</GroupName>
-          <Files>
             <File>
-              <FileName>bk3435_ble_encrypt.lib</FileName>
-              <FileType>4</FileType>
-              <FilePath>..\..\libs\bk3435_ble_encrypt.lib</FilePath>
-            </File>
-            <File>
-              <FileName>bk3435_fcc_mode.lib</FileName>
-              <FileType>4</FileType>
-              <FilePath>..\..\libs\bk3435_fcc_mode.lib</FilePath>
-            </File>
-            <File>
-              <FileName>bk3435_pn9_mode.lib</FileName>
-              <FileType>4</FileType>
-              <FilePath>..\..\libs\bk3435_pn9_mode.lib</FilePath>
+              <FileName>User_Timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HARDWARE\src\User_Timer.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1109,6 +1094,26 @@
               <FileName>usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\USMART\usart.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>lib</GroupName>
+          <Files>
+            <File>
+              <FileName>bk3435_ble_encrypt.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\libs\bk3435_ble_encrypt.lib</FilePath>
+            </File>
+            <File>
+              <FileName>bk3435_fcc_mode.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\libs\bk3435_fcc_mode.lib</FilePath>
+            </File>
+            <File>
+              <FileName>bk3435_pn9_mode.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\libs\bk3435_pn9_mode.lib</FilePath>
             </File>
           </Files>
         </Group>

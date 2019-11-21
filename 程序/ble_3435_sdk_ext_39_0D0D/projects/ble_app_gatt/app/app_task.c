@@ -362,7 +362,7 @@ static int gapc_connection_req_ind_handler(ke_msg_id_t const msgid,
         ke_state_set(dest_id, APPM_CONNECTED);
 		
 		#if UPDATE_CONNENCT_PARAM
-		ke_timer_set(APP_PARAM_UPDATE_REQ_IND,TASK_APP,100);
+		ke_timer_set(APP_PARAM_UPDATE_REQ_IND,TASK_APP,100);//建立连接后延时1s后更新连接参数
     ke_timer_set(APP_LED_SCAN,TASK_APP,100); 				
 		#endif	
 	        
@@ -370,7 +370,7 @@ static int gapc_connection_req_ind_handler(ke_msg_id_t const msgid,
     else
     {
         // No connection has been establish, restart advertising
-		appm_start_advertising();
+		appm_start_advertising();//开始广播
     }
 
     return (KE_MSG_CONSUMED);
@@ -378,7 +378,7 @@ static int gapc_connection_req_ind_handler(ke_msg_id_t const msgid,
 
 /**
  ****************************************************************************************
- * @brief Handles GAP controller command complete events.
+ * @brief Handles GAP controller command complete events.处理GAP控制器命令完成事件
  *
  * @param[in] msgid     Id of the message received.
  * @param[in] param     Pointer to the parameters of the message.
@@ -608,7 +608,7 @@ static int appm_msg_handler(ke_msg_id_t const msgid,
         case (TASK_ID_FFF0S):
         {
             // Call the Health Thermometer Module
-            msg_pol = appm_get_handler(&app_fff0_table_handler, msgid, param, src_id);
+            msg_pol = appm_get_handler(&app_fff0_table_handler, msgid, param, src_id);//在消息表中找到对应实例
         } break;
 				
         case (TASK_ID_DISS):
@@ -725,11 +725,11 @@ static int gapc_le_pkt_size_ind_handler (ke_msg_id_t const msgid,
  ****************************************************************************************
  * @brief  GAPC_PARAM_UPDATED_IND
  * @param[in] msgid     Id of the message received.
- * @param[in] param     Pointer to the parameters of the message.
+ * @param[in] param     Pointer to the parameters of the message.指向消息参数的指针
  * @param[in] dest_id   ID of the receiving task instance
  * @param[in] src_id    ID of the sending task instance.
  *
- * @return If the message was consumed or not.
+ * @return 如果消息是否已被使用
  ****************************************************************************************
  */
 static int gapc_param_updated_ind_handler (ke_msg_id_t const msgid, 

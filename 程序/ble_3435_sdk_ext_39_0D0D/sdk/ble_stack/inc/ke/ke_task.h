@@ -56,14 +56,14 @@ enum KE_TASK_STATUS
 };
 
 
-#define MSG_T(msg)         ((ke_task_id_t)((msg) >> 8))
-#define MSG_I(msg)         ((msg) & ((1<<8)-1))
+#define MSG_T(msg)         ((ke_task_id_t)((msg) >> 8))//任务ID
+#define MSG_I(msg)         ((msg) & ((1<<8)-1))      //消息ID
 
 /// 任务消息处理程序函数的格式
 typedef int (*ke_msg_func_t)(ke_msg_id_t const msgid, void const *param,
                              ke_task_id_t const dest_id, ke_task_id_t const src_id);
 
-/// Macro for message handler function declaration or definition
+/// Macro for message handler function declaration or definition用于消息处理程序函数声明或定义的宏
 #define KE_MSG_HANDLER(msg_name, param_struct)   __STATIC int msg_name##_handler(ke_msg_id_t const msgid,     \
                                                                                 param_struct const *param,  \
                                                                                 ke_task_id_t const dest_id, \

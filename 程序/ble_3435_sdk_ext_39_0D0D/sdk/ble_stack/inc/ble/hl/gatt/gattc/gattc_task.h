@@ -48,7 +48,7 @@
 enum gattc_msg_id
 {
     /* Default event */
-    /// Command Complete event
+    /// Command Complete event命令完成事件
     GATTC_CMP_EVT = TASK_FIRST_MSG(TASK_ID_GATTC),
 
     /* ATTRIBUTE CLIENT */

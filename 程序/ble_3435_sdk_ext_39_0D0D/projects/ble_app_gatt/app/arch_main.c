@@ -234,17 +234,17 @@ void rw_app_enter(void)
 	while(1)
 	{
 		//schedule all pending events调度所有挂起事件
-		//rwip_schedule();
+		rwip_schedule();
 //ANO_DT_Send_Version(0xf1,1, 2, 3, 4, 5);
-<<<<<<< HEAD
-		printf("Run Time Calculation ON\r\n");
-//		usmart_scan();
-=======
+
+//		printf("Run Time Calculation ON\r\n");
+
+
 //		UART_PRINTF("Run Time Calculation ON\r\n");
 //		printf("Run Time Calculation ON\r\n");
 		usmart_scan();
 //		UART_PRINTF("Run Time Calculation OFF\r\n");
->>>>>>> 169df4f2aea882862f23c0cd234e9352ce43ec19
+
 //		printf("Run Time Calculation OFF\r\n");
 		// Checks for sleep have to be done with interrupt disabled
 		//睡眠检查必须在中断被禁用的情况下进行
