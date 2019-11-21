@@ -74,7 +74,7 @@
 #define RWBLE_INT     CO_BIT(INTC_BLE)
 #define DMA_INT       CO_BIT(INTC_DMA)
 
-// enable the supported interrupts
+// enable the supported interrupts启用支持的中断
 #define PLF_INT     (UART_INT | DMA_INT)
 #if defined(CFG_BT)
 #define BT_INT      (RWBT_INT)
@@ -94,6 +94,7 @@
  ****************************************************************************************
  */
 /// locally define this type to be able to qualify the array.
+//本地定义此类型以便能够限定数组。
 typedef void (*void_fn)(void);
 
 extern uint8_t system_mode;
@@ -104,18 +105,19 @@ void intc_spurious(void)
     // force error
     ASSERT_ERR(0);
 }
-
+//初始化中断
 void intc_init(void)  
 {
      // Clear all interrupts
     intc_enable_clear(INT_IRQ_BIT | FIQ_IRQ_BIT);
 	
-    // enable the supported interrupts
+    // enable the supported interrupts启用支持的中断
     intc_enable_set(INT_IRQ_BIT | FIQ_IRQ_BIT);
 	
-    intc_module_enable_set(INT_BLE_bit | INT_UART_bit);
+//    intc_module_enable_set(INT_BLE_bit | INT_UART_bit);
+	 intc_module_enable_set(INT_UART_bit);
 }
-
+//清除中断标志位
 void intc_stat_clear(void)
 {
     // Clear all interrupts
@@ -203,6 +205,7 @@ void IRQ_Exception(void)
 	
 }
 
+
 void FIQ_Exception(void)
 {
 	uint32_t IntStat;
@@ -241,7 +244,8 @@ if(IntStat& INT_STATUS_PWM0_bit)
 }
 #endif
 
-	intc_status_clear(IntStat); 
+//	intc_status_clear(IntStat); 
+intc_status_clear(fiq_status); 
 }
 
 

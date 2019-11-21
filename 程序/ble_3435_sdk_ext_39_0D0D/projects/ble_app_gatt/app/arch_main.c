@@ -236,8 +236,15 @@ void rw_app_enter(void)
 		//schedule all pending events调度所有挂起事件
 		//rwip_schedule();
 //ANO_DT_Send_Version(0xf1,1, 2, 3, 4, 5);
+<<<<<<< HEAD
 		printf("Run Time Calculation ON\r\n");
 //		usmart_scan();
+=======
+//		UART_PRINTF("Run Time Calculation ON\r\n");
+//		printf("Run Time Calculation ON\r\n");
+		usmart_scan();
+//		UART_PRINTF("Run Time Calculation OFF\r\n");
+>>>>>>> 169df4f2aea882862f23c0cd234e9352ce43ec19
 //		printf("Run Time Calculation OFF\r\n");
 		// Checks for sleep have to be done with interrupt disabled
 		//睡眠检查必须在中断被禁用的情况下进行
@@ -300,28 +307,28 @@ void rw_main(void)
 {
 	/*
 	 ***************************************************************************
-	 * Platform initialization
+	 * Platform initialization平台初始化
 	 ***************************************************************************
 	 */
 
-	// Initialize random process
+	// Initialize random process初始化随机模块
 	srand(1);
 
-    // Iniialize sys run mode
+    // 初始化系统运行模式
 	sys_mode_init();
 
-	//get System sleep flag
+	//获取系统睡眠标志
 	system_sleep_init();
 
 	// Initialize the exchange memory interface
 	emi_init();
 
-	// Initialize timer module
+	// 初始化时间模块
 	timer_init();
 
 	rwip_eif_api_init();
 
-	// Initialize the Interrupt Controller
+	// 初始化中断控制器
 	intc_init();
 
 	// Initialize UART component
@@ -334,6 +341,12 @@ void rw_main(void)
 #endif
 
 //	Init_LED();
+	gpio_config(BlueLedPort, OUTPUT, PULL_NONE);
+	gpio_config(RedLedPort, OUTPUT, PULL_NONE);
+
+	gpio_set(BlueLedPort, 1);
+	gpio_set(RedLedPort, 1);
+
   uart_stack_register(uart_printf);
 
 	flash_advance_init();
@@ -369,7 +382,7 @@ void rw_main(void)
 	gpio_config(BlueLedPort, OUTPUT, PULL_NONE);
 //	gpio_set(0x10, 1);
 
-	REG_AHB0_ICU_INT_ENABLE |= (0x01 << 15); //BLE INT
+  REG_AHB0_ICU_INT_ENABLE |= (0x01 << 15); //使能蓝牙中断
 	REG_AHB0_ICU_IRQ_ENABLE = 0x03;
 
 	// finally start interrupt handling

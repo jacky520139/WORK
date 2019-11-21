@@ -1,16 +1,27 @@
-
+#include "usmart.h"
+#include "usmart_str.h"
+#include "ALL_Includes.h"
 ////////////////////////////用户配置区///////////////////////////////////////////////
 //这下面要包含所用到的函数所申明的头文件(用户自己添加) 
-//#include "delay.h"	
-
-#include "ALL_Includes.h"
-extern u16 gui_color_chg(u32 rgb);
+//#include "delay.h"	 	
+//#include "sys.h"
+//#include "lcd.h"
+//#include "sdram.h"
+//#include "ltdc.h"
+								 
+extern void led_set(u8 sta);
+extern void test_fun(void(*ledset)(u8),u8 sta);										  
 //函数名列表初始化(用户自己添加)
 //用户直接在这里输入要执行的函数名及其查找串
 struct _m_usmart_nametab usmart_nametab[]=
 {
-(void*)Init_LED,"void Init_LED(void)",
-(void*)BlueLed,"void BlueLed(void)"
+#if USMART_USE_WRFUNS==1 	//如果使能了读写操作
+//	(void*)read_addr,"u32 read_addr(u32 addr)",
+//	(void*)write_addr,"void write_addr(u32 addr,u32 val)",	 
+#endif		
+
+	(void*)Init_LED,"void Init_LED(void)	",
+					
 };						  
 ///////////////////////////////////END///////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////

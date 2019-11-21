@@ -1,11 +1,11 @@
 .\obj\pwm.o: ..\..\sdk\plactform\driver\pwm\pwm.c
-.\obj\pwm.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
-.\obj\pwm.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-.\obj\pwm.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\obj\pwm.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+.\obj\pwm.o: C:\Keil\ARM\ARMCC\Bin\..\include\string.h
+.\obj\pwm.o: C:\Keil\ARM\ARMCC\Bin\..\include\stddef.h
 .\obj\pwm.o: ..\..\sdk\plactform\arch\BK3435_reg.h
 .\obj\pwm.o: ..\..\sdk\plactform\driver\pwm\pwm.h
 .\obj\pwm.o: ..\..\sdk\plactform\driver\gpio\gpio.h
-.\obj\pwm.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\obj\pwm.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdbool.h
 .\obj\pwm.o: ..\..\sdk\ble_stack\inc\ble\ll\lld\lld_evt.h
 .\obj\pwm.o: .\config\rwip_config.h
 .\obj\pwm.o: ..\..\sdk\ble_stack\com\rwble\rwble_config.h
@@ -41,7 +41,7 @@
 .\obj\pwm.o: ..\..\sdk\plactform\reg\_reg_ble_em_cs.h
 .\obj\pwm.o: ..\..\sdk\ble_stack\inc\ble\ll\llm\llm.h
 .\obj\pwm.o: ..\..\sdk\plactform\core_modules\common\api\co_math.h
-.\obj\pwm.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\obj\pwm.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
 .\obj\pwm.o: ..\..\sdk\ble_stack\inc\ble\ll\em\em_buf.h
 .\obj\pwm.o: ..\..\sdk\plactform\core_modules\common\api\co_endian.h
 .\obj\pwm.o: ..\..\sdk\plactform\reg\reg_ble_em_tx_desc.h

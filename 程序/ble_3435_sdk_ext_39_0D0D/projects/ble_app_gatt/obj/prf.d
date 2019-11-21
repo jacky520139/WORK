@@ -7,11 +7,11 @@
 .\obj\prf.o: .\config\rwprf_config.h
 .\obj\prf.o: ..\..\sdk\ble_stack\com\prf\prf.h
 .\obj\prf.o: ..\..\sdk\ble_stack\inc\ke\ke_task.h
-.\obj\prf.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
-.\obj\prf.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\obj\prf.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+.\obj\prf.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdbool.h
 .\obj\prf.o: ..\..\sdk\plactform\arch\compiler\compiler.h
 .\obj\prf.o: ..\..\sdk\ble_stack\inc\ke\ke_msg.h
-.\obj\prf.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\obj\prf.o: C:\Keil\ARM\ARMCC\Bin\..\include\stddef.h
 .\obj\prf.o: ..\..\sdk\plactform\arch\arch.h
 .\obj\prf.o: ..\..\sdk\plactform\arch\ll\ll.h
 .\obj\prf.o: ..\..\sdk\ble_stack\inc\ke\ke_config.h

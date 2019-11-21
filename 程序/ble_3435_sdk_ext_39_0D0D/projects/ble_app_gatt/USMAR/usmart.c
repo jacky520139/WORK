@@ -1,4 +1,6 @@
-
+//#include "usmart.h"
+//#include "usart.h"
+//#include "sys.h" 
 #include "ALL_Includes.h"
 //////////////////////////////////////////////////////////////////////////////////	 
 //本程序只供学习使用，未经作者许可，不得用于其它任何用途
@@ -34,7 +36,7 @@
 //3,修改了函数默认显示参数格式的修改方式. 
 //V2.4 20110905
 //1,修改了usmart_get_cmdname函数,增加最大参数长度限制.避免了输入错误参数时的死机现象.
-//2,增加USMART_ENTIM_SCAN宏定义,用于配置是否使用TIM定时执行scan函数.
+//2,增加USMART_ENTIM2_SCAN宏定义,用于配置是否使用TIM2定时执行scan函数.
 //V2.5 20110930
 //1,修改usmart_init函数为void usmart_init(u8 sysclk),可以根据系统频率自动设定扫描时间.(固定100ms)
 //2,去掉了usmart_init函数中的uart_init函数,串口初始化必须在外部初始化,方便用户自行管理.
@@ -57,13 +59,14 @@
 //发送:runtime 1 ,则开启函数执行时间统计功能
 //发送:runtime 0 ,则关闭函数执行时间统计功能
 ///runtime统计功能,必须设置:USMART_ENTIMX_SCAN 为1,才可以使用!!
+//V3.2 20140828
+//1,修改usmart_get_aparm函数,加入+/-符号的支持
+//2,修改usmart_str2num函数,支持负数转换
+//V3.3 20160506
+//修正usmart_exe函数在USMART_ENTIMX_SCAN为0的时候，报错的bug
 /////////////////////////////////////////////////////////////////////////////////////
-//USMART资源占用情况@MDK 3.80A@2.0版本：
-//FLASH:4K~K字节(通过USMART_USE_HELP和USMART_USE_WRFUNS设置)
-//SRAM:72字节(最少的情况下)
-//SRAM计算公式:   SRAM=PARM_LEN+72-4  其中PARM_LEN必须大于等于4.
-//应该保证堆栈不小于100个字节.
-////////////////////////////////////////////用户配置参数////////////////////////////////////////////////////	  
+//u8 *aRxBuffer=uart_tx_buf;
+//TIM_HandleTypeDef TIM4_Handler;      //定时器句柄 
 //系统命令
 u8 *sys_cmd_tab[]=
 {
@@ -95,16 +98,17 @@ u8 usmart_sys_cmd_exe(u8 *str)
 	{					   
 		case 0:
 		case 1://帮助指令
+			
 			UART_PRINTF("\r\n");
-#if USMART_USE_HELP
-			UART_PRINTF("------------------------USMART V3.1------------------------ \r\n");
+#if USMART_USE_HELP 
+			UART_PRINTF("------------------------USMART V3.3------------------------ \r\n");
 			UART_PRINTF("    USMART是由ALIENTEK开发的一个灵巧的串口调试互交组件,通过 \r\n");
 			UART_PRINTF("它,你可以通过串口助手调用程序里面的任何函数,并执行.因此,你可\r\n");
-			UART_PRINTF("以随意更改函数的输入参数(支持数字(10/16进制)、字符串、函数入\r\n");	  
-			UART_PRINTF("口地址等作为参数),单个函数最多支持10个输入参数,并支持函数返 \r\n");
-			UART_PRINTF("回值显示.新增参数显示进制设置功能,新增进制转换功能.\r\n");
+			UART_PRINTF("以随意更改函数的输入参数(支持数字(10/16进制,支持负数)、字符串\r\n"),
+			UART_PRINTF("、函数入口地址等作为参数),单个函数最多支持10个输入参数,并支持\r\n"),  
+			UART_PRINTF("函数返回值显示.支持参数显示进制设置功能,支持进制转换功能.\r\n");
 			UART_PRINTF("技术支持:www.openedv.com\r\n");
-			UART_PRINTF("USMART有7个系统命令:\r\n");
+			UART_PRINTF("USMART有7个系统命令(必须小写):\r\n");
 			UART_PRINTF("?:      获取帮助信息\r\n");
 			UART_PRINTF("help:   获取帮助信息\r\n");
 			UART_PRINTF("list:   可用的函数列表\r\n\n");
@@ -208,9 +212,9 @@ u8 usmart_sys_cmd_exe(u8 *str)
 //需要根据所移植到的MCU的定时器参数进行修改
 void usmart_reset_runtime(void)
 {
-//	TIM4->SR&=~(1<<0);	//清除中断标志位 
-//	TIM4->ARR=0XFFFF;	//将重装载值设置到最大
-//	TIM4->CNT=0;		//清空定时器的CNT
+//    __HAL_TIM_CLEAR_FLAG(&TIM4_Handler,TIM_FLAG_UPDATE);//清除中断标志位 
+//    __HAL_TIM_SET_AUTORELOAD(&TIM4_Handler,0XFFFF);     //将重装载值设置到最大
+//    __HAL_TIM_SET_COUNTER(&TIM4_Handler,0);             //清空定时器的CNT
 	usmart_dev.runtime=0;	
 }
 //获得runtime时间
@@ -218,35 +222,44 @@ void usmart_reset_runtime(void)
 //需要根据所移植到的MCU的定时器参数进行修改
 u32 usmart_get_runtime(void)
 {
-//	if(TIM4->SR&0X0001)//在运行期间,产生了定时器溢出
+//	if(__HAL_TIM_GET_FLAG(&TIM4_Handler,TIM_FLAG_UPDATE)==SET)//在运行期间,产生了定时器溢出
 //	{
 //		usmart_dev.runtime+=0XFFFF;
 //	}
-//	usmart_dev.runtime+=TIM4->CNT;
+//	usmart_dev.runtime+=__HAL_TIM_GET_COUNTER(&TIM4_Handler);
 	return usmart_dev.runtime;		//返回计数值
-}
+}  
 //下面这两个函数,非USMART函数,放到这里,仅仅方便移植. 
 //定时器4中断服务程序	 
 void TIM4_IRQHandler(void)
-{ 		    		  			    
-//	if(TIM4->SR&0X0001)//溢出中断
-//	{ 
-//		usmart_dev.scan();	//执行usmart扫描	
-//		TIM4->CNT=0;		//清空定时器的CNT
-//		TIM4->ARR=1000;		//恢复原来的设置
-//	}				   
-//	TIM4->SR&=~(1<<0);//清除中断标志位 	    
+{ 		    		  			       
+//    if(__HAL_TIM_GET_IT_SOURCE(&TIM4_Handler,TIM_IT_UPDATE)==SET)//溢出中断
+//    {
+        usmart_dev.scan();	//执行usmart扫描
+//        __HAL_TIM_SET_COUNTER(&TIM4_Handler,0);;    //清空定时器的CNT
+//        __HAL_TIM_SET_AUTORELOAD(&TIM4_Handler,100);//恢复原来的设置
+//    }
+//    __HAL_TIM_CLEAR_IT(&TIM4_Handler, TIM_IT_UPDATE);//清除中断标志位
 }
+
 //使能定时器4,使能中断.
 void Timer4_Init(u16 arr,u16 psc)
-{
-//	RCC->APB1ENR|=1<<2;	//TIM4时钟使能    
-// 	TIM4->ARR=arr;  	//设定计数器自动重装值  
-//	TIM4->PSC=psc;  	//预分频器7200,得到10Khz的计数时钟	
-//	TIM4->DIER|=1<<0;   //允许更新中断			  							    
-//	TIM4->CR1|=0x01;    //使能定时器2
-//  	MY_NVIC_Init(3,3,TIM4_IRQn,2);//抢占3，子优先级3，组2(组2中优先级最低的)									 
+{ 
+    //定时器4
+//    __HAL_RCC_TIM4_CLK_ENABLE();
+//    HAL_NVIC_SetPriority(TIM4_IRQn,3,3);    //设置中断优先级，抢占优先级3，子优先级3
+//    HAL_NVIC_EnableIRQ(TIM4_IRQn);          //开启ITM4中断    
+//    
+//    TIM4_Handler.Instance=TIM4;                          //通用定时器4
+//    TIM4_Handler.Init.Prescaler=psc;                     //分频
+//    TIM4_Handler.Init.CounterMode=TIM_COUNTERMODE_UP;    //向上计数器
+//    TIM4_Handler.Init.Period=arr;                        //自动装载值
+//    TIM4_Handler.Init.ClockDivision=TIM_CLOCKDIVISION_DIV1;
+//    HAL_TIM_Base_Init(&TIM4_Handler);
+//    HAL_TIM_Base_Start_IT(&TIM4_Handler); //使能定时器4和定时器4中断 					 
 }
+ 
+
 #endif
 ////////////////////////////////////////////////////////////////////////////////////////
 //初始化串口控制器
@@ -254,7 +267,7 @@ void Timer4_Init(u16 arr,u16 psc)
 void usmart_init(u8 sysclk)
 {
 #if USMART_ENTIMX_SCAN==1
-//	Timer4_Init(1000,(u32)sysclk*100-1);//分频,时钟为10K ,100ms中断一次,注意,计数频率必须为10Khz,以和runtime单位(0.1ms)同步.
+	Timer4_Init(1000,(u32)sysclk*100-1);//分频,时钟为10K ,100ms中断一次,注意,计数频率必须为10Khz,以和runtime单位(0.1ms)同步.
 #endif
 	usmart_dev.sptype=1;	//十六进制显示参数
 }		
@@ -269,7 +282,6 @@ u8 usmart_cmd_rec(u8*str)
 	u8 sfname[MAX_FNAME_LEN];//存放本地函数名
 	sta=usmart_get_fname(str,rfname,&rpnum,&rval);//得到接收到的数据的函数名及参数个数	  
 	if(sta)return sta;//错误
-
 	for(i=0;i<usmart_dev.fnum;i++)
 	{
 		sta=usmart_get_fname((u8*)usmart_dev.funs[i].name,sfname,&spnum,&rval);//得到本地函数名及参数个数
@@ -281,20 +293,10 @@ u8 usmart_cmd_rec(u8*str)
 			break;//跳出.
 		}	
 	}
-//	UART_PRINTF((const char*)rfname);
-//	UART_PRINTF("0x%x ", rpnum);
-
-//	UART_PRINTF((const char*)sfname);
-//	UART_PRINTF("0x%x ", spnum);
-//	
-//		UART_PRINTF("0x%x ", 	usmart_dev.id);
-//UART_PRINTF("0x%x ", 	usmart_dev.fnum);
-	
 	if(i==usmart_dev.fnum)return USMART_NOFUNCFIND;	//未找到匹配的函数
  	sta=usmart_get_fparam(str,&i);					//得到函数参数个数	
 	if(sta)return sta;								//返回错误
 	usmart_dev.pnum=i;								//参数个数记录
-//UART_PRINTF("0x%x ", 	usmart_dev.pnum);	
     return USMART_OK;
 }
 //usamrt执行函数
@@ -305,7 +307,7 @@ u8 usmart_cmd_rec(u8*str)
 void usmart_exe(void)
 {
 	u8 id,i;
-	u32 res=0;		   
+	u32 res;		   
 	u32 temp[MAX_PARM];//参数转换,使之支持了字符串 
 	u8 sfname[MAX_FNAME_LEN];//存放本地函数名
 	u8 pnum,rval;
@@ -324,13 +326,15 @@ void usmart_exe(void)
 		}else						  //参数是数字
 		{
 			temp[i]=*(u32*)(usmart_dev.parm+usmart_get_parmpos(i));
-			if(usmart_dev.sptype==SP_TYPE_DEC)UART_PRINTF("%lu",temp[i]);//10进制参数显示
+			if(usmart_dev.sptype==SP_TYPE_DEC)UART_PRINTF("%ld",temp[i]);//10进制参数显示
 			else UART_PRINTF("0X%X",temp[i]);//16进制参数显示 	   
 		}
 		if(i!=pnum-1)UART_PRINTF(",");
 	}
 	UART_PRINTF(")");
+#if USMART_ENTIMX_SCAN==1
 	usmart_reset_runtime();	//计时器清零,开始计时
+#endif
 	switch(usmart_dev.pnum)
 	{
 		case 0://无参数(void类型)											  
@@ -372,7 +376,9 @@ void usmart_exe(void)
 			temp[5],temp[6],temp[7],temp[8],temp[9]);
 			break;
 	}
+#if USMART_ENTIMX_SCAN==1
 	usmart_get_runtime();//获取函数执行时间
+#endif
 	if(rval==1)//需要返回值.
 	{
 		if(usmart_dev.sptype==SP_TYPE_DEC)UART_PRINTF("=%lu;\r\n",res);//输出执行结果(10进制参数显示)
@@ -402,11 +408,12 @@ void usmart_scan(void)
 			len=usmart_sys_cmd_exe(USART_RX_BUF);
 			if(len!=USMART_FUNCERR)sta=len;
 			if(sta)
-			{
+			{   
 				switch(sta)
 				{
 					case USMART_FUNCERR:
-						UART_PRINTF("函数错误!\r\n");   			
+						UART_PRINTF("函数错误!\r\n");
+                      				
 						break;	
 					case USMART_PARMERR:
 						UART_PRINTF("参数错误!\r\n");   			
@@ -423,7 +430,6 @@ void usmart_scan(void)
 		USART_RX_STA=0;//状态寄存器清空	    
 	}
 }
-
 #if USMART_USE_WRFUNS==1 	//如果使能了读写操作
 //读取指定地址的值		 
 u32 read_addr(u32 addr)
@@ -438,8 +444,49 @@ void write_addr(u32 addr,u32 val)
 #endif
 
 
+//串口1中断服务程序
+//注意,读取USARTx->SR能避免莫名其妙的错误   	
+u8 USART_RX_BUF[USART_REC_LEN];     //接收缓冲,最大USART_REC_LEN个字节.
+//接收状态
+//bit15，	接收完成标志
+//bit14，	接收到0x0d
+//bit13~0，	接收到的有效字节数目
+u16 USART_RX_STA=0;       //接收状态标记	
 
+u8 aRxBuffer[RXBUFFERSIZE];//HAL库使用的串口接收缓冲
+//UART_HandleTypeDef UART1_Handler; //UART句柄
 
+//串口1中断服务程序
+void USART1_IRQHandler(void)                	
+{ 
+	u8 Res;
+
+	if((__HAL_UART_GET_FLAG(&UART1_Handler,UART_FLAG_RXNE)!=RESET))  //接收中断(接收到的数据必须是0x0d 0x0a结尾)
+	{
+        HAL_UART_Receive(&UART1_Handler,&Res,1,1000); 
+		
+		if((USART_RX_STA&0x8000)==0)//接收未完成
+		{
+			if(USART_RX_STA&0x4000)//接收到了0x0d
+			{
+				if(Res!=0x0a)USART_RX_STA=0;//接收错误,重新开始
+				else USART_RX_STA|=0x8000;	//接收完成了 
+			}
+			else //还没收到0X0D
+			{	
+				if(Res==0x0d)USART_RX_STA|=0x4000;
+				else
+				{
+					USART_RX_BUF[USART_RX_STA&0X3FFF]=Res ;
+					USART_RX_STA++;
+					if(USART_RX_STA>(USART_REC_LEN-1))USART_RX_STA=0;//接收数据错误,重新开始接收	  
+				}		 
+			}
+		}   		 
+	}
+	HAL_UART_IRQHandler(&UART1_Handler);	
+
+} 
 
 
 
