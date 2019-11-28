@@ -695,7 +695,7 @@ void prf_init(bool reset)
             prf_env.prf[i].desc.state           = NULL;
             prf_env.prf[i].desc.idx_max         = 0;
 
-            // Request kernel to flush task messages
+            // Request kernel to flush task messages请求内核刷新任务消息
             ke_task_msg_flush(KE_TYPE_GET(prf_env.prf[i].task));
         }
     }

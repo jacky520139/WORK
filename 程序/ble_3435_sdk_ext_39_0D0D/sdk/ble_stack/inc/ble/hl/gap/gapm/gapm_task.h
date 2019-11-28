@@ -218,7 +218,7 @@ enum gapm_operation
     GAPM_ADV_DIRECT, // 0x0E
     /// Start directed connectable advertising using Low Duty Cycle
     GAPM_ADV_DIRECT_LDC, // 0x0F
-    /// Update on the fly advertising data
+    /// Update on the fly advertising data 即时更新广告数据
     GAPM_UPDATE_ADVERTISE_DATA,// 0x10
 
     /* Scan mode operations                             */

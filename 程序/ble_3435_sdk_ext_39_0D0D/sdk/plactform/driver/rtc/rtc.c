@@ -21,7 +21,7 @@
 static void (*p_RTC_Int_Handler)(void) = NULL;
 
 
-
+//RTC初始化
 void rtc_init(RTC_DATE_DESC *p_RTC_date_desc)
 {
     if (p_RTC_date_desc == NULL)
@@ -49,24 +49,24 @@ void rtc_init(RTC_DATE_DESC *p_RTC_date_desc)
 
 }
 
-
+//RTC使能
 void rtc_enable(void)
 {
     REG_APB6_RTC_CFG |= (1 << BIT_RTC_ENABLE);
 }
-
+//RTC失能
 void rtc_disable(void)
 {
     REG_APB6_RTC_CFG &= (~(1 << BIT_RTC_ENABLE));
 }
 
-
+//闹钟初始化
 void rtc_alarm_init(unsigned char ucMode, RTC_DATE_DESC *p_RTC_alarm_time, 
                     unsigned long ulMiiliSecond, void (*p_Int_Handler)(void))
 {
     ICU_RTC_CLK_PWD_CLEAR();
 
-    if (ucMode == 0x00)         // clock alarm mode
+    if (ucMode == 0x00)         // clock alarm mode时钟报警模式
     {
         if (p_RTC_alarm_time == NULL)
         {
@@ -76,7 +76,7 @@ void rtc_alarm_init(unsigned char ucMode, RTC_DATE_DESC *p_RTC_alarm_time,
                           | ((p_RTC_alarm_time->minute   & 0x3F) << BIT_RTC_ALARM_MINUTE)
                           | ((p_RTC_alarm_time->hour     & 0x1F) << BIT_RTC_ALARM_HOUR);
     }
-    else if (ucMode == 0x01)    // millisecond alarm mode
+    else if (ucMode == 0x01)    // millisecond alarm mode毫秒报警模式
     {
         REG_APB6_RTC_ALM_TIME = (ulMiiliSecond & 0x3FF) << BIT_RTC_ALARM_MILLISEC;
     }
@@ -102,18 +102,18 @@ void rtc_alarm_init(unsigned char ucMode, RTC_DATE_DESC *p_RTC_alarm_time,
 		REG_AHB0_ICU_INT_ENABLE |= (0x1 << 12);
     }
 }
-
+//闹钟使能
 void rtc_alarm_enable(void)
 {
     REG_APB6_RTC_CFG |= (1 << BIT_RTC_ALARM_EN);
 }
-
+//闹钟失能
 void rtc_alarm_disable(void)
 {
     REG_APB6_RTC_CFG &= (~(1 << BIT_RTC_ALARM_EN));
 }
 
-
+//RTC时钟设置
 void rtc_set_time(RTC_DATE_DESC *p_RTC_date_desc)
 {
     if (p_RTC_date_desc == NULL)
@@ -126,7 +126,7 @@ void rtc_set_time(RTC_DATE_DESC *p_RTC_date_desc)
                 | ((p_RTC_date_desc->hour     & 0x1F) << BIT_RTC_HOUR)
                 | ((p_RTC_date_desc->week_day & 0x07) << BIT_RTC_WEEK);
 }
-
+//RTC时钟获取时间
 void rtc_get_time(RTC_DATE_DESC *p_RTC_date_desc)
 {
     unsigned long ulTime;
@@ -147,14 +147,14 @@ void rtc_int_handler_clear(void)
     p_RTC_Int_Handler = NULL;
 }
 
-
+//RTC中断服务
 void rtc_isr(void)
 {
     if (REG_APB6_RTC_ALM_FLAG & (0x1 << 0))
     {
         if (p_RTC_Int_Handler != NULL)
         {
-            (void)p_RTC_Int_Handler();
+            (void)p_RTC_Int_Handler();//闹钟服务
         }
     }
 

@@ -46,4 +46,3 @@
 .\obj\uart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\obj\uart.o: ..\..\sdk\ble_stack\inc\ea\ea.h
 .\obj\uart.o: ..\..\sdk\plactform\core_modules\common\api\co_list.h
-.\obj\uart.o: ..\..\sdk\plactform\driver\gpio\gpio.h

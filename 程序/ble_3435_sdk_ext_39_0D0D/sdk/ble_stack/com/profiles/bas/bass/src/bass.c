@@ -392,7 +392,7 @@ void bass_exe_operation(void)
     bool finished = true;
     uint8_t conidx = GAP_INVALID_CONIDX;
 
-    // Restoring connection information requested
+    // Restoring connection information requested正在还原请求的连接信息
     if(bass_env->operation->id == BASS_ENABLE_REQ)
     {
         struct bass_enable_req * enable = (struct bass_enable_req *) ke_msg2param(bass_env->operation);
@@ -413,7 +413,7 @@ void bass_exe_operation(void)
             bass_env->cursor++;
         }
     }
-    // Battery level updated
+    // Battery level updated 电池电量更新
     else if(bass_env->operation->id == BASS_BATT_LEVEL_UPD_REQ)
     {
         struct bass_batt_level_upd_req * update = (struct bass_batt_level_upd_req *) ke_msg2param(bass_env->operation);
@@ -439,7 +439,7 @@ void bass_exe_operation(void)
         ASSERT_ERR(0);
     }
 
-    // check if operation is finished
+    // 检测操作完成
     if(finished)
     {
         // trigger response message

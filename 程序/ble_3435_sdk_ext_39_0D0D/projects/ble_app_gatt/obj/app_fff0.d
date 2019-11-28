@@ -45,3 +45,17 @@
 .\obj\app_fff0.o: ..\..\sdk\ble_stack\inc\ke\ke_timer.h
 .\obj\app_fff0.o: ..\..\sdk\plactform\driver\uart\uart.h
 .\obj\app_fff0.o: .\config\user_config.h
+.\obj\app_fff0.o: .\HARDWARE\interface\ALL_Includes.h
+.\obj\app_fff0.o: ..\..\sdk\plactform\driver\adc\adc.h
+.\obj\app_fff0.o: ..\..\sdk\plactform\driver\pwm\pwm.h
+.\obj\app_fff0.o: ..\..\sdk\plactform\arch\BK3435_reg.h
+.\obj\app_fff0.o: .\HARDWARE\interface\ANO_UART.h
+.\obj\app_fff0.o: .\HARDWARE\interface\ALL_Includes.h
+.\obj\app_fff0.o: .\USMART\usmart.h
+.\obj\app_fff0.o: .\USMART\usmart_str.h
+.\obj\app_fff0.o: .\USMART\usart.h
+.\obj\app_fff0.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\obj\app_fff0.o: .\HARDWARE\interface\LED.h
+.\obj\app_fff0.o: ..\..\sdk\plactform\driver\rtc\rtc.h
+.\obj\app_fff0.o: .\HARDWARE\interface\app_rtc.h
+.\obj\app_fff0.o: .\HARDWARE\interface\User_Timer.h

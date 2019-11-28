@@ -98,5 +98,5 @@ void app_fff0_enable_prf(uint8_t conidx);
  */
 void app_fff0_send_lvl(uint8_t batt_lvl);
 
-
+void app_fff1_send_lvl(uint8_t* buf, uint8_t len);
 #endif // APP_BATT_H_

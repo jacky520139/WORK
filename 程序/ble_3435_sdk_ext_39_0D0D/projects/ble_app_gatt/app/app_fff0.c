@@ -41,7 +41,7 @@
 #include "ke_timer.h"
 #include "uart.h"
 
-
+#include "ALL_Includes.h"
 
 /*
  * DEFINES
@@ -94,7 +94,7 @@ void app_fff0_add_fff0s(void)
     ke_msg_send(req);
 }
 
-
+//将数据发送到蓝牙底层进行发送
 void app_fff1_send_lvl(uint8_t* buf, uint8_t len)
 {
     // Allocate the message分配消息（内存申请）
@@ -104,7 +104,7 @@ void app_fff1_send_lvl(uint8_t* buf, uint8_t len)
                                                         fff0s_fff1_level_upd_req);
     // 填写参数结构
     req->length = len;
-	memcpy(req->fff1_level, buf, len);
+	  memcpy(req->fff1_level, buf, len);
 
     // Send the message
     ke_msg_send(req);
@@ -176,14 +176,15 @@ static int fff2_writer_req_handler(ke_msg_id_t const msgid,
                                      ke_task_id_t const src_id)
 {
     // Drop the message
-	UART_PRINTF("FFF2 param->value = 0x ");
-	
-	for(uint8_t i = 0;i < param->length;i++)
-	{
-		UART_PRINTF("%02x ",param->fff2_value[i]);
-	}
-	UART_PRINTF("\r\n");
-		
+//	UART_PRINTF("FFF2 param->value = 0x ");
+//	
+//	for(uint8_t i = 0;i < param->length;i++)
+//	{
+//		UART_PRINTF("%02x ",param->fff2_value[i]);
+//	}
+//	UART_PRINTF("\r\n");
+//		UART_PRINTF("\r\n");
+	uart_write(param->fff2_value, param->length, NULL, NULL);
     return (KE_MSG_CONSUMED);
 }
 
@@ -193,10 +194,11 @@ static int fff1_period_ntf_handler(ke_msg_id_t const msgid,
                                                ke_task_id_t const dest_id,
                                                ke_task_id_t const src_id)
 {
+	rtc_get_time(&calendar.RTC);
 	uint8_t buf[128];
 	memset(buf, 0x89, 128);
-//  app_fff1_send_lvl(buf, 1);
- ke_timer_set(FFF0S_FFF1_LEVEL_PERIOD_NTF,dest_id , 50);//延时1s后触发
+//  app_fff1_send_lvl(&RTC_DEV.second, 1);
+// ke_timer_set(FFF0S_FFF1_LEVEL_PERIOD_NTF,dest_id , 100);//延时1s后触发
 //		
     return (KE_MSG_CONSUMED);
 }

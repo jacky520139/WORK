@@ -45,7 +45,7 @@
 #include "lld.h"
 #include "wdt.h"
 
-
+#include "ALL_Includes.h"
 /*
  * LOCAL FUNCTION DEFINITIONS
  ****************************************************************************************
@@ -87,7 +87,7 @@ static uint8_t appm_get_handler(const struct ke_state_handler *handler_list,
 /**
  ****************************************************************************************
  * @brief Handles ready indication from the GAP. - Reset the stack
- *
+ *从间隙处理就绪指示
  * @param[in] msgid     Id of the message received.
  * @param[in] param     Pointer to the parameters of the message.
  * @param[in] dest_id   ID of the receiving task instance (TASK_GAP).
@@ -104,12 +104,12 @@ static int gapm_device_ready_ind_handler(ke_msg_id_t const msgid,
     // 应用程序尚未初始化
     ASSERT_ERR(ke_state_get(dest_id) == APPM_INIT);
 
-    // Reset the stack
+    // Reset the stack复位堆栈
     struct gapm_reset_cmd* cmd = KE_MSG_ALLOC(GAPM_RESET_CMD,
                                               TASK_GAPM, TASK_APP,
                                               gapm_reset_cmd);
 
-    cmd->operation = GAPM_RESET;
+    cmd->operation = GAPM_RESET;//复位GAPM
 
     ke_msg_send(cmd);
 
@@ -120,7 +120,7 @@ static int gapm_device_ready_ind_handler(ke_msg_id_t const msgid,
 /**
  ****************************************************************************************
  * @brief Handles GAP manager command complete events.
- *
+ * 处理命令操作成功事件
  * @param[in] msgid     Id of the message received.
  * @param[in] param     Pointer to the parameters of the message.
  * @param[in] dest_id   ID of the receiving task instance (TASK_GAP).
@@ -138,25 +138,25 @@ static int gapm_cmp_evt_handler(ke_msg_id_t const msgid,
     switch(param->operation)
     {
         // Reset completed
-        case (GAPM_RESET):
+        case (GAPM_RESET)://处理GAPM复位成功事件
         {
-            if(param->status == GAP_ERR_NO_ERROR)
+            if(param->status == GAP_ERR_NO_ERROR)//复位成功后的操作
             {
-                // Set Device configuration
+                // Set Device configuration设置设备配置
                 struct gapm_set_dev_config_cmd* cmd = KE_MSG_ALLOC(GAPM_SET_DEV_CONFIG_CMD,
 	                                                                   TASK_GAPM, TASK_APP,
                                                                    gapm_set_dev_config_cmd);
-                // Set the operation
+                // Set the operation设置操作
                 cmd->operation = GAPM_SET_DEV_CONFIG;
-                // Set the device role - Peripheral
+                // Set the device role - Peripheral设备角色-外设
                 cmd->role      = GAP_ROLE_PERIPHERAL;
-                // Set Data length parameters
-                cmd->sugg_max_tx_octets = BLE_MIN_OCTETS;
+                // Set Data length parameters设置数据长度参数
+                cmd->sugg_max_tx_octets = BLE_MIN_OCTETS;//八位字节
                 cmd->sugg_max_tx_time   = BLE_MIN_TIME;
 								
-		 		cmd->max_mtu = 131;//BLE_MIN_OCTETS;
-                //Do not support secure connections
-                cmd->pairing_mode = GAPM_PAIRING_LEGACY;
+		 		        cmd->max_mtu = 131;//BLE_MIN_OCTETS;
+                //Do not support secure connections不支持安全连接
+                cmd->pairing_mode = GAPM_PAIRING_LEGACY;//配对模式
                 
  				//cmd->addr_type   = GAPM_CFG_ADDR_HOST_PRIVACY; //2017-10-24 by alen
                 // load IRK
@@ -173,27 +173,27 @@ static int gapm_cmp_evt_handler(ke_msg_id_t const msgid,
             }
         }
         break;
-        case (GAPM_PROFILE_TASK_ADD):
+        case (GAPM_PROFILE_TASK_ADD)://添加下一个请求的服务
         {
-            // Add the next requested service
+            // Add the next requested service添加下一个请求的服务
             if (!appm_add_svc())
             {
                 // Go to the ready state
-                ke_state_set(TASK_APP, APPM_READY);
+                ke_state_set(TASK_APP, APPM_READY);//任务都已经添加完成，将任务设置为就绪状态，开始广播
 							
-				appm_start_advertising();
+				     appm_start_advertising();//开始广播
             }
         }
         break;
-        // Device Configuration updated
+        // Device Configuration updated设备配置已更新
         case (GAPM_SET_DEV_CONFIG):
         {
             ASSERT_INFO(param->status == GAP_ERR_NO_ERROR, param->operation, param->status);
 
             // Go to the create db state
-            ke_state_set(TASK_APP, APPM_CREATE_DB);
-            // Add the first required service in the database
-            // and wait for the PROFILE_ADDED_IND
+            ke_state_set(TASK_APP, APPM_CREATE_DB);//设置任务状态为建立数据库状态
+            // Add the first required service in the database在数据库中添加第一个必需的服务
+            // and wait for the PROFILE_ADDED_IND并等待配置文件添加
             appm_add_svc();
         }
         break;	
@@ -243,9 +243,9 @@ static int gapc_get_dev_info_req_ind_handler(ke_msg_id_t const msgid,
             ke_msg_send(cfm);
         } break;
 
-        case GAPC_DEV_APPEARANCE:
+        case GAPC_DEV_APPEARANCE://外观
         {
-            // Allocate message
+            // Allocate message分配消息
             struct gapc_get_dev_info_cfm *cfm = KE_MSG_ALLOC(GAPC_GET_DEV_INFO_CFM,
                                                     src_id, dest_id,
                                                     gapc_get_dev_info_cfm);
@@ -281,8 +281,6 @@ static int gapc_get_dev_info_req_ind_handler(ke_msg_id_t const msgid,
         default: /* Do Nothing */
 			break;
     }
-
-
     return (KE_MSG_CONSUMED);
 }
 /**
@@ -305,7 +303,7 @@ static int gapc_set_dev_info_req_ind_handler(ke_msg_id_t const msgid,
 	// Set Device configuration
 	struct gapc_set_dev_info_cfm* cfm = KE_MSG_ALLOC(GAPC_SET_DEV_INFO_CFM, src_id, dest_id,
                                                  gapc_set_dev_info_cfm);
-	// Reject to change parameters
+	// Reject to change parameters拒绝更改参数
 	cfm->status = GAP_ERR_REJECTED;
 	cfm->req = param->req;
 	// Send message
@@ -317,7 +315,7 @@ static int gapc_set_dev_info_req_ind_handler(ke_msg_id_t const msgid,
 /**
  ****************************************************************************************
  * @brief Handles connection complete event from the GAP. Enable all required profiles
- *从间隙处理连接完成事件。启用所有必需的配置文件
+ *从间隙处理连接完成事件。使能所有必需的配置文件
  * @param[in] msgid     Id of the message received.
  * @param[in] param     Pointer to the parameters of the message.
  * @param[in] dest_id   ID of the receiving task instance (TASK_GAP).
@@ -336,13 +334,13 @@ static int gapc_connection_req_ind_handler(ke_msg_id_t const msgid,
     app_env.conidx = KE_IDX_GET(src_id);
     // Check if the received Connection Handle was valid
 	  //检查接收到的连接句柄是否有效
-    if (app_env.conidx != GAP_INVALID_CONIDX)
+    if (app_env.conidx != GAP_INVALID_CONIDX)//如果不是无效的连接索引
     {
         // Retrieve the connection info from the parameters
 			  //从参数中检索连接信息
         app_env.conhdl = param->conhdl;
 
-        // Send connection confirmation发送连接确认
+        // 发送连接确认
         struct gapc_connection_cfm *cfm = KE_MSG_ALLOC(GAPC_CONNECTION_CFM,
                 KE_BUILD_ID(TASK_GAPC, app_env.conidx), TASK_APP,
                 gapc_connection_cfm);
@@ -359,7 +357,7 @@ static int gapc_connection_req_ind_handler(ke_msg_id_t const msgid,
         app_batt_enable_prf(app_env.conhdl);
 		
         // We are now in connected State
-        ke_state_set(dest_id, APPM_CONNECTED);
+        ke_state_set(dest_id, APPM_CONNECTED);//任务状态设置为连接状态
 		
 		#if UPDATE_CONNENCT_PARAM
 		ke_timer_set(APP_PARAM_UPDATE_REQ_IND,TASK_APP,100);//建立连接后延时1s后更新连接参数
@@ -396,7 +394,7 @@ static int gapc_cmp_evt_handler(ke_msg_id_t const msgid,
 	UART_PRINTF("gapc_cmp_evt_handler operation = %x\r\n",param->operation);
 	switch(param->operation)
 	{
-    	case (GAPC_UPDATE_PARAMS):  //0x09
+    	case (GAPC_UPDATE_PARAMS):  //0x09更新连接参数
     	{
 			if (param->status != GAP_ERR_NO_ERROR)
         	{
@@ -409,7 +407,7 @@ static int gapc_cmp_evt_handler(ke_msg_id_t const msgid,
 			
     	} break;
 
-		case (GAPC_SECURITY_REQ): //0x0c
+		case (GAPC_SECURITY_REQ): //0x0c安全
 		{
 			if (param->status != GAP_ERR_NO_ERROR)
 	        {
@@ -420,7 +418,7 @@ static int gapc_cmp_evt_handler(ke_msg_id_t const msgid,
 	            UART_PRINTF("gapc security req ok !\r\n");
 	        }
 		}break;
-		case (GAPC_BOND): // 0xa
+		case (GAPC_BOND): // 0xa绑定
     	{
 	        if (param->status != GAP_ERR_NO_ERROR)
 	        {
@@ -432,7 +430,7 @@ static int gapc_cmp_evt_handler(ke_msg_id_t const msgid,
 	        }
     	}break;
 		
-		case (GAPC_ENCRYPT): // 0xb
+		case (GAPC_ENCRYPT): // 0xb加密
 		{
 			if (param->status != GAP_ERR_NO_ERROR)
 			{
@@ -456,7 +454,7 @@ static int gapc_cmp_evt_handler(ke_msg_id_t const msgid,
 /**
  ****************************************************************************************
  * @brief Handles disconnection complete event from the GAP.
- *
+ *成功断开连接
  * @param[in] msgid     Id of the message received.
  * @param[in] param     Pointer to the parameters of the message.
  * @param[in] dest_id   ID of the receiving task instance (TASK_GAP).
@@ -473,12 +471,12 @@ static int gapc_disconnect_ind_handler(ke_msg_id_t const msgid,
 	UART_PRINTF("disconnect link reason = 0x%x\r\n",param->reason);
 
 	// Go to the ready state
-	ke_state_set(TASK_APP, APPM_READY);
+	ke_state_set(TASK_APP, APPM_READY);//任务就绪
 
-	wdt_disable_flag = 1;
+	wdt_disable_flag = 1;//开看门狗
 
 	// Restart Advertising
-	appm_start_advertising();
+	appm_start_advertising();//开始广播
 
 	
     return (KE_MSG_CONSUMED);
@@ -502,10 +500,10 @@ static int gapm_profile_added_ind_handler(ke_msg_id_t const msgid,
                                           ke_task_id_t const dest_id,
                                           ke_task_id_t const src_id)
 {
-    // Current State
+    // 当前状态
     uint8_t state = ke_state_get(dest_id);
 
-    if (state == APPM_CREATE_DB)
+    if (state == APPM_CREATE_DB)//建立数据库状态
     {
         switch (param->prf_task_id)
         {
@@ -587,10 +585,10 @@ static int appm_msg_handler(ke_msg_id_t const msgid,
                             ke_task_id_t const dest_id,
                             ke_task_id_t const src_id)
 {
-    // Retrieve identifier of the task from received message
+    // 从收到的消息中检索任务的标识符
     ke_task_id_t src_task_id = MSG_T(msgid);
-    // Message policy
-    uint8_t msg_pol          = KE_MSG_CONSUMED;
+    // 消息策略
+    uint8_t msg_pol          = KE_MSG_CONSUMED;//信息消耗
 
 
     switch (src_task_id)
@@ -676,7 +674,7 @@ static int gapc_update_conn_param_req_ind_handler (ke_msg_id_t const msgid,
 	up_param.latency    = BLE_UAPDATA_LATENCY;  
 	up_param.time_out   = BLE_UAPDATA_TIMEOUT; 
 	
-	appm_update_param(&up_param);
+	appm_update_param(&up_param);//更新连接参数
 	
 	return KE_MSG_CONSUMED;
 }
@@ -712,7 +710,7 @@ static int gapc_le_pkt_size_ind_handler (ke_msg_id_t const msgid,
 									const struct gapc_le_pkt_size_ind  *param,
                  					ke_task_id_t const dest_id, ke_task_id_t const src_id)
 {
-   	UART_PRINTF("%s \r\n", __func__);
+  UART_PRINTF("%s \r\n", __func__);
 	UART_PRINTF("1max_rx_octets = %d\r\n",param->max_rx_octets);
 	UART_PRINTF("1max_rx_time = %d\r\n",param->max_rx_time);
 	UART_PRINTF("1max_tx_octets = %d\r\n",param->max_tx_octets);
@@ -728,15 +726,16 @@ static int gapc_le_pkt_size_ind_handler (ke_msg_id_t const msgid,
  * @param[in] param     Pointer to the parameters of the message.指向消息参数的指针
  * @param[in] dest_id   ID of the receiving task instance
  * @param[in] src_id    ID of the sending task instance.
- *
+ * 打印更新后的连接参数
  * @return 如果消息是否已被使用
+ *
  ****************************************************************************************
  */
 static int gapc_param_updated_ind_handler (ke_msg_id_t const msgid, 
 									const struct gapc_param_updated_ind  *param,
                  					ke_task_id_t const dest_id, ke_task_id_t const src_id)
 {
-    UART_PRINTF("%s \r\n", __func__);
+    UART_PRINTF("%s \r\n", __func__);//打印gapc_param_updated_ind_handler
 	UART_PRINTF("con_interval = %d\r\n",param->con_interval);
 	UART_PRINTF("con_latency = %d\r\n",param->con_latency);
 	UART_PRINTF("sup_to = %d\r\n",param->sup_to);
@@ -748,6 +747,7 @@ static int gapc_param_updated_ind_handler (ke_msg_id_t const msgid,
 /**
  ****************************************************************************************
  * @brief  GATTC_MTU_CHANGED_IND
+  *GATT修改MTU后的值
  * @param[in] msgid     Id of the message received.
  * @param[in] param     Pointer to the parameters of the message.
  * @param[in] dest_id   ID of the receiving task instance
@@ -774,7 +774,7 @@ static int gattc_mtu_changed_ind_handler(ke_msg_id_t const msgid,
  * @param[in] param     Pointer to the parameters of the message.
  * @param[in] dest_id   ID of the receiving task instance
  * @param[in] src_id    ID of the sending task instance.
- *
+*同意主设备发送来的连接参数变更
  * @return If the message was consumed or not.
  ****************************************************************************************
  */
@@ -826,7 +826,14 @@ static int app_led_handler(ke_msg_id_t const msgid,
 
 //	// Send message
 //    ke_msg_send(cfm);
-	    RedLedToggle();
+//	    RedLedToggle();
+	 RTC_Get();
+//	ANO_DT_Send_Version(0XF1, calendar.RTC.hour,calendar.RTC.minute,calendar.RTC.second,calendar.RTC.week_day,0);
+	ke_timer_set(APP_LED_SCAN,TASK_APP,10); 
+//adc_init(1,1);//初始化ADC,软件模式V	
+  u16 Temp_val=adc_get_value(9);
+//	u16 BAT_VCC=(adc_val*490)>>8;
+	ANO_DT_Send_Version(0XF1, calendar.RTC.hour,calendar.RTC.minute,calendar.RTC.second,calendar.RTC.week_day,Temp_val);
 	return (KE_MSG_CONSUMED);
 }
 /*
@@ -846,7 +853,7 @@ const struct ke_msg_handler appm_default_state[] =
     {GAPM_CMP_EVT,             		(ke_msg_func_t)gapm_cmp_evt_handler},
     {GAPC_GET_DEV_INFO_REQ_IND, 	(ke_msg_func_t)gapc_get_dev_info_req_ind_handler},
     {GAPC_SET_DEV_INFO_REQ_IND, 	(ke_msg_func_t)gapc_set_dev_info_req_ind_handler},
-    {GAPC_CONNECTION_REQ_IND,   	(ke_msg_func_t)gapc_connection_req_ind_handler},
+    {GAPC_CONNECTION_REQ_IND,   	(ke_msg_func_t)gapc_connection_req_ind_handler},/*连接成功*/
     {GAPC_CMP_EVT,             		(ke_msg_func_t)gapc_cmp_evt_handler},
     {GAPC_DISCONNECT_IND,       	(ke_msg_func_t)gapc_disconnect_ind_handler},
     {GAPM_PROFILE_ADDED_IND,    	(ke_msg_func_t)gapm_profile_added_ind_handler},

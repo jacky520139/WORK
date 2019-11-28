@@ -54,7 +54,7 @@
 #if ( 1 )
 #define CFG_APP 
 #endif
-
+//、、、、、、、、、、、、、、、、、、配置蓝牙角色、、、、、、、、、、、、、、、、、、、、、、、、、、
 //   <o> CFG_BLE Role配置蓝牙角色
 // 		<0=> BROADCASTER  播音员
 // 		<1=> OBSERVER观察员
@@ -62,7 +62,7 @@
 // 		<3=> CENTRAL中央
 // 		<4=> ALLROLES所有角色
 //    <i> Select Role 选择角色
-#define CFG_ROLE 2
+#define CFG_ROLE 3
 
 #if ( CFG_ROLE == 0)
 #define CFG_BROADCASTER 
@@ -83,15 +83,16 @@
 #if ( CFG_ROLE == 4)
 #define CFG_ALLROLES 
 #endif
+//、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、
 //  
-//、、、、、、、、、、、、、、、、、、、、、
+//、、、、、、、启用交互内存、、、、、、、、
 //   <e> CFG_EMB 
 //   <i> enable Exchange Memeory  	启用交互内存
 //   </e>
 #if ( 1 )
 #define CFG_EMB 
 #endif
-
+////////////////////////////////////////////////////////////
 //   <e> CFG_BLE
 //   	<i> select BLE or BT MODE
 //   </e> 
@@ -485,7 +486,7 @@
 
 
 /// Use 32K Hz Clock if set to 1 else 32,768k is used
-#define HZ32000                                     0
+#define HZ32000                                     1    //使用32k晶振
 
 
 /// Time to wake-up Radio Module (in us)
@@ -755,7 +756,7 @@ enum KE_EVENT_TYPE
 enum KE_TASK_TYPE
 {
 #if (BT_EMB_PRESENT)
-    // BT Controller Tasks
+    // BT Controller Tasks   BT控制器任务
     TASK_LM,
     TASK_LC,
     TASK_LB,

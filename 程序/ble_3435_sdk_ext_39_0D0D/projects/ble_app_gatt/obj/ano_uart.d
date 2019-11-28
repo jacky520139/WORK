@@ -21,4 +21,5 @@
 .\obj\ano_uart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\obj\ano_uart.o: .\HARDWARE\interface\LED.h
 .\obj\ano_uart.o: ..\..\sdk\plactform\driver\rtc\rtc.h
+.\obj\ano_uart.o: .\HARDWARE\interface\app_rtc.h
 .\obj\ano_uart.o: .\HARDWARE\interface\User_Timer.h

@@ -209,7 +209,7 @@ void IRQ_Exception(void)
 void FIQ_Exception(void)
 {
 	uint32_t IntStat;
-	uint32_t fiq_status;
+	uint32_t fiq_status=0;
 	IntStat = intc_status_get();
 
 #if (SYSTEM_SLEEP)

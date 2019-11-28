@@ -87,4 +87,6 @@
 .\obj\arch_main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\obj\arch_main.o: .\HARDWARE\interface\LED.h
 .\obj\arch_main.o: ..\..\sdk\plactform\driver\rtc\rtc.h
+.\obj\arch_main.o: .\HARDWARE\interface\app_rtc.h
 .\obj\arch_main.o: .\HARDWARE\interface\User_Timer.h
+.\obj\arch_main.o: app\app_fff0.h

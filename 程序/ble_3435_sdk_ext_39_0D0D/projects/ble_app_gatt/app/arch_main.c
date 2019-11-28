@@ -166,14 +166,14 @@ uint8_t encrypt_key_array[16] =
  ****************************************************************************************
  */
 
-
+//错误时系统复位
 void platform_reset(uint32_t error)
 {
 	//void (*pReset)(void);
 
 	UART_PRINTF("error = %x\r\n", error);
 
-	// Disable interrupts
+	// Disable interrupts失能中断
 	GLOBAL_INT_STOP();
 
 #if UART_PRINTF_EN
@@ -210,7 +210,7 @@ void bdaddr_env_init(void)
 	}
 }
 
-
+//dut模式下
 void rw_dut_enter(void)
 {
 	/*
@@ -220,7 +220,7 @@ void rw_dut_enter(void)
 	 */
 	while(1)
 	{
-		// schedule all pending events
+		// schedule all pending events开始调度任务
 		rwip_schedule();
 	}
 }
@@ -242,7 +242,7 @@ void rw_app_enter(void)
 
 //		UART_PRINTF("Run Time Calculation ON\r\n");
 //		printf("Run Time Calculation ON\r\n");
-		usmart_scan();
+//		usmart_scan();
 //		UART_PRINTF("Run Time Calculation OFF\r\n");
 
 //		printf("Run Time Calculation OFF\r\n");
@@ -281,7 +281,7 @@ void rw_app_enter(void)
 		GLOBAL_INT_RESTORE();//打开全局中断
 	}
 }
-
+//初始化系统模式
 void sys_mode_init(void)
 {
 	system_mode |= RW_NO_MODE;
@@ -299,12 +299,16 @@ void sys_mode_init(void)
  */
 #include "LED.h"
 #include "usart.h"
+#include "app_fff0.h"              // Battery Application Module Definitions
 extern struct rom_env_tag rom_env;
 extern void uart_stack_register(void *cb);
 
 void rwip_eif_api_init(void);
 void rw_main(void)
 {
+//	cpu_reduce_voltage_sleep();//休眠
+//	cpu_idle_sleep();//休眠
+//	while(1);
 	/*
 	 ***************************************************************************
 	 * Platform initialization平台初始化
@@ -330,12 +334,15 @@ void rw_main(void)
 
 	// 初始化中断控制器
 	intc_init();
-
+	Init_RTC();//初始化RTC
+//  user_timer_init();
 	// Initialize UART component
+	 adc_init(1,1);//初始化ADC,软件模式V
 #if (UART_DRIVER)
 	uart_init(115200);
 	//uart_cb_register(uart_rx_handler);//串口注册接收回调函数
 	uart_cb_register(USART1_IRQHandler);//串口注册接收回调函数
+//    uart_cb_register();//串口注册接收回调函数
 	
 	//uart_cb_register(app_fff1_send_lvl);//串口注册接收回调函数
 #endif
@@ -344,8 +351,8 @@ void rw_main(void)
 	gpio_config(BlueLedPort, OUTPUT, PULL_NONE);
 	gpio_config(RedLedPort, OUTPUT, PULL_NONE);
 
-	gpio_set(BlueLedPort, 1);
-	gpio_set(RedLedPort, 1);
+	gpio_set(BlueLedPort, 0);
+	gpio_set(RedLedPort, 0);
 
   uart_stack_register(uart_printf);
 
@@ -377,7 +384,7 @@ void rw_main(void)
 	icu_init();
 
 	flash_init();
-	
+	Init_RTC();//初始化RTC
 //	gpio_config(0x10, OUTPUT, PULL_NONE);
 	gpio_config(BlueLedPort, OUTPUT, PULL_NONE);
 //	gpio_set(0x10, 1);

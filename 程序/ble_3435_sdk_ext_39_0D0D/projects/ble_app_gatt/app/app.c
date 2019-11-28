@@ -93,7 +93,7 @@ static const appm_add_svc_func_t appm_add_svc_func_list[APPM_SVC_LIST_STOP] =
     (appm_add_svc_func_t)app_fff0_add_fff0s,
     (appm_add_svc_func_t)app_dis_add_dis,
     (appm_add_svc_func_t)app_batt_add_bas,
-	(appm_add_svc_func_t)app_oad_add_oads,
+	  (appm_add_svc_func_t)app_oad_add_oads,
 };
 
 /*
@@ -101,7 +101,7 @@ static const appm_add_svc_func_t appm_add_svc_func_list[APPM_SVC_LIST_STOP] =
  ****************************************************************************************
  */
 
-/// Application Environment Structure
+/// 应用环境结构
 struct app_env_tag app_env;
 
 /*
@@ -152,7 +152,7 @@ void appm_init()
 			
     app_oads_init();		
 }
-
+//添加服务，运行1次添加一个服务
 bool appm_add_svc(void)
 {
     // Indicate if more services need to be added in the database
@@ -308,7 +308,9 @@ void appm_start_advertising(void)
 
         // Set the state of the task to APPM_ADVERTISING 将任务的状态设置为APPM_ADVERTISING广播
         ke_state_set(TASK_APP, APPM_ADVERTISING);	
-
+				
+//        appm_stop_advertising();
+				ke_timer_set(APP_LED_SCAN,TASK_APP,10); 	
     }
 	
     // else ignore the request
@@ -336,7 +338,7 @@ void appm_stop_advertising(void)
     }
     // else ignore the request
 }
-
+//更新广播数据
 void appm_update_adv_data( uint8_t* adv_buff, uint8_t adv_len, uint8_t* scan_buff, uint8_t scan_len)
 {
 	if (ke_state_get(TASK_APP) == APPM_ADVERTISING 
@@ -362,7 +364,7 @@ void appm_update_adv_data( uint8_t* adv_buff, uint8_t adv_len, uint8_t* scan_buf
 }
 
 
-
+//设置连接参数
 void appm_update_param(struct gapc_conn_param *conn_param)
 {
     // Prepare the GAPC_PARAM_UPDATE_CMD message
@@ -390,7 +392,7 @@ void appm_update_param(struct gapc_conn_param *conn_param)
 
 uint8_t appm_get_dev_name(uint8_t* name)
 {
-    // copy name to provided pointer
+    // copy name to provided pointer复制名称到提供的指针
     memcpy(name, app_env.dev_name, app_env.dev_name_len);
     // return name length
     return app_env.dev_name_len;

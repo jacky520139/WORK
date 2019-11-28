@@ -21,4 +21,5 @@
 .\obj\usmart_str.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\obj\usmart_str.o: .\HARDWARE\interface\LED.h
 .\obj\usmart_str.o: ..\..\sdk\plactform\driver\rtc\rtc.h
+.\obj\usmart_str.o: .\HARDWARE\interface\app_rtc.h
 .\obj\usmart_str.o: .\HARDWARE\interface\User_Timer.h

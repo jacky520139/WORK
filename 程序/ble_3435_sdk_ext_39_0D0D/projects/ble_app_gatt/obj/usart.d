@@ -21,5 +21,15 @@
 .\obj\usart.o: .\USMART\usart.h
 .\obj\usart.o: .\HARDWARE\interface\LED.h
 .\obj\usart.o: ..\..\sdk\plactform\driver\rtc\rtc.h
+.\obj\usart.o: .\HARDWARE\interface\app_rtc.h
 .\obj\usart.o: .\HARDWARE\interface\User_Timer.h
 .\obj\usart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\obj\usart.o: .\app\app_fff0.h
+.\obj\usart.o: ..\..\sdk\ble_stack\inc\ke\ke_task.h
+.\obj\usart.o: ..\..\sdk\plactform\arch\compiler\compiler.h
+.\obj\usart.o: ..\..\sdk\ble_stack\inc\ke\ke_msg.h
+.\obj\usart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\obj\usart.o: ..\..\sdk\plactform\arch\arch.h
+.\obj\usart.o: ..\..\sdk\plactform\arch\ll\ll.h
+.\obj\usart.o: ..\..\sdk\ble_stack\inc\ke\ke_config.h
+.\obj\usart.o: ..\..\sdk\plactform\core_modules\common\api\co_list.h

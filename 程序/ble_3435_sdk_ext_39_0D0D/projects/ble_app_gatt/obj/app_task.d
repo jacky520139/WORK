@@ -87,3 +87,16 @@
 .\obj\app_task.o: ..\..\sdk\plactform\reg\_reg_blecore.h
 .\obj\app_task.o: ..\..\sdk\ble_stack\inc\ble\ll\lld\lld_evt.h
 .\obj\app_task.o: ..\..\sdk\plactform\driver\wdt\wdt.h
+.\obj\app_task.o: .\HARDWARE\interface\ALL_Includes.h
+.\obj\app_task.o: ..\..\sdk\plactform\driver\adc\adc.h
+.\obj\app_task.o: ..\..\sdk\plactform\driver\pwm\pwm.h
+.\obj\app_task.o: .\HARDWARE\interface\ANO_UART.h
+.\obj\app_task.o: .\HARDWARE\interface\ALL_Includes.h
+.\obj\app_task.o: .\USMART\usmart.h
+.\obj\app_task.o: .\USMART\usmart_str.h
+.\obj\app_task.o: .\USMART\usart.h
+.\obj\app_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\obj\app_task.o: .\HARDWARE\interface\LED.h
+.\obj\app_task.o: ..\..\sdk\plactform\driver\rtc\rtc.h
+.\obj\app_task.o: .\HARDWARE\interface\app_rtc.h
+.\obj\app_task.o: .\HARDWARE\interface\User_Timer.h

@@ -113,26 +113,26 @@ enum app_loc_nvds_tag
     NVDS_LEN_PEER_IRK                   = sizeof(struct gapc_irk),
 };
 
-/// Application environment structure
+/// 应用环境结构
 struct app_env_tag
 {
-    /// Connection handle
+    /// Connection handle连接手柄
     uint16_t conhdl;
-    /// Connection Index
+    /// Connection Index连接索引
     uint8_t  conidx;
 
-    /// Last initialized profile
+    /// Last initialized profile上次初始化的配置文件
     uint8_t next_svc;
 
-    /// Bonding status
+    /// Bonding status邦定状态
     bool bonded;
 
-    /// Device Name length
+    /// Device Name length设备名称长度
     uint8_t dev_name_len;
-    /// Device Name
+    /// Device Name设备名称
     uint8_t dev_name[APP_DEVICE_NAME_MAX_LEN];
 
-    /// Local device IRK
+    /// Local device IRK 本地设备IRK
     uint8_t loc_irk[KEY_LEN];
 	
 };

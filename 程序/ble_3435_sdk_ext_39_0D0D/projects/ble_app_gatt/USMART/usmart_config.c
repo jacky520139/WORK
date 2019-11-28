@@ -1,17 +1,29 @@
 
+
 ////////////////////////////用户配置区///////////////////////////////////////////////
 //这下面要包含所用到的函数所申明的头文件(用户自己添加) 
 //#include "delay.h"	
 
 #include "ALL_Includes.h"
+#include "app.h"                     // Application Definition
+#include "timer.h"        // timer definition
 extern u16 gui_color_chg(u32 rgb);
 //函数名列表初始化(用户自己添加)
 //用户直接在这里输入要执行的函数名及其查找串
 struct _m_usmart_nametab usmart_nametab[]=
 {
 (void*)Init_LED,"void Init_LED(void)",
-(void*)BlueLed,"void BlueLed(void)"
-};						  
+(void*)BlueLed,"void BlueLed(void)",
+(void*)appm_start_advertising,"void appm_start_advertising(void)",
+(void*)appm_stop_advertising,"void appm_stop_advertising(void)",
+(void*)appm_disconnect,"void appm_disconnect(void)",
+(void*)appm_get_dev_name,"uint8_t appm_get_dev_name(uint8_t* name)",
+(void*)timer_set_timeout,"void timer_set_timeout(uint32_t to)",
+(void*)timer_enable,"void timer_enable(bool enable)",
+(void*)timer_get_time,"uint32_t timer_get_time(void)",
+
+};
+
 ///////////////////////////////////END///////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 //函数控制管理器初始化

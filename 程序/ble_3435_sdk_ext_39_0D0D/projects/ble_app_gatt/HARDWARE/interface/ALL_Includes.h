@@ -15,6 +15,7 @@
 #include "usart.h"
 #include "LED.h"
 #include "rtc.h"
+#include "app_rtc.h"
 #include "User_Timer.h"
 
 #endif 

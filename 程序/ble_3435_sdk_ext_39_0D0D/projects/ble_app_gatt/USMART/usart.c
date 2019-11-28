@@ -1,5 +1,5 @@
 #include "usart.h"	  
-
+#include "app_fff0.h"              // Battery Application Module Definitions
 //////////////////////////////////////////////////////////////////////////////////	 
 //本程序只供学习使用，未经作者许可，不得用于其它任何用途
 //ALIENTEK STM32开发板
@@ -104,7 +104,7 @@ void USART1_IRQHandler(uint8_t *buf, uint8_t len)
 	}
 	uart_printf("\r\n");			
 //	}
-
+app_fff1_send_lvl(buf,len);
 } 
 #endif										 
 ////初始化IO 串口1

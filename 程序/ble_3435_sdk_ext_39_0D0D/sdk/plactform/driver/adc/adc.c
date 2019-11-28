@@ -6,7 +6,7 @@
 #include "gpio.h"
 #include "adc.h"
 
-
+//ADC基准电压为1.2V
 void adc_init(uint8_t chanle,uint8_t mode)
 {
 	uint32_t cfg;
@@ -51,14 +51,14 @@ void adc_isr(void)
 
 extern void Delay_us(int num);
 
-uint16_t adc_get_value(uint8_t chanle)
+uint16_t adc_get_value(uint8_t chanle)//9通道为内部温度ADC,8通道为VCCBAT脚ADC
 {
     uint16_t adc_cnt;
     adc_cnt=0;
     adc_flag =0;
 
 	  REG_APB7_ADC_CFG &=0X83;
-    REG_APB7_ADC_CFG |= (chanle << BIT_ADC_CHNL)+SET_ADC_EN;
+    REG_APB7_ADC_CFG |= (chanle << BIT_ADC_CHNL)+SET_ADC_EN+1;
     
     while (!adc_flag)  
     {

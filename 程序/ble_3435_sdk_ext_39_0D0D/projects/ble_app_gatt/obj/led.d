@@ -83,4 +83,5 @@
 .\obj\led.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\obj\led.o: .\HARDWARE\interface\LED.h
 .\obj\led.o: ..\..\sdk\plactform\driver\rtc\rtc.h
+.\obj\led.o: .\HARDWARE\interface\app_rtc.h
 .\obj\led.o: .\HARDWARE\interface\User_Timer.h

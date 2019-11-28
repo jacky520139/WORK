@@ -48,24 +48,24 @@
 enum gapc_msg_id
 {
     /* Default event */
-    /// Command Complete event
+    /// 命令完成事件
     GAPC_CMP_EVT = TASK_FIRST_MSG(TASK_ID_GAPC),
 
     /* Connection state information */
-    /// Indicate that a connection has been established
+    /// 表示已建立连接
     GAPC_CONNECTION_REQ_IND,
-    /// Set specific link data configuration.
+    /// Set specific link data configuration.设置特定的链路数据配置
     GAPC_CONNECTION_CFM,
 
-    /// Indicate that a link has been disconnected
+    /// 表示链接已断开
     GAPC_DISCONNECT_IND,
 
     /* Link management command */
-    /// Request disconnection of current link command.
+    /// 请求断开当前链接命令。
     GAPC_DISCONNECT_CMD,
 
     /* Peer device info */
-    /// Retrieve information command
+    /// 检索信息命令
     GAPC_GET_INFO_CMD,
     /// Peer device attribute DB info such as Device Name, Appearance or Slave Preferred Parameters
     GAPC_PEER_ATT_INFO_IND,
@@ -73,7 +73,7 @@ enum gapc_msg_id
     GAPC_PEER_VERSION_IND,
     /// Indication of peer features info
     GAPC_PEER_FEATURES_IND,
-    /// Indication of ongoing connection RSSI
+    /// Indication of ongoing connection RSSI持续连接指示
     GAPC_CON_RSSI_IND,
 
     /* Device Name Management */
@@ -92,6 +92,7 @@ enum gapc_msg_id
     /// Request of updating connection parameters indication
     GAPC_PARAM_UPDATE_REQ_IND,
     /// Master confirm or not that parameters proposed by slave are accepted or not
+		//主确认是否接受从机提出的参数
     GAPC_PARAM_UPDATE_CFM,
     /// Connection parameters updated indication
     GAPC_PARAM_UPDATED_IND,
@@ -352,23 +353,23 @@ struct gapc_cmp_evt
     uint8_t status;
 };
 
-/// Indicate that a connection has been established
+/// 表示已建立连接
 struct gapc_connection_req_ind
 {
-    /// Connection handle
+    /// Connection handle连接句柄
     uint16_t conhdl;
-    /// Connection interval
-    uint16_t con_interval;
+    /// Connection interval 
+    uint16_t con_interval;  //连接间隔
     /// Connection latency
-    uint16_t con_latency;
+    uint16_t con_latency;   //连接延时
     /// Link supervision timeout
-    uint16_t sup_to;
+    uint16_t sup_to;        //连接超时
     /// Clock accuracy
-    uint8_t clk_accuracy;
-    /// Peer address type
-    uint8_t peer_addr_type;
+    uint8_t clk_accuracy;   //时钟精度
+    /// Peer address type  
+    uint8_t peer_addr_type;  //同设备的地址类型
     /// Peer BT address
-    bd_addr_t peer_addr;
+    bd_addr_t peer_addr;      //同设备的地址
 };
 
 

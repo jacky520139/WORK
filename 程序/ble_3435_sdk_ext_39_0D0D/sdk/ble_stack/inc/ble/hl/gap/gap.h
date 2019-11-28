@@ -76,7 +76,7 @@
 #define GAP_SIMUL_BR_EDR_LE_HOST                0x10
 
 /*********** GAP Miscellaneous Defines *************/
-/// Invalid connection index
+/// 无效的连接索引
 #define GAP_INVALID_CONIDX                      0xFF
 
 /// Invalid connection handle
@@ -454,10 +454,10 @@ enum gap_lk_sec_lvl
     GAP_LK_SEC_CON,
 };
 
-/// Authentication Requirements
+/// 认证要求
 enum gap_auth
 {
-    /// No MITM No Bonding
+    /// No MITM No Bonding没有MITM没有结合
     GAP_AUTH_REQ_NO_MITM_NO_BOND  = (GAP_AUTH_NONE),
     /// No MITM Bonding
     GAP_AUTH_REQ_NO_MITM_BOND     = (GAP_AUTH_BOND),

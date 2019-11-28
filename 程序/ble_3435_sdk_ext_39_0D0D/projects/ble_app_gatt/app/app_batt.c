@@ -46,7 +46,7 @@
  ****************************************************************************************
  */
 
-/// Battery Application Module Environment Structure
+/// Battery Application Module Environment Structure电池应用模块环境结构
 struct app_batt_env_tag app_batt_env;
 
 /*
@@ -82,7 +82,7 @@ void app_batt_add_bas(void)
  
     // Add a BAS instance
     db_cfg->bas_nb      = 1;
-    // Sending of notifications is supported
+    // Sending of notifications is supported发送通知支持
     db_cfg->features[0] = BAS_BATT_LVL_NTF_SUP;
 
     // Send the message
@@ -99,7 +99,7 @@ void app_batt_enable_prf(uint8_t conidx)
                                                 TASK_APP,
                                                 bass_enable_req);
 
-    // Fill in the parameter structure
+    // 填写参数结构
     req->conidx             = conidx;
 
     // NTF initial status - Disabled
@@ -109,7 +109,7 @@ void app_batt_enable_prf(uint8_t conidx)
     // Send the message
     ke_msg_send(req);
 }
-
+//电池电量
 void app_batt_send_lvl(uint8_t batt_lvl)
 {
     ASSERT_ERR(batt_lvl <= BAS_BATTERY_LVL_MAX);
