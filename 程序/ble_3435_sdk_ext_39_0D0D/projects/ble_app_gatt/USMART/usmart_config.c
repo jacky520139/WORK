@@ -7,6 +7,7 @@
 #include "ALL_Includes.h"
 #include "app.h"                     // Application Definition
 #include "timer.h"        // timer definition
+#include "app_batt.h" 
 extern u16 gui_color_chg(u32 rgb);
 //函数名列表初始化(用户自己添加)
 //用户直接在这里输入要执行的函数名及其查找串
@@ -21,7 +22,7 @@ struct _m_usmart_nametab usmart_nametab[]=
 (void*)timer_set_timeout,"void timer_set_timeout(uint32_t to)",
 (void*)timer_enable,"void timer_enable(bool enable)",
 (void*)timer_get_time,"uint32_t timer_get_time(void)",
-
+(void*)app_batt_send_lvl,"void app_batt_send_lvl(uint8_t batt_lvl)",
 };
 
 ///////////////////////////////////END///////////////////////////////////////////////

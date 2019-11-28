@@ -38,7 +38,6 @@
 .\obj\rwip.o: ..\..\sdk\ble_stack\inc\ble\hl\l2c\l2cc\l2cc_pdu.h
 .\obj\rwip.o: ..\..\sdk\ble_stack\inc\ble\hl\gatt\att.h
 .\obj\rwip.o: .\app\app.h
-.\obj\rwip.o: ..\..\sdk\ble_stack\inc\ble\ll\lld\lld_sleep.h
 .\obj\rwip.o: ..\..\sdk\ble_stack\inc\ble\ll\llc\llc.h
 .\obj\rwip.o: ..\..\sdk\plactform\core_modules\common\api\co_llcp.h
 .\obj\rwip.o: ..\..\sdk\ble_stack\inc\ble\ll\llc\llc_llcp.h

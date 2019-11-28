@@ -827,13 +827,13 @@ static int app_led_handler(ke_msg_id_t const msgid,
 //	// Send message
 //    ke_msg_send(cfm);
 //	    RedLedToggle();
-	 RTC_Get();
-//	ANO_DT_Send_Version(0XF1, calendar.RTC.hour,calendar.RTC.minute,calendar.RTC.second,calendar.RTC.week_day,0);
-	ke_timer_set(APP_LED_SCAN,TASK_APP,10); 
-//adc_init(1,1);//初始化ADC,软件模式V	
-  u16 Temp_val=adc_get_value(9);
-//	u16 BAT_VCC=(adc_val*490)>>8;
-	ANO_DT_Send_Version(0XF1, calendar.RTC.hour,calendar.RTC.minute,calendar.RTC.second,calendar.RTC.week_day,Temp_val);
+//	 RTC_Get();
+////	ANO_DT_Send_Version(0XF1, calendar.RTC.hour,calendar.RTC.minute,calendar.RTC.second,calendar.RTC.week_day,0);
+//	ke_timer_set(APP_LED_SCAN,TASK_APP,10); 
+////adc_init(1,1);//初始化ADC,软件模式V	
+//  u16 Temp_val=adc_get_value(9);
+////	u16 BAT_VCC=(adc_val*490)>>8;
+//	ANO_DT_Send_Version(0XF1, calendar.RTC.hour,calendar.RTC.minute,calendar.RTC.second,calendar.RTC.week_day,Temp_val);
 	return (KE_MSG_CONSUMED);
 }
 /*

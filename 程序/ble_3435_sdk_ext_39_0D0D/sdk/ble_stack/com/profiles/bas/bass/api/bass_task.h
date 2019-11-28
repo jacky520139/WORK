@@ -57,11 +57,12 @@ enum bass_msg_id
     BASS_ENABLE_REQ = TASK_FIRST_MSG(TASK_ID_BASS),
     /// Confirmation of the Battery Server start
     BASS_ENABLE_RSP,
-    /// Battery Level Value Update Request
+    /// Battery Level Value Update Request电池电量值更新请求
     BASS_BATT_LEVEL_UPD_REQ,
-    /// Inform APP if Battery Level value has been notified or not
+    /// Inform APP if Battery Level value has been notified or not通知应用程序是否已通知电池电量值
     BASS_BATT_LEVEL_UPD_RSP,
     /// Inform APP that Battery Level Notification Configuration has been changed - use to update bond data
+	  //通知应用程序电池电量通知配置已更改-用于更新绑定数据
     BASS_BATT_LEVEL_NTF_CFG_IND,
 };
 

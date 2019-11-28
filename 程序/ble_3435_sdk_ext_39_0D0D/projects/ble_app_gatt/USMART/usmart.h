@@ -108,7 +108,7 @@ struct _m_usmart_dev
 	u8 sptype;						//参数显示类型(非字符串参数):0,10进制;1,16进制;
 	u16 parmtype;					//参数的类型
 	u8  plentbl[MAX_PARM];  		//每个参数的长度暂存表
-	u8  parm[PARM_LEN];  			//函数的参数
+	u32  parm[PARM_LEN];  			//函数的参数
 	u8 runtimeflag;					//0,不统计函数执行时间;1,统计函数执行时间,注意:此功能必须在USMART_ENTIMX_SCAN使能的时候,才有用
 	u32 runtime;					//运行时间,单位:0.1ms,最大延时时间为定时器CNT值的2倍*0.1ms
 };

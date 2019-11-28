@@ -402,7 +402,7 @@ u8 usmart_get_fparam(u8*str,u8 *parn)
 				break;
 			case 1://字符串	 	
 				len=usmart_strlen(tstr)+1;	//包含了结束符'\0'
-				usmart_strcopy(tstr,&usmart_dev.parm[usmart_get_parmpos(n)]);//拷贝tstr数据到usmart_dev.parm[n]
+				usmart_strcopy(tstr,&((u8*)usmart_dev.parm)[usmart_get_parmpos(n)]);//拷贝tstr数据到usmart_dev.parm[n]
 				usmart_dev.parmtype|=1<<n;	//标记字符串 
 				usmart_dev.plentbl[n]=len;	//该参数的长度为len  
 				n++;

@@ -242,7 +242,7 @@ void rw_app_enter(void)
 
 //		UART_PRINTF("Run Time Calculation ON\r\n");
 //		printf("Run Time Calculation ON\r\n");
-//		usmart_scan();
+		usmart_scan();
 //		UART_PRINTF("Run Time Calculation OFF\r\n");
 
 //		printf("Run Time Calculation OFF\r\n");

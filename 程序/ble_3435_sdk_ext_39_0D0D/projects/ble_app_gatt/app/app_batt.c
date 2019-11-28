@@ -35,7 +35,7 @@
 #include "arch.h"                    // Platform Definitions
 #include "prf.h"
 #include "bass.h"
-
+#include "uart.h" 
 /*
  * DEFINES
  ****************************************************************************************
@@ -132,7 +132,13 @@ static int bass_batt_level_ntf_cfg_ind_handler(ke_msg_id_t const msgid,
                                                struct bass_batt_level_ntf_cfg_ind const *param,
                                                ke_task_id_t const dest_id,
                                                ke_task_id_t const src_id)
-{
+{UART_PRINTF("bass_batt_level_ntf_cfg_ind_handler");
+	if(param->ntf_cfg==1)
+	{
+//		ke_timer_set(FFF0S_FFF1_LEVEL_PERIOD_NTF,dest_id , 100);//—” ±1s∫Û¥•∑¢
+		}
+  else
+  {}
     return (KE_MSG_CONSUMED);
 }
 
@@ -140,7 +146,7 @@ static int batt_level_upd_handler(ke_msg_id_t const msgid,
                                       struct bass_batt_level_upd_rsp const *param,
                                       ke_task_id_t const dest_id,
                                       ke_task_id_t const src_id)
-{
+{UART_PRINTF("batt_level_upd_handler");
     return (KE_MSG_CONSUMED);
 }
 
@@ -149,7 +155,7 @@ static int bass_enable_rsp_handler(ke_msg_id_t const msgid,
                                     struct bass_enable_rsp const *param,
                                     ke_task_id_t const dest_id,
                                     ke_task_id_t const src_id)
-{
+{UART_PRINTF("bass_enable_rsp_handler");
     return (KE_MSG_CONSUMED);
 }
 
@@ -171,8 +177,16 @@ static int app_batt_msg_dflt_handler(ke_msg_id_t const msgid,
                                      ke_task_id_t const src_id)
 {
     // Drop the message
-
+ UART_PRINTF("app_batt_msg_dflt_handler");
     return (KE_MSG_CONSUMED);
+}
+static int bass_batt_level_upd_handler(ke_msg_id_t const msgid,
+                                     void const *param,
+                                     ke_task_id_t const dest_id,
+                                     ke_task_id_t const src_id)
+{
+ UART_PRINTF("bass_batt_level_upd_handler");
+ return (KE_MSG_CONSUMED);
 }
 
 /*
@@ -187,10 +201,10 @@ const struct ke_msg_handler app_batt_msg_handler_list[] =
     {KE_MSG_DEFAULT_HANDLER,        (ke_msg_func_t)app_batt_msg_dflt_handler},
     {BASS_BATT_LEVEL_NTF_CFG_IND,   (ke_msg_func_t)bass_batt_level_ntf_cfg_ind_handler},
     {BASS_BATT_LEVEL_UPD_RSP,       (ke_msg_func_t)batt_level_upd_handler},
-	{BASS_ENABLE_RSP,       		(ke_msg_func_t)bass_enable_rsp_handler},
-		
-};
-
+	   {BASS_ENABLE_RSP,       		    (ke_msg_func_t)bass_enable_rsp_handler},
+		  {BASS_BATT_LEVEL_UPD_REQ,     (ke_msg_func_t)bass_batt_level_upd_handler}
+		 
+		};
 const struct ke_state_handler app_batt_table_handler =
     {&app_batt_msg_handler_list[0], (sizeof(app_batt_msg_handler_list)/sizeof(struct ke_msg_handler))};
 

@@ -73,7 +73,7 @@ uint16_t adc_get_value(uint8_t chanle)//9通道为内部温度ADC,8通道为VCCBAT脚ADC
     if(adc_flag==1)
     {
         g_adc_value=(REG_APB7_ADC_DAT>>2);
-        UART_PRINTF("g_adc_value=%x\r\n",g_adc_value);
+//        UART_PRINTF("g_adc_value=%x\r\n",g_adc_value);
     }
     
     REG_APB7_ADC_CFG &= ~(SET_ADC_EN+(0x03 << BIT_ADC_MODE )); //ADC值读取完成后必须把使能位清除       

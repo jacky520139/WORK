@@ -44,3 +44,4 @@
 .\obj\usmart_config.o: ..\..\sdk\ble_stack\com\rwip\api\rwip_task.h
 .\obj\usmart_config.o: ..\..\sdk\ble_stack\inc\nvds\nvds.h
 .\obj\usmart_config.o: ..\..\sdk\plactform\driver\timer\timer.h
+.\obj\usmart_config.o: .\app\app_batt.h

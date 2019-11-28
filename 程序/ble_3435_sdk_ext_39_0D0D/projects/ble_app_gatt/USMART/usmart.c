@@ -1,5 +1,6 @@
 
 #include "ALL_Includes.h"
+               // Battery Application Module Definitions
 //////////////////////////////////////////////////////////////////////////////////	 
 //本程序只供学习使用，未经作者许可，不得用于其它任何用途
 //ALIENTEK STM32开发板	   

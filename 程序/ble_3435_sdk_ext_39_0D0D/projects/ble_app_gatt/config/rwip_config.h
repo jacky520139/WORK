@@ -62,7 +62,7 @@
 // 		<3=> CENTRAL中央
 // 		<4=> ALLROLES所有角色
 //    <i> Select Role 选择角色
-#define CFG_ROLE 3
+#define CFG_ROLE 2
 
 #if ( CFG_ROLE == 0)
 #define CFG_BROADCASTER 
@@ -179,7 +179,7 @@
 //   <e> CFG_SLEEP
 //   <i> enable DEEP_SLEEP 使能深度睡眠
 //   </e>
-#if ( 1 )
+#if ( 0 )
 #define CFG_SLEEP 
 #endif
 

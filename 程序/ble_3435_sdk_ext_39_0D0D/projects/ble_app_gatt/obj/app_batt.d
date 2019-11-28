@@ -37,3 +37,5 @@
 .\obj\app_batt.o: ..\..\sdk\ble_stack\com\prf\prf.h
 .\obj\app_batt.o: ..\..\sdk\ble_stack\inc\ble\hl\gap\gapm\gapm_task.h
 .\obj\app_batt.o: ..\..\sdk\ble_stack\com\profiles\bas\bass\src\bass.h
+.\obj\app_batt.o: ..\..\sdk\plactform\driver\uart\uart.h
+.\obj\app_batt.o: .\config\user_config.h
