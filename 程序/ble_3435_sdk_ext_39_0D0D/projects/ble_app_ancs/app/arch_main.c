@@ -56,7 +56,7 @@
 #include "oads.h"
 #include "wdt.h"
 #include "user_config.h"
-
+#include "ALL_Includes.h"
 /**
  ****************************************************************************************
  * @addtogroup DRIVERS
@@ -238,7 +238,7 @@ void rw_app_enter(void)
 	{
 		//schedule all pending events
 		rwip_schedule();
-
+	  usmart_scan();//usmart扫描
 		// Checks for sleep have to be done with interrupt disabled
 		GLOBAL_INT_DISABLE();
 
@@ -288,7 +288,9 @@ void sys_mode_init(void)
  * @return status   exit status
  *******************************************************************************
  */
-
+#include "LED.h"
+#include "usart.h"
+#include "app_fff0.h"              // Battery Application Module Definitions
 extern struct rom_env_tag rom_env;
 extern void uart_stack_register(void *cb);
 
@@ -323,7 +325,8 @@ void rw_main(void)
 	// Initialize UART component
 #if (UART_DRIVER)
 	uart_init(115200);
-	uart_cb_register(uart_rx_handler);
+//	uart_cb_register(uart_rx_handler);
+	uart_cb_register(USART1_IRQHandler);//串口注册接收回调函数
 #endif
 
     uart_stack_register(uart_printf);
@@ -393,14 +396,14 @@ void rw_main(void)
 
 
 #if (UART_DRIVER)
-static void uart_rx_handler(uint8_t *buf, uint8_t len)
-{
-	for(uint8_t i=0; i<len; i++)
-	{
-		UART_PRINTF("0x%x ", buf[i]);
-	}
-	uart_printf("\r\n");
-}
+//static void uart_rx_handler(uint8_t *buf, uint8_t len)
+//{
+//	for(uint8_t i=0; i<len; i++)
+//	{
+//		UART_PRINTF("0x%x ", buf[i]);
+//	}
+//	uart_printf("\r\n");
+//}
 #endif
 
 void rwip_eif_api_init(void)

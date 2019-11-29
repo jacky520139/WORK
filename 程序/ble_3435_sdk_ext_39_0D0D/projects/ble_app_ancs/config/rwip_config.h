@@ -178,7 +178,7 @@
 //   <e> CFG_SLEEP
 //   <i> enable DEEP_SLEEP
 //   </e>
-#if ( 1 )
+#if ( 0 )
 #define CFG_SLEEP 
 #endif
 
@@ -485,7 +485,7 @@
 
 
 /// Use 32K Hz Clock if set to 1 else 32,768k is used
-#define HZ32000                                     0
+#define HZ32000                                     1
 
 
 /// Time to wake-up Radio Module (in us)

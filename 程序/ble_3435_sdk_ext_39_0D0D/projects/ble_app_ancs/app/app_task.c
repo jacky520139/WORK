@@ -564,12 +564,12 @@ static int app_period_timer_handler(ke_msg_id_t const msgid,
                                           ke_task_id_t const dest_id,
                                           ke_task_id_t const src_id)
 {
-#if (RC_CALIBRATE)    
+#if (RC_CALIBRATE)   //RC校准 
     uint32_t timer_625us,timer_1us,timer_ms;
 
     lld_evt_time_get_us(&timer_625us,&timer_1us);
     //timer_625us这个值最大为0x07FFFFFF，超过又从0开始
-    timer_ms=((uint64_t)timer_625us*625+timer_1us)/1000;
+//    timer_ms=((uint64_t)timer_625us*625+timer_1us)/1000;
 
     //UART_PRINTF("%d\r\n", timer_ms);        
     user_timer_init();
@@ -654,7 +654,7 @@ static int appm_msg_handler(ke_msg_id_t const msgid,
 
 
 /*******************************************************************************
- * Function: gapc_update_conn_param_req_ind_handler
+ * Function: gapc_update_conn_param_req_ind_handler更新连接参数
  * Description: Update request command processing from slaver connection parameters
  * Input: msgid   -Id of the message received.
  *		  param   -Pointer to the parameters of the message.

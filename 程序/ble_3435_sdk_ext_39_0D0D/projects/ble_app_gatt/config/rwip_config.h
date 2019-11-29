@@ -179,7 +179,7 @@
 //   <e> CFG_SLEEP
 //   <i> enable DEEP_SLEEP 使能深度睡眠
 //   </e>
-#if ( 0 )
+#if ( 1 )
 #define CFG_SLEEP 
 #endif
 

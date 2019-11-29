@@ -7,7 +7,7 @@
 #include "uart.h"
 #include "icu.h"
 #include "pwm.h"
-
+#include "RWIP.h"
 
 #define CAL_TIMER  1000000 //计算1s时间进行比较
 
@@ -34,7 +34,7 @@ void rc32k_cal_init(PWM_DRV_DESC *pwm_drv_desc)
     }	
 	
 	//Config clk
-	ICU_PWM_CLK_PWM_X_PWD_CLEAR(pwm_drv_desc->channel); 
+	  ICU_PWM_CLK_PWM_X_PWD_CLEAR(pwm_drv_desc->channel); 
     ICU_PWM_CLK_PWM_X_SEL_32KHZ(pwm_drv_desc->channel);
    //ICU_PWM_CLK_PWM_X_SEL_16MHZ(pwm_drv_desc->channel);
     
@@ -99,7 +99,7 @@ void user_timer_cb(unsigned char ucChannel)
 
 void user_timer_init(void)
 {	
-	icu_set_sleep_mode(1);
+	icu_set_sleep_mode(1);//空闲模式
 	rwip_prevent_sleep_set(BK_DRIVER_TIMER_ACTIVE);
 	PWM_DRV_DESC timer_desc;
 

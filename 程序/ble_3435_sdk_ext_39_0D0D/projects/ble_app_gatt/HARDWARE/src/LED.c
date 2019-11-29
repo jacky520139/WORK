@@ -55,7 +55,7 @@ RTC_DATE.week_day=3;
 rtc_init(&RTC_DATE);
 rtc_enable();
  u16 adc_val=adc_get_value(8);
-	u16 BAT_VCC=(adc_val*490)>>8;//VCCµÁ—π
+ 	u16 BAT_VCC=(adc_val*490)>>8;//VCCµÁ—π
 while(1)
 {
 
@@ -87,6 +87,7 @@ BlueLedToggle();
 //RedLedToggle();
 
 }
+
 
 
 

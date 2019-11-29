@@ -40,6 +40,7 @@
 #include "app_batt.h"                // Battery Application Definitions
 #include "app_ancsc.h"               // Application ancs Definition
 #include "app_oads.h"                 // Application oads Definition
+#include "app_fff0.h"                 // Application security Definition
 #include "nvds.h"                    // NVDS Definitions
 #include "app_sec.h"
 #include "rf.h"
@@ -70,9 +71,10 @@ typedef void (*appm_add_svc_func_t)(void);
 enum appm_svc_list
 {
     APPM_SVC_ANCSC,
+	  APPM_SVC_FFF0,
     APPM_SVC_DIS,
     APPM_SVC_BATT,
-	APPM_SVC_OADS,
+	  APPM_SVC_OADS,
     APPM_SVC_LIST_STOP ,
 };
 
@@ -89,9 +91,10 @@ static const struct ke_task_desc TASK_DESC_APP = {NULL, &appm_default_handler,
 static const appm_add_svc_func_t appm_add_svc_func_list[APPM_SVC_LIST_STOP] =
 {
     (appm_add_svc_func_t)app_ancs_add_ancsc,
+	  (appm_add_svc_func_t)app_fff0_add_fff0s,
     (appm_add_svc_func_t)app_dis_add_dis,
     (appm_add_svc_func_t)app_batt_add_bas,
-	(appm_add_svc_func_t)app_oad_add_oads,
+	  (appm_add_svc_func_t)app_oad_add_oads,
 };
 
 /*
@@ -142,7 +145,7 @@ void appm_init()
      *------------------------------------------------------*/
     // ANCS Module
 	app_ancsc_init();
-	
+  app_fff0_init();	
     // Device Information Module
     app_dis_init();
 

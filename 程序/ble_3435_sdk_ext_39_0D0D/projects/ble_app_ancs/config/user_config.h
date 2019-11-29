@@ -86,10 +86,10 @@
 
 //DRIVER CONFIG
 #define UART_DRIVER						1
-#define GPIO_DRIVER						0
+#define GPIO_DRIVER						1
 #define AUDIO_DRIVER					0
-#define RTC_DRIVER						0
-#define ADC_DRIVER						0
+#define RTC_DRIVER						1
+#define ADC_DRIVER						1
 #define I2C_DRIVER						0
 #define PWM_DRIVER						1
 

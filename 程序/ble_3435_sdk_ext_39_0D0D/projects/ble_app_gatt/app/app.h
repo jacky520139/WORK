@@ -134,7 +134,8 @@ struct app_env_tag
 
     /// Local device IRK 本地设备IRK
     uint8_t loc_irk[KEY_LEN];
-	
+		/// Peer device IRK
+    struct gapc_irk peer_irk;
 };
 
 

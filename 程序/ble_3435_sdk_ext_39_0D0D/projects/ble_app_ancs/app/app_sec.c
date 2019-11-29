@@ -35,7 +35,7 @@
 #include "llc_llcp.h"
 
 #include "app.h"            // Application API Definition
-#include "app_sec.h"        // Application Security API Definition
+#include "app_sec.h"        // Application Security API Definition 安全服务
 #include "app_task.h"       // Application Manager API Definitionde 
 #include "ke_timer.h"
 #include "nvds.h"           // NVDS API Definitions

@@ -10,6 +10,8 @@
       <TargetName>BK3435_app</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
+      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>ARM9E-S (Little Endian)</Device>
@@ -48,9 +50,9 @@
           <OutputName>bk3435_ble_app</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
-          <CreateHexFile>0</CreateHexFile>
+          <CreateHexFile>1</CreateHexFile>
           <DebugInformation>0</DebugInformation>
-          <BrowseInformation>0</BrowseInformation>
+          <BrowseInformation>1</BrowseInformation>
           <ListingPath>.\lst\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
@@ -82,6 +84,8 @@
             <UserProg2Name>.\output\encrypt_app.bat</UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
+            <nStopA1X>0</nStopA1X>
+            <nStopA2X>0</nStopA2X>
           </AfterMake>
           <SelectedForBatchBuild>0</SelectedForBatchBuild>
           <SVCSIdString></SVCSIdString>
@@ -145,7 +149,7 @@
             <RestoreSysVw>1</RestoreSysVw>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>5</TargetSelection>
+          <TargetSelection>19</TargetSelection>
           <SimDlls>
             <CpuDll></CpuDll>
             <CpuDllArguments></CpuDllArguments>
@@ -219,12 +223,14 @@
             <hadXRAM>0</hadXRAM>
             <uocXRam>0</uocXRam>
             <RvdsVP>0</RvdsVP>
+            <RvdsMve>0</RvdsMve>
             <hadIRAM2>0</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>0</StupSel>
             <useUlib>1</useUlib>
             <EndSel>0</EndSel>
             <uLtcg>0</uLtcg>
+            <nSecure>0</nSecure>
             <RoSelD>0</RoSelD>
             <RwSelD>5</RwSelD>
             <CodeSel>1</CodeSel>
@@ -358,12 +364,20 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>0</uC99>
+            <uGnu>0</uGnu>
             <useXO>0</useXO>
+            <v6Lang>1</v6Lang>
+            <v6LangP>1</v6LangP>
+            <vShortEn>1</vShortEn>
+            <vShortWch>1</vShortWch>
+            <v6Lto>0</v6Lto>
+            <v6WtE>0</v6WtE>
+            <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>--c99</MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\config;.\app;..\..\libs;..\..\sdk\plactform\core_modules\src;..\..\sdk\plactform\arch;..\..\sdk\plactform\arch\compiler;..\..\sdk\plactform\arch\ll;..\..\sdk\plactform\core_modules\common\api;..\..\sdk\plactform\arch\boot;..\..\sdk\plactform\core_modules\dbg\api;..\..\sdk\plactform\core_modules\rf\api;..\..\sdk\plactform\core_modules\ecc_p256\api;..\..\sdk\plactform\arch\main;..\..\sdk\plactform\core_modules\util;..\..\sdk\plactform\driver\pwm;..\..\sdk\plactform\driver\adc;..\..\sdk\plactform\driver\audio;..\..\sdk\plactform\driver\wdt;..\..\sdk\plactform\driver\rtc;..\..\sdk\plactform\driver\i2c;..\..\sdk\plactform\driver\utc;..\..\sdk\plactform\driver\ir;..\..\sdk\plactform\driver\spi;..\..\sdk\plactform\driver\plf;..\..\sdk\plactform\driver\counter;..\..\sdk\plactform\driver\gpio;..\..\sdk\plactform\driver\intcntl;..\..\sdk\plactform\driver\icu;..\..\sdk\plactform\driver\intc;..\..\sdk\plactform\driver\flash;..\..\sdk\plactform\driver\timer;..\..\sdk\plactform\driver\reg;..\..\sdk\plactform\driver\uart;..\..\sdk\plactform\driver\emi;..\..\sdk\ble_stack\com\rwble;..\..\sdk\ble_stack\com\rwble_hl;..\..\sdk\ble_stack\com\rwble;..\..\sdk\ble_stack\com\rwip\api;..\..\sdk\ble_stack\com\rwble_hl;..\..\sdk\ble_stack\src;..\..\sdk\plactform\reg;..\..\sdk\plactform\driver\syscntl;..\..\sdk\plactform\rom\hci;..\..\sdk\plactform\core_modules\ecc_p256\api;..\..\sdk\ble_stack\inc;..\..\sdk\ble_stack\inc\hci;..\..\sdk\ble_stack\inc\h4tl;..\..\sdk\ble_stack\inc\ke;..\..\sdk\ble_stack\inc\nvds;..\..\sdk\ble_stack\inc\ea;..\..\sdk\ble_stack\inc\em;..\..\sdk\ble_stack\inc\ahi;..\..\sdk\ble_stack\inc\ble\hl\gap\gapc;..\..\sdk\ble_stack\inc\ble\hl\gap\gapm;..\..\sdk\ble_stack\inc\ble\hl\gap\smpc;..\..\sdk\ble_stack\inc\ble\hl\gap\smpm;..\..\sdk\ble_stack\inc\ble\hl\gatt\attc;..\..\sdk\ble_stack\inc\ble\hl\gatt\attm;..\..\sdk\ble_stack\inc\ble\hl\gatt\atts;..\..\sdk\ble_stack\inc\ble\hl\gatt\gattc;..\..\sdk\ble_stack\inc\ble\hl\gatt\gattm;..\..\sdk\ble_stack\inc\ble\hl\l2c\l2cc;..\..\sdk\ble_stack\inc\ble\hl\l2c\l2cm;..\..\sdk\ble_stack\inc\ble\ll\em;..\..\sdk\ble_stack\inc\ble\ll\llc;..\..\sdk\ble_stack\inc\ble\ll\lld;..\..\sdk\ble_stack\inc\ble\ll\llm;..\..\sdk\ble_stack\com\rwip\api;..\..\sdk\ble_stack\inc\ble\hl\gap;..\..\sdk\ble_stack\inc\ble\hl\gatt;..\..\sdk\ble_stack\com\prf;..\..\sdk\ble_stack\com\profiles\dis\diss\src;..\..\sdk\ble_stack\com\profiles\bas\bass\src;..\..\sdk\ble_stack\com\profiles\ancs\ancsc\api;..\..\sdk\ble_stack\com\profiles\ancs\ancsc\src;..\..\sdk\ble_stack\com\profiles\ancs;..\..\sdk\ble_stack\com\profiles\FCC0\api;..\..\sdk\ble_stack\com\profiles\FCC0\src;..\..\sdk\ble_stack\com\profiles\FCC0\util;..\..\sdk\ble_stack\com\profiles\FEE0\api;..\..\sdk\ble_stack\com\profiles\FEE0\src;..\..\sdk\ble_stack\com\profiles\hogp;..\..\sdk\ble_stack\com\profiles\hogp\hogpd\api;..\..\sdk\ble_stack\com\profiles\hogp\hogpd\src;..\..\libs;..\..\sdk\ble_stack\com\profiles\wechat\api;..\..\sdk\ble_stack\com\profiles\wechat\src;.\wechat;..\..\sdk\ble_stack\com\profiles\bas\bass;..\..\sdk\ble_stack\com\profiles\bas\bass\api;..\..\sdk\ble_stack\com\profiles\dis\diss;..\..\sdk\ble_stack\com\profiles\dis\diss\api;..\..\sdk\ble_stack\com\profiles\FFF0\api;..\..\sdk\ble_stack\com\profiles\FFF0;..\..\sdk\ble_stack\com\profiles\oad\api;..\..\sdk\plactform\driver\rc_cal</IncludePath>
+              <IncludePath>.\config;.\app;..\..\libs;..\..\sdk\plactform\core_modules\src;..\..\sdk\plactform\arch;..\..\sdk\plactform\arch\compiler;..\..\sdk\plactform\arch\ll;..\..\sdk\plactform\core_modules\common\api;..\..\sdk\plactform\arch\boot;..\..\sdk\plactform\core_modules\dbg\api;..\..\sdk\plactform\core_modules\rf\api;..\..\sdk\plactform\core_modules\ecc_p256\api;..\..\sdk\plactform\arch\main;..\..\sdk\plactform\core_modules\util;..\..\sdk\plactform\driver\pwm;..\..\sdk\plactform\driver\adc;..\..\sdk\plactform\driver\audio;..\..\sdk\plactform\driver\wdt;..\..\sdk\plactform\driver\rtc;..\..\sdk\plactform\driver\i2c;..\..\sdk\plactform\driver\utc;..\..\sdk\plactform\driver\ir;..\..\sdk\plactform\driver\spi;..\..\sdk\plactform\driver\plf;..\..\sdk\plactform\driver\counter;..\..\sdk\plactform\driver\gpio;..\..\sdk\plactform\driver\intcntl;..\..\sdk\plactform\driver\icu;..\..\sdk\plactform\driver\intc;..\..\sdk\plactform\driver\flash;..\..\sdk\plactform\driver\timer;..\..\sdk\plactform\driver\reg;..\..\sdk\plactform\driver\uart;..\..\sdk\plactform\driver\emi;..\..\sdk\ble_stack\com\rwble;..\..\sdk\ble_stack\com\rwble_hl;..\..\sdk\ble_stack\com\rwble;..\..\sdk\ble_stack\com\rwip\api;..\..\sdk\ble_stack\com\rwble_hl;..\..\sdk\ble_stack\src;..\..\sdk\plactform\reg;..\..\sdk\plactform\driver\syscntl;..\..\sdk\plactform\rom\hci;..\..\sdk\plactform\core_modules\ecc_p256\api;..\..\sdk\ble_stack\inc;..\..\sdk\ble_stack\inc\hci;..\..\sdk\ble_stack\inc\h4tl;..\..\sdk\ble_stack\inc\ke;..\..\sdk\ble_stack\inc\nvds;..\..\sdk\ble_stack\inc\ea;..\..\sdk\ble_stack\inc\em;..\..\sdk\ble_stack\inc\ahi;..\..\sdk\ble_stack\inc\ble\hl\gap\gapc;..\..\sdk\ble_stack\inc\ble\hl\gap\gapm;..\..\sdk\ble_stack\inc\ble\hl\gap\smpc;..\..\sdk\ble_stack\inc\ble\hl\gap\smpm;..\..\sdk\ble_stack\inc\ble\hl\gatt\attc;..\..\sdk\ble_stack\inc\ble\hl\gatt\attm;..\..\sdk\ble_stack\inc\ble\hl\gatt\atts;..\..\sdk\ble_stack\inc\ble\hl\gatt\gattc;..\..\sdk\ble_stack\inc\ble\hl\gatt\gattm;..\..\sdk\ble_stack\inc\ble\hl\l2c\l2cc;..\..\sdk\ble_stack\inc\ble\hl\l2c\l2cm;..\..\sdk\ble_stack\inc\ble\ll\em;..\..\sdk\ble_stack\inc\ble\ll\llc;..\..\sdk\ble_stack\inc\ble\ll\lld;..\..\sdk\ble_stack\inc\ble\ll\llm;..\..\sdk\ble_stack\com\rwip\api;..\..\sdk\ble_stack\inc\ble\hl\gap;..\..\sdk\ble_stack\inc\ble\hl\gatt;..\..\sdk\ble_stack\com\prf;..\..\sdk\ble_stack\com\profiles\dis\diss\src;..\..\sdk\ble_stack\com\profiles\bas\bass\src;..\..\sdk\ble_stack\com\profiles\ancs\ancsc\api;..\..\sdk\ble_stack\com\profiles\ancs\ancsc\src;..\..\sdk\ble_stack\com\profiles\ancs;..\..\sdk\ble_stack\com\profiles\FCC0\api;..\..\sdk\ble_stack\com\profiles\FCC0\src;..\..\sdk\ble_stack\com\profiles\FCC0\util;..\..\sdk\ble_stack\com\profiles\FEE0\api;..\..\sdk\ble_stack\com\profiles\FEE0\src;..\..\sdk\ble_stack\com\profiles\hogp;..\..\sdk\ble_stack\com\profiles\hogp\hogpd\api;..\..\sdk\ble_stack\com\profiles\hogp\hogpd\src;..\..\libs;..\..\sdk\ble_stack\com\profiles\wechat\api;..\..\sdk\ble_stack\com\profiles\wechat\src;.\wechat;..\..\sdk\ble_stack\com\profiles\bas\bass;..\..\sdk\ble_stack\com\profiles\bas\bass\api;..\..\sdk\ble_stack\com\profiles\dis\diss;..\..\sdk\ble_stack\com\profiles\dis\diss\api;..\..\sdk\ble_stack\com\profiles\FFF0\api;..\..\sdk\ble_stack\com\profiles\FFF0;..\..\sdk\ble_stack\com\profiles\oad\api;..\..\sdk\plactform\driver\rc_cal;.\HARDWARE\interface;.\USMART</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -376,6 +390,7 @@
             <NoWarn>0</NoWarn>
             <uSurpInc>0</uSurpInc>
             <useXO>0</useXO>
+            <uClangAs>0</uClangAs>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define></Define>
@@ -438,7 +453,15 @@
                 <uThumb>2</uThumb>
                 <uSurpInc>2</uSurpInc>
                 <uC99>2</uC99>
+                <uGnu>2</uGnu>
                 <useXO>2</useXO>
+                <v6Lang>0</v6Lang>
+                <v6LangP>0</v6LangP>
+                <vShortEn>2</vShortEn>
+                <vShortWch>2</vShortWch>
+                <v6Lto>2</v6Lto>
+                <v6WtE>2</v6WtE>
+                <v6Rtti>2</v6Rtti>
                 <VariousControls>
                   <MiscControls></MiscControls>
                   <Define></Define>
@@ -456,6 +479,7 @@
                 <NoWarn>2</NoWarn>
                 <uSurpInc>2</uSurpInc>
                 <useXO>2</useXO>
+                <uClangAs>2</uClangAs>
                 <VariousControls>
                   <MiscControls></MiscControls>
                   <Define></Define>
@@ -523,7 +547,15 @@
                 <uThumb>2</uThumb>
                 <uSurpInc>2</uSurpInc>
                 <uC99>2</uC99>
+                <uGnu>2</uGnu>
                 <useXO>2</useXO>
+                <v6Lang>0</v6Lang>
+                <v6LangP>0</v6LangP>
+                <vShortEn>2</vShortEn>
+                <vShortWch>2</vShortWch>
+                <v6Lto>2</v6Lto>
+                <v6WtE>2</v6WtE>
+                <v6Rtti>2</v6Rtti>
                 <VariousControls>
                   <MiscControls></MiscControls>
                   <Define></Define>
@@ -541,6 +573,7 @@
                 <NoWarn>2</NoWarn>
                 <uSurpInc>2</uSurpInc>
                 <useXO>2</useXO>
+                <uClangAs>2</uClangAs>
                 <VariousControls>
                   <MiscControls></MiscControls>
                   <Define></Define>
@@ -603,7 +636,15 @@
                 <uThumb>2</uThumb>
                 <uSurpInc>2</uSurpInc>
                 <uC99>2</uC99>
+                <uGnu>2</uGnu>
                 <useXO>2</useXO>
+                <v6Lang>0</v6Lang>
+                <v6LangP>0</v6LangP>
+                <vShortEn>2</vShortEn>
+                <vShortWch>2</vShortWch>
+                <v6Lto>2</v6Lto>
+                <v6WtE>2</v6WtE>
+                <v6Rtti>2</v6Rtti>
                 <VariousControls>
                   <MiscControls></MiscControls>
                   <Define></Define>
@@ -621,6 +662,7 @@
                 <NoWarn>2</NoWarn>
                 <uSurpInc>2</uSurpInc>
                 <useXO>2</useXO>
+                <uClangAs>2</uClangAs>
                 <VariousControls>
                   <MiscControls></MiscControls>
                   <Define></Define>
@@ -683,7 +725,15 @@
                 <uThumb>2</uThumb>
                 <uSurpInc>2</uSurpInc>
                 <uC99>2</uC99>
+                <uGnu>2</uGnu>
                 <useXO>2</useXO>
+                <v6Lang>0</v6Lang>
+                <v6LangP>0</v6LangP>
+                <vShortEn>2</vShortEn>
+                <vShortWch>2</vShortWch>
+                <v6Lto>2</v6Lto>
+                <v6WtE>2</v6WtE>
+                <v6Rtti>2</v6Rtti>
                 <VariousControls>
                   <MiscControls></MiscControls>
                   <Define></Define>
@@ -701,6 +751,7 @@
                 <NoWarn>2</NoWarn>
                 <uSurpInc>2</uSurpInc>
                 <useXO>2</useXO>
+                <uClangAs>2</uClangAs>
                 <VariousControls>
                   <MiscControls></MiscControls>
                   <Define></Define>
@@ -766,6 +817,16 @@
               <FileType>1</FileType>
               <FilePath>..\..\sdk\plactform\driver\pwm\pwm.c</FilePath>
             </File>
+            <File>
+              <FileName>rtc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\sdk\plactform\driver\rtc\rtc.c</FilePath>
+            </File>
+            <File>
+              <FileName>adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\sdk\plactform\driver\adc\adc.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -803,7 +864,15 @@
                 <uThumb>2</uThumb>
                 <uSurpInc>2</uSurpInc>
                 <uC99>2</uC99>
+                <uGnu>2</uGnu>
                 <useXO>2</useXO>
+                <v6Lang>0</v6Lang>
+                <v6LangP>0</v6LangP>
+                <vShortEn>2</vShortEn>
+                <vShortWch>2</vShortWch>
+                <v6Lto>2</v6Lto>
+                <v6WtE>2</v6WtE>
+                <v6Rtti>2</v6Rtti>
                 <VariousControls>
                   <MiscControls></MiscControls>
                   <Define></Define>
@@ -821,6 +890,7 @@
                 <NoWarn>2</NoWarn>
                 <uSurpInc>2</uSurpInc>
                 <useXO>2</useXO>
+                <uClangAs>2</uClangAs>
                 <VariousControls>
                   <MiscControls></MiscControls>
                   <Define></Define>
@@ -882,14 +952,14 @@
               <FilePath>..\..\sdk\ble_stack\com\profiles\oad\src\oads_task.c</FilePath>
             </File>
             <File>
-              <FileName>prf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\sdk\ble_stack\com\prf\prf.c</FilePath>
-            </File>
-            <File>
               <FileName>prf_utils.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\sdk\ble_stack\com\prf\prf_utils.c</FilePath>
+            </File>
+            <File>
+              <FileName>prf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\sdk\ble_stack\com\prf\prf.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -928,7 +998,15 @@
                 <uThumb>2</uThumb>
                 <uSurpInc>2</uSurpInc>
                 <uC99>2</uC99>
+                <uGnu>2</uGnu>
                 <useXO>2</useXO>
+                <v6Lang>0</v6Lang>
+                <v6LangP>0</v6LangP>
+                <vShortEn>2</vShortEn>
+                <vShortWch>2</vShortWch>
+                <v6Lto>2</v6Lto>
+                <v6WtE>2</v6WtE>
+                <v6Rtti>2</v6Rtti>
                 <VariousControls>
                   <MiscControls></MiscControls>
                   <Define></Define>
@@ -946,6 +1024,7 @@
                 <NoWarn>2</NoWarn>
                 <uSurpInc>2</uSurpInc>
                 <useXO>2</useXO>
+                <uClangAs>2</uClangAs>
                 <VariousControls>
                   <MiscControls></MiscControls>
                   <Define></Define>
@@ -995,6 +1074,51 @@
               <FileName>app_sec.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\app\app_sec.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>USMART</GroupName>
+          <Files>
+            <File>
+              <FileName>usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USMART\usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>usmart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USMART\usmart.c</FilePath>
+            </File>
+            <File>
+              <FileName>usmart_config.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USMART\usmart_config.c</FilePath>
+            </File>
+            <File>
+              <FileName>usmart_str.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USMART\usmart_str.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>HARDWARE</GroupName>
+          <Files>
+            <File>
+              <FileName>ANO_UART.C</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HARDWARE\src\ANO_UART.C</FilePath>
+            </File>
+            <File>
+              <FileName>app_rtc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HARDWARE\src\app_rtc.c</FilePath>
+            </File>
+            <File>
+              <FileName>LED.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HARDWARE\src\LED.c</FilePath>
             </File>
           </Files>
         </Group>
