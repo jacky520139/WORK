@@ -40,7 +40,7 @@
 /* Default Message handler code to handle several message type in same handler. */
 //处理同一处理程序中多个消息类型的默认消息处理程序代码
 #define KE_MSG_DEFAULT_HANDLER  (0xFFFF)
-/* Invalid task */
+/* 无效任务 */
 #define KE_TASK_INVALID         (0xFFFF)
 /* Used to know if a message is not present in kernel queue */
 #define KE_MSG_NOT_IN_QUEUE     ((struct co_list_hdr *) 0xFFFFFFFF)

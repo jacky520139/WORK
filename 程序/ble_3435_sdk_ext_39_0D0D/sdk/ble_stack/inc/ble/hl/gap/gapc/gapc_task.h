@@ -282,9 +282,9 @@ enum gapc_bond
     /// Pairing Failed information
     GAPC_PAIRING_FAILED,
 
-    /// Used to retrieve pairing Temporary Key
+    /// Used to retrieve pairing Temporary Key用于检索配对临时密钥
     GAPC_TK_EXCH,
-    /// Used for Identity Resolving Key exchange
+    /// Used for Identity Resolving Key exchange用于身份解析密钥交换
     GAPC_IRK_EXCH,
     /// Used for Connection Signature Resolving Key exchange
     GAPC_CSRK_EXCH,
@@ -557,11 +557,11 @@ struct gapc_set_dev_info_req_ind
 struct gapc_set_dev_info_cfm
 {
     /// Requested information
-    /// - GAPC_DEV_NAME: Device Name
-    /// - GAPC_DEV_APPEARANCE: Device Appearance Icon
+    /// - GAPC_DEV_NAME: Device Name设备名称
+    /// - GAPC_DEV_APPEARANCE: Device Appearance Icon设备外观图标
     uint8_t req;
 
-    /// Status code used to know if requested has been accepted or not
+    /// Status code used to know if requested has been accepted or not用于知道请求是否已被接受的状态代码
     uint8_t status;
 };
 

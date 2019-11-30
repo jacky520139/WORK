@@ -125,7 +125,7 @@ void app_sec_remove_bond(void)
 	app_sec_env.peer_pairing = false;
 	app_sec_env.peer_encrypt = false;
 }
-
+//发送安全连接请求
 void app_sec_send_security_req(uint8_t conidx)
 {
 	if(!app_get_encrypt_flag() && !app_get_bonding_flag())
@@ -139,6 +139,7 @@ void app_sec_send_security_req(uint8_t conidx)
 
 	    cmd->operation = GAPC_SECURITY_REQ;
 	    cmd->auth      = GAP_AUTH_REQ_NO_MITM_BOND;
+//			cmd->auth      = GAP_AUTH_REQ_MITM_BOND;
 	    // Send the message
 	    ke_msg_send(cmd);
 	}
@@ -166,22 +167,24 @@ static int gapc_bond_req_ind_handler(ke_msg_id_t const msgid,
 
     switch (param->request)
     {
-        case (GAPC_PAIRING_REQ):
+        case (GAPC_PAIRING_REQ)://配对
         {
 	    	UART_PRINTF("gapc_pairing req\r\n");
 	    	app_sec_env.peer_pairing = true;
-            cfm->request = GAPC_PAIRING_RSP;
+            cfm->request = GAPC_PAIRING_RSP;//配对
 
             cfm->accept  = false;
-
+             //检查是否已连接（仅支持一个连接）
             // Check if we are already bonded (Only one bonded connection is supported)
             if (!app_sec_env.bonded)
             {
-                cfm->accept  = true;
+                cfm->accept  = true;//接受
 
                 // Pairing Features
-				cfm->data.pairing_feat.auth      = GAP_AUTH_REQ_NO_MITM_BOND;
-                cfm->data.pairing_feat.iocap     = GAP_IO_CAP_NO_INPUT_NO_OUTPUT;
+							  cfm->data.pairing_feat.auth      = GAP_AUTH_REQ_NO_MITM_BOND;//没密码有邦定
+//				        cfm->data.pairing_feat.auth      = GAP_AUTH_REQ_MITM_BOND;//需要密码和邦定
+                cfm->data.pairing_feat.iocap     = GAP_IO_CAP_NO_INPUT_NO_OUTPUT;//对端只需按确认
+//							  cfm->data.pairing_feat.iocap     = GAP_IO_CAP_DISPLAY_ONLY;//对端需要输入密码
                 cfm->data.pairing_feat.key_size  = 16;
                 cfm->data.pairing_feat.oob       = GAP_OOB_AUTH_DATA_NOT_PRESENT;
                 cfm->data.pairing_feat.sec_req   = GAP_NO_SEC;
@@ -238,7 +241,7 @@ static int gapc_bond_req_ind_handler(ke_msg_id_t const msgid,
         case (GAPC_TK_EXCH):
         {
             // Generate a PIN Code- (Between 100000 and 999999)
-            uint32_t pin_code =123456;// (100000 + (co_rand_word()%900000));
+            uint32_t pin_code =654321;// (100000 + (co_rand_word()%900000));
 
             cfm->accept  = true;
             cfm->request = GAPC_TK_EXCH;
@@ -302,7 +305,7 @@ static int gapc_bond_ind_handler(ke_msg_id_t const msgid,
         case (GAPC_REPEATED_ATTEMPT):
         {
 			app_sec_env.peer_pairing = false;
-	    	app_sec_env.peer_encrypt = false;
+	    app_sec_env.peer_encrypt = false;
 			app_sec_env.pairing_fail = true;
             appm_disconnect();
         } break;
@@ -310,7 +313,7 @@ static int gapc_bond_ind_handler(ke_msg_id_t const msgid,
         case (GAPC_IRK_EXCH):
         {
 		   	UART_PRINTF("gapc pairing GAPC_IRK_EXCH\r\n");
-           	// Store peer identity in NVDS
+           	// Store peer identity in NVDS在NVDS中存储对等身份
            	if (nvds_put(NVDS_TAG_PEER_IRK, NVDS_LEN_PEER_IRK, (uint8_t *)&param->data.irk) != NVDS_OK)
            	{
                	ASSERT_ERR(0);

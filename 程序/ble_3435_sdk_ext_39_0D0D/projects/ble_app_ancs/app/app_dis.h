@@ -39,19 +39,19 @@
  ****************************************************************************************
  */
 
-/// Manufacturer Name Value
+/// Manufacturer Name Value 制造商名称值
 #define APP_DIS_MANUFACTURER_NAME       ("BEKEN SAS")
 #define APP_DIS_MANUFACTURER_NAME_LEN   (9)
 
-/// Model Number String Value
+/// Model Number String Value型号字符串值
 #define APP_DIS_MODEL_NB_STR            ("BK-BLE-1.0")
 #define APP_DIS_MODEL_NB_STR_LEN        (10)
 
-/// Serial Number
+/// Serial Number序列号
 #define APP_DIS_SERIAL_NB_STR           ("1.0.0.0-LE")
 #define APP_DIS_SERIAL_NB_STR_LEN       (10)
 
-/// Firmware Revision
+/// Firmware Revision固件版本
 #define APP_DIS_FIRM_REV_STR            ("6.1.2")
 #define APP_DIS_FIRM_REV_STR_LEN        (5)
 
@@ -59,11 +59,11 @@
 #define APP_DIS_SYSTEM_ID               ("\x12\x34\x56\xFF\xFE\x9A\xBC\xDE")
 #define APP_DIS_SYSTEM_ID_LEN           (8)
 
-/// Hardware Revision String
+/// Hardware Revision String硬件修订字符串
 #define APP_DIS_HARD_REV_STR           ("1.0.0")
 #define APP_DIS_HARD_REV_STR_LEN       (5)
 
-/// Software Revision String
+/// Software Revision String软件修订字符串
 #define APP_DIS_SW_REV_STR              ("6.3.0")
 #define APP_DIS_SW_REV_STR_LEN          (5)
 

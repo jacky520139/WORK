@@ -47,7 +47,7 @@
  ****************************************************************************************
  */
 
-/// Number of APP Task Instances
+/// Number of APP Task Instances应用程序任务实例数
 #define APP_IDX_MAX                 (1)
 
 
@@ -59,15 +59,15 @@
 /// States of APP task
 enum appm_state
 {
-    /// Initialization state
+    /// Initialization state初始化状态
     APPM_INIT,
-    /// Database create state
+    /// Database create state建立数据库状态
     APPM_CREATE_DB,
-    /// Ready State
-    APPM_READY,
-    /// Advertising state
+    /// Ready State       就绪状态
+    APPM_READY,          
+    /// Advertising state广播状态
     APPM_ADVERTISING,
-    /// Connected state
+    /// Connected state连接状态
     APPM_CONNECTED,
     /// Number of defined states.
     APPM_STATE_MAX
@@ -85,7 +85,9 @@ enum appm_msg
 	
 	APP_ANCS_REQ_IND,
 	
-	APP_PERIOD_TIMER,	
+	APP_PERIOD_TIMER,
+	
+  APP_ADV_ENABLE_TIMER,	/*APP开始广播*/
 };
 
 

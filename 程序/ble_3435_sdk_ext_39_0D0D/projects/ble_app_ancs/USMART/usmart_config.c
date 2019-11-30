@@ -9,6 +9,7 @@
 #include "timer.h"        // timer definition
 #include "app_batt.h" 
 #include "lld_evt.h" 
+#include "ke_timer.h" 
 extern u16 gui_color_chg(u32 rgb);
 //函数名列表初始化(用户自己添加)
 //用户直接在这里输入要执行的函数名及其查找串
@@ -24,7 +25,12 @@ struct _m_usmart_nametab usmart_nametab[]=
 (void*)timer_enable,"void timer_enable(bool enable)",
 (void*)timer_get_time,"uint32_t timer_get_time(void)",
 (void*)app_batt_send_lvl,"void app_batt_send_lvl(uint8_t batt_lvl)",
-	(uint32_t*)lld_evt_time_get,"uint32_t lld_evt_time_get(void)",
+(uint32_t*)lld_evt_time_get,"uint32_t lld_evt_time_get(void)",
+//(int*)appm_msg_handler,"static int appm_msg_handler(ke_msg_id_t const msgid,void *param,ke_task_id_t const dest_id,ke_task_id_t const src_id)",
+(void*)ke_timer_set,"void ke_timer_set(ke_msg_id_t const timer_id, ke_task_id_t const task, uint32_t delay)",
+(void*)ke_timer_clear,"void ke_timer_clear(ke_msg_id_t const timerid, ke_task_id_t const task)",
+(void*)ke_timer_active,"bool ke_timer_active(ke_msg_id_t const timer_id, ke_task_id_t const task_id)"
+
 
 };
 

@@ -72,7 +72,7 @@ typedef void (*appm_add_svc_func_t)(void);
 enum appm_svc_list
 {
     APPM_SVC_FFF0,
-    APPM_SVC_DIS,
+//    APPM_SVC_DIS,
     APPM_SVC_BATT,
 	  APPM_SVC_OADS,
     APPM_SVC_LIST_STOP ,
@@ -91,7 +91,7 @@ static const struct ke_task_desc TASK_DESC_APP = {NULL, &appm_default_handler,
 static const appm_add_svc_func_t appm_add_svc_func_list[APPM_SVC_LIST_STOP] =
 {
     (appm_add_svc_func_t)app_fff0_add_fff0s,
-    (appm_add_svc_func_t)app_dis_add_dis,
+//    (appm_add_svc_func_t)app_dis_add_dis,
     (appm_add_svc_func_t)app_batt_add_bas,
 	  (appm_add_svc_func_t)app_oad_add_oads,
 };

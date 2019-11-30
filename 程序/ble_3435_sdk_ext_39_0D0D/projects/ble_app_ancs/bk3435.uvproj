@@ -1061,11 +1061,6 @@
               <FilePath>.\app\app_oads.c</FilePath>
             </File>
             <File>
-              <FileName>app_task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\app\app_task.c</FilePath>
-            </File>
-            <File>
               <FileName>app_ancsc.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\app\app_ancsc.c</FilePath>
@@ -1074,6 +1069,21 @@
               <FileName>app_sec.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\app\app_sec.c</FilePath>
+            </File>
+            <File>
+              <FileName>app_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\app_key.c</FilePath>
+            </File>
+            <File>
+              <FileName>app_wlist.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\app_wlist.c</FilePath>
+            </File>
+            <File>
+              <FileName>app_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\app_task.c</FilePath>
             </File>
           </Files>
         </Group>

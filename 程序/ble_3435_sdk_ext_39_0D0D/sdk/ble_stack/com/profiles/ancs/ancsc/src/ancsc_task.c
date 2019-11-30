@@ -413,7 +413,7 @@ static int gattc_cmp_evt_handler(ke_msg_id_t const msgid,
 
                 if (param->status == ATT_ERR_NO_ERROR)
                 {
-                    // check characteristic validity
+                    // check characteristic validity检查特征有效性
                     if(ancsc_env->env[conidx]->nb_svc > 0)
                     {
                         // UART_PRINTF("a3\r\n");
@@ -568,8 +568,8 @@ const struct ke_msg_handler ancsc_default_state[] =
 	{GATTC_SDP_SVC_IND,            			(ke_msg_func_t)gattc_sdp_svc_ind_handler},
 	{ANCSC_CFG_NTF_SRC_INDNTF_REQ,          (ke_msg_func_t)ancsc_ntf_src_ntf_cfg_req_handler},
 	{ANCSC_CFG_DATA_SRC_INDNTF_REQ,         (ke_msg_func_t)ancsc_data_src_ntf_cfg_req_handler},
-	{ANCSC_WR_CNTL_POINT_REQ,				(ke_msg_func_t)ancsc_wr_cntl_point_req_handler},
-	{GATTC_EVENT_IND ,						(ke_msg_func_t)gattc_event_ind_handler},
+	{ANCSC_WR_CNTL_POINT_REQ,				        (ke_msg_func_t)ancsc_wr_cntl_point_req_handler},
+	{GATTC_EVENT_IND ,						          (ke_msg_func_t)gattc_event_ind_handler},
 		
 };
 

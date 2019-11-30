@@ -206,7 +206,7 @@
 #define GAP_CONN_LATENCY                                    0x0000
 
 /// GAP Device name Characteristic
-/// Default device name
+/// 默认设备名
 #define GAP_DEV_NAME                                        "RIVIERAWAVES-BLE"
 
 /// GAP Appearance or Icon Characteristic - 2 octets
@@ -393,15 +393,15 @@ enum gap_scan_mode
 enum gap_io_cap
 {
     /// Display Only
-    GAP_IO_CAP_DISPLAY_ONLY = 0x00,
+    GAP_IO_CAP_DISPLAY_ONLY = 0x00,/*本机显示密码，对端输入密码*/
     /// Display Yes No
-    GAP_IO_CAP_DISPLAY_YES_NO,
+    GAP_IO_CAP_DISPLAY_YES_NO,/*本机显示密码，对端输入密码后，还需要本机确认是否配对？*/
     /// Keyboard Only
-    GAP_IO_CAP_KB_ONLY,
+    GAP_IO_CAP_KB_ONLY,/*对端显示密码，本机输入密码*/
     /// No Input No Output
-    GAP_IO_CAP_NO_INPUT_NO_OUTPUT,
+    GAP_IO_CAP_NO_INPUT_NO_OUTPUT,/*本机即不能显示密码也不能输入密码，对端只需要确定是否配对*/
     /// Keyboard Display
-    GAP_IO_CAP_KB_DISPLAY,
+    GAP_IO_CAP_KB_DISPLAY,/* 是否是双方都要输入对方显示的密码*/
     GAP_IO_CAP_LAST
 };
 
@@ -460,7 +460,7 @@ enum gap_auth
     /// No MITM No Bonding没有MITM没有结合
     GAP_AUTH_REQ_NO_MITM_NO_BOND  = (GAP_AUTH_NONE),
     /// No MITM Bonding
-    GAP_AUTH_REQ_NO_MITM_BOND     = (GAP_AUTH_BOND),
+    GAP_AUTH_REQ_NO_MITM_BOND     = (GAP_AUTH_BOND),/*没有密码有邦定*/
     /// MITM No Bonding
     GAP_AUTH_REQ_MITM_NO_BOND     = (GAP_AUTH_MITM),
     /// MITM and Bonding
@@ -607,7 +607,7 @@ struct gap_bdaddr
 {
     /// BD Address of device
     bd_addr_t addr;
-    /// Address type of the device 0=public/1=private random
+    /// Address type of the device 0=public/1=private random  0为公共地址，1为私人地址
     uint8_t addr_type;
 };
 

@@ -52,11 +52,12 @@
 
 
 //设备名称
-#define APP_DFLT_DEVICE_NAME           ("BK3435-jack")
+#define APP_DFLT_DEVICE_NAME           ("LINZEJIE")
 
 
  //广播包UUID配置
-#define APP_FFF0_ADV_DATA_UUID        "\x03\x03\xF0\xFF"
+#define APP_FFF0_ADV_DATA_UUID        "\x03\x03\x0E\x2A"//F0FF
+//#define APP_FFF0_ADV_DATA_UUID        "\x03\x03\x12\x18"//0x1812
 #define APP_FFF0_ADV_DATA_UUID_LEN    (4)
 
 //扫描响应包数据

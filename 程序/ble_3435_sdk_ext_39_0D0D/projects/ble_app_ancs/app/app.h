@@ -115,26 +115,26 @@ enum app_loc_nvds_tag
 /// Application environment structure
 struct app_env_tag
 {
-    /// Connection handle
+    /// Connection handle连接手柄
     uint16_t conhdl;
-    /// Connection Index
+    /// Connection Index连接索引
     uint8_t  conidx;
 
-    /// Last initialized profile
+    /// Last initialized profile上次初始化的配置文件
     uint8_t next_svc;
 
-    /// Bonding status
+    /// Bonding status邦定状态
     bool bonded;
 
-    /// Device Name length
+    /// Device Name length设备名长度
     uint8_t dev_name_len;
-    /// Device Name
+    /// Device Name设备名
     uint8_t dev_name[APP_DEVICE_NAME_MAX_LEN];
 
-    /// Local device IRK
+    /// Local device IRK 本地IRK
     uint8_t loc_irk[KEY_LEN];
 
-	/// Peer device IRK
+	/// Peer device IRK对端设备的IRK
     struct gapc_irk peer_irk;
 	
 };
@@ -175,7 +175,13 @@ bool appm_add_svc(void);
  ****************************************************************************************
  */
 void appm_start_advertising(void);
-
+/**
+ ****************************************************************************************
+ * @brief 将设备置于一般可发现和可连接模式
+ ****************************************************************************************
+ */
+void appm_start_direct_dvertising(void);/* 设备发起定向广播函数*/
+void appm_start_white_list_dvertising(void);/* 设备发起白名单过滤广播*/
 /**
  ****************************************************************************************
  * @brief Put the device in non discoverable and non connectable mode
