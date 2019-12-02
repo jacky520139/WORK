@@ -226,7 +226,7 @@ static int gapc_bond_req_ind_handler(ke_msg_id_t const msgid,
 
         case (GAPC_IRK_EXCH):
         {
-			UART_PRINTF("gapc_lrk exch\r\n");
+			     UART_PRINTF("gapc_lrk exch\r\n");
 
             cfm->accept  = true;
             cfm->request = GAPC_IRK_EXCH;
@@ -276,7 +276,7 @@ static int gapc_bond_ind_handler(ke_msg_id_t const msgid,
     UART_PRINTF("%s param->info = 0x%x\r\n",__func__,param->info);
     switch (param->info)
     {
-        case (GAPC_PAIRING_SUCCEED):
+        case (GAPC_PAIRING_SUCCEED)://≈‰∂‘≥…π¶
         {
 			// Update the bonding status in the environment
 			app_sec_env.bond_lost = false;

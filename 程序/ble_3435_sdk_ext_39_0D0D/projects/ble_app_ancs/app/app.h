@@ -44,10 +44,10 @@
  * DEFINES
  ****************************************************************************************
  */
-/// Maximal length of the Device Name value
+/// 设备名称值的最大长度
 #define APP_DEVICE_NAME_MAX_LEN      (18)
 
-/// Default Advertising duration - 30s (in multiple of 10ms)
+//默认广告持续时间-30秒（10毫秒的倍数）
 #define APP_DFLT_ADV_DURATION        (3000)
 
 
@@ -58,7 +58,7 @@
  ****************************************************************************************
  */
 
-/// List of Application NVDS TAG identifiers
+/// List of Application NVDS TAG identifiers应用程序NVDS标记标识符列表
 enum app_nvds_tag
 {
     /// BLE Application Advertising data

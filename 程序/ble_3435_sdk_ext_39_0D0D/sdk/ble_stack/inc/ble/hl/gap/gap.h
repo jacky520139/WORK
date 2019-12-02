@@ -64,15 +64,15 @@
 
 
 ///***** AD Type Flag - Bit set *******/
-/// Limited discovery flag - AD Flag
+/// Limited discovery flag - AD Flag有限发现标志-AD标志
 #define GAP_LE_LIM_DISCOVERABLE_FLG             0x01
-/// General discovery flag - AD Flag
+/// General discovery flag - AD Flag通用发现标志-AD标志
 #define GAP_LE_GEN_DISCOVERABLE_FLG             0x02
 /// Legacy BT not supported - AD Flag
 #define GAP_BR_EDR_NOT_SUPPORTED                0x04
-/// Dual mode for controller supported (BR/EDR/LE) - AD Flag
+/// Dual mode for controller supported (BR/EDR/LE) - AD Flag支持控制器的双模式（BR/EDR/LE）-AD标志
 #define GAP_SIMUL_BR_EDR_LE_CONTROLLER          0x08
-/// Dual mode for host supported (BR/EDR/LE) - AD Flag
+/// Dual mode for host supported (BR/EDR/LE) - AD Flag支持主机的双模式（BR/EDR/LE）AD标志
 #define GAP_SIMUL_BR_EDR_LE_HOST                0x10
 
 /*********** GAP Miscellaneous Defines *************/

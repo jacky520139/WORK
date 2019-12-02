@@ -173,7 +173,7 @@ static int gapm_cmp_evt_handler(ke_msg_id_t const msgid,
             }
         }
         break;
-        case (GAPM_PROFILE_TASK_ADD):
+        case (GAPM_PROFILE_TASK_ADD)://加载服务
         {
             // Add the next requested service
             if (!appm_add_svc())
@@ -181,7 +181,19 @@ static int gapm_cmp_evt_handler(ke_msg_id_t const msgid,
                 // Go to the ready state
                 ke_state_set(TASK_APP, APPM_READY);
 							
-				appm_start_advertising();
+				         appm_start_advertising();
+							// No more service to add, start advertising
+//					 if(app_sec_get_bond_status())//判断是否邦定，如果邦定则发送定向广播，如果没有就发送通用广播
+//								{
+//									//if device has bonded, then start direct adv
+//									appm_start_direct_dvertising();
+//								}
+//								else
+//								{
+//									//device not bonded, start general adv
+//									appm_start_advertising();
+//								}			
+							
             }
         }
         break;
@@ -416,7 +428,7 @@ static int gapc_cmp_evt_handler(ke_msg_id_t const msgid,
 			}
 			
     	} break;
-		case (GAPC_DISCONNECT): //0x01
+		case (GAPC_DISCONNECT): //0x01复位广播
 		{
 			if(param->status == GAP_ERR_NO_ERROR)
 			{
@@ -435,7 +447,7 @@ static int gapc_cmp_evt_handler(ke_msg_id_t const msgid,
 				}
 			}
 		}break;
-		case (GAPC_SECURITY_REQ): //0x0c
+		case (GAPC_SECURITY_REQ): //0x0c安全验证
 		{
 			if (param->status != GAP_ERR_NO_ERROR)
 	        {
@@ -446,7 +458,7 @@ static int gapc_cmp_evt_handler(ke_msg_id_t const msgid,
 	            UART_PRINTF("gapc security req ok !\r\n");
 	        }
 		}break;
-		case (GAPC_BOND): // 0xa
+		case (GAPC_BOND): // 0xa邦定
     	{
 	        if (param->status != GAP_ERR_NO_ERROR)
 	        {
@@ -459,7 +471,7 @@ static int gapc_cmp_evt_handler(ke_msg_id_t const msgid,
 	        }
     	}break;
 		
-		case (GAPC_ENCRYPT): // 0xb
+		case (GAPC_ENCRYPT): // 0xb加密
 		{
 			if (param->status != GAP_ERR_NO_ERROR)
 			{
