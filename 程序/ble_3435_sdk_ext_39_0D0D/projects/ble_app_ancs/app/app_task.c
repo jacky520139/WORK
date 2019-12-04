@@ -26,7 +26,7 @@
 #include "gapm_task.h"          // GAP Manager Task API
 #include "gattc_task.h"
 #include "arch.h"                    // Platform Definitions
-
+#include "app_fff0.h"                 // Application security Definition
 #include "ke_timer.h"             // Kernel timer
 #include "app_dis.h"              // Device Information Module Definition
 #include "diss_task.h"
@@ -46,6 +46,7 @@
 #include "app_sec.h"              // Security Module Definition
 #include "wdt.h"
 #include "rc32k_cal.h"
+#include "LED.h"
 /*
  * LOCAL FUNCTION DEFINITIONS
  ****************************************************************************************
@@ -116,7 +117,40 @@ static int gapm_device_ready_ind_handler(ke_msg_id_t const msgid,
     return (KE_MSG_CONSUMED);
 }
 
+/*
+ * MESSAGE HANDLERS
+ ****************************************************************************************
+ */
 
+/**
+ ****************************************************************************************
+ * @brief
+ *
+ * @param[in] msgid     Id of the message received.
+ * @param[in] param     Pointer to the parameters of the message.
+ * @param[in] dest_id   ID of the receiving task instance (TASK_GAP).
+ * @param[in] src_id    ID of the sending task instance.
+ *
+ * @return If the message was consumed or not.
+//广播超时处理事件
+ ****************************************************************************************
+ */
+static int app_adv_timeout_handler(ke_msg_id_t const msgid,
+                                   void const *param,
+                                   ke_task_id_t const dest_id,
+                                   ke_task_id_t const src_id)
+{
+	UART_PRINTF("%s\r\n", __func__);
+
+//	adv_timeout_flag = true;
+
+	// Stop advertising
+	appm_stop_advertising();
+
+//	key_wakeup_config();
+	wdt_disable_flag=1;
+	return (KE_MSG_CONSUMED);
+}
 /**
  ****************************************************************************************
  * @brief Handles GAP manager command complete events.
@@ -177,22 +211,22 @@ static int gapm_cmp_evt_handler(ke_msg_id_t const msgid,
         {
             // Add the next requested service
             if (!appm_add_svc())
-            {
+            {                       //服务加载完成后开始广播
                 // Go to the ready state
                 ke_state_set(TASK_APP, APPM_READY);
 							
-				         appm_start_advertising();
+//				         appm_start_advertising();
 							// No more service to add, start advertising
-//					 if(app_sec_get_bond_status())//判断是否邦定，如果邦定则发送定向广播，如果没有就发送通用广播
-//								{
-//									//if device has bonded, then start direct adv
-//									appm_start_direct_dvertising();
-//								}
-//								else
-//								{
-//									//device not bonded, start general adv
-//									appm_start_advertising();
-//								}			
+					 if(app_sec_get_bond_status())//判断是否邦定，如果邦定则发送定向广播，如果没有就发送通用广播
+								{
+									//if device has bonded, then start direct adv
+									appm_start_direct_dvertising();
+								}
+								else
+								{
+									//device not bonded, start general adv
+									appm_start_advertising();
+								}			
 							
             }
         }
@@ -382,10 +416,13 @@ static int gapc_connection_req_ind_handler(ke_msg_id_t const msgid,
 		
 	    ke_timer_set(APP_ANCS_REQ_IND,TASK_APP,80); 
 			ke_timer_set(APP_SEND_SECURITY_REQ,TASK_APP,220);  //开始发送安全请求
+		#if (APP_GET_RSSI_EN)
+		ke_timer_set(APP_GET_RSSI_TIMER,TASK_APP,120);//获取信号强度
+    #endif
 		#if UPDATE_CONNENCT_PARAM
 		ke_timer_set(APP_PARAM_UPDATE_REQ_IND,TASK_APP,100); //更新连接参数
 		#endif	
-	        
+    
     }
     else
     {
@@ -484,7 +521,17 @@ static int gapc_cmp_evt_handler(ke_msg_id_t const msgid,
 			}
 		}
 		break;
-		
+		case (GAPC_GET_CON_RSSI): //获取连接信号强度
+		{
+			if (param->status != GAP_ERR_NO_ERROR)
+	        {
+	            UART_PRINTF("gapc RSSI req fail !\r\n");
+	        }
+	        else
+	        {
+	            UART_PRINTF("gapc RSSI req ok !\r\n");
+	        }
+		}break;		
 
     	default:
     	  break;
@@ -634,7 +681,11 @@ static int app_period_timer_handler(ke_msg_id_t const msgid,
         {
             // Service Changed - Drop
         } break;
-
+        case (TASK_ID_FFF0S):
+        {
+            // Call the Health Thermometer Module
+            msg_pol = appm_get_handler(&app_fff0_table_handler, msgid, param, src_id);//在消息表中找到对应实例
+        } break;
         case (TASK_ID_ANCSC):
         {
             // Call the Health Thermometer Module
@@ -693,7 +744,6 @@ static int gapc_update_conn_param_req_ind_handler (ke_msg_id_t const msgid,
 	up_param.time_out   = BLE_UAPDATA_TIMEOUT; 
 	
 	appm_update_param(&up_param);
-	
 	return KE_MSG_CONSUMED;
 }
 
@@ -713,7 +763,7 @@ static int gapc_le_pkt_size_ind_handler (ke_msg_id_t const msgid,
                  					ke_task_id_t const dest_id, 
                  					ke_task_id_t const src_id)
 {
-   	UART_PRINTF("%s \r\n", __func__);
+  UART_PRINTF("%s \r\n", __func__);
 	UART_PRINTF("1max_rx_octets = %d\r\n",param->max_rx_octets);
 	UART_PRINTF("1max_rx_time = %d\r\n",param->max_rx_time);
 	UART_PRINTF("1max_tx_octets = %d\r\n",param->max_tx_octets);
@@ -871,10 +921,64 @@ static int app_adv_enable_handler(ke_msg_id_t const msgid,
 		//device not bonded, start general adv非邦定状态下发送广播
 		appm_start_advertising();
 	}
+//  ke_timer_set(APP_LED_CTRL_SCAN,TASK_APP,10);
+	return (KE_MSG_CONSUMED);
+}
+
+/**
+ ****************************************************************************************
+ * @brief gapc_conn_rssi_ind_handler.
+ *
+ * @param[in] msgid     Id of the message received.
+ * @param[in] param     Pointer to the parameters of the message.
+ * @param[in] dest_id   ID of the receiving task instance (TASK_GAP).
+ * @param[in] src_id    ID of the sending task instance.
+ *
+ * @return If the message was consumed or not.
+ ****************************************************************************************
+ */
+static int gapc_conn_rssi_ind_handler(ke_msg_id_t const msgid,
+        struct gapc_con_rssi_ind const *param,
+        ke_task_id_t const dest_id,
+        ke_task_id_t const src_id)
+{
+
+	if(ke_state_get(dest_id) == APPM_CONNECTED)
+	{
+		UART_PRINTF("get rssi = %d\r\n",param->rssi);
+	}
 
 	return (KE_MSG_CONSUMED);
 }
 
+
+/*******************************************************************************
+ * Function: app_get_rssi_timer_handler
+ * Description: app period timer process
+ * Input: msgid -Id of the message received.
+ *		  param -Pointer to the parameters of the message.
+ *		  dest_id -ID of the receiving task instance (TASK_GAP).
+ *		  ID of the sending task instance.
+ * Return: If the message was consumed or not.
+ * Others: void
+*******************************************************************************/
+static int app_get_rssi_timer_handler(ke_msg_id_t const msgid,
+                                    void const *param,
+                                    ke_task_id_t const dest_id,
+                                    ke_task_id_t const src_id)
+{	
+	UART_PRINTF("%s\r\n", __func__);
+	
+	if(ke_state_get(dest_id) == APPM_CONNECTED)
+	{
+		appm_get_conn_rssi();
+	}
+	
+	ke_timer_set(APP_GET_RSSI_TIMER,TASK_APP,500);
+
+	return KE_MSG_CONSUMED;
+
+}
 /*
  * GLOBAL VARIABLES DEFINITION
  ****************************************************************************************
@@ -885,9 +989,10 @@ const struct ke_msg_handler appm_default_state[] =
 {
     // Note: first message is latest message checked by kernel so default is put on top.
     {KE_MSG_DEFAULT_HANDLER,    	(ke_msg_func_t)appm_msg_handler},
-    {GAPM_DEVICE_READY_IND,     	(ke_msg_func_t)gapm_device_ready_ind_handler},
-    {GAPM_CMP_EVT,             		(ke_msg_func_t)gapm_cmp_evt_handler},
-    {GAPC_GET_DEV_INFO_REQ_IND, 	(ke_msg_func_t)gapc_get_dev_info_req_ind_handler},
+		{APP_ADV_TIMEOUT_TIMER,     	(ke_msg_func_t)app_adv_timeout_handler},/*广播信号连接超时*/
+    {GAPM_DEVICE_READY_IND,     	(ke_msg_func_t)gapm_device_ready_ind_handler},/*设备就绪指示*/
+    {GAPM_CMP_EVT,             		(ke_msg_func_t)gapm_cmp_evt_handler},         /*GAPM指令操作完成指示*/
+    {GAPC_GET_DEV_INFO_REQ_IND, 	(ke_msg_func_t)gapc_get_dev_info_req_ind_handler},/*获取设备信息*/
     {GAPC_SET_DEV_INFO_REQ_IND, 	(ke_msg_func_t)gapc_set_dev_info_req_ind_handler},/*GAPC设置设备配置信息*/
     {GAPC_CONNECTION_REQ_IND,   	(ke_msg_func_t)gapc_connection_req_ind_handler},  /*手机连接后的处理事件*/
     {GAPC_CMP_EVT,             		(ke_msg_func_t)gapc_cmp_evt_handler},           /*GAPC命令事件的处理*/
@@ -896,12 +1001,18 @@ const struct ke_msg_handler appm_default_state[] =
     {GAPC_LE_PKT_SIZE_IND,			  (ke_msg_func_t)gapc_le_pkt_size_ind_handler},
     {GAPC_PARAM_UPDATED_IND,		  (ke_msg_func_t)gapc_param_updated_ind_handler},/*接受完主设备更新的连接参数*/
     {APP_SEND_SECURITY_REQ,     	(ke_msg_func_t)gapc_send_security_req_handler},/*APP发送安全请求*/
-    {GATTC_MTU_CHANGED_IND,			  (ke_msg_func_t)gattc_mtu_changed_ind_handler},	
+    {GATTC_MTU_CHANGED_IND,			  (ke_msg_func_t)gattc_mtu_changed_ind_handler},/*数据包变更指示*/	
     {GAPC_PARAM_UPDATE_REQ_IND, 	(ke_msg_func_t)gapc_param_update_req_ind_handler},/*接受主设备更新的连接参数*/
     {APP_PARAM_UPDATE_REQ_IND, 		(ke_msg_func_t)gapc_update_conn_param_req_ind_handler},/*APP更新设备连接参数*/
     {APP_ANCS_REQ_IND,				    (ke_msg_func_t)app_ancs_req_handler},
     {APP_PERIOD_TIMER,				    (ke_msg_func_t)app_period_timer_handler},/*周期定时器*/
 		{APP_ADV_ENABLE_TIMER,			  (ke_msg_func_t)app_adv_enable_handler},/*使能广播*/
+		{APP_GET_RSSI_TIMER,			    (ke_msg_func_t)app_get_rssi_timer_handler},/*定时获取连接信号强度定时器*/
+    {GAPC_CON_RSSI_IND, 			    (ke_msg_func_t)gapc_conn_rssi_ind_handler},/*获取连接信号强度*/
+		{APP_LED_CTRL_SCAN,			      (ke_msg_func_t)app_led_ctrl_scan_handler},/*LED控制*/
+		{USER_APP_CALENDAR_UPDATE,		(ke_msg_func_t)Calendar_Update_handler},/*日历更新数据*/
+		
+
 };
 
 /* 指定所有状态通用的消息处理程序. */

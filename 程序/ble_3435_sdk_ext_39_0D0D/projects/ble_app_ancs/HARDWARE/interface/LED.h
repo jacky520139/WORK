@@ -1,6 +1,6 @@
 #ifndef _LED_H
 #define _LED_H
-  
+ #include "ALL_Includes.h" 
 #define	Get1		0x11
 #define	Set_Get1()		REG_APB5_GPIOB_DATA |= 0x01
 #define	RES_Get1()		REG_APB5_GPIOB_DATA &= (~0x01)
@@ -31,8 +31,20 @@
 #define	RES_COM4()		REG_APB5_GPIOA_DATA &= (~0x20)
 #define	COM4Toggle()	REG_APB5_GPIOA_DATA ^= 0x20
 
+
+struct LED_Dev_tag
+{
+  u8 Mode;//模式
+	u8 TIME_s;//运行的时间，秒
+	u8 TIME_min;//运行的时间，分钟
+};
+extern struct LED_Dev_tag LED_Dev;
 void Init_LED(void);
 void BlueLed(void);
+u32 LED_Scan(void);
+int app_led_ctrl_scan_handler(ke_msg_id_t const msgid,void const *param,ke_task_id_t const dest_id, ke_task_id_t const src_id);
+int ble_printf(const char *fmt,...);
+void ble_printf_text(void);
 
 
 #endif

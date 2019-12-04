@@ -139,8 +139,8 @@ void uart_read(uint8_t *bufptr, uint32_t size, void (*callback) (void*, uint8_t)
  *
  * @param[in] bufptr   Pointer to the TX buffer
  * @param[in] size     Size of the transmission
- * @param[in] 指向传输完成时回调的函数的回调指针
- * @param[in] dummy    传输完成时返回回调的虚拟数据指针
+ * @param[in] callback Pointer to the function called back when transfer finished
+ * @param[in] dummy    Dummy data pointer returned to callback when transmission is finished
  *****************************************************************************************
  */
 void uart_write(uint8_t *bufptr, uint32_t size, void (*callback) (void*, uint8_t), void* dummy);

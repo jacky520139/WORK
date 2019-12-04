@@ -229,19 +229,29 @@ uint8_t Uart_Read_Byte(void)
 	return (REG_APB3_UART_PORT&0xff);
 }
 
-
+#include "app_fff0.h"              // Battery Application Module Definitions
 int uart_putchar(char * st)
 {
 	uint8_t num = 0;
+		char *st_temp=st;
 	while (*st)
 	{
-		if(UART_TX_WRITE_READY)
-		{
-			REG_APB3_UART_PORT = *st;
 			st++;
 			num++;
-		}
 	}
+	uart_send((uint8_t*)st_temp,num);
+//	app_fff1_send_lvl((uint8_t*)st_temp,num);
+//	while (*st)
+//	{
+////		 app_fff1_send_lvl((uint8_t*)st,1);
+//		if(UART_TX_WRITE_READY)
+//		{
+//			REG_APB3_UART_PORT = *st;
+//			st++;
+//			num++;
+//		}
+
+//	}
 	return num;
 }
 
@@ -480,7 +490,7 @@ enum
     DUT_MODE = 1,
     REG_MODE = 2,
 };
-
+#include "gpio.h"
 void uart_isr(void)
 {
 	uint32_t IntStat;
@@ -497,65 +507,65 @@ void uart_isr(void)
 			}
 		}
 	}
+	BlueLedToggle();
+//	if((system_mode & RW_DUT_MODE) == RW_DUT_MODE)
+//	{
+//		void (*callback) (void*, uint8_t) = NULL;
+//		void* data =NULL;
+//		if( uart_rx_end_isr_getf())
+//		{
+//			if((uart_rx_buf[0] == 0x01) &&(uart_rx_buf[1] == 0xe0)&& (uart_rx_buf[2] == 0xfc))
+//			{
+//				uart_dut_reg_flag = REG_MODE;
+//			}
+//			else if((uart_rx_buf[0] == 0x01) && (uart_rx_index > 3))
+//			{
+//				uart_dut_reg_flag = DUT_MODE;
+//			}
 
-	if((system_mode & RW_DUT_MODE) == RW_DUT_MODE)
-	{
-		void (*callback) (void*, uint8_t) = NULL;
-		void* data =NULL;
-		if( uart_rx_end_isr_getf())
-		{
-			if((uart_rx_buf[0] == 0x01) &&(uart_rx_buf[1] == 0xe0)&& (uart_rx_buf[2] == 0xfc))
-			{
-				uart_dut_reg_flag = REG_MODE;
-			}
-			else if((uart_rx_buf[0] == 0x01) && (uart_rx_index > 3))
-			{
-				uart_dut_reg_flag = DUT_MODE;
-			}
-
-			if(uart_dut_reg_flag != NORMAL_MODE)
-			{
-				uart_rx_done = 1 ;
-			}
-			else
-			{
-				uart_rx_index = 0;
-			}
-		}
-		if(uart_dut_reg_flag == DUT_MODE)
-		{
-			uart_rx_index = 0;
-			callback = uart_env.rx.callback;
-			data = uart_env.rx.dummy;
-			if(callback != NULL)
-			{
-				// Clear callback pointer
-				uart_env.rx.callback = NULL;
-				uart_env.rx.dummy    = NULL;
-				callback(data, RWIP_EIF_STATUS_OK);
-			}
-		}
-		uart_dut_reg_flag = NORMAL_MODE;
-	}
-	else if((system_mode & RW_FCC_MODE) == RW_FCC_MODE)
-	{
-		uart_rx_done = 1;
-	}
-	else if((system_mode & RW_PN9_MODE) == RW_PN9_MODE)
-	{
-		uart_rx_done = 1;
-		pn9_test_process(uart_rx_buf,uart_rx_index);
-		uart_rx_index = 0;
-	}
-	else
-	{
-		uart_rx_done = 1;//接收完成
+//			if(uart_dut_reg_flag != NORMAL_MODE)
+//			{
+//				uart_rx_done = 1 ;
+//			}
+//			else
+//			{
+//				uart_rx_index = 0;
+//			}
+//		}
+//		if(uart_dut_reg_flag == DUT_MODE)
+//		{
+//			uart_rx_index = 0;
+//			callback = uart_env.rx.callback;
+//			data = uart_env.rx.dummy;
+//			if(callback != NULL)
+//			{
+//				// Clear callback pointer
+//				uart_env.rx.callback = NULL;
+//				uart_env.rx.dummy    = NULL;
+//				callback(data, RWIP_EIF_STATUS_OK);
+//			}
+//		}
+//		uart_dut_reg_flag = NORMAL_MODE;
+//	}
+//	else if((system_mode & RW_FCC_MODE) == RW_FCC_MODE)
+//	{
+//		uart_rx_done = 1;
+//	}
+//	else if((system_mode & RW_PN9_MODE) == RW_PN9_MODE)
+//	{
+//		uart_rx_done = 1;
+//		pn9_test_process(uart_rx_buf,uart_rx_index);
+//		uart_rx_index = 0;
+//	}
+//	else
+//	{
+//		uart_rx_done = 1;//接收完成
 		if(usrt_rx_cb)
 		{
 			(*usrt_rx_cb)(uart_rx_buf, uart_rx_index);
 		}
 		uart_rx_index = 0;
-	}
+//	}
 	uart_isr_stat_set(IntStat);
 }
 

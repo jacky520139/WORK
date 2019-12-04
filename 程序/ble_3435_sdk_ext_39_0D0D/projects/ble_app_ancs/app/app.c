@@ -49,6 +49,7 @@
 #include "adc.h"
 #include "gpio.h"
 #include "wdt.h"
+#include "led.h"
 /*
  * DEFINES
  ****************************************************************************************
@@ -156,7 +157,9 @@ void appm_init()
 	app_sec_init();
 
 	// Oad Module
-    app_oads_init();		
+    app_oads_init();	
+
+		
 }
 //添加服务
 bool appm_add_svc(void)
@@ -194,6 +197,7 @@ void appm_disconnect(void)
     // Send the message
     ke_msg_send(cmd);
 }
+
 /**
  ****************************************************************************************
  * Advertising Functions
@@ -419,7 +423,9 @@ void appm_start_advertising(void)
         ke_state_set(TASK_APP, APPM_ADVERTISING);//设置成广播状态	
 
     }
-	
+//	  ke_timer_set(APP_LED_CTRL_SCAN,TASK_APP,10);
+		ke_msg_send_basic(APP_LED_CTRL_SCAN,TASK_APP,TASK_APP);//开始扫描LED
+		ke_msg_send_basic(USER_APP_CALENDAR_UPDATE, TASK_APP,TASK_APP);//开始更新日历数据
     // else ignore the request
 }
 
@@ -497,7 +503,22 @@ void appm_update_param(struct gapc_conn_param *conn_param)
     // Send the message
     ke_msg_send(cmd);
 }
+//获取连接信号强度
+void appm_get_conn_rssi(void)
+{
+	// connection index has been put in addr_src
+//	struct gapc_get_info_cmd* info_cmd = KE_MSG_ALLOC(GAPC_GET_INFO_CMD,
+//	        KE_BUILD_ID(TASK_GAPC,0), TASK_GAPM,
+//	        gapc_get_info_cmd);
+	struct gapc_get_info_cmd* info_cmd = KE_MSG_ALLOC(GAPC_GET_INFO_CMD,
+	        KE_BUILD_ID(TASK_GAPC,0), TASK_GAPM,
+	        gapc_get_info_cmd);	
+	// request peer device name.
+	info_cmd->operation = GAPC_GET_CON_RSSI;
 
+	// send command
+	ke_msg_send(info_cmd);
+}
 //*获取设备名
 uint8_t appm_get_dev_name(uint8_t* name)
 {

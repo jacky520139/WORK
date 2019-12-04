@@ -80,9 +80,9 @@ void app_batt_add_bas(void)
     // Set parameters
     db_cfg = (struct bass_db_cfg* ) req->param;
  
-    // Add a BAS instance
+    // Add a BAS instance添加BAS实例
     db_cfg->bas_nb      = 1;
-    // Sending of notifications is supported
+    // Sending of notifications is supported支持发送通知
     db_cfg->features[0] = BAS_BATT_LVL_NTF_SUP;
 
     // Send the message

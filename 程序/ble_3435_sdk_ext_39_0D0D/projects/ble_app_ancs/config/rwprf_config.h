@@ -27,6 +27,7 @@
  */
 
 //ATT DB,Testing and Qualification related flags
+//ATT DB，测试和鉴定相关标志
 #if (BLE_CENTRAL || BLE_PERIPHERAL)
 
 // <<< Use Configuration Wizard in Context Menu >>> 

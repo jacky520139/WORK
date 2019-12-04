@@ -32,7 +32,7 @@
  ****************************************************************************************
  */
 
-///Flash type code used to select the correct erasing and programming algorithm
+///用于选择正确擦除和编程算法的Flash类型代码
 #define FLASH_TYPE_UNKNOWN             0
 #define FLASH_SPACE_TYPE_MAIN					 0x3435
 #define FLASH_TYPE_EMBEN_BK3435        FLASH_SPACE_TYPE_MAIN
@@ -58,7 +58,7 @@
 #define UPDATE_CHUNK_SIZE                                 (32)
 
 #define GD_FLASH_1	 0XC84013
-#define GD_MD25D40   0x514013
+#define GD_MD25D40   0x514013   
 #define GD_GD25WD40  0xc86413
 
 
@@ -135,7 +135,7 @@ void flash_init(void);
  ****************************************************************************************
  * @brief   Identify the flash device.
  *
- * This function is used to read the flash device ID.
+ * 此功能用于读取闪存设备ID。
  * 
  * Note: callback parameter is not used
  *
@@ -150,7 +150,7 @@ uint8_t flash_identify(uint8_t* id, void (*callback)(void));
  ****************************************************************************************
  * @brief   Erase a flash section.
  *
- * This function is used to erase a part of the flash memory.
+ * 此功能用于清除部分闪存。
  * 
  * Note: callback parameter is not used
  *
@@ -167,7 +167,7 @@ uint8_t flash_erase(uint8_t flash_type, uint32_t offset, uint32_t size, void (*c
  ****************************************************************************************
  * @brief   Write a flash section.
  *
- * This function is used to write a part of the flash memory.
+ * 此函数用于写入部分闪存。
  * 
  * Note: callback parameter is not used
  *
@@ -185,7 +185,7 @@ uint8_t flash_write(uint8_t flash_type, uint32_t offset, uint32_t length, uint8_
  ****************************************************************************************
  * @brief   Read a flash section.
  *
- * This function is used to read a part of the flash memory.
+此功能用于读取部分闪存。
  * 
  * Note: callback parameter is not used
  *

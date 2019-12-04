@@ -434,7 +434,7 @@ void rwip_init(uint32_t error)
     #endif //HCI_PRESENT
 
     #if (AHI_TL_SUPPORT)
-    // Initialize the Application Host Interface初始化应用程序主机接口
+    // Initialize the Application Host Interface
     ahi_init();
     #endif //AHI_TL_SUPPORT
 

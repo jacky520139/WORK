@@ -64,19 +64,19 @@
 
 
 ///***** AD Type Flag - Bit set *******/
-/// Limited discovery flag - AD Flag有限发现标志-AD标志
+/// Limited discovery flag - AD Flag
 #define GAP_LE_LIM_DISCOVERABLE_FLG             0x01
-/// General discovery flag - AD Flag通用发现标志-AD标志
+/// General discovery flag - AD Flag
 #define GAP_LE_GEN_DISCOVERABLE_FLG             0x02
 /// Legacy BT not supported - AD Flag
 #define GAP_BR_EDR_NOT_SUPPORTED                0x04
-/// Dual mode for controller supported (BR/EDR/LE) - AD Flag支持控制器的双模式（BR/EDR/LE）-AD标志
+/// Dual mode for controller supported (BR/EDR/LE) - AD Flag
 #define GAP_SIMUL_BR_EDR_LE_CONTROLLER          0x08
-/// Dual mode for host supported (BR/EDR/LE) - AD Flag支持主机的双模式（BR/EDR/LE）AD标志
+/// Dual mode for host supported (BR/EDR/LE) - AD Flag
 #define GAP_SIMUL_BR_EDR_LE_HOST                0x10
 
 /*********** GAP Miscellaneous Defines *************/
-/// 无效的连接索引
+/// Invalid connection index
 #define GAP_INVALID_CONIDX                      0xFF
 
 /// Invalid connection handle
@@ -206,7 +206,7 @@
 #define GAP_CONN_LATENCY                                    0x0000
 
 /// GAP Device name Characteristic
-/// 默认设备名
+/// Default device name
 #define GAP_DEV_NAME                                        "RIVIERAWAVES-BLE"
 
 /// GAP Appearance or Icon Characteristic - 2 octets
@@ -393,15 +393,15 @@ enum gap_scan_mode
 enum gap_io_cap
 {
     /// Display Only
-    GAP_IO_CAP_DISPLAY_ONLY = 0x00,/*本机显示密码，对端输入密码*/
+    GAP_IO_CAP_DISPLAY_ONLY = 0x00,
     /// Display Yes No
-    GAP_IO_CAP_DISPLAY_YES_NO,/*本机显示密码，对端输入密码后，还需要本机确认是否配对？*/
+    GAP_IO_CAP_DISPLAY_YES_NO,
     /// Keyboard Only
-    GAP_IO_CAP_KB_ONLY,/*对端显示密码，本机输入密码*/
+    GAP_IO_CAP_KB_ONLY,
     /// No Input No Output
-    GAP_IO_CAP_NO_INPUT_NO_OUTPUT,/*本机即不能显示密码也不能输入密码，对端只需要确定是否配对*/
+    GAP_IO_CAP_NO_INPUT_NO_OUTPUT,
     /// Keyboard Display
-    GAP_IO_CAP_KB_DISPLAY,/* 是否是双方都要输入对方显示的密码*/
+    GAP_IO_CAP_KB_DISPLAY,
     GAP_IO_CAP_LAST
 };
 
@@ -454,13 +454,13 @@ enum gap_lk_sec_lvl
     GAP_LK_SEC_CON,
 };
 
-/// 认证要求
+/// Authentication Requirements
 enum gap_auth
 {
-    /// No MITM No Bonding没有MITM没有结合
+    /// No MITM No Bonding
     GAP_AUTH_REQ_NO_MITM_NO_BOND  = (GAP_AUTH_NONE),
     /// No MITM Bonding
-    GAP_AUTH_REQ_NO_MITM_BOND     = (GAP_AUTH_BOND),/*没有密码有邦定*/
+    GAP_AUTH_REQ_NO_MITM_BOND     = (GAP_AUTH_BOND),
     /// MITM No Bonding
     GAP_AUTH_REQ_MITM_NO_BOND     = (GAP_AUTH_MITM),
     /// MITM and Bonding
@@ -607,7 +607,7 @@ struct gap_bdaddr
 {
     /// BD Address of device
     bd_addr_t addr;
-    /// Address type of the device 0=public/1=private random  0为公共地址，1为私人地址
+    /// Address type of the device 0=public/1=private random
     uint8_t addr_type;
 };
 

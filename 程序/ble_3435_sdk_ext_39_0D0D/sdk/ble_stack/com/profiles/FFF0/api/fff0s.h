@@ -84,7 +84,6 @@ enum
 
 
 /// FFF0 'Profile' Server environment variable
-//FFF0“Profile”服务器环境变量
 struct fff0s_env_tag
 {
     /// profile environment

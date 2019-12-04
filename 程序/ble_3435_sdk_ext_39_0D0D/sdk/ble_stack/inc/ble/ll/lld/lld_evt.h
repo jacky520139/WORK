@@ -471,9 +471,9 @@ __INLINE uint8_t lld_evt_sca_get(void)
 
 /**
  ****************************************************************************************
- * @brief 从硬件获取当前时间值 HW
+ * @brief Get current time value from HW
  *
- * @return 当前时间单位为625us
+ * @return The current time in units of 625us
  *
  ****************************************************************************************
  */
@@ -489,12 +489,12 @@ __INLINE uint32_t lld_evt_time_get(void)
 
 __INLINE void lld_evt_time_get_us(uint32_t *slot ,  uint32_t *slot1)
 {
-    // Sample the base time count采样基本时间计数
+    // Sample the base time count
     ble_samp_setf(1);
     while(ble_samp_getf());
 
-	*slot = ble_basetimecnt_get();//基时制
-	*slot1 = ble_finetimecnt_get();//精细时间控制
+	*slot = ble_basetimecnt_get();
+	*slot1 = ble_finetimecnt_get();
 
     // Read current time in HW    
     //return (ble_finetimecnt_get());

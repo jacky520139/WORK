@@ -212,13 +212,13 @@ enum gapm_operation
     /* ************************************************ */
     /// Start non connectable advertising
     GAPM_ADV_NON_CONN,// 0x0C
-    /// Start undirected connectable advertising启动无向可连接广告
+    /// Start undirected connectable advertising
     GAPM_ADV_UNDIRECT, // 0x0D
-    /// Start directed connectable advertising启动定向可连接广告
+    /// Start directed connectable advertising
     GAPM_ADV_DIRECT, // 0x0E
-    /// Start directed connectable advertising using Low Duty Cycle使用低占空比启动定向可连接广告
+    /// Start directed connectable advertising using Low Duty Cycle
     GAPM_ADV_DIRECT_LDC, // 0x0F
-    /// Update on the fly advertising data 即时更新广告数据
+    /// Update on the fly advertising data
     GAPM_UPDATE_ADVERTISE_DATA,// 0x10
 
     /* Scan mode operations                             */
@@ -328,7 +328,7 @@ enum gapm_addr_type
 /// Own BD address source of the device
 enum gapm_own_addr
 {
-   /// Public or Private Static Address according to device address configuration根据设备地址配置的公共或私有静态地址
+   /// Public or Private Static Address according to device address configuration
    GAPM_STATIC_ADDR,
    /// Generated resolvable private random address
    GAPM_GEN_RSLV_ADDR,
@@ -387,17 +387,17 @@ enum gapm_att_cfg_flag
 /// +----+----+----+----+----+----+----+----+
 /// |KGEN|          RFU           | SCP| LP |
 /// +----+----+----+----+----+----+----+----+
-enum gapm_pairing_mode//配对模式
+enum gapm_pairing_mode
 {
     /// No pairing authorized
     GAPM_PAIRING_DISABLE  = 0,
-    /// Legacy pairing Authorized授权的传统配对
+    /// Legacy pairing Authorized
     GAPM_PAIRING_LEGACY   = (1 << 0),
-    /// Secure Connection pairing Authorized授权的安全连接配对
+    /// Secure Connection pairing Authorized
     GAPM_PAIRING_SEC_CON  = (1 << 1),
 
 
-    /// Force re-generation of P256 private and public keys强制重新生成P256私钥和公钥
+    /// Force re-generation of P256 private and public keys
     GAPM_PAIRING_FORCE_P256_KEY_GEN = (1<<7),
 };
 
@@ -691,19 +691,19 @@ struct gapm_addr_solved_ind
 struct gapm_adv_host
 {
     /// Advertising mode :
-    /// - GAP_NON_DISCOVERABLE: 不可发现模式
-    /// - GAP_GEN_DISCOVERABLE: 一般可发现模式
-    /// - GAP_LIM_DISCOVERABLE: 有限可发现模式
-    /// - GAP_BROADCASTER_MODE: 广播模式
+    /// - GAP_NON_DISCOVERABLE: Non discoverable mode
+    /// - GAP_GEN_DISCOVERABLE: General discoverable mode
+    /// - GAP_LIM_DISCOVERABLE: Limited discoverable mode
+    /// - GAP_BROADCASTER_MODE: Broadcaster mode
     uint8_t              mode;
 
     /// Advertising filter policy:
-    /// - ADV_ALLOW_SCAN_ANY_CON_ANY: 允许来自任何人的扫描和连接请求
-    /// - ADV_ALLOW_SCAN_WLST_CON_ANY: 只允许来自白名单设备的扫描请求和
+    /// - ADV_ALLOW_SCAN_ANY_CON_ANY: Allow both scan and connection requests from anyone
+    /// - ADV_ALLOW_SCAN_WLST_CON_ANY: Allow both scan req from White List devices only and
     ///   connection req from anyone
-    /// - ADV_ALLOW_SCAN_ANY_CON_WLST: 允许来自任何人的扫描请求和连接请求
+    /// - ADV_ALLOW_SCAN_ANY_CON_WLST: Allow both scan req from anyone and connection req
     ///   from White List devices only
-    /// - ADV_ALLOW_SCAN_WLST_CON_WLST: 允许来自白名单的扫描和连接请求
+    /// - ADV_ALLOW_SCAN_WLST_CON_WLST: Allow scan and connection requests from White List
     ///   devices only
     uint8_t              adv_filt_policy;
 
@@ -743,10 +743,10 @@ struct gapm_air_operation
 struct gapm_start_advertise_cmd
 {
     /// GAPM requested operation:
-    /// - GAPM_ADV_NON_CONN: 开始不可连接的广告
-    /// - GAPM_ADV_UNDIRECT: 启动无向可连接广告
-    /// - GAPM_ADV_DIRECT: 开始定向可连接广告
-    /// - GAPM_ADV_DIRECT_LDC: 使用低占空比启动定向可连接广告
+    /// - GAPM_ADV_NON_CONN: Start non connectable advertising
+    /// - GAPM_ADV_UNDIRECT: Start undirected connectable advertising
+    /// - GAPM_ADV_DIRECT: Start directed connectable advertising
+    /// - GAPM_ADV_DIRECT_LDC: Start directed connectable advertising using Low Duty Cycle
     struct gapm_air_operation op;
 
     /// Minimum interval for advertising
@@ -760,10 +760,10 @@ struct gapm_start_advertise_cmd
     /// Advertising information
     union gapm_adv_info
     {
-        /// 主机信息广告数据(GAPM_ADV_NON_CONN and GAPM_ADV_UNDIRECT)
+        /// Host information advertising data (GAPM_ADV_NON_CONN and GAPM_ADV_UNDIRECT)
         struct gapm_adv_host host;
-        ///  直接地址信息 (GAPM_ADV_DIRECT)
-        /// (used only if reconnection address isn't set or privacy disabled)仅在未设置重新连接地址或禁用隐私时使用
+        ///  Direct address information (GAPM_ADV_DIRECT)
+        /// (used only if reconnection address isn't set or privacy disabled)
         struct gap_bdaddr direct;
     } info;
 };
@@ -983,7 +983,7 @@ struct gapm_profile_task_add_cmd
     /// - EKS: Service needs a 16 bytes encryption key
     /// - AUTH: 0 - Disable, 1 - Enable, 2 - Unauth, 3 - Auth
     /// - DIS: Disable the service
-    uint8_t  sec_lvl;
+    uint8_t  sec_lvl;//安全级别
     /// Profile task identifier
     uint16_t prf_task_id;
     /// Application task number
@@ -992,7 +992,7 @@ struct gapm_profile_task_add_cmd
     /// Only applies for services - Ignored by collectors
     /// 0: dynamically allocated in Attribute database
     uint16_t start_hdl;
-    /// 32 bits value that contains value to initialize profile (database parameters, etc...)
+    /// 32 bits value that contains value to initialize profile (database parameters, etc...)32位值包含初始化剖面值
     uint32_t param[__ARRAY_EMPTY];
 };
 

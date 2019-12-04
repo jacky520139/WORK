@@ -48,7 +48,7 @@
 enum gattc_msg_id
 {
     /* Default event */
-    /// Command Complete event命令完成事件
+    /// Command Complete event
     GATTC_CMP_EVT = TASK_FIRST_MSG(TASK_ID_GATTC),
 
     /* ATTRIBUTE CLIENT */
@@ -118,7 +118,7 @@ enum gattc_msg_id
     /* -------------------------- ATTRIBUTE SERVER ------------------------------- */
     /*Notify Characteristic*/
     /*Indicate Characteristic*/
-    /// send an event to peer device向对等设备发送事件
+    /// send an event to peer device
     GATTC_SEND_EVT_CMD,
 
     /* Service Changed Characteristic Indication */
@@ -230,9 +230,9 @@ enum gattc_operation
 
     /* Operation flags for sending events to peer device*/
     /* ************************************************ */
-    /// Send an attribute notification发送属性通知
+    /// Send an attribute notification
     GATTC_NOTIFY,
-    /// Send an attribute indication发送属性指示
+    /// Send an attribute indication
     GATTC_INDICATE,
     /// Send a service changed indication
     GATTC_SVC_CHANGED,
@@ -292,12 +292,12 @@ struct gattc_exc_mtu_cmd
     uint16_t seq_num;
 };
 
-/// Indicate that the ATT MTU has been updated (negotiated)表示ATT MTU已更新
+/// Indicate that the ATT MTU has been updated (negotiated)
 struct gattc_mtu_changed_ind
 {
-    /// Exchanged MTU value变换后的MTU值
+    /// Exchanged MTU value
     uint16_t mtu;
-    /// operation sequence number操作序列号
+    /// operation sequence number
     uint16_t seq_num;
 };
 

@@ -59,7 +59,7 @@ struct app_ancsc_env_tag app_ancsc_env;
 
 void app_ancsc_init(void)
 {
-	UART_PRINTF("%s \r\n",__func__);
+//	UART_PRINTF("%s \r\n",__func__);
     // Reset the environment
     memset(&app_ancsc_env, 0, sizeof(struct app_ancsc_env_tag)); 
 }

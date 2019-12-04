@@ -202,7 +202,7 @@ void appm_update_param(struct gapc_conn_param *conn_param);
  ****************************************************************************************
  */
 void appm_disconnect(void);
-
+void appm_get_conn_rssi(void);
 /**
  ****************************************************************************************
  * @brief Retrieve device name

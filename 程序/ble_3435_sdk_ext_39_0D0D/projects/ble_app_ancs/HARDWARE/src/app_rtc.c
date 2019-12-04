@@ -1,20 +1,26 @@
 #include "ALL_Includes.h"
-
+//#define USER_APP_CALENDAR_UPDATE_TIME   360000//1天更新一次
+#define USER_APP_CALENDAR_UPDATE_TIME   36//1天更新一次
 calendar_dev calendar;//日历结构体
 alarm_dev alarm1,alarm2,alarm3,alarm4,alarm5;
 alarm_dev*  alarm[alarm_class]={&alarm1,&alarm2,&alarm3,&alarm4,&alarm5};//闹钟
+
 u8 RTC_Get_Week(u16 year,u8 month,u8 day);
+static u32 daycnt=0;
+static u8 weekcnt=0;
+
 void Init_RTC(void)
 {
-calendar.syear=DEFAULT_YEAR;
-calendar.smon=DEFAULT_MON;
-calendar.sdate=DEFAULT_DATE;
-calendar.RTC.hour=RTC_DEFAULT_HOUR;
+calendar.year=DEFAULT_YEAR;
+calendar.mon=DEFAULT_MON;
+calendar.date=DEFAULT_DATE;
+calendar.RTC.hour=RTC_DEFAULT_HOUR; 
 calendar.RTC.minute=RTC_DEFAULT_MINUTE;
 calendar.RTC.second=RTC_DEFAULT_SECOND;
 calendar.RTC.week_day=RTC_DEFAULT_WEEK_DAY;
 rtc_init(&calendar.RTC);
 rtc_enable();
+
 }
 //判断是否是闰年函数
 //月份   1  2  3  4  5  6  7  8  9  10 11 12
@@ -43,31 +49,63 @@ u8 Is_Leap_Year(u16 year)
 u8 const table_week[12]={0,3,3,6,1,4,6,2,5,0,3,5}; //月修正数据表	  
 //平年的月份日期表
 const u8 mon_table[12]={31,28,31,30,31,30,31,31,30,31,30,31};
-u8 RTC_Set(u16 syear,u8 smon,u8 sday,u8 hour,u8 min,u8 sec)
+u8 Calendar_Seting(u16 year,u8 mon,u8 day,u8 hour,u8 min,u8 sec)
 {
-calendar.syear=syear;
-calendar.smon=smon;
-calendar.sdate=sday;
+//calendar.year=year;
+//calendar.mon=mon;
+//calendar.date=day;
+//calendar.RTC.hour=hour;
+//calendar.RTC.minute=min;
+//calendar.RTC.second=sec;
+//calendar.RTC.week_day=RTC_Get_Week(year,mon,day);
+//rtc_init(&calendar.RTC);
+calendar.year=year;
+calendar.mon=mon;
+calendar.date=day;
 calendar.RTC.hour=hour;
 calendar.RTC.minute=min;
 calendar.RTC.second=sec;
-calendar.RTC.week_day=RTC_Get_Week(syear,smon,sday);
+calendar.RTC.week_day=RTC_Get_Week(year,mon,day);
 rtc_init(&calendar.RTC);
+	u16 t;
+//	u32 seccount=0;
+	daycnt=0;
+	if(year<2010||year>2099)return 1;	   
+	for(t=2010;t<year;t++)	//把所有年份的秒钟相加
+	{
+		if(Is_Leap_Year(t))daycnt+=366;//闰年的秒钟数
+		else daycnt+=365;			  //平年的秒钟数
+	}
+	mon-=1;
+	for(t=0;t<mon;t++)	   //把前面月份的秒钟数相加
+	{
+		daycnt+=(u32)mon_table[t];//月份秒钟数相加
+		if(Is_Leap_Year(year)&&t==1)daycnt+=1;//闰年2月份增加一天的秒钟数	   
+	}
+	daycnt+=(u32)(day-1);//把前面日期的秒钟数相加
+	weekcnt=calendar.RTC.week_day;
+	ke_msg_send_basic(USER_APP_CALENDAR_UPDATE, TASK_APP,TASK_APP);
+	UART_PRINTF("daycnt=%d\r\n",daycnt);		
+  UART_PRINTF("%d-%d-%d %d:%d:%d-%d\r\n",calendar.year,calendar.mon,calendar.date,calendar.RTC.hour,calendar.RTC.minute,calendar.RTC.second,calendar.RTC.week_day);
+	
+//u8 Calendar_Update();
 return 0;	    
 }
 //得到当前的时间
 //返回值:0,成功;其他:错误代码.
-u8 RTC_Get(void)
+u8 Calendar_Update_handler(ke_msg_id_t const msgid, void const *param,
+        ke_task_id_t const dest_id, ke_task_id_t const src_id)
 {
-	static u32 daycnt=0;
-	static u8 weekcnt=0;
+
+
 	u16 temp1=0;	 
-//	rtc_get_time(&calendar.RTC);	
+	rtc_get_time(&calendar.RTC);	
 	if(calendar.RTC.week_day!=weekcnt)//超过一天了
 	{	  
 		weekcnt=calendar.RTC.week_day;
 		daycnt++;
 		temp1=2010;	//从2010年开始
+//		temp1=calendar.year;
 		while(daycnt>=365)
 		{				 
 			if(Is_Leap_Year(temp1))//是闰年
@@ -78,11 +116,11 @@ u8 RTC_Get(void)
 			else daycnt-=365;	  //平年 
 			temp1++;  
 		}   
-		calendar.syear=temp1;//得到年份
+		calendar.year=temp1;//得到年份
 		temp1=0;
 		while(daycnt>=28)//超过了一个月
 		{
-			if(Is_Leap_Year(calendar.syear)&&temp1==1)//当年是不是闰年/2月份
+			if(Is_Leap_Year(calendar.year)&&temp1==1)//当年是不是闰年/2月份
 			{
 				if(daycnt>=29)daycnt-=29;//闰年的秒钟数
 				else break; 
@@ -94,9 +132,10 @@ u8 RTC_Get(void)
 			}
 			temp1++;  
 		}
-		calendar.smon=temp1+1;	//得到月份
-		calendar.sdate=daycnt+1;  	//得到日期 
+		calendar.mon=temp1+1;	//得到月份
+		calendar.date=daycnt+1;  	//得到日期 
 	}
+	ke_timer_set(USER_APP_CALENDAR_UPDATE,TASK_APP , USER_APP_CALENDAR_UPDATE_TIME);//1天更新一次日历数据
 	return 0;
 }	 
 //获得现在是星期几

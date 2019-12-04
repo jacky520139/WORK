@@ -281,7 +281,7 @@ enum rwble_pti_config_idx
 
 
 
-#define BLE_MIN_OCTETS  (27)//°ËÎ»×Ö½Ú
+#define BLE_MIN_OCTETS  (27)
 #define BLE_MIN_TIME    (328)
 #if !(BLE_QUALIF)
 #define BLE_MAX_OCTETS      (251)

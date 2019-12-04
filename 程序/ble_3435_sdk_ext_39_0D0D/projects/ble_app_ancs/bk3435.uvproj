@@ -1130,6 +1130,21 @@
               <FileType>1</FileType>
               <FilePath>.\HARDWARE\src\LED.c</FilePath>
             </File>
+            <File>
+              <FileName>app_step.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HARDWARE\src\app_step.c</FilePath>
+            </File>
+            <File>
+              <FileName>User_Save.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HARDWARE\src\User_Save.c</FilePath>
+            </File>
+            <File>
+              <FileName>user_app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HARDWARE\src\user_app.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1149,6 +1164,16 @@
               <FileName>bk3435_pn9_mode.lib</FileName>
               <FileType>4</FileType>
               <FilePath>..\..\libs\bk3435_pn9_mode.lib</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>README</GroupName>
+          <Files>
+            <File>
+              <FileName>README.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\README\README.txt</FilePath>
             </File>
           </Files>
         </Group>

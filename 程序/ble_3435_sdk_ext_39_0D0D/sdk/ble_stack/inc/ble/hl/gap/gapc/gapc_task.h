@@ -48,24 +48,24 @@
 enum gapc_msg_id
 {
     /* Default event */
-    /// 命令完成事件
+    /// Command Complete event
     GAPC_CMP_EVT = TASK_FIRST_MSG(TASK_ID_GAPC),
 
     /* Connection state information */
-    /// 表示已建立连接
+    /// Indicate that a connection has been established
     GAPC_CONNECTION_REQ_IND,
-    /// Set specific link data configuration.设置特定的链路数据配置
+    /// Set specific link data configuration.
     GAPC_CONNECTION_CFM,
 
-    /// 表示链接已断开
+    /// Indicate that a link has been disconnected
     GAPC_DISCONNECT_IND,
 
     /* Link management command */
-    /// 请求断开当前链接命令。
+    /// Request disconnection of current link command.
     GAPC_DISCONNECT_CMD,
 
     /* Peer device info */
-    /// 检索信息命令
+    /// Retrieve information command
     GAPC_GET_INFO_CMD,
     /// Peer device attribute DB info such as Device Name, Appearance or Slave Preferred Parameters
     GAPC_PEER_ATT_INFO_IND,
@@ -73,7 +73,7 @@ enum gapc_msg_id
     GAPC_PEER_VERSION_IND,
     /// Indication of peer features info
     GAPC_PEER_FEATURES_IND,
-    /// Indication of ongoing connection RSSI持续连接指示
+    /// Indication of ongoing connection RSSI
     GAPC_CON_RSSI_IND,
 
     /* Device Name Management */
@@ -92,7 +92,6 @@ enum gapc_msg_id
     /// Request of updating connection parameters indication
     GAPC_PARAM_UPDATE_REQ_IND,
     /// Master confirm or not that parameters proposed by slave are accepted or not
-		//主确认是否接受从机提出的参数
     GAPC_PARAM_UPDATE_CFM,
     /// Connection parameters updated indication
     GAPC_PARAM_UPDATED_IND,
@@ -188,50 +187,50 @@ enum gapc_msg_id
 
 
 
-//请求操作类型-应用程序接口
+
 /// request operation type - application interface
 enum gapc_operation
 {
     /*                 Operation Flags                  */
     /* No Operation (if nothing has been requested)     */
     /* ************************************************ */
-    /// 无操作
+    /// No operation
     GAPC_NO_OP                                    = 0x00,
 
-    /* Connection management 连接管理 */
-    /// Disconnect link 断开连接
+    /* Connection management */
+    /// Disconnect link
     GAPC_DISCONNECT,
 
-    /* 连接信息 */
-    /// 检索同款设备名称
+    /* Connection information */
+    /// Retrieve name of peer device.
     GAPC_GET_PEER_NAME,
-    /// 检索同款设备版本信息
+    /// Retrieve peer device version info.
     GAPC_GET_PEER_VERSION,
-    /// 检索同款设备功能
+    /// Retrieve peer device features.
     GAPC_GET_PEER_FEATURES,
-    /// Get Peer device appearance获取同款设备外观
+    /// Get Peer device appearance
     GAPC_GET_PEER_APPEARANCE,
-    /// Get Peer device Slaved Preferred Parameters获取同款设备从属首选参数
+    /// Get Peer device Slaved Preferred Parameters
     GAPC_GET_PEER_SLV_PREF_PARAMS,
-    /// Retrieve connection RSSI.检索连接RSSI。
+    /// Retrieve connection RSSI.
     GAPC_GET_CON_RSSI,
-    /// Retrieve Connection Channel MAP.检索连接频道
+    /// Retrieve Connection Channel MAP.
     GAPC_GET_CON_CHANNEL_MAP,
 
-    /* 连接参数更新 */
-    /// 执行连接参数的更新
+    /* Connection parameters update */
+    /// Perform update of connection parameters.
     GAPC_UPDATE_PARAMS,
 
-    /* 安全程序 */
-    /// Start bonding procedure.开始粘合程序
+    /* Security procedures */
+    /// Start bonding procedure.
     GAPC_BOND,
-    /// Start encryption procedure.启动加密过程
+    /// Start encryption procedure.
     GAPC_ENCRYPT,
-    /// Start security request procedure启动安全请求过程
+    /// Start security request procedure
     GAPC_SECURITY_REQ,
 
-    /* Deprecated不赞成 */
-    /// Deprecated operation不推荐的操作
+    /* Deprecated */
+    /// Deprecated operation
     GAPC_OP_DEPRECATED_0,
     GAPC_OP_DEPRECATED_1,
     GAPC_OP_DEPRECATED_2,
@@ -261,11 +260,11 @@ enum gapc_operation
     /// Retrieve PHY configuration of active link
     GAPC_GET_PHY,
 
-    // ---------------------- 内部 API ------------------------
+    // ---------------------- INTERNAL API ------------------------
     /* Packet signature */
-    /// sign an attribute packet签署属性包
+    /// sign an attribute packet
     GAPC_SIGN_PACKET,
-    /// Verify signature or an attribute packet验证签名或属性包
+    /// Verify signature or an attribute packet
     GAPC_SIGN_CHECK,
 };
 
@@ -282,9 +281,9 @@ enum gapc_bond
     /// Pairing Failed information
     GAPC_PAIRING_FAILED,
 
-    /// Used to retrieve pairing Temporary Key用于检索配对临时密钥
+    /// Used to retrieve pairing Temporary Key
     GAPC_TK_EXCH,
-    /// Used for Identity Resolving Key exchange用于身份解析密钥交换
+    /// Used for Identity Resolving Key exchange
     GAPC_IRK_EXCH,
     /// Used for Connection Signature Resolving Key exchange
     GAPC_CSRK_EXCH,
@@ -347,29 +346,29 @@ struct gapc_operation_cmd
 /// Command complete event data structure
 struct gapc_cmp_evt
 {
-    /// GAP request type   GAP请求类型
-    uint8_t operation;//请求操作类型
-    /// Status of the request 请求状态
+    /// GAP request type
+    uint8_t operation;
+    /// Status of the request
     uint8_t status;
 };
 
-/// 表示已建立连接
+/// Indicate that a connection has been established
 struct gapc_connection_req_ind
 {
-    /// Connection handle连接句柄
+    /// Connection handle
     uint16_t conhdl;
-    /// Connection interval 
-    uint16_t con_interval;  //连接间隔
+    /// Connection interval
+    uint16_t con_interval;
     /// Connection latency
-    uint16_t con_latency;   //连接延时
+    uint16_t con_latency;
     /// Link supervision timeout
-    uint16_t sup_to;        //连接超时
+    uint16_t sup_to;
     /// Clock accuracy
-    uint8_t clk_accuracy;   //时钟精度
-    /// Peer address type  
-    uint8_t peer_addr_type;  //同设备的地址类型
+    uint8_t clk_accuracy;
+    /// Peer address type
+    uint8_t peer_addr_type;
     /// Peer BT address
-    bd_addr_t peer_addr;      //同设备的地址
+    bd_addr_t peer_addr;
 };
 
 
@@ -417,7 +416,7 @@ struct gapc_disconnect_ind
 };
 
 
-/// 检索信息命令
+/// Retrieve information command
 struct gapc_get_info_cmd
 {
     /// GAP request type:
@@ -428,8 +427,8 @@ struct gapc_get_info_cmd
     /// - GAPC_GET_CON_CHANNEL_MAP: Retrieve Connection Channel MAP.
     /// - GAPC_GET_PEER_APPEARANCE: Get Peer device appearance
     /// - GAPC_GET_PEER_SLV_PREF_PARAMS: Get Peer device Slaved Preferred Parameters
-    /// - GAPC_GET_ADDR_RESOL_SUPP: Address Resolution Supported
-    /// - GAPC_GET_LE_PING_TIMEOUT: Retrieve LE Ping Timeout Value
+    /// - GAPC_GET_ADDR_RESOL_SUPP: Address Resolution Supported支持地址解析
+    /// - GAPC_GET_LE_PING_TIMEOUT: Retrieve LE Ping Timeout Value etrieve LE Ping超时值
     uint8_t operation;
 };
 
@@ -557,11 +556,11 @@ struct gapc_set_dev_info_req_ind
 struct gapc_set_dev_info_cfm
 {
     /// Requested information
-    /// - GAPC_DEV_NAME: Device Name设备名称
-    /// - GAPC_DEV_APPEARANCE: Device Appearance Icon设备外观图标
+    /// - GAPC_DEV_NAME: Device Name
+    /// - GAPC_DEV_APPEARANCE: Device Appearance Icon
     uint8_t req;
 
-    /// Status code used to know if requested has been accepted or not用于知道请求是否已被接受的状态代码
+    /// Status code used to know if requested has been accepted or not
     uint8_t status;
 };
 
@@ -635,7 +634,7 @@ struct gapc_param_update_cfm
     uint16_t ce_len_max;
 };
 
-/// Pairing parameters
+/// Pairing parameters配对
 struct gapc_pairing
 {
     /// IO capabilities (@see gap_io_cap)

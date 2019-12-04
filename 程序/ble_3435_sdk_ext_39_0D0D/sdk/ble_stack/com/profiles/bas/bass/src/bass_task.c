@@ -362,9 +362,9 @@ static int gattc_read_req_ind_handler(ke_msg_id_t const msgid, struct gattc_read
 static int gattc_cmp_evt_handler(ke_msg_id_t const msgid,  struct gattc_cmp_evt const *param,
                                  ke_task_id_t const dest_id, ke_task_id_t const src_id)
 {
-    if(param->operation == GATTC_NOTIFY)//如果通知是打开的
+    if(param->operation == GATTC_NOTIFY)
     {
-        // continue operation execution继续执行操作
+        // continue operation execution
         bass_exe_operation();
     }
     return (KE_MSG_CONSUMED);

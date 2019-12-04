@@ -114,8 +114,8 @@ void intc_init(void)
     // enable the supported interrupts启用支持的中断
     intc_enable_set(INT_IRQ_BIT | FIQ_IRQ_BIT);
 	
-    intc_module_enable_set(INT_BLE_bit | INT_UART_bit);
-//	 intc_module_enable_set(INT_UART_bit);
+//    intc_module_enable_set(INT_BLE_bit | INT_UART_bit);
+	 intc_module_enable_set(INT_UART_bit);
 }
 //清除中断标志位
 void intc_stat_clear(void)
@@ -209,7 +209,7 @@ void IRQ_Exception(void)
 void FIQ_Exception(void)
 {
 	uint32_t IntStat;
-	uint32_t fiq_status=0;
+	uint32_t fiq_status;
 	IntStat = intc_status_get();
 
 #if (SYSTEM_SLEEP)

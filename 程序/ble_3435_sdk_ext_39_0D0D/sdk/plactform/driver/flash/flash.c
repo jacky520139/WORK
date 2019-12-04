@@ -257,7 +257,7 @@ void flash_init(void)
 
 }
 
-
+//flash擦除扇区
 void flash_erase_sector(uint32_t address)
 {
     flash_set_line_mode(1);
@@ -311,7 +311,7 @@ void flash_read_data (uint8_t *buffer, uint32_t address, uint32_t len)
         }
         k += 32;        
     }
-    REG_FLASH_OPERATE_SW=FLASH_ADDR_FIX ;
+        REG_FLASH_OPERATE_SW=FLASH_ADDR_FIX ;
     for (i=0; i<8; i++)
         REG_FLASH_DATA_SW_FLASH = 0xffffffff;
 }
@@ -349,7 +349,6 @@ void flash_write_data (uint8_t *buffer, uint32_t address, uint32_t len)
         flash_enable_write_flag4=FLASH_WRITE_ENABLE4; 
         for (i=0; i<8; i++)
             REG_FLASH_DATA_SW_FLASH = buf[i];
-
 
         if(flash_enable_write_flag1==FLASH_WRITE_ENABLE1 && flash_enable_write_flag2==FLASH_WRITE_ENABLE2 )
         {
@@ -520,7 +519,7 @@ uint8_t flash_write(uint8_t flash_space, uint32_t address, uint32_t len, uint8_t
     page0 = address &(~FLASH_PAGE_MASK);
     page1 = (address + len) &(~FLASH_PAGE_MASK);
      
-    if(page0 != page1)
+    if(page0 != page1)//不在同一页
     {
         pre_address = address;
         pre_len = page1 - address;
@@ -545,7 +544,7 @@ uint8_t flash_write(uint8_t flash_space, uint32_t address, uint32_t len, uint8_t
 }
 
 
-
+//将本扇区的数据写到下一个扇区中
 void udi_exchange_fdata_to_adjoining_next_sector(uint32_t data_addr, uint32_t len, uint32_t wr_point_inpage)
 {
     /* assume: the space, from address(current sector) to next sector, can be operated  */
@@ -578,10 +577,10 @@ void udi_exchange_fdata_to_adjoining_next_sector(uint32_t data_addr, uint32_t le
     }
 }
 
-
+//将本扇区的数据写到上一个扇区中
 void udi_exchange_fdata_to_adjoining_previous_sector(uint32_t data_addr, uint32_t len, uint32_t wr_point_inpage)
 {
-    /* assume: the space, from previous sector to address+len, can be operated  */
+    /* 假定: the space, from previous sector to address+len, can be operated  从上一个扇区到address+len的空间可以操作*/
     uint8_t tmp[UPDATE_CHUNK_SIZE];
     uint32_t pre_sector_addr;
     uint32_t rd_addr;
@@ -611,7 +610,7 @@ void udi_exchange_fdata_to_adjoining_previous_sector(uint32_t data_addr, uint32_
 }
 
 
-
+//擦除flash
 uint8_t flash_erase(uint8_t flash_type, uint32_t address, uint32_t len, void (*callback)(void))
 {
     /* assume: the worst span is four sectors*/
@@ -687,24 +686,42 @@ uint8_t flash_erase(uint8_t flash_type, uint32_t address, uint32_t len, void (*c
 
 
 
-/*
+
 #define  c_Temp_SIZE    0Xff
-#define  TEST_FLASH_ADDRESS  0x72000
+#define  TEST_FLASH_ADDRESS  0x42000
 void flash_test(void)
 {
 	unsigned char cTemp[c_Temp_SIZE];
 	unsigned char cTemp1[c_Temp_SIZE];
 	int i;
-
+  uint32_t flash_id;
 	
 	for (i=0; i<c_Temp_SIZE; i++)
 	{
-	    cTemp[i] = 0;
+	    cTemp[i] = 0x01;
 	}
+//			for (i=0; i<c_Temp_SIZE; i++)
+//	{
+//			UART_PRINTF("cTemp1[%d]=%x\r\n",i,cTemp1[i]);
+//	}
 	
-	UART_PRINTF("\r\n");
-	flash_write(0,0 ,c_Temp_SIZE,cTemp,NULL);
+//	flash_erase(0, TEST_FLASH_ADDRESS, c_Temp_SIZE,NULL);
+	 flash_id=get_flash_ID();
+	UART_PRINTF("get_flash_ID=%x\r\n",flash_id);
+	flash_write(0,TEST_FLASH_ADDRESS ,c_Temp_SIZE,cTemp,NULL);
+	flash_read (0,TEST_FLASH_ADDRESS ,c_Temp_SIZE,cTemp1,NULL);
+		for (i=0; i<c_Temp_SIZE; i++)
+	{
+			UART_PRINTF("cTemp1[%d]=%x\r\n",i,cTemp1[i]);
+	}
+	UART_PRINTF("/****************************/\r\n");
+//    flash_erase(0, TEST_FLASH_ADDRESS, c_Temp_SIZE,NULL);
+//		flash_read(0,TEST_FLASH_ADDRESS ,c_Temp_SIZE,cTemp1,NULL);
+//		for (i=0; i<c_Temp_SIZE; i++)
+//	{
+//			UART_PRINTF("cTemp1[%d]=%x\r\n",i,cTemp1[i]);
+//	}
 }
-*/
+
 
 

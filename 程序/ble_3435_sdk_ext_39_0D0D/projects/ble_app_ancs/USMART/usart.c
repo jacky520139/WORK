@@ -98,13 +98,13 @@ void USART1_IRQHandler(uint8_t *buf, uint8_t len)
 			}
 		} 
 	}	
-	for(uint8_t i=0; i<len; i++)
-	{
-		UART_PRINTF("0x%x ", buf[i]);
-	}
-	uart_printf("\r\n");			
+//	for(uint8_t i=0; i<len; i++)
+//	{
+//		UART_PRINTF("0x%x ", buf[i]);
 //	}
-app_fff1_send_lvl(buf,len);
+//	UART_PRINTF("\r\n");			
+//	}
+//app_fff1_send_lvl(buf,len);
 } 
 #endif										 
 ////³õÊ¼»¯IO ´®¿Ú1

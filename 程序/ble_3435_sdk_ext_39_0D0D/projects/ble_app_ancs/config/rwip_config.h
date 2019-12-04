@@ -178,7 +178,7 @@
 //   <e> CFG_SLEEP
 //   <i> enable DEEP_SLEEP
 //   </e>
-#if ( 0 )
+#if ( 0)
 #define CFG_SLEEP 
 #endif
 
@@ -882,7 +882,7 @@ enum
 
 /// Size of non retention heap - 512 bytes per ble link plus 4096 bytes for data throughput should be sufficient and should be tuned
 #if (BLE_EMB_PRESENT || BLE_HOST_PRESENT)
-#define RWIP_HEAP_NON_RET_SIZE    (( 512 * BLE_CONNECTION_MAX ) + 1024)//4096)
+#define RWIP_HEAP_NON_RET_SIZE    (( 512 * BLE_CONNECTION_MAX ) + 1024)
 #else
 #define RWIP_HEAP_NON_RET_SIZE    ( 512 )
 #endif

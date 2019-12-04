@@ -7,6 +7,9 @@
 #define	u32   uint32_t
 
 /**************¡¾Í·ÎÄ¼þ¡¿********************/
+#include "app_task.h"              // Application Manager Task API
+#include "ke_timer.h"             // Kernel timer
+#include "user_app.h"
 #include "adc.h"
 #include "pwm.h"
 #include "uart.h"       // uart definition
@@ -17,7 +20,9 @@
 #include "rtc.h"
 #include "app_rtc.h"
 #include "User_Timer.h"
-
+#include "User_Save.h"
+#include "User_app.h"
+#include "app_rtc.h"
 #endif 
 
 

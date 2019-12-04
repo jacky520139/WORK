@@ -40,7 +40,7 @@
 /* Default Message handler code to handle several message type in same handler. */
 //处理同一处理程序中多个消息类型的默认消息处理程序代码
 #define KE_MSG_DEFAULT_HANDLER  (0xFFFF)
-/* 无效任务 */
+/* Invalid task */
 #define KE_TASK_INVALID         (0xFFFF)
 /* Used to know if a message is not present in kernel queue */
 #define KE_MSG_NOT_IN_QUEUE     ((struct co_list_hdr *) 0xFFFFFFFF)
@@ -56,14 +56,14 @@ enum KE_TASK_STATUS
 };
 
 
-#define MSG_T(msg)         ((ke_task_id_t)((msg) >> 8))//任务ID
-#define MSG_I(msg)         ((msg) & ((1<<8)-1))      //消息ID
+#define MSG_T(msg)         ((ke_task_id_t)((msg) >> 8))
+#define MSG_I(msg)         ((msg) & ((1<<8)-1))
 
 /// 任务消息处理程序函数的格式
 typedef int (*ke_msg_func_t)(ke_msg_id_t const msgid, void const *param,
                              ke_task_id_t const dest_id, ke_task_id_t const src_id);
 
-/// Macro for message handler function declaration or definition用于消息处理程序函数声明或定义的宏
+/// Macro for message handler function declaration or definition
 #define KE_MSG_HANDLER(msg_name, param_struct)   __STATIC int msg_name##_handler(ke_msg_id_t const msgid,     \
                                                                                 param_struct const *param,  \
                                                                                 ke_task_id_t const dest_id, \

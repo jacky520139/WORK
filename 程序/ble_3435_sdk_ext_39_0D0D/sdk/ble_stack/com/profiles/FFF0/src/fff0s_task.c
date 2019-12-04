@@ -48,9 +48,9 @@ static int fff0s_fff1_level_upd_req_handler(ke_msg_id_t const msgid,
         struct fff0s_env_tag* fff0s_env = PRF_ENV_GET(FFF0S, fff0s);//配置文件任务ID
 
         // put task in a busy state
-        ke_state_set(dest_id, FFF0S_BUSY);	//设置任务忙状态					
+        ke_state_set(dest_id, FFF0S_BUSY);						
 		fff0s_notify_fff1_lvl(fff0s_env, param);
-		ke_state_set(dest_id, FFF0S_IDLE);      //设置任务空闲状态 
+		ke_state_set(dest_id, FFF0S_IDLE);   
 		msg_status = KE_MSG_CONSUMED;	
     }
 
@@ -233,21 +233,21 @@ static int gattc_read_req_ind_handler(ke_msg_id_t const msgid, struct gattc_read
     return (KE_MSG_CONSUMED);
 }   
 
-//gattc 完成事件处理
+
 static int gattc_cmp_evt_handler(ke_msg_id_t const msgid,  struct gattc_cmp_evt const *param,
                                  ke_task_id_t const dest_id, ke_task_id_t const src_id)
 {
-	if(param->operation == GATTC_NOTIFY)//打开通知完成事件后的处理，发送数据到蓝牙
+    if(param->operation == GATTC_NOTIFY)
     {	
-//      	uint8_t conidx = KE_IDX_GET(src_id);
-//      	struct fff0s_env_tag* fff0s_env = PRF_ENV_GET(FFF0S, fff0s);
+      	uint8_t conidx = KE_IDX_GET(src_id);
+      	struct fff0s_env_tag* fff0s_env = PRF_ENV_GET(FFF0S, fff0s);
 
-//	    struct fff0s_fff1_level_upd_rsp *rsp = KE_MSG_ALLOC(FFF0S_FFF1_LEVEL_UPD_RSP,
-//                                                         prf_dst_task_get(&(fff0s_env->prf_env), conidx),
-//                                                         dest_id, fff0s_fff1_level_upd_rsp);
+	    struct fff0s_fff1_level_upd_rsp *rsp = KE_MSG_ALLOC(FFF0S_FFF1_LEVEL_UPD_RSP,
+                                                         prf_dst_task_get(&(fff0s_env->prf_env), conidx),
+                                                         dest_id, fff0s_fff1_level_upd_rsp);
 
-//        rsp->status = param->status;			
-//        ke_msg_send(rsp);
+        rsp->status = param->status;			
+        ke_msg_send(rsp);
     }
 
 	// go back in to idle mode

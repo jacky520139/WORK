@@ -122,9 +122,9 @@ struct fff0s_fff1_level_upd_rsp
 ///Parameters of the @ref BASS_BATT_LEVEL_NTF_CFG_IND message
 struct fff0s_fff1_level_ntf_cfg_ind
 {
-    /// connection index连接索引
+    /// connection index
     uint8_t  conidx;
-    ///Notification Configuration通知配置
+    ///Notification Configuration
     uint8_t  ntf_cfg;
 };
 

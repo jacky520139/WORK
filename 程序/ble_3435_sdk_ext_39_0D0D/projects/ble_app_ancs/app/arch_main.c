@@ -321,7 +321,8 @@ void rw_main(void)
 	rwip_eif_api_init();
 
 	// Initialize the Interrupt Controller
-	intc_init();
+	intc_init();//÷–∂œ≥ı ºªØ
+	
 	// Initialize UART component
 #if (UART_DRIVER)
 	uart_init(115200);
@@ -363,10 +364,10 @@ void rw_main(void)
 
 	REG_AHB0_ICU_INT_ENABLE |= (0x01 << 15); //BLE INT
 	REG_AHB0_ICU_IRQ_ENABLE = 0x03;
-
+  User_HeadWare_Init();
 	// finally start interrupt handling
 	GLOBAL_INT_START();
-
+  
 
 	UART_PRINTF("start\r\n");
 

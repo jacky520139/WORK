@@ -41,6 +41,8 @@
  
 //连接参数更新控制
 #define UPDATE_CONNENCT_PARAM  			1
+//获取连接信号强度
+#define APP_GET_RSSI_EN             1
 
 //最小连接间隔
 #define BLE_UAPDATA_MIN_INTVALUE		20

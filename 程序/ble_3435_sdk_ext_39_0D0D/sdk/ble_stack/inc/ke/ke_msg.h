@@ -54,18 +54,19 @@
 #include "ke_config.h"       // kernel configuration
 #include "co_list.h"         // list definition
 
-//任务ID。由任务类型和任务索引组成。
+/// Task Identifier. Composed by the task type and the task index.
 typedef uint16_t ke_task_id_t;
-//根据任务的类型和索引生成任务ID
+
+/// Builds the task identifier from the type and the index of that task.
 #define KE_BUILD_ID(type, index) ( (ke_task_id_t)(((index) << 8)|(type)) )
 
-//从任务id检索任务类型
+/// Retrieves task type from task id.
 #define KE_TYPE_GET(ke_task_id) ((ke_task_id) & 0xFF)
 
-//从任务id检索任务索引号
+/// Retrieves task index number from task id.
 #define KE_IDX_GET(ke_task_id) (((ke_task_id) >> 8) & 0xFF)
 
-/// 任务状态
+/// Task State
 typedef uint8_t ke_state_t;
 
 /// Message Identifier. The number of messages is limited to 0xFFFF.

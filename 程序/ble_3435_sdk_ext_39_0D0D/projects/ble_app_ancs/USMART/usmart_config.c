@@ -10,28 +10,34 @@
 #include "app_batt.h" 
 #include "lld_evt.h" 
 #include "ke_timer.h" 
-extern u16 gui_color_chg(u32 rgb);
+#include "flash.h"         // flash definition
+//extern u16 gui_color_chg(u32 rgb);
 //函数名列表初始化(用户自己添加)
 //用户直接在这里输入要执行的函数名及其查找串
 struct _m_usmart_nametab usmart_nametab[]=
 {
 (void*)Init_LED,"void Init_LED(void)",
 (void*)BlueLed,"void BlueLed(void)",
-(void*)appm_start_advertising,"void appm_start_advertising(void)",
-(void*)appm_stop_advertising,"void appm_stop_advertising(void)",
-(void*)appm_disconnect,"void appm_disconnect(void)",
-(void*)appm_get_dev_name,"uint8_t appm_get_dev_name(uint8_t* name)",
-(void*)timer_set_timeout,"void timer_set_timeout(uint32_t to)",
-(void*)timer_enable,"void timer_enable(bool enable)",
-(void*)timer_get_time,"uint32_t timer_get_time(void)",
-(void*)app_batt_send_lvl,"void app_batt_send_lvl(uint8_t batt_lvl)",
-(uint32_t*)lld_evt_time_get,"uint32_t lld_evt_time_get(void)",
-//(int*)appm_msg_handler,"static int appm_msg_handler(ke_msg_id_t const msgid,void *param,ke_task_id_t const dest_id,ke_task_id_t const src_id)",
-(void*)ke_timer_set,"void ke_timer_set(ke_msg_id_t const timer_id, ke_task_id_t const task, uint32_t delay)",
-(void*)ke_timer_clear,"void ke_timer_clear(ke_msg_id_t const timerid, ke_task_id_t const task)",
-(void*)ke_timer_active,"bool ke_timer_active(ke_msg_id_t const timer_id, ke_task_id_t const task_id)"
-
-
+//(void*)appm_start_advertising,"void appm_start_advertising(void)",
+//(void*)appm_stop_advertising,"void appm_stop_advertising(void)",
+//(void*)appm_disconnect,"void appm_disconnect(void)",
+//(void*)appm_get_dev_name,"uint8_t appm_get_dev_name(uint8_t* name)",
+//(void*)timer_set_timeout,"void timer_set_timeout(uint32_t to)",
+//(void*)timer_enable,"void timer_enable(bool enable)",
+//(void*)timer_get_time,"uint32_t timer_get_time(void)",
+//(void*)app_batt_send_lvl,"void app_batt_send_lvl(uint8_t batt_lvl)",
+//(uint32_t*)lld_evt_time_get,"uint32_t lld_evt_time_get(void)",
+////(int*)appm_msg_handler,"static int appm_msg_handler(ke_msg_id_t const msgid,void *param,ke_task_id_t const dest_id,ke_task_id_t const src_id)",
+//(void*)ke_timer_set,"void ke_timer_set(ke_msg_id_t const timer_id, ke_task_id_t const task, uint32_t delay)",
+//(void*)ke_timer_clear,"void ke_timer_clear(ke_msg_id_t const timerid, ke_task_id_t const task)",
+//(void*)ke_timer_active,"bool ke_timer_active(ke_msg_id_t const timer_id, ke_task_id_t const task_id)",
+//(void*)flash_erase,"uint8_t flash_erase(uint8_t flash_type, uint32_t offset, uint32_t size, void (*callback)(void))",
+//(void*)flash_write,"uint8_t flash_write(uint8_t flash_type, uint32_t offset, uint32_t length, uint8_t *buffer, void (*callback)(void))",
+//(void*)flash_read, "uint8_t flash_read(uint8_t flash_type, uint32_t offset, uint32_t length, uint8_t *buffer, void (*callback)(void))",
+//(void*)flash_test,"void flash_test(void)",
+(void*)ble_printf,"int ble_printf(const char *fmt,...)",
+(void*)ble_printf_text,"void ble_printf_text(void)",
+(void*)Calendar_Seting,	"u8 Calendar_Seting(u16 year,u8 mon,u8 day,u8 hour,u8 min,u8 sec)"
 };
 
 ///////////////////////////////////END///////////////////////////////////////////////
