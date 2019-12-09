@@ -33,7 +33,7 @@ typedef struct
 extern calendar_dev calendar;
 
 void Init_RTC(void);
-u8 RTC_Get_Week(u16 year,u8 month,u8 day);
+//u8 RTC_Get_Week(u16 year,u8 month,u8 day);
 u8 Calendar_Seting(u16 year,u8 mon,u8 day,u8 hour,u8 min,u8 sec);
 u8 Calendar_Update_handler(ke_msg_id_t const msgid, void const *param,ke_task_id_t const dest_id, ke_task_id_t const src_id);
 //得到当前的时间

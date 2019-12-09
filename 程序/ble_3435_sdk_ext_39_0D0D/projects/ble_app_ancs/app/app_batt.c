@@ -102,7 +102,7 @@ void app_batt_enable_prf(uint8_t conidx)
     // Fill in the parameter structure
     req->conidx             = conidx;
 
-    // NTF initial status - Disabled
+    // NTF initial status - Disabled  NTF³õÊ¼×´Ì¬-ÒÑ½ûÓÃ
     req->ntf_cfg           = PRF_CLI_STOP_NTFIND;
     req->old_batt_lvl[0]   = 50;
 
@@ -141,6 +141,7 @@ static int batt_level_upd_handler(ke_msg_id_t const msgid,
                                       ke_task_id_t const dest_id,
                                       ke_task_id_t const src_id)
 {
+	
     return (KE_MSG_CONSUMED);
 }
 

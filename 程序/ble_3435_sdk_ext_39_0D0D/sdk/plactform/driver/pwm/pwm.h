@@ -133,7 +133,7 @@ void pwm_disable(unsigned char ucChannel);
 void pwm_int_enable(unsigned char ucChannel);
 
 void pwm_int_disable(unsigned char ucChannel);
-
+void pwm_duty_cycle(unsigned char channel,unsigned short duty_cycle);
 unsigned short pwm_capture_value_get(unsigned char ucChannel);
 
 void pwm_int_handler_clear(unsigned char ucChannel);

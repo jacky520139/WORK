@@ -256,16 +256,22 @@ void rw_app_enter(void)
 			// 1:idel  0:reduce voltage
 			if(icu_get_sleep_mode())
 			{
+//				UART_PRINTF("RW_MCU_DEEP_SLEEP&cpu_idle_sleep\r\n");
 				cpu_idle_sleep();
+					
 			}
 			else
 			{
+//				UART_PRINTF("RW_MCU_DEEP_SLEEP&cpu_reduce_voltage_sleep\r\n");
 				cpu_reduce_voltage_sleep();
+					
 			}
 		}
 		else if((sleep_type & RW_MCU_IDLE_SLEEP) == RW_MCU_IDLE_SLEEP)
 		{
+//			UART_PRINTF("RW_MCU_IDLE_SLEEP\r\n");
 			cpu_idle_sleep();
+			
 		}
 #endif
 		Stack_Integrity_Check();
@@ -329,7 +335,7 @@ void rw_main(void)
 //	uart_cb_register(uart_rx_handler);
 	uart_cb_register(USART1_IRQHandler);//串口注册接收回调函数
 #endif
-
+    user_app_text();//用户测试程序
     uart_stack_register(uart_printf);
 
 

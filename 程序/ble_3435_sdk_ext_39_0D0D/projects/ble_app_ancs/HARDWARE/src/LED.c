@@ -26,6 +26,7 @@
 
 #include "ALL_Includes.h"
 #include "flash.h"         // flash definition
+
 void Init_LED1(void)
 { 
 	PWM_DRV_DESC PWM0;
@@ -39,13 +40,13 @@ void Init_LED1(void)
 //	  adc_init(1,1);//初始化ADC,软件模式
 	GLOBAL_INT_START();//使能全局中断
 	//初始化LED
-	gpio_config(BlueLedPort, OUTPUT, PULL_NONE);
-	gpio_config(RedLedPort, OUTPUT, PULL_NONE);
+//	gpio_config(BlueLedPort, OUTPUT, PULL_NONE);
+//	gpio_config(RedLedPort, OUTPUT, PULL_NONE);
 //  gpio_config(MotorPort, OUTPUT, PULL_NONE);
-	gpio_config(ButtonPort, INPUT, PULL_HIGH);
-	gpio_set(BlueLedPort, 1);
-	gpio_set(RedLedPort, 1);
-  gpio_set(ButtonPort, 0);
+//	gpio_config(ButtonPort, INPUT, PULL_HIGH);
+//	gpio_set(BlueLedPort, 1);
+////	gpio_set(RedLedPort, 1);
+//  gpio_set(ButtonPort, 0);
 	
 RTC_DATE.hour=18;
 RTC_DATE.minute=30;
@@ -58,20 +59,20 @@ rtc_enable();
 while(1)
 {
 
-if(gpio_get_input(ButtonPort))
-{	gpio_set(BlueLedPort, 1);
-	gpio_set(RedLedPort, 1);
-//	gpio_set(MotorPort, 0);
-}
-	else
-	{
-  gpio_set(BlueLedPort, 0);
-	gpio_set(RedLedPort, 0);
-//	gpio_set(MotorPort, 1);
-	}	
+//if(gpio_get_input(ButtonPort))
+//{	gpio_set(BlueLedPort, 1);
+//	gpio_set(RedLedPort, 1);
+////	gpio_set(MotorPort, 0);
+//}
+//	else
+//	{
+//  gpio_set(BlueLedPort, 0);
+//	gpio_set(RedLedPort, 0);
+////	gpio_set(MotorPort, 1);
+//	}	
 //	adc_get_value(1);
 		rtc_get_time(&RTC_DATE);
-	ANO_DT_Send_Version(0xf1,RTC_DATE.hour, RTC_DATE.minute, RTC_DATE.second, RTC_DATE.week_day, 5);
+	ANO_DT_Send_Date(0xf1,RTC_DATE.hour, RTC_DATE.minute, RTC_DATE.second, RTC_DATE.week_day, 5);
 	}
 
 
@@ -79,13 +80,7 @@ if(gpio_get_input(ButtonPort))
 
 
 }
-void BlueLed(void)
-{
-	
-BlueLedToggle();
-//RedLedToggle();
 
-}
 
 #include "stdarg.h"
 #include "app_fff0.h"              // Battery Application Module Definitions
@@ -148,50 +143,98 @@ void ble_printf_text(void)
 //			USMART_PRINTF1("--------------------------ALIENTEK------------------------- \r\n");
 
 }
-typedef void(*LED_CTRL_env)(void);
+//typedef void(*LED_CTRL_env)(void);
 //void LED_OFF(void)    {RES_Get1();RES_Get2();RES_Get3();Set_COM1();Set_COM2();Set_COM3();Set_COM4();}
-//void LED_ON(void)     {Set_Get1();Set_Get2();Set_Get3();RES_COM1();RES_COM2();RES_COM3();RES_COM4();}
-//void LED1_ON(void)    {Set_Get2();RES_COM1();}
-//void LED2_ON(void)    {Set_COM1();Set_Get2();RES_COM2();}
-//void LED3_ON(void)    {RES_Get2();Set_Get1();RES_COM2();}
-//void LED4_ON(void)    {RES_Get1();Set_COM2();Set_Get2();RES_COM3();}
-//void LED5_ON(void)    {Set_COM3();Set_Get2();RES_COM4();}
-//void LED6_ON(void)    {RES_Get2();Set_COM4();Set_Get1();RES_COM3();}
-//void LED7_ON(void)    {RES_Get1();Set_COM3();Set_Get3();RES_COM1();}
-//void LED8_ON(void)    {Set_COM1();Set_Get3();RES_COM2();}
-//void LED9_ON(void)    {RES_Get3();Set_COM2();Set_Get1();RES_COM4();}
-//void LED10_ON(void)   {RES_Get1();Set_COM4();Set_Get3();RES_COM3();}
-//void LED11_ON(void)   {Set_COM3();Set_Get3();RES_COM4();}
-//void LED12_ON(void)   {Set_COM3();Set_Get3();RES_COM4();}
-
+//void LED_ON(void)     {LED_OFF();Set_Get1();Set_Get2();Set_Get3();RES_COM1();RES_COM2();RES_COM3();RES_COM4();}
+//void LED1_ON(void)    {LED_OFF();Set_Get2();RES_COM1();}
+//void LED2_ON(void)    {LED_OFF();Set_COM1();Set_Get2();RES_COM2();}
+//void LED3_ON(void)    {LED_OFF();RES_Get2();Set_Get1();RES_COM2();}
+//void LED4_ON(void)    {LED_OFF();RES_Get1();Set_COM2();Set_Get2();RES_COM3();}
+//void LED5_ON(void)    {LED_OFF();Set_COM3();Set_Get2();RES_COM4();}
+//void LED6_ON(void)    {LED_OFF();RES_Get2();Set_COM4();Set_Get1();RES_COM3();}
+//void LED7_ON(void)    {LED_OFF();RES_Get1();Set_COM3();Set_Get3();RES_COM1();}
+//void LED8_ON(void)    {LED_OFF();Set_COM1();Set_Get3();RES_COM2();}
+//void LED9_ON(void)    {LED_OFF();RES_Get3();Set_COM2();Set_Get1();RES_COM4();}
+//void LED10_ON(void)   {LED_OFF();RES_Get1();Set_COM4();Set_Get3();RES_COM3();}
+//void LED11_ON(void)   {LED_OFF();Set_COM3();Set_Get3();RES_COM4();}
+//void LED12_ON(void)   {LED_OFF();Set_COM3();Set_Get3();RES_COM4();}
+typedef void(*LED_CTRL_env)(void);
 void LED_OFF(void)    {RES_Get1();RES_Get2();RES_Get3();Set_COM1();Set_COM2();Set_COM3();Set_COM4();}
-void LED_ON(void)     {BlueLedToggle();}
-void LED1_ON(void)    {BlueLedToggle();}
-void LED2_ON(void)    {RedLedToggle();}
-void LED3_ON(void)    {BlueLedToggle();}
-void LED4_ON(void)    {RedLedToggle();}
-void LED5_ON(void)    {BlueLedToggle();}
-void LED6_ON(void)    {RedLedToggle();}
-void LED7_ON(void)    {BlueLedToggle();}
-void LED8_ON(void)    {RedLedToggle();}
-void LED9_ON(void)    {BlueLedToggle();}
-void LED10_ON(void)   {RedLedToggle();}
-void LED11_ON(void)   {BlueLedToggle();}
-void LED12_ON(void)   {RedLedToggle();}
+void LED_ON(void)     {LED_OFF();Set_Get1();Set_Get2();Set_Get3();RES_COM1();RES_COM2();RES_COM3();RES_COM4();}
+void LED1_ON(void)    {LED_OFF();Set_Get2();RES_COM1();}
+void LED2_ON(void)    {LED_OFF();Set_Get2();RES_COM2();}
+void LED3_ON(void)    {LED_OFF();Set_Get1();RES_COM2();}
+void LED4_ON(void)    {LED_OFF();Set_Get2();RES_COM3();}
+void LED5_ON(void)    {LED_OFF();Set_Get2();RES_COM4();}
+void LED6_ON(void)    {LED_OFF();Set_Get1();RES_COM3();}
+void LED7_ON(void)    {LED_OFF();Set_Get3();RES_COM1();}
+void LED8_ON(void)    {LED_OFF();Set_Get3();RES_COM2();}
+void LED9_ON(void)    {LED_OFF();Set_Get1();RES_COM4();}
+void LED10_ON(void)   {LED_OFF();Set_Get3();RES_COM3();}
+void LED11_ON(void)   {LED_OFF();Set_Get3();RES_COM4();}
+void LED12_ON(void)   {LED_OFF();Set_Get1();RES_COM1();}
+
+//void LED_OFF(void)    {RES_Get1();RES_Get2();RES_Get3();Set_COM1();Set_COM2();Set_COM3();Set_COM4();}
+//void LED_ON(void)     {BlueLedToggle();}
+//void LED1_ON(void)    {BlueLedToggle();}
+//void LED2_ON(void)    {RedLedToggle();}
+//void LED3_ON(void)    {BlueLedToggle();}
+//void LED4_ON(void)    {RedLedToggle();}
+//void LED5_ON(void)    {BlueLedToggle();}
+//void LED6_ON(void)    {RedLedToggle();}
+//void LED7_ON(void)    {BlueLedToggle();}
+//void LED8_ON(void)    {RedLedToggle();}
+//void LED9_ON(void)    {BlueLedToggle();}
+//void LED10_ON(void)   {RedLedToggle();}
+//void LED11_ON(void)   {BlueLedToggle();}
+//void LED12_ON(void)   {RedLedToggle();}
 static const LED_CTRL_env LED_ctrl_handler[14]={LED_OFF,LED1_ON,LED2_ON,LED3_ON,LED4_ON,LED5_ON,LED6_ON,LED7_ON,LED8_ON,LED9_ON,LED10_ON,LED11_ON,LED12_ON,};
 
 struct LED_Dev_tag LED_Dev;
 #define LED_OPEN_T      10;
 #define LED_CLOSE_T     90;
 void Init_LED(void)
-{	 
-	gpio_config(BlueLedPort, OUTPUT, PULL_NONE);
-	gpio_config(RedLedPort, OUTPUT, PULL_NONE);
-	gpio_set(BlueLedPort, 0);
-	gpio_set(RedLedPort, 0);
-  memset(&LED_Dev, 0, sizeof(struct LED_Dev_tag)); 
-  LED_Dev.Mode=1;
+{	memset(&LED_Dev, 0, sizeof(struct LED_Dev_tag)); 
+  LED_Dev.Mode=0X08;
+	LED_Dev.Strength=50;
+	gpio_config(Get1, OUTPUT, PULL_NONE);
+	gpio_config(Get2, OUTPUT, PULL_NONE);
+	gpio_config(Get3, OUTPUT, PULL_NONE);
+	gpio_config(COM1, OUTPUT, PULL_NONE);
+	gpio_config(COM2, OUTPUT, PULL_NONE);
+	gpio_config(COM3, OUTPUT, PULL_NONE);
+	gpio_config(COM4, OUTPUT, PULL_NONE);
+	#ifdef LED_PWM_DRIVE
+	PWM_DRV_DESC PWM1,PWM2,PWM3;
+	PWM1.channel=1;
+	PWM1.mode=0X10;
+	PWM1.end_value=100;
+	PWM1.duty_cycle=LED_Dev.Strength;
+	pwm_init(&PWM1);
+	
+	PWM2.channel=2;
+	PWM2.mode=0X10;
+	PWM2.end_value=100;
+	PWM2.duty_cycle=LED_Dev.Strength;
+	pwm_init(&PWM2);
+	
+	PWM3.channel=3;
+	PWM3.mode=0X10;
+	PWM3.end_value=100;
+	PWM3.duty_cycle=LED_Dev.Strength;
+	pwm_init(&PWM3);
+	#endif
+
+	
+//  LED_OFF();
+//LED1_ON();
+//while(1);
  }
+u8 GET_LED_State(void)
+{
+	return (REG_PWM_CTRL&0x00000888);
+
+}
  u32 LED_Scan(void)
  {static u8 STEP=1;
 //	static u8 TIME_S=0;
@@ -212,20 +255,32 @@ switch(STEP)
 		 else {
 		  LED_ctrl_handler[13](); 
 		 }
+
 		 STEP++;
+		 #if SYSTEM_SLEEP
+		 #ifdef LED_PWM_DRIVE
+		 rwip_prevent_sleep_set(BK_DRIVER_TIMER_ACTIVE);
+		 #endif
+		 #endif
 		 break;
 		 case 2:
 		 LED_Time=LED_CLOSE_T;
 
 		 if(LED_Dev.Mode&0x05)
 		 {
-			 LED_ctrl_handler[0](); 
+			 LED_ctrl_handler[0]();
+			#if SYSTEM_SLEEP
+			#ifdef LED_PWM_DRIVE
+		  rwip_prevent_sleep_clear(BK_DRIVER_TIMER_ACTIVE);
+			 #endif
+			#endif			 
 		 }
      LED_Dev.TIME_s++;
 		 if(LED_Dev.TIME_s>=60)
 		 {LED_Dev.TIME_s=0;
 		  LED_Dev.TIME_min++;}
 		 STEP--;
+
 		 break;
 }
 	
@@ -243,9 +298,10 @@ int app_led_ctrl_scan_handler(ke_msg_id_t const msgid, void const *param,
 {   uint32_t LED_Ctrl_Time;
 
     LED_Ctrl_Time=LED_Scan();
-	  if(LED_Dev.TIME_min>=2)
-	  {LED_Dev.TIME_min=0;
-//		 ke_timer_clear(APP_LED_CTRL_SCAN,TASK_APP);
+	  if(LED_Dev.TIME_min>=1)
+	  {LED_OFF();
+		 LED_Dev.TIME_min=0;
+		 ke_timer_clear(APP_LED_CTRL_SCAN,TASK_APP);
 	  }
 		else
 		{
@@ -254,3 +310,15 @@ int app_led_ctrl_scan_handler(ke_msg_id_t const msgid, void const *param,
 
     return KE_MSG_CONSUMED;
 }
+
+//void Motor(void)
+//{
+//MotorToggle();
+
+
+//}
+
+
+
+
+

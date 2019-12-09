@@ -90,7 +90,18 @@ void pwm_init(PWM_DRV_DESC *pwm_drv_desc)
 		ICU_INT_ENABLE_CLEAR(ICU_INT_ENABLE_IRQ_PWM_X_MASK(pwm_drv_desc->channel));
 	}
 }
+void pwm_duty_cycle(unsigned char channel,unsigned short duty_cycle)
+{ 
+//	unsigned short temp;
+//	temp=REG_PWM_X_CNT(channel);
+	REG_PWM_X_CNT(channel)&=0x0000FFFF;
+	REG_PWM_X_CNT(channel)|=((unsigned long)duty_cycle << PWM_CNT_DUTY_CYCLE_POSI);
+//	REG_PWM_X_CNT(channel)=temp;
+//	= 
+//        ((((unsigned long)pwm_drv_desc->duty_cycle << PWM_CNT_DUTY_CYCLE_POSI) & PWM_CNT_DUTY_CYCLE_MASK)
+//       + (((unsigned long)pwm_drv_desc->end_value << PWM_CNT_END_VALUE_POSI) & PWM_CNT_END_VALUE_MASK));
 
+}
 
 void pwm_enable(unsigned char ucChannel)
 {

@@ -1,6 +1,6 @@
 #include "ALL_Includes.h"
-//#define USER_APP_CALENDAR_UPDATE_TIME   360000//1天更新一次
-#define USER_APP_CALENDAR_UPDATE_TIME   36//1天更新一次
+#define USER_APP_CALENDAR_UPDATE_TIME   360000//1天更新一次
+//#define USER_APP_CALENDAR_UPDATE_TIME   36//1天更新一次
 calendar_dev calendar;//日历结构体
 alarm_dev alarm1,alarm2,alarm3,alarm4,alarm5;
 alarm_dev*  alarm[alarm_class]={&alarm1,&alarm2,&alarm3,&alarm4,&alarm5};//闹钟

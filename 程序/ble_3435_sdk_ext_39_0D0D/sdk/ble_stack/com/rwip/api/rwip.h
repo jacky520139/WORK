@@ -43,26 +43,26 @@
 #define KE_HEAP 
 #endif
 
-/// Definition of the bits preventing the system from sleeping
+/// Definition of the bits preventing the system from sleeping防止系统休眠的位的定义
 enum prevent_sleep
 {
-    /// Flag indicating that the wake up process is ongoing
+    /// Flag indicating that the wake up process is ongoing表示唤醒过程正在进行的标志
     RW_WAKE_UP_ONGOING = 0x0001,
-    /// Flag indicating that an TX transfer is ongoing on Transport Layer
+    /// Flag indicating that an TX transfer is ongoing on Transport Layer表示传输层上正在进行TX传输的标志
     RW_TL_TX_ONGOING = 0x0002,
     /// Flag indicating that an RX transfer is ongoing on Transport Layer
     RW_TL_RX_ONGOING = 0x0004,
-    /// Flag indicating HCI timeout is ongoing
+    /// Flag indicating HCI timeout is ongoing指示HCI超时正在进行的标志
     RW_AHI_TIMEOUT = 0x0008,
-    /// Flag indicating that an encryption is ongoing
+    /// Flag indicating that an encryption is ongoing表示加密正在进行的标志
     RW_CRYPT_ONGOING = 0x0010,
-    /// Flag indicating that a element deletion is on going
+    /// Flag indicating that a element deletion is on going指示元素删除正在进行的标志
     RW_DELETE_ELT_ONGOING = 0x0020,
-	/// Flag indicating that controller shall not sleep due to not CSB LPO_Allowed 
+	/// Flag indicating that controller shall not sleep due to not CSB LPO_Allowed 指示由于不允许CSB LPO而控制器不应休眠的标志
 	RW_CSB_NOT_LPO_ALLOWED = 0x0040,
-    /// Flag indicating the MWS/WLAN Event Generator is in operation
+    /// Flag indicating the MWS/WLAN Event Generator is in operation指示MWS/WLAN事件生成器正在运行的标志
     RW_MWS_WLAN_EVENT_GENERATOR_ACTIVE = 0x0080,
-	// Flag indicating 
+	// Flag indicating 标志指示
 	BK_DRIVER_TIMER_ACTIVE = 0x0100,
 
 	RW_SLEEP_ONGOING = 0x0200

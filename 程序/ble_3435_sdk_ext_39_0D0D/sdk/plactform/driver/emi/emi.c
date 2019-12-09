@@ -3,7 +3,7 @@
  *
  * @file emi.c
  *
- * @brief  Definition of the EMI initialization API.
+ * @brief  Definition of the EMI initialization API.EMI初始化API的定义
  *
  * Copyright (C) RivieraWaves 2009-2015
  *

@@ -95,6 +95,7 @@ static uint8_t appm_get_handler(const struct ke_state_handler *handler_list,
  * @param[in] src_id    ID of the sending task instance.
  *
  * @return If the message was consumed or not.
+//设备已经就绪
  ****************************************************************************************
  */
 static int gapm_device_ready_ind_handler(ke_msg_id_t const msgid,
@@ -279,7 +280,7 @@ static int gapc_get_dev_info_req_ind_handler(ke_msg_id_t const msgid,
     switch(param->req)
     {
         case GAPC_DEV_NAME://设备名
-        {
+        {	UART_PRINTF("%s\r\n", GAPC_DEV_NAME);
             struct gapc_get_dev_info_cfm * cfm = KE_MSG_ALLOC_DYN(GAPC_GET_DEV_INFO_CFM,
                                                     src_id, dest_id,
                                                     gapc_get_dev_info_cfm, APP_DEVICE_NAME_MAX_LEN);
@@ -291,7 +292,7 @@ static int gapc_get_dev_info_req_ind_handler(ke_msg_id_t const msgid,
         } break;
 
         case GAPC_DEV_APPEARANCE://设备外观
-        {
+        {	UART_PRINTF("%s\r\n", GAPC_DEV_APPEARANCE);
             // Allocate message
             struct gapc_get_dev_info_cfm *cfm = KE_MSG_ALLOC(GAPC_GET_DEV_INFO_CFM,
                                                     src_id, dest_id,
@@ -306,7 +307,7 @@ static int gapc_get_dev_info_req_ind_handler(ke_msg_id_t const msgid,
         } break;
 
         case GAPC_DEV_SLV_PREF_PARAMS:
-        {
+        {	UART_PRINTF("%s\r\n", GAPC_DEV_SLV_PREF_PARAMS);
             // Allocate message
             struct gapc_get_dev_info_cfm *cfm = KE_MSG_ALLOC(GAPC_GET_DEV_INFO_CFM,
                     								src_id, dest_id,
@@ -400,7 +401,7 @@ static int gapc_connection_req_ind_handler(ke_msg_id_t const msgid,
          * ENABLE REQUIRED PROFILES
          *--------------------------------------------------------------*/
          
-        // Enable Battery Service
+        // 使能电池服务
         app_batt_enable_prf(app_env.conhdl);
 		
         // We are now in connected State
@@ -422,7 +423,7 @@ static int gapc_connection_req_ind_handler(ke_msg_id_t const msgid,
 		#if UPDATE_CONNENCT_PARAM
 		ke_timer_set(APP_PARAM_UPDATE_REQ_IND,TASK_APP,100); //更新连接参数
 		#endif	
-    
+    user_batt_send_lvl_handler();//发送电池电量
     }
     else
     {
@@ -734,7 +735,6 @@ static int gapc_update_conn_param_req_ind_handler (ke_msg_id_t const msgid,
                  					ke_task_id_t const dest_id, 
                  					ke_task_id_t const src_id)
 {
-
 	UART_PRINTF("slave send param_update_req\r\n");
 	struct gapc_conn_param  up_param;
 	
@@ -1009,9 +1009,14 @@ const struct ke_msg_handler appm_default_state[] =
 		{APP_ADV_ENABLE_TIMER,			  (ke_msg_func_t)app_adv_enable_handler},/*使能广播*/
 		{APP_GET_RSSI_TIMER,			    (ke_msg_func_t)app_get_rssi_timer_handler},/*定时获取连接信号强度定时器*/
     {GAPC_CON_RSSI_IND, 			    (ke_msg_func_t)gapc_conn_rssi_ind_handler},/*获取连接信号强度*/
+//、、、、、、、、、、、、、、、、、、、用户程序消息、、、、、、、、、、、、、、、、	
 		{APP_LED_CTRL_SCAN,			      (ke_msg_func_t)app_led_ctrl_scan_handler},/*LED控制*/
 		{USER_APP_CALENDAR_UPDATE,		(ke_msg_func_t)Calendar_Update_handler},/*日历更新数据*/
-		
+		{SL_SC7A21_CLICK_TIMER,		    (ke_msg_func_t)SL_SC7A21_Click_Timer_Cnt},/*SC7A21敲击计数器*/
+		{SL_SC7A21_GET_PEDO,		      (ke_msg_func_t)SL_SC7A21_GET_PEDO_VALUE},/*SC7A21获取计步值*/
+	  {USER_MOTOR_PERIOD_TIMER,		  (ke_msg_func_t)user_Motor_period_timer_handler},/*SC7A21获取计步值*/
+//		{USER_BATT_SEND_LVL,		       (ke_msg_func_t)user_batt_send_lvl_handler},/*发送电池电量*/
+
 
 };
 

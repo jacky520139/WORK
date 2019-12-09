@@ -9,7 +9,7 @@
 #define BYTE3(dwTemp)       ( *( (char *)(&dwTemp) + 3) )
 
 typedef void(*uart_send_cb_t)(unsigned char *,int);
-void ANO_DT_Send_Version(u8 type, u16 Data1, u16 Data2, u16 Data3, u16 Data4, u16 Data5);
+void ANO_DT_Send_Date(u8 type, u16 Data1, u16 Data2, u16 Data3, u16 Data4, u16 Data5);
 
 
 

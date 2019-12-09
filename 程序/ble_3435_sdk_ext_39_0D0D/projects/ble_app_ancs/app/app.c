@@ -50,6 +50,7 @@
 #include "gpio.h"
 #include "wdt.h"
 #include "led.h"
+#include "ALL_Includes.h"
 /*
  * DEFINES
  ****************************************************************************************
@@ -423,9 +424,9 @@ void appm_start_advertising(void)
         ke_state_set(TASK_APP, APPM_ADVERTISING);//设置成广播状态	
 
     }
+		USER_PERIOD_TIMER_Conf();//配置用户周期性消息任务
 //	  ke_timer_set(APP_LED_CTRL_SCAN,TASK_APP,10);
-		ke_msg_send_basic(APP_LED_CTRL_SCAN,TASK_APP,TASK_APP);//开始扫描LED
-		ke_msg_send_basic(USER_APP_CALENDAR_UPDATE, TASK_APP,TASK_APP);//开始更新日历数据
+
     // else ignore the request
 }
 

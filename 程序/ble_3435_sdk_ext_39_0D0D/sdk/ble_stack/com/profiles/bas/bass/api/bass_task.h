@@ -94,11 +94,11 @@ struct bass_db_cfg
 /// Parameters of the @ref BASS_ENABLE_REQ message
 struct bass_enable_req
 {
-    /// connection index
+    /// connection index连接索引
     uint8_t  conidx;
-    /// Notification Configuration
+    /// Notification Configuration通知配置
     uint8_t  ntf_cfg;
-    /// Old Battery Level used to decide if notification should be triggered
+    /// Old Battery Level used to decide if notification should be triggered用于决定是否应触发通知的旧电池电量
     uint8_t  old_batt_lvl[BASS_NB_BAS_INSTANCES_MAX];
 };
 

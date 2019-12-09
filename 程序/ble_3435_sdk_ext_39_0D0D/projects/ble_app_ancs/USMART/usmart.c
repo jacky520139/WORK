@@ -79,7 +79,8 @@ u8 *sys_cmd_tab[]=
 	"hex",
 	"dec",
 	"runtime",
-  "Calendar_Get",	
+  "Calendar_Get",
+	"step_Get",	
 };	    
 //处理系统指令
 //0,成功处理;其他,错误代码;
@@ -201,10 +202,13 @@ u8 usmart_sys_cmd_exe(u8 *str)
  			}else return USMART_PARMERR;				//参数错误. 
 			USMART_PRINTF("\r\n"); 
 			break;
-	case 7://获取日历
+	  case 7://获取日历
 //  Calendar_Update();
-
 //	ke_msg_send_basic(USER_APP_CALENDAR_UPDATE, TASK_APP,TASK_APP);
+	USMART_PRINTF("%d-%d-%d %d:%d:%d-%d\r\n",calendar.year,calendar.mon,calendar.date,calendar.RTC.hour,calendar.RTC.minute,calendar.RTC.second,calendar.RTC.week_day);
+	USMART_PRINTF("\r\n"); 	
+	break;
+		case 8://获取步数
 	USMART_PRINTF("%d-%d-%d %d:%d:%d-%d\r\n",calendar.year,calendar.mon,calendar.date,calendar.RTC.hour,calendar.RTC.minute,calendar.RTC.second,calendar.RTC.week_day);
 	USMART_PRINTF("\r\n"); 	
 	break;
@@ -424,7 +428,7 @@ void usmart_exe(void)
 		if(usmart_dev.sptype==SP_TYPE_DEC)USMART_PRINTF("=%lu;\r\n",res);//输出执行结果(10进制参数显示)
 		else USMART_PRINTF("=0X%X;\r\n",res);//输出执行结果(16进制参数显示)	   
 	}else USMART_PRINTF(";\r\n");		//不需要返回值,直接输出结束
-//	if(usmart_dev.runtimeflag)	//需要显示函数执行时间
+	if(usmart_dev.runtimeflag)	//需要显示函数执行时间
 	{ 
 		USMART_PRINTF("Function Run Time:%d.%1dms\r\n",usmart_dev.runtime/10,usmart_dev.runtime%10);//打印函数执行时间 
 	}	

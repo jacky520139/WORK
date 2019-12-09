@@ -2,7 +2,7 @@
 uart_send_cb_t uart_send_cb=uart_send;
 u8 *data_to_send=uart_tx_buf;
 
-void ANO_DT_Send_Version(u8 type, u16 Data1, u16 Data2, u16 Data3, u16 Data4, u16 Data5)
+void ANO_DT_Send_Date(u8 type, u16 Data1, u16 Data2, u16 Data3, u16 Data4, u16 Data5)
 {
 	u8 _cnt=0;
 	u8 sum = 0;

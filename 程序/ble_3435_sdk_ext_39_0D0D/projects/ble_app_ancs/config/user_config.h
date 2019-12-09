@@ -42,12 +42,12 @@
 //连接参数更新控制
 #define UPDATE_CONNENCT_PARAM  			1
 //获取连接信号强度
-#define APP_GET_RSSI_EN             1
+#define APP_GET_RSSI_EN             0
 
 //最小连接间隔
 #define BLE_UAPDATA_MIN_INTVALUE		20
 //最大连接间隔 
-#define BLE_UAPDATA_MAX_INTVALUE		40
+#define BLE_UAPDATA_MAX_INTVALUE		100
 //连接Latency
 #define BLE_UAPDATA_LATENCY				0
 //连接超时
@@ -55,7 +55,7 @@
 
 
 //设备名称
-#define APP_DFLT_DEVICE_NAME           ("LINZEJIE")
+#define APP_DFLT_DEVICE_NAME           ("YAZOLE_TEXT")
 
 
  //广播包UUID配置
@@ -64,7 +64,7 @@
 
 //扫描响应包数据
 //#define APP_SCNRSP_DATA        "\x0c\x08\x42\x4B\x33\x34\x34\x35\x2D\x41\x4E\x43\x53" //BK3435-ANCS"
-#define APP_SCNRSP_DATA          "\x0c\x08\x4c\x49\x4e\x5a\x45\x4a\x49\x45\x00\x00\x00" //BK3435-GATT"
+#define APP_SCNRSP_DATA          "\x0c\x08\x59\x41\x5A\x4F\x4C\x45\x5F\x54\x45\x58\x54" //BK3435-GATT"
 #define APP_SCNRSP_DATA_LEN     (13)
 
 
@@ -72,9 +72,9 @@
 /// Advertising channel map - 37, 38, 39
 #define APP_ADV_CHMAP           (0x07)
 /// Advertising minimum interval - 100ms (160*0.625ms)
-#define APP_ADV_INT_MIN         (80)
+#define APP_ADV_INT_MIN         (100)
 /// Advertising maximum interval - 100ms (160*0.625ms)
-#define APP_ADV_INT_MAX         (80)
+#define APP_ADV_INT_MAX         (100)
 /// Fast advertising interval
 #define APP_ADV_FAST_INT        (32)
 

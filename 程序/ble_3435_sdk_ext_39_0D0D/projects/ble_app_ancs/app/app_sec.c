@@ -73,10 +73,10 @@ void app_sec_init()
 			app_sec_env.bonded = false;
 		}
 	}
-	app_sec_env.peer_pairing = false;
-	app_sec_env.peer_encrypt = false;	
-	app_sec_env.bond_lost = false;
-	app_sec_env.pairing_fail = false;
+	app_sec_env.peer_pairing = false;//≈‰∂‘
+	app_sec_env.peer_encrypt = false;	//º”√‹
+	app_sec_env.bond_lost = false;//∞Ó∂® ß∞‹
+	app_sec_env.pairing_fail = false;//≈‰∂‘ ß∞‹
 }
 
 bool app_sec_get_bond_status(void)
@@ -365,7 +365,7 @@ static int gapc_encrypt_req_ind_handler(ke_msg_id_t const msgid,
 	}
 	
 	UART_PRINTF("%s \r\n",__func__);
-	app_sec_env.peer_encrypt = true;
+	app_sec_env.peer_encrypt = true;//º”√‹
     // LTK value
     struct gapc_ltk ltk;
     // Length
