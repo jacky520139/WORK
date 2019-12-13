@@ -1,10 +1,10 @@
    #ifndef ALL_INCLUDES_H
    #define ALL_INCLUDES_H  
-	 #include "stdint.h"
+	 #include "BK_HCI_Protocol.h"
 /**************【类型定义】********************/
-#define	u8    uint8_t
-#define	u16   uint16_t
-#define	u32   uint32_t
+//#define	u8    uint8_t
+//#define	u16   uint16_t
+//#define	u32   uint32_t
 
 /**************【头文件】********************/
 #include "string.h"

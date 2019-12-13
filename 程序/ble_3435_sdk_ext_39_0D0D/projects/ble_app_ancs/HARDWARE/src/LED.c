@@ -173,21 +173,6 @@ void LED9_ON(void)    {LED_OFF();Set_Get1();RES_COM4();}
 void LED10_ON(void)   {LED_OFF();Set_Get3();RES_COM3();}
 void LED11_ON(void)   {LED_OFF();Set_Get3();RES_COM4();}
 void LED12_ON(void)   {LED_OFF();Set_Get1();RES_COM1();}
-
-//void LED_OFF(void)    {RES_Get1();RES_Get2();RES_Get3();Set_COM1();Set_COM2();Set_COM3();Set_COM4();}
-//void LED_ON(void)     {BlueLedToggle();}
-//void LED1_ON(void)    {BlueLedToggle();}
-//void LED2_ON(void)    {RedLedToggle();}
-//void LED3_ON(void)    {BlueLedToggle();}
-//void LED4_ON(void)    {RedLedToggle();}
-//void LED5_ON(void)    {BlueLedToggle();}
-//void LED6_ON(void)    {RedLedToggle();}
-//void LED7_ON(void)    {BlueLedToggle();}
-//void LED8_ON(void)    {RedLedToggle();}
-//void LED9_ON(void)    {BlueLedToggle();}
-//void LED10_ON(void)   {RedLedToggle();}
-//void LED11_ON(void)   {BlueLedToggle();}
-//void LED12_ON(void)   {RedLedToggle();}
 static const LED_CTRL_env LED_ctrl_handler[14]={LED_OFF,LED1_ON,LED2_ON,LED3_ON,LED4_ON,LED5_ON,LED6_ON,LED7_ON,LED8_ON,LED9_ON,LED10_ON,LED11_ON,LED12_ON,};
 
 struct LED_Dev_tag LED_Dev;
@@ -195,7 +180,7 @@ struct LED_Dev_tag LED_Dev;
 #define LED_CLOSE_T     90;
 void Init_LED(void)
 {	memset(&LED_Dev, 0, sizeof(struct LED_Dev_tag)); 
-  LED_Dev.Mode=0X08;
+  LED_Dev.Mode=0X08;//灯光模式
 	LED_Dev.Strength=50;
 	gpio_config(Get1, OUTPUT, PULL_NONE);
 	gpio_config(Get2, OUTPUT, PULL_NONE);
@@ -235,11 +220,44 @@ u8 GET_LED_State(void)
 	return (REG_PWM_CTRL&0x00000888);
 
 }
+extern bool Pairing_Flag;//配对状态
  u32 LED_Scan(void)
- {static u8 STEP=1;
+ {static u8 STEP=1,STEP2=1,STEP3=1,cnt=0;
 //	static u8 TIME_S=0;
 	u32 LED_Time;
-	 
+	 if (ke_state_get(TASK_APP) == APPM_ADVERTISING)
+	 {
+		 cnt=0;
+		if(STEP2==1) 
+		{STEP2=0;
+		if(Pairing_Flag==0)
+	 LED12_ON();
+		else
+		LED6_ON();	
+	 LED_Time=20;
+		}
+		else
+		{STEP2=1;
+		 LED_OFF();
+	   LED_Time=20;
+		}
+		
+		return LED_Time;	
+	 }
+else if ((ke_state_get(TASK_APP) == APPM_CONNECTED)&&(cnt==0))
+ { if(STEP3==1) 
+		{STEP3=0;
+	  LED12_ON();
+	  LED_Time=300;
+		}
+		else
+		{STEP3=1;
+		 LED_OFF();
+			cnt=1;
+			LED_Dev.TIME_min=1;
+		}
+	 return LED_Time;	
+ }	 
 switch(STEP)
 	 {
 		 case 0:LED_ON();
@@ -289,6 +307,7 @@ switch(STEP)
 }
 	if(LED_Dev.TIME_min>=1)
 	  {STEP=0;}
+		
 return LED_Time;
  }
  
@@ -303,7 +322,7 @@ int app_led_ctrl_scan_handler(ke_msg_id_t const msgid, void const *param,
 {   uint32_t LED_Ctrl_Time;
 
     LED_Ctrl_Time=LED_Scan();
-	  if(LED_Dev.TIME_min>=1)
+	  if(LED_Dev.TIME_min>=1)//如果亮灯一分钟到
 	  {LED_OFF();
 		 LED_Dev.TIME_min=0;
 		 ke_timer_clear(APP_LED_CTRL_SCAN,TASK_APP);

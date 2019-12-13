@@ -274,6 +274,8 @@ void appm_start_direct_dvertising(void)
 		}
 
 	    ke_state_set(TASK_APP, APPM_ADVERTISING);	
+		  ke_msg_send_basic(APP_LED_CTRL_SCAN,TASK_APP,TASK_APP);//开始扫描LED
+		  UART_PRINTF("APP_LED_CTRL_SCAN\r\n");
 	}		
 }
 
@@ -322,7 +324,13 @@ void appm_start_advertising(void)
         cmd->op.code        = GAPM_ADV_UNDIRECT;//启动无向可连接广告
 		
         cmd->info.host.mode = GAP_GEN_DISCOVERABLE;//一般可发现模式
-
+#if (APP_WHITE_LIST_ENABLE)
+        if(wlist_enable_flag)
+        {
+            wlist_enable_flag=0;
+            cmd->info.host.adv_filt_policy=ADV_ALLOW_SCAN_WLST_CON_WLST;
+        }
+#endif
  		/*-----------------------------------------------------------------------------------
          * Set the Advertising Data and the Scan Response Data
          *---------------------------------------------------------------------------------*/
@@ -417,17 +425,18 @@ void appm_start_advertising(void)
         // Send the message
         ke_msg_send(cmd);
 	 	UART_PRINTF("appm start advertising\r\n");
-
+	#if (SYSTEM_SLEEP)
+		//Start the advertising timer
+    	ke_timer_set(APP_ADV_TIMEOUT_TIMER, TASK_APP, APP_DFLT_ADV_DURATION);
+	#endif
 		wdt_enable(0x3fff);
-		ke_msg_send_basic(APP_PERIOD_TIMER,TASK_APP,TASK_APP);
-        // Set the state of the task to APPM_ADVERTISING
-        ke_state_set(TASK_APP, APPM_ADVERTISING);//设置成广播状态	
-
+		
+    ke_state_set(TASK_APP, APPM_ADVERTISING);//设置成广播状态
+    ke_msg_send_basic(APP_PERIOD_TIMER,TASK_APP,TASK_APP);				
+    ke_msg_send_basic(APP_LED_CTRL_SCAN,TASK_APP,TASK_APP);//开始扫描LED
+//				 UART_PRINTF("APP_LED_CTRL_SCAN\r\n");
     }
-		USER_PERIOD_TIMER_Conf();//配置用户周期性消息任务
-//	  ke_timer_set(APP_LED_CTRL_SCAN,TASK_APP,10);
 
-    // else ignore the request
 }
 
 
@@ -454,7 +463,7 @@ void appm_stop_advertising(void)
 }
 
 
-
+//更新广播数据
 void appm_update_adv_data( uint8_t* adv_buff, uint8_t adv_len, uint8_t* scan_buff, uint8_t scan_len)
 {
 	if (ke_state_get(TASK_APP) == APPM_ADVERTISING 

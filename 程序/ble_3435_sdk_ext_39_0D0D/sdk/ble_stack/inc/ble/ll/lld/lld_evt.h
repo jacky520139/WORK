@@ -483,7 +483,7 @@ __INLINE uint32_t lld_evt_time_get(void)
     ble_samp_setf(1);
     while(ble_samp_getf());
     // Read current time in HW
-    return (ble_basetimecnt_get());
+    return (ble_basetimecnt_get());//获取0.625us计数
 }
 
 

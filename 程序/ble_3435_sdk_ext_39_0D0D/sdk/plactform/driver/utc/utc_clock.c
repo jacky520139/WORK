@@ -108,6 +108,7 @@ void utc_update( void )
 	uint32_t elapsedMSec = 0;
 
 	// Get the free-running count of 625us timer ticks
+	//获得625us计时器计时的自由运行计数
 	tmp = lld_evt_time_get();
 	//UART_PRINTF("tmp->%lu\r\n", tmp);
 
@@ -116,6 +117,7 @@ void utc_update( void )
 		if(tmp > previousRwTimerTick)
 		{
 			// Calculate the elapsed ticks of the free-running timer.
+			//计算空闲运行计时器的运行时间间隔
 			ticks625us = tmp - previousRwTimerTick;
 		}
 		else

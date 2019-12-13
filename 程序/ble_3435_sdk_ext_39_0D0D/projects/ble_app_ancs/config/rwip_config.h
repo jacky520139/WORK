@@ -178,7 +178,7 @@
 //   <e> CFG_SLEEP
 //   <i> enable DEEP_SLEEP
 //   </e>
-#if (0)
+#if (1)
 #define CFG_SLEEP 
 #endif
 

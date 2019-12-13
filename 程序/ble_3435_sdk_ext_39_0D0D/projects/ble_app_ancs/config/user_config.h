@@ -45,9 +45,9 @@
 #define APP_GET_RSSI_EN             0
 
 //最小连接间隔
-#define BLE_UAPDATA_MIN_INTVALUE		20
+#define BLE_UAPDATA_MIN_INTVALUE		20//必须是“0.625ms”的整数倍
 //最大连接间隔 
-#define BLE_UAPDATA_MAX_INTVALUE		100
+#define BLE_UAPDATA_MAX_INTVALUE		100//必须是“0.625ms”的整数倍
 //连接Latency
 #define BLE_UAPDATA_LATENCY				0
 //连接超时
@@ -71,14 +71,17 @@
 //广播参数配置
 /// Advertising channel map - 37, 38, 39
 #define APP_ADV_CHMAP           (0x07)
-/// Advertising minimum interval - 100ms (160*0.625ms)
+/// Advertising minimum interval - 100ms (160*0.625ms)必须是“0.625ms”的整数倍,范围是“20ms ~ 10.24s”之间
 #define APP_ADV_INT_MIN         (100)
 /// Advertising maximum interval - 100ms (160*0.625ms)
 #define APP_ADV_INT_MAX         (100)
 /// Fast advertising interval
 #define APP_ADV_FAST_INT        (32)
 
-
+//打开这个宏将打开可变地址解析功能，即只允许绑定的设备建立连接，否则断开连接
+#define BK_CONNNECT_FILTER_CTRL		 0
+//白名单使能
+#define APP_WHITE_LIST_ENABLE        1
 
 
 /*******************************************************************************

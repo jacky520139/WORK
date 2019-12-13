@@ -173,27 +173,27 @@ __BLEIRQ void rwble_isr(void)//蓝牙中断服务
     // Loop until no more interrupts have to be handled循环直到不再需要处理中断
     while (1)
     {
-        // Check BLE interrupt status and call the appropriate handlers
+        // 检查BLE中断状态并调用适当的处理程序
         uint32_t irq_stat = ble_intstat_get();
 			
         if (irq_stat == 0)
             break;
         #if SYSTEM_SLEEP
         #if !BT_DUAL_MODE
-        // End of sleep interrupt
+        // End of sleep interrupt睡眠结束中断
         if (irq_stat & BLE_SLPINTSTAT_BIT)
         {
-            DBG_SWDIAG(BLE_ISR, SLPINT, 1);
+            DBG_SWDIAG(BLE_ISR, SLPINT, 1);//清除标志位
 
             // Clear the interrupt
-            ble_intack_clear(BLE_SLPINTACK_BIT);
+            ble_intack_clear(BLE_SLPINTACK_BIT);//清除标志位
 			// Handle wake-up
             rwip_wakeup();	
 			
             DBG_SWDIAG(BLE_ISR, SLPINT, 0);
         }
 
-        // Slot interrupt
+        // Slot interrupt时隙中断
         if (irq_stat & BLE_CSCNTINTSTAT_BIT)
         {
             DBG_SWDIAG(BLE_ISR, CSCNTINT, 1);
@@ -204,7 +204,7 @@ __BLEIRQ void rwble_isr(void)//蓝牙中断服务
             // Handle end of wake-up
             rwip_wakeup_end();
 					
-            // Try to schedule immediately
+            // Try to schedule immediately试着马上安排
             ea_finetimer_isr();
 
             DBG_SWDIAG(BLE_ISR, CSCNTINT, 0);
@@ -212,7 +212,7 @@ __BLEIRQ void rwble_isr(void)//蓝牙中断服务
         #endif //!BT_DUAL_MODE
         #endif //SYSTEM_SLEEP
 
-        // Event target interrupt
+        // Event target interrupt事件目标中断
         if (irq_stat & BLE_FINETGTIMINTSTAT_BIT)
         {
             DBG_SWDIAG(BLE_ISR, FINETGTIMINT, 1);
@@ -250,7 +250,7 @@ __BLEIRQ void rwble_isr(void)//蓝牙中断服务
             DBG_SWDIAG(BLE_ISR2, AUDIO2INT, 0);
         }
         #endif
-        // End of event interrupt
+        // End of event interrupt事件结束中断
         if (irq_stat & BLE_EVENTINTSTAT_BIT)
         {
             DBG_SWDIAG(BLE_ISR, EVENTINT, 1);

@@ -409,9 +409,9 @@ struct gapc_disconnect_cmd
 /// Indicate that a link has been disconnected
 struct gapc_disconnect_ind
 {
-    /// Connection handle
+    /// Connection handle连接手柄
     uint16_t conhdl;
-    /// Reason of disconnection
+    /// Reason of disconnection断线原因
     uint8_t reason;
 };
 

@@ -40,6 +40,7 @@
 #if (!RW_SWDIAG)
 
 /// Macro used to set a SW diag to specific value
+//用于将SW diag设置为特定值的宏
 #define DBG_SWDIAG(bank , field , value)
 
 #else //RW_SWDIAG

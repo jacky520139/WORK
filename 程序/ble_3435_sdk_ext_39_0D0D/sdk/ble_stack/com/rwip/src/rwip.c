@@ -809,7 +809,7 @@ void rwip_wakeup(void)
     h4tl_start();
     #endif //H4TL_SUPPORT
 
-    wdt_feed(0x3fff);
+    wdt_feed(0x3fff);//Î¹¹·
 }
 
 void rwip_wakeup_end(void)

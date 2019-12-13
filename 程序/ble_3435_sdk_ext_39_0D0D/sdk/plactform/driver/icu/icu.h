@@ -9,7 +9,7 @@
 #define MCU_CLK_32M	  3
 #define MCU_CLK_48M   4
 
-#define REDUCE_VOL_SLEEP		0
+#define REDUCE_VOL_SLEEP		0//½µÑ¹ÐÝÃß
 
 #define MCU_DEFAULT_CLK 	MCU_CLK_16M
 

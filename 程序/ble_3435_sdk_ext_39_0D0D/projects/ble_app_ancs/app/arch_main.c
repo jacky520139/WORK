@@ -373,9 +373,7 @@ void rw_main(void)
 	REG_AHB0_ICU_IRQ_ENABLE = 0x03;
   User_HeadWare_Init();
 	// finally start interrupt handling
-	GLOBAL_INT_START();
-  
-
+	GLOBAL_INT_START();//打开全局中断
 	UART_PRINTF("start\r\n");
 
 

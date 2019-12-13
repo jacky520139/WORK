@@ -99,7 +99,7 @@ bool app_get_encrypt_flag(void)
 }
 
 
-void app_sec_remove_bond(void)
+void app_sec_remove_bond(void)//½â³ý°ó¶¨
 {
     uint16_t ntf_cfg = PRF_CLI_STOP_NTFIND;
 

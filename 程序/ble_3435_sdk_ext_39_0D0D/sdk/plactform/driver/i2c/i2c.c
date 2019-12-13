@@ -129,7 +129,8 @@ STATUS i2c_write(uint8_t devAddr, uint8_t addr, uint8_t*buf, uint8_t size)
 	}
 	i2c_send_start();
 
-	while (is_i2c_busy() == YES);       // wait until i2c0 free
+	while (is_i2c_busy() == YES)
+	{};       // wait until i2c0 free
 
 	//PrintI2CurrentMsg(i2c_get_last_msg());
 
@@ -163,7 +164,8 @@ STATUS i2c_read(uint8_t devAddr, uint8_t addr, uint8_t*buf, uint8_t size)
 	}
 	i2c_send_start();
 
-	while (is_i2c_busy() == YES);       // wait until i2c0 free
+	while (is_i2c_busy() == YES)
+	{};       // wait until i2c0 free
 
 	if(i2c_get_last_msg() != NULL)
 	{

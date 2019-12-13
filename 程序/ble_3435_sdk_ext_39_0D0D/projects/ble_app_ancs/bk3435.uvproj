@@ -827,6 +827,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\sdk\plactform\driver\adc\adc.c</FilePath>
             </File>
+            <File>
+              <FileName>utc_clock.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\sdk\plactform\driver\utc\utc_clock.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
