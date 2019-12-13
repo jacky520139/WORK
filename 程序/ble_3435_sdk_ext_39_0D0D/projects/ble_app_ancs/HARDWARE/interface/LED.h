@@ -58,14 +58,16 @@ struct LED_Dev_tag
 };
 extern struct LED_Dev_tag LED_Dev;
 void Init_LED(void);
+void LED_OFF(void);
+void LED_ON(void);
 void BlueLed(void);
 u32 LED_Scan(void);
 u8 GET_LED_State(void);
 int app_led_ctrl_scan_handler(ke_msg_id_t const msgid,void const *param,ke_task_id_t const dest_id, ke_task_id_t const src_id);
 int ble_printf(const char *fmt,...);
 void ble_printf_text(void);
-
-
+void LED_Mode(u8 mode);
+void LED_State(void);
 #endif
 
 

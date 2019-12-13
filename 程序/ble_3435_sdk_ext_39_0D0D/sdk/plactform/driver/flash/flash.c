@@ -602,7 +602,7 @@ void udi_exchange_fdata_to_adjoining_previous_sector(uint32_t data_addr, uint32_
     {
         sub_cnt = MIN(UPDATE_CHUNK_SIZE, total_cnt);
         flash_read(flash_env.space_type, rd_addr, sub_cnt,tmp,NULL);
-	 	flash_write(flash_env.space_type, wr_addr, sub_cnt,tmp,NULL);
+	 	    flash_write(flash_env.space_type, wr_addr, sub_cnt,tmp,NULL);
         total_cnt -= sub_cnt;
         rd_addr += sub_cnt;
         wr_addr += sub_cnt;
@@ -637,8 +637,8 @@ uint8_t flash_erase(uint8_t flash_type, uint32_t address, uint32_t len, void (*c
     if(first_len)
     {
         flash_enable_erase_flag2=FLASH_ERASE_ENABLE2;
-        udi_exchange_fdata_to_adjoining_next_sector(first_addr, first_len, wr_point);
-        udi_exchange_fdata_to_adjoining_previous_sector(mid_addr, first_len, wr_point);
+        udi_exchange_fdata_to_adjoining_next_sector(first_addr, first_len, wr_point);//将数据交换到相邻的下一个扇区
+        udi_exchange_fdata_to_adjoining_previous_sector(mid_addr, first_len, wr_point);//将数据交换到相邻的上一个扇区
         erase_addr = mid_addr;
         erase_len = len - (FLASH_ERASE_SECTOR_SIZE - first_len);
     }
@@ -722,6 +722,83 @@ void flash_test(void)
 //			UART_PRINTF("cTemp1[%d]=%x\r\n",i,cTemp1[i]);
 //	}
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void FLASH_Read(uint32_t address,uint8_t *buffer,uint32_t len)
+{flash_read (0,address ,len,buffer,NULL);}
+#include "ALL_Includes.h"
+#define   FLASH_Unlock()   {flash_enable_erase_flag1=FLASH_ERASE_ENABLE1;\
+                            flash_enable_erase_flag2=FLASH_ERASE_ENABLE2;}						//解锁
+#define   FLASH_Lock()   {flash_enable_erase_flag1=0;\
+                            flash_enable_erase_flag2=0;}						//解锁
+		 
+u8 STMFLASH_BUF[FLASH_ERASE_SECTOR_SIZE];//最多是2K字节
+void FLASH_Write(uint32_t WriteAddr,uint8_t *pBuffer,uint16_t NumToWrite)
+{
+	u32 secpos;	   //扇区地址
+	u16 secoff;	   //扇区内偏移地址(16位字计算)
+	u16 secremain; //扇区内剩余地址(16位字计算)	   
+ 	u16 i;    
+//	u32 offaddr;   //去掉0X08000000后的地址
+
+    if(flash_mid != get_flash_ID())
+    {
+        return ;
+    }
+	FLASH_Unlock()//解锁	 
+//	offaddr=WriteAddr;		//实际偏移地址.
+	secpos=WriteAddr & (~FLASH_ERASE_SECTOR_SIZE_MASK);			//扇区地址  0~127 for STM32F103RBT6
+	secoff=WriteAddr & FLASH_ERASE_SECTOR_SIZE_MASK;		//在扇区内的偏移
+	secremain=FLASH_ERASE_SECTOR_SIZE_MASK-secoff;		//扇区剩余空间大小   
+	if(NumToWrite<=secremain)secremain=NumToWrite;//不大于该扇区范围
+	while(1) 
+	{	 flash_read(flash_env.space_type, secpos,FLASH_ERASE_SECTOR_SIZE,STMFLASH_BUF, NULL);
+//		STMFLASH_Read(secpos*STM_SECTOR_SIZE+STM32_FLASH_BASE,STMFLASH_BUF,STM_SECTOR_SIZE/2);//读出整个扇区的内容
+		for(i=0;i<secremain;i++)//校验数据
+		{
+			if(STMFLASH_BUF[secoff+i]!=0XFF)break;//需要擦除  	  
+		}
+		if(i<secremain)//需要擦除
+		{    
+			flash_erase_sector(secpos);
+//			FLASH_ErasePage(secpos*STM_SECTOR_SIZE+STM32_FLASH_BASE);//擦除这个扇区
+			for(i=0;i<secremain;i++)//复制
+			{
+				STMFLASH_BUF[i+secoff]=pBuffer[i];	  
+			}
+			 flash_write(0,secpos ,FLASH_ERASE_SECTOR_SIZE,STMFLASH_BUF,NULL);   
+//			 STMFLASH_Write_NoCheck(secpos*STM_SECTOR_SIZE+STM32_FLASH_BASE,STMFLASH_BUF,STM_SECTOR_SIZE/2);//写入整个扇区  
+		}else  flash_write(0,WriteAddr ,NumToWrite,pBuffer,NULL); //写已经擦除了的,直接写入扇区剩余区间. 				   
+		if(NumToWrite==secremain)break;//写入结束了
+		else//写入未结束
+		{
+//			secpos=(WriteAddr & (~FLASH_ERASE_SECTOR_SIZE_MASK)) + FLASH_ERASE_SECTOR_SIZE;
+			secpos=secpos+FLASH_ERASE_SECTOR_SIZE;
+//			secpos++;				//扇区地址增1
+			secoff=0;				//偏移位置为0 	 
+		   	pBuffer+=secremain;  	//指针偏移
+			WriteAddr+=secremain;	//写地址偏移	   
+		   	NumToWrite-=secremain;	//字节(16位)数递减
+			if(NumToWrite>(FLASH_ERASE_SECTOR_SIZE))
+				   secremain=FLASH_ERASE_SECTOR_SIZE;//下一个扇区还是写不完
+			else secremain=NumToWrite;//下一个扇区可以写完了
+		}	 
+	};	
+	FLASH_Lock();//上锁
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

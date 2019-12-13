@@ -20,6 +20,7 @@
 #include "usart.h"
 #include "LED.h"
 #include "rtc.h"
+#include "flash.h"         // flash definition
 #include "app_rtc.h"
 #include "User_Timer.h"
 #include "User_Save.h"
@@ -30,6 +31,7 @@
 #include "SL_Sc7a21_Driver.h"
 #include "SL_SC7A21_Application.h"
 #include "app_key.h"
+#include "app_rtc.h"
 #include "motor.h"
 #endif 
 

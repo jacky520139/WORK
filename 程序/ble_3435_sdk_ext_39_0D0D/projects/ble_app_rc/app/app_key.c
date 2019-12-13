@@ -193,8 +193,8 @@ void delay_us(uint32_t num)
 void key_init(void)
 {
 	//初始化LED
-	gpio_config(BlueLedPort, OUTPUT, PULL_NONE);
-	gpio_set(BlueLedPort, 0);
+//	gpio_config(BlueLedPort, OUTPUT, PULL_NONE);
+//	gpio_set(BlueLedPort, 0);
 	
 	//注册IO回调
 	gpio_cb_register(app_gpio_int_cb);

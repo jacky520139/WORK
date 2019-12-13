@@ -1,11 +1,11 @@
 .\obj\intc.o: ..\..\sdk\plactform\driver\intc\intc.c
 .\obj\intc.o: ..\..\sdk\plactform\arch\compiler\compiler.h
 .\obj\intc.o: ..\..\sdk\plactform\arch\arch.h
-.\obj\intc.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+.\obj\intc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\obj\intc.o: ..\..\sdk\plactform\arch\ll\ll.h
 .\obj\intc.o: ..\..\sdk\plactform\core_modules\common\api\co_math.h
-.\obj\intc.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdbool.h
-.\obj\intc.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
+.\obj\intc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\obj\intc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\obj\intc.o: .\config\rwip_config.h
 .\obj\intc.o: ..\..\sdk\ble_stack\com\rwble\rwble_config.h
 .\obj\intc.o: .\config\rwip_config.h
@@ -16,9 +16,9 @@
 .\obj\intc.o: ..\..\sdk\plactform\reg\reg_blecore.h
 .\obj\intc.o: ..\..\sdk\plactform\reg\_reg_blecore.h
 .\obj\intc.o: ..\..\sdk\plactform\driver\reg\reg_access.h
-.\obj\intc.o: C:\Keil\ARM\ARMCC\Bin\..\include\string.h
+.\obj\intc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\obj\intc.o: ..\..\sdk\plactform\core_modules\common\api\co_utils.h
-.\obj\intc.o: C:\Keil\ARM\ARMCC\Bin\..\include\stddef.h
+.\obj\intc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\obj\intc.o: ..\..\sdk\plactform\core_modules\common\api\co_bt.h
 .\obj\intc.o: ..\..\sdk\plactform\core_modules\common\api\co_lmp.h
 .\obj\intc.o: ..\..\sdk\plactform\core_modules\common\api\co_bt.h

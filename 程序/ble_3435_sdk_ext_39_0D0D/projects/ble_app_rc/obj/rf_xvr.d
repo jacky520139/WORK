@@ -1,10 +1,10 @@
 .\obj\rf_xvr.o: ..\..\sdk\plactform\core_modules\rf\src\rf_xvr.c
-.\obj\rf_xvr.o: C:\Keil\ARM\ARMCC\Bin\..\include\string.h
+.\obj\rf_xvr.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\obj\rf_xvr.o: ..\..\sdk\plactform\core_modules\common\api\co_utils.h
-.\obj\rf_xvr.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
-.\obj\rf_xvr.o: C:\Keil\ARM\ARMCC\Bin\..\include\stddef.h
+.\obj\rf_xvr.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\obj\rf_xvr.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\obj\rf_xvr.o: ..\..\sdk\plactform\core_modules\common\api\co_bt.h
-.\obj\rf_xvr.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdbool.h
+.\obj\rf_xvr.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\obj\rf_xvr.o: ..\..\sdk\plactform\core_modules\common\api\co_lmp.h
 .\obj\rf_xvr.o: ..\..\sdk\plactform\core_modules\common\api\co_bt.h
 .\obj\rf_xvr.o: ..\..\sdk\plactform\core_modules\common\api\co_hci.h
@@ -17,7 +17,7 @@
 .\obj\rf_xvr.o: ..\..\sdk\plactform\arch\compiler\compiler.h
 .\obj\rf_xvr.o: ..\..\sdk\plactform\core_modules\common\api\co_error.h
 .\obj\rf_xvr.o: ..\..\sdk\plactform\core_modules\common\api\co_math.h
-.\obj\rf_xvr.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
+.\obj\rf_xvr.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\obj\rf_xvr.o: ..\..\sdk\plactform\core_modules\common\api\co_endian.h
 .\obj\rf_xvr.o: ..\..\sdk\plactform\arch\arch.h
 .\obj\rf_xvr.o: ..\..\sdk\plactform\arch\ll\ll.h

@@ -242,6 +242,10 @@ u8 GET_LED_State(void)
 	 
 switch(STEP)
 	 {
+		 case 0:LED_ON();
+		        LED_Time=100;
+		        STEP++;
+			 break;
 		 case 1:
      LED_Time=LED_OPEN_T;
 		 if(LED_Dev.Mode&0x03)
@@ -283,7 +287,8 @@ switch(STEP)
 
 		 break;
 }
-	
+	if(LED_Dev.TIME_min>=1)
+	  {STEP=0;}
 return LED_Time;
  }
  
@@ -310,7 +315,15 @@ int app_led_ctrl_scan_handler(ke_msg_id_t const msgid, void const *param,
 
     return KE_MSG_CONSUMED;
 }
-
+void LED_Mode(u8 mode)
+{ if(mode>=1)
+	{mode=mode-1;
+	 LED_Dev.Mode=1<<mode;}
+}
+void LED_State(void)
+{
+ke_msg_send_basic(APP_LED_CTRL_SCAN,TASK_APP,TASK_APP);//¿ªÊ¼É¨ÃèLED
+}
 //void Motor(void)
 //{
 //MotorToggle();

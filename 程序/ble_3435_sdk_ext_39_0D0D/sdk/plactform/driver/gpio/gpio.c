@@ -175,9 +175,9 @@ void gpio_cb_register(GPIO_INT_CALLBACK_T cb)
 
 void gpio_isr(void)
 {
-	REG_APB5_GPIO_WUATOD_ENABLE = 0x00000000; 
-	REG_APB5_GPIO_WUATOD_STAT = 0xffffffff;
-    REG_AHB0_ICU_INT_ENABLE &= (~(0x01 << 9));
+//	REG_APB5_GPIO_WUATOD_ENABLE = 0x00000000; 
+//	REG_APB5_GPIO_WUATOD_STAT = 0xffffffff;
+//  REG_AHB0_ICU_INT_ENABLE &= (~(0x01 << 9));
     //gpio_triger(0x14);
 
 	//triger int callback

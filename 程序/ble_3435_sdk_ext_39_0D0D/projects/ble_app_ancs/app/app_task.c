@@ -424,6 +424,7 @@ static int gapc_connection_req_ind_handler(ke_msg_id_t const msgid,
 		ke_timer_set(APP_PARAM_UPDATE_REQ_IND,TASK_APP,100); //更新连接参数
 		#endif	
     user_batt_send_lvl_handler();//发送电池电量
+		user_Motor_handler(1);//振动一下
     }
     else
     {
@@ -627,6 +628,7 @@ static int app_period_timer_handler(ke_msg_id_t const msgid,
                                           ke_task_id_t const dest_id,
                                           ke_task_id_t const src_id)
 {
+	static uint16_t key_free_dalay_cnt=0;
 #if (RC_CALIBRATE)   //RC校准 
     uint32_t timer_625us,timer_1us,timer_ms;
 
@@ -639,7 +641,57 @@ static int app_period_timer_handler(ke_msg_id_t const msgid,
 
 
     ke_timer_set(APP_PERIOD_TIMER,TASK_APP,30000);
-#endif    
+#endif  
+    Key_Scan();
+ 	if(ke_state_get(TASK_APP) == APPM_CONNECTED)
+	{
+		//BlueLedOn();
+	}
+	else
+	{
+//		if(++uLedDutyCnt > APP_LEDDUTY_DB)
+//		{
+//			uLedDutyCnt = 0;
+//			//BlueLedToggle();
+//		}
+	} 
+#if (SYSTEM_SLEEP)
+//	app_key_state = key_status_check();
+
+
+//	if(app_key_state != ALL_KEY_FREE_DELAY)
+//	{
+//		ke_timer_set(APP_PERIOD_TIMER,TASK_APP,APP_KEYSCAN_DURATION);
+//	}
+// if(KEY1_Dev.Value==1)
+// {KEY1_Dev.Value=0;
+// UART_PRINTF("KEY1_Dev.Value=1\r\n");
+// 
+//  }
+	if(KEY1_Dev.Down_Time==0)
+	{
+		key_free_dalay_cnt++;
+
+		if(key_free_dalay_cnt>=200)
+		{
+//			app_key_state=ALL_KEY_FREE_DELAY;
+			key_wakeup_config();
+
+			UART_PRINTF("key sleep\r\n");
+		}
+		else
+		{ke_timer_set(APP_PERIOD_TIMER,TASK_APP,APP_KEYSCAN_DURATION);
+		}
+	}
+	else if(KEY1_Dev.Down_Time>0)
+	{key_free_dalay_cnt=0;
+		ke_timer_set(APP_PERIOD_TIMER,TASK_APP,APP_KEYSCAN_DURATION);
+	}
+
+
+#else
+	ke_timer_set(APP_PERIOD_TIMER,TASK_APP,APP_KEYSCAN_DURATION);
+#endif	
     return KE_MSG_CONSUMED;
 }
 
@@ -1014,8 +1066,9 @@ const struct ke_msg_handler appm_default_state[] =
 		{USER_APP_CALENDAR_UPDATE,		(ke_msg_func_t)Calendar_Update_handler},/*日历更新数据*/
 		{SL_SC7A21_CLICK_TIMER,		    (ke_msg_func_t)SL_SC7A21_Click_Timer_Cnt},/*SC7A21敲击计数器*/
 		{SL_SC7A21_GET_PEDO,		      (ke_msg_func_t)SL_SC7A21_GET_PEDO_VALUE},/*SC7A21获取计步值*/
-	  {USER_MOTOR_PERIOD_TIMER,		  (ke_msg_func_t)user_Motor_period_timer_handler},/*SC7A21获取计步值*/
+	  {USER_MOTOR_PERIOD_TIMER,		  (ke_msg_func_t)user_Motor_period_timer_handler},/*振动电机周期性扫描*/
 //		{USER_BATT_SEND_LVL,		       (ke_msg_func_t)user_batt_send_lvl_handler},/*发送电池电量*/
+		{USER_ALARM_IND,		           (ke_msg_func_t)user_alarm_ind},/*闹钟提醒*/
 
 
 };

@@ -93,7 +93,9 @@ enum appm_msg
 	USER_APP_CALENDAR_UPDATE,/*APP日历更新*/
 	SL_SC7A21_CLICK_TIMER,/*敲击计数器*/
 	SL_SC7A21_GET_PEDO,/*获取计步值*/
+	USER_ALARM_IND,//闹钟提醒
 	USER_MOTOR_PERIOD_TIMER,//电机振动延时
+
 };
 
 

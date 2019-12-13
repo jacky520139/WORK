@@ -229,7 +229,7 @@ uint8_t Uart_Read_Byte(void)
 	return (REG_APB3_UART_PORT&0xff);
 }
 
-#include "app_fff0.h"              // Battery Application Module Definitions
+//#include "app_fff0.h"              // Battery Application Module Definitions
 int uart_putchar(char * st)
 {
 	uint8_t num = 0;

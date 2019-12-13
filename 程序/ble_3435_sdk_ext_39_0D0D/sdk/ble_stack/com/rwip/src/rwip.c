@@ -701,6 +701,7 @@ uint8_t rwip_sleep(void)
          **************            CHECK KERNEL TIMERS             **************
          ************************************************************************/
         // Compute the duration up to the next software timer expires
+				//计算下一个软件计时器到期前的持续时间
         if (!ke_timer_sleep_check(&sleep_duration, rwip_env.wakeup_delay))
             break;
 		

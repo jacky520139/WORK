@@ -211,7 +211,8 @@ void flash_set_line_mode(uint8_t mode);
 void flash_read_data (uint8_t *buffer, uint32_t address, uint32_t len);
 void flash_write_data (uint8_t *buffer, uint32_t address, uint32_t len);
 void flash_set_dual_mode(void);
-
+void FLASH_Read(uint32_t address,uint8_t *buffer,uint32_t len);
+void FLASH_Write(uint32_t WriteAddr,uint8_t *pBuffer,uint16_t NumToWrite);
 /// @} FLASH
 
 #endif // FLASH_H_

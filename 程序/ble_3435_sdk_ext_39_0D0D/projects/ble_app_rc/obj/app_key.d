@@ -5,12 +5,12 @@
 .\obj\app_key.o: ..\..\sdk\ble_stack\com\rwble_hl\rwble_hl_config.h
 .\obj\app_key.o: ..\..\sdk\ble_stack\com\rwble_hl\rwble_hl_error.h
 .\obj\app_key.o: .\config\rwprf_config.h
-.\obj\app_key.o: C:\Keil\ARM\ARMCC\Bin\..\include\string.h
+.\obj\app_key.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\obj\app_key.o: app\app.h
-.\obj\app_key.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+.\obj\app_key.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\obj\app_key.o: ..\..\sdk\plactform\core_modules\common\api\co_bt.h
-.\obj\app_key.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdbool.h
-.\obj\app_key.o: C:\Keil\ARM\ARMCC\Bin\..\include\stddef.h
+.\obj\app_key.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\obj\app_key.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\obj\app_key.o: ..\..\sdk\plactform\core_modules\common\api\co_lmp.h
 .\obj\app_key.o: ..\..\sdk\plactform\core_modules\common\api\co_bt.h
 .\obj\app_key.o: ..\..\sdk\plactform\core_modules\common\api\co_hci.h
@@ -69,7 +69,7 @@
 .\obj\app_key.o: ..\..\sdk\plactform\reg\_reg_ble_em_cs.h
 .\obj\app_key.o: ..\..\sdk\ble_stack\inc\ble\ll\llm\llm.h
 .\obj\app_key.o: ..\..\sdk\plactform\core_modules\common\api\co_math.h
-.\obj\app_key.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
+.\obj\app_key.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\obj\app_key.o: ..\..\sdk\ble_stack\inc\ble\ll\em\em_buf.h
 .\obj\app_key.o: ..\..\sdk\plactform\core_modules\common\api\co_endian.h
 .\obj\app_key.o: ..\..\sdk\plactform\reg\reg_ble_em_tx_desc.h

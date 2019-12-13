@@ -9,14 +9,14 @@
 .\obj\bass.o: ..\..\sdk\ble_stack\com\profiles\bas\bass\api\bass_task.h
 .\obj\bass.o: ..\..\sdk\ble_stack\com\prf\prf_types.h
 .\obj\bass.o: ..\..\sdk\ble_stack\inc\ble\hl\gatt\att.h
-.\obj\bass.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+.\obj\bass.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\obj\bass.o: ..\..\sdk\plactform\arch\compiler\compiler.h
 .\obj\bass.o: ..\..\sdk\ble_stack\com\rwip\api\rwip_task.h
 .\obj\bass.o: ..\..\sdk\ble_stack\com\prf\prf.h
 .\obj\bass.o: ..\..\sdk\ble_stack\inc\ke\ke_task.h
-.\obj\bass.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdbool.h
+.\obj\bass.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\obj\bass.o: ..\..\sdk\ble_stack\inc\ke\ke_msg.h
-.\obj\bass.o: C:\Keil\ARM\ARMCC\Bin\..\include\stddef.h
+.\obj\bass.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\obj\bass.o: ..\..\sdk\plactform\arch\arch.h
 .\obj\bass.o: ..\..\sdk\plactform\arch\ll\ll.h
 .\obj\bass.o: ..\..\sdk\ble_stack\inc\ke\ke_config.h
@@ -34,5 +34,5 @@
 .\obj\bass.o: ..\..\sdk\plactform\core_modules\common\api\co_error.h
 .\obj\bass.o: ..\..\sdk\ble_stack\inc\ble\hl\gap\gapc\gapc_task.h
 .\obj\bass.o: ..\..\sdk\ble_stack\inc\ble\hl\gatt\attm\attm.h
-.\obj\bass.o: C:\Keil\ARM\ARMCC\Bin\..\include\string.h
+.\obj\bass.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\obj\bass.o: ..\..\sdk\ble_stack\inc\ke\ke_mem.h

@@ -178,13 +178,11 @@
 //   <e> CFG_SLEEP
 //   <i> enable DEEP_SLEEP
 //   </e>
-#if ( 0)
+#if (0)
 #define CFG_SLEEP 
 #endif
 
 // </h>
-
-
 
 // <h>  Config MAX Connect Device Numble
 // <o>  CFG_CON <1-10>

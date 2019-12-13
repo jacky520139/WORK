@@ -204,7 +204,7 @@ u8 usmart_sys_cmd_exe(u8 *str)
 			break;
 	  case 7://获取日历
 //  Calendar_Update();
-//	ke_msg_send_basic(USER_APP_CALENDAR_UPDATE, TASK_APP,TASK_APP);
+	ke_msg_send_basic(USER_APP_CALENDAR_UPDATE, TASK_APP,TASK_APP);
 	USMART_PRINTF("%d-%d-%d %d:%d:%d-%d\r\n",calendar.year,calendar.mon,calendar.date,calendar.RTC.hour,calendar.RTC.minute,calendar.RTC.second,calendar.RTC.week_day);
 	USMART_PRINTF("\r\n"); 	
 	break;

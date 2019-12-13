@@ -46,7 +46,15 @@ struct _m_usmart_nametab usmart_nametab[]=
 (void*)pwm_duty_cycle,"void pwm_duty_cycle(unsigned char channel,unsigned short duty_cycle)",	
 (void*)user_batt_send_lvl_handler,"u8 user_batt_send_lvl_handler(void)",
 (void*)SL_SC7A21_Online_Test,"signed char  SL_SC7A21_Online_Test(unsigned char Sl_pull_up_mode)",
-	(void*)SL_SC7A21_Read_XYZ_Data,"	signed char  SL_SC7A21_Read_XYZ_Data(signed short *SL_SC7A21_Data_XYZ_Buf)",
+(void*)SL_SC7A21_Read_XYZ_Data,"	signed char  SL_SC7A21_Read_XYZ_Data(signed short *SL_SC7A21_Data_XYZ_Buf)",
+(void*)user_Motor_handler,"void user_Motor_handler(u8 operation)",	
+(void*)LED_Mode,"void LED_Mode(u8 mode)",	
+(void*)LED_State,"void LED_State(void)",
+(void*)Text_Alarm,"void Text_Alarm(u8 mode,u8 hour,u8 min,u8 sec)",	
+(void*)Alarm_Get,"void Alarm_Get(u8 Class)",
+(void*)Alarm_date_Get,"void Alarm_date_Get(u8 Class)",		
+
+
 
 	
 };

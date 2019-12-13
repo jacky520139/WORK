@@ -1,9 +1,9 @@
 .\obj\audio.o: ..\..\sdk\plactform\driver\audio\audio.c
-.\obj\audio.o: C:\Keil\ARM\ARMCC\Bin\..\include\stddef.h
+.\obj\audio.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\obj\audio.o: ..\..\sdk\plactform\arch\BK3435_reg.h
 .\obj\audio.o: ..\..\sdk\plactform\driver\audio\audio.h
-.\obj\audio.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdbool.h
-.\obj\audio.o: C:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+.\obj\audio.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\obj\audio.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\obj\audio.o: ..\..\sdk\plactform\driver\gpio\gpio.h
 .\obj\audio.o: ..\..\sdk\plactform\driver\uart\uart.h
 .\obj\audio.o: .\config\rwip_config.h

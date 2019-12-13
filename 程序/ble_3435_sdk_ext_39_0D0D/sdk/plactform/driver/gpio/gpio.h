@@ -87,7 +87,11 @@ typedef enum
 //#define	MotorToggle()	REG_APB5_GPIOB_DATA ^= 0x01
 
 
-#define	KeyPort		0x04
+#define	KeyPort		  0x04
+#define	Int1_Port		0x16
+#define	Int2_Port		0x17
+
+
 //#define	RedLedOn()		  REG_APB5_GPIOA_DATA |= 0x08
 //#define	RedLedOff()		  REG_APB5_GPIOA_DATA &= (~0x08)
 //#define	RedLedToggle()	REG_APB5_GPIOA_DATA ^= 0x08

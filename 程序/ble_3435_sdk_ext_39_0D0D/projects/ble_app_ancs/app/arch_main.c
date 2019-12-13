@@ -234,6 +234,7 @@ void rw_app_enter(void)
 	 * Main loop
 	 ***************************************************************************
 	 */
+
 	while(1)
 	{
 		//schedule all pending events

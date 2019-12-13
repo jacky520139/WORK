@@ -158,7 +158,7 @@ void rtc_isr(void)
         }
     }
 
-    REG_APB6_RTC_ALM_FLAG = 0x1 << 0;
+    REG_APB6_RTC_ALM_FLAG = 0x1 << 0;//ÄÖÖÓ±êÖ¾Î»
 }
 
 

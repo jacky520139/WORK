@@ -61,7 +61,7 @@
 #if (I2C_DRIVER)
 #include "i2c.h"
 #endif
-
+#include "rtc.h"
 /*
  * DEFINES
  ****************************************************************************************
@@ -157,6 +157,12 @@ void IRQ_Exception(void)
 		audio_isr();
 	}
 #endif
+	
+	if(IntStat & INT_STATUS_RTC_bit)
+	{
+		irq_status |= INT_STATUS_RTC_bit;
+		rtc_isr();
+	}
 #if (GPIO_DRIVER)
 	if(IntStat & INT_STATUS_GPIO_bit)
 	{

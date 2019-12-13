@@ -236,7 +236,8 @@ static int gattc_read_req_ind_handler(ke_msg_id_t const msgid, struct gattc_read
 
 static int gattc_cmp_evt_handler(ke_msg_id_t const msgid,  struct gattc_cmp_evt const *param,
                                  ke_task_id_t const dest_id, ke_task_id_t const src_id)
-{
+{   
+//	UART_PRINTF("%s\r\n", __func__);
     if(param->operation == GATTC_NOTIFY)
     {	
       	uint8_t conidx = KE_IDX_GET(src_id);
@@ -248,6 +249,7 @@ static int gattc_cmp_evt_handler(ke_msg_id_t const msgid,  struct gattc_cmp_evt 
 
         rsp->status = param->status;			
         ke_msg_send(rsp);
+			
     }
 
 	// go back in to idle mode
