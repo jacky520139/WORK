@@ -158,11 +158,13 @@ void IRQ_Exception(void)
 	}
 #endif
 	
+	#if (RTC_DRIVER)
 	if(IntStat & INT_STATUS_RTC_bit)
 	{
 		irq_status |= INT_STATUS_RTC_bit;
 		rtc_isr();
 	}
+#endif	
 #if (GPIO_DRIVER)
 	if(IntStat & INT_STATUS_GPIO_bit)
 	{

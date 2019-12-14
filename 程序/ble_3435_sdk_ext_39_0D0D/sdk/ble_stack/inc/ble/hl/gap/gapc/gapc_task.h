@@ -281,22 +281,22 @@ enum gapc_bond
     /// Pairing Failed information
     GAPC_PAIRING_FAILED,
 
-    /// Used to retrieve pairing Temporary Key
+    /// Used to retrieve pairing Temporary Key用于检索配对临时密钥
     GAPC_TK_EXCH,
-    /// Used for Identity Resolving Key exchange
+    /// Used for Identity Resolving Key exchange用于身份解析密钥交换
     GAPC_IRK_EXCH,
-    /// Used for Connection Signature Resolving Key exchange
+    /// Used for Connection Signature Resolving Key exchange用于连接签名解析密钥交换
     GAPC_CSRK_EXCH,
-    /// Used for Long Term Key exchange
+    /// Used for Long Term Key exchange用于长期密钥交换
     GAPC_LTK_EXCH,
 
-    /// Bond Pairing request issue, Repeated attempt
+    /// Bond Pairing request issue, Repeated attempt反复尝试
     GAPC_REPEATED_ATTEMPT,
 
-    /// Out of Band - exchange of confirm and rand.
+    /// Out of Band - exchange of confirm and rand.带外确认和随机交换
     GAPC_OOB_EXCH,
 
-    /// Numeric Comparison - Exchange of Numeric Value -
+    /// Numeric Comparison - Exchange of Numeric Value -数值比较-数值交换
     GAPC_NC_EXCH
 };
 

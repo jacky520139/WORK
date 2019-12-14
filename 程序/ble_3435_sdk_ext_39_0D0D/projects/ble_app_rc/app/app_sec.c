@@ -296,7 +296,7 @@ static int gapc_bond_ind_handler(ke_msg_id_t const msgid,
     UART_PRINTF("%s param->info = 0x%x\r\n",__func__,param->info);
     switch (param->info)
     {
-        case (GAPC_PAIRING_SUCCEED):
+        case (GAPC_PAIRING_SUCCEED):// 配对成功
         {
 			// Update the bonding status in the environment
 			app_sec_env.bond_lost = false;
@@ -316,7 +316,7 @@ static int gapc_bond_ind_handler(ke_msg_id_t const msgid,
                 ASSERT_ERR(0);
             }
 
-            // Set the BD Address of the peer device in NVDS
+            // Set the BD Address of the peer device in NVDS纪录当前链接上的连接地址信息
             if (nvds_put(NVDS_TAG_PEER_BD_ADDRESS, NVDS_LEN_PEER_BD_ADDRESS,
                          (uint8_t *)gapc_get_bdaddr(0, SMPC_INFO_PEER)) != NVDS_OK)
             {
@@ -326,12 +326,13 @@ static int gapc_bond_ind_handler(ke_msg_id_t const msgid,
 			
         } break;
 
-        case (GAPC_REPEATED_ATTEMPT):
+        case (GAPC_REPEATED_ATTEMPT):// 重新配对
         {
 			app_sec_env.peer_pairing = false;
 	    	app_sec_env.peer_encrypt = false;
 			app_sec_env.pairing_fail = true;
             appm_disconnect();
+						UART_PRINTF("gapc pairing GAPC_REPEATED_ATTEMPT\r\n");
         } break;
 
         case (GAPC_IRK_EXCH):
@@ -360,12 +361,12 @@ static int gapc_bond_ind_handler(ke_msg_id_t const msgid,
 			UART_PRINTF("\r\n");
         } break;
 
-        case (GAPC_PAIRING_FAILED):
+        case (GAPC_PAIRING_FAILED):// 配对失败
         {
 	    	UART_PRINTF("gapc pairing failed\r\n");
 	    	app_sec_env.peer_pairing = false;
 	    	app_sec_env.peer_encrypt = false;
-			app_sec_env.pairing_fail = true;
+			  app_sec_env.pairing_fail = true;
 	    	appm_disconnect();
         } break;
 

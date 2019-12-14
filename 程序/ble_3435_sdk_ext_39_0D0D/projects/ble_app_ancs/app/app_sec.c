@@ -284,7 +284,7 @@ static int gapc_bond_ind_handler(ke_msg_id_t const msgid,
             app_sec_env.bonded = true;
 	    	UART_PRINTF("gapc pairing success\r\n");
 		
-            // Update the bonding status in the environment
+            // 更新环境中的绑定状态
             if (nvds_put(NVDS_TAG_PERIPH_BONDED, NVDS_LEN_PERIPH_BONDED,
                          (uint8_t *)&app_sec_env.bonded) != NVDS_OK)
             {
@@ -292,14 +292,30 @@ static int gapc_bond_ind_handler(ke_msg_id_t const msgid,
                 ASSERT_ERR(0);
             }
 
-            // Set the BD Address of the peer device in NVDS
+            // 在NVDS中设置对等设备蓝牙设备地址
             if (nvds_put(NVDS_TAG_PEER_BD_ADDRESS, NVDS_LEN_PEER_BD_ADDRESS,
                          (uint8_t *)gapc_get_bdaddr(0, SMPC_INFO_PEER)) != NVDS_OK)
             {
                 // An error has occurred during access to the NVDS
                 ASSERT_ERR(0);
             }
-			
+////////////////////////////////////////
+//    struct gap_bdaddr whitelist_bdaddr;
+//    uint8_t peer_address_len = NVDS_LEN_PEER_BD_ADDRESS;//7
+//            if(nvds_get(NVDS_TAG_PEER_BD_ADDRESS, &peer_address_len, (uint8_t *)&whitelist_bdaddr) != NVDS_OK)
+//            {
+//                // An error has occurred during access to the NVDS
+//                ASSERT_INFO(0,NVDS_TAG_PEER_BD_ADDRESS,peer_address_len);
+//            }
+
+//	  UART_PRINTF("addr_type = %x\r\n", whitelist_bdaddr.addr_type);
+//	  UART_PRINTF("addr = ");
+//	  for(int i = 0;i < sizeof(bd_addr_t);i++)
+//	  {
+//		UART_PRINTF("%x ",whitelist_bdaddr.addr.addr[i]);
+//	  }
+//	  UART_PRINTF("\r\n");						
+////////////////////////////						
         } break;
 
         case (GAPC_REPEATED_ATTEMPT):
@@ -320,6 +336,12 @@ static int gapc_bond_ind_handler(ke_msg_id_t const msgid,
            	}
 					 
 			memcpy(&app_env.peer_irk,&param->data.irk.irk.key[0],sizeof(struct gapc_irk));
+//						 if (nvds_put(NVDS_TAG_PEER_BD_ADDRESS, NVDS_LEN_PEER_BD_ADDRESS,
+//                         (uint8_t *)param->data.irk.addr.addr.addr) != NVDS_OK)
+//            {
+//                // An error has occurred during access to the NVDS
+//                ASSERT_ERR(0);
+//            }
 			UART_PRINTF("irk.key = ");
 			for(int i = 0;i<sizeof(struct gap_sec_key);i++)
 			{

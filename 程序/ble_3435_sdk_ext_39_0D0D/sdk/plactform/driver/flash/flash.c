@@ -726,20 +726,20 @@ void flash_test(void)
 
 void FLASH_Read(uint32_t address,uint8_t *buffer,uint32_t len)
 {flash_read (0,address ,len,buffer,NULL);}
-#include "ALL_Includes.h"
+//#include "ALL_Includes.h"
 #define   FLASH_Unlock()   {flash_enable_erase_flag1=FLASH_ERASE_ENABLE1;\
                             flash_enable_erase_flag2=FLASH_ERASE_ENABLE2;}						//解锁
 #define   FLASH_Lock()   {flash_enable_erase_flag1=0;\
                             flash_enable_erase_flag2=0;}						//解锁
 		 
-u8 STMFLASH_BUF[FLASH_ERASE_SECTOR_SIZE];//最多是2K字节
+uint8_t STMFLASH_BUF[FLASH_ERASE_SECTOR_SIZE];//最多是2K字节
 void FLASH_Write(uint32_t WriteAddr,uint8_t *pBuffer,uint16_t NumToWrite)
 {
-	u32 secpos;	   //扇区地址
-	u16 secoff;	   //扇区内偏移地址(16位字计算)
-	u16 secremain; //扇区内剩余地址(16位字计算)	   
- 	u16 i;    
-//	u32 offaddr;   //去掉0X08000000后的地址
+	uint32_t secpos;	   //扇区地址
+	uint16_t secoff;	   //扇区内偏移地址(16位字计算)
+	uint16_t secremain; //扇区内剩余地址(16位字计算)	   
+ 	uint16_t i;    
+//	uint32_t offaddr;   //去掉0X08000000后的地址
 
     if(flash_mid != get_flash_ID())
     {

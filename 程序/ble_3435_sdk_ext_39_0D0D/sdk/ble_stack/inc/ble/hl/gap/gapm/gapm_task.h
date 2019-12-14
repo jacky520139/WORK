@@ -616,7 +616,7 @@ struct gapm_white_list_mgt_cmd
     ///  - GAPM_RMV_DEV_FRM_WLIST: Remove devices form white list.
     ///  - GAPM_CLEAR_WLIST: Clear all devices from white list.
     uint8_t operation;
-    /// Number of device information present in command
+    ///命令中存在的设备信息数
     uint8_t nb;
     /// Device address information that can be used to add or remove element in device list.
     struct gap_bdaddr devices[__ARRAY_EMPTY];

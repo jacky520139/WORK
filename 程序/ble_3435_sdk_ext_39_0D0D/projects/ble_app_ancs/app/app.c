@@ -286,7 +286,7 @@ uint8_t wlist_enable_flag = 0;
 void appm_start_white_list_dvertising(void)
 {   
     struct gap_bdaddr whitelist_bdaddr;
-    uint8_t peer_address_len = NVDS_LEN_PEER_BD_ADDRESS;
+    uint8_t peer_address_len = NVDS_LEN_PEER_BD_ADDRESS;//7
 
     // Check if the advertising procedure is already is progress
     if (ke_state_get(TASK_APP) == APPM_READY)
@@ -306,6 +306,7 @@ void appm_start_white_list_dvertising(void)
         }
     }		
 }
+
 /* 设备发起广播函数*/
 void appm_start_advertising(void)
 {	
@@ -328,7 +329,7 @@ void appm_start_advertising(void)
         if(wlist_enable_flag)
         {
             wlist_enable_flag=0;
-            cmd->info.host.adv_filt_policy=ADV_ALLOW_SCAN_WLST_CON_WLST;
+            cmd->info.host.adv_filt_policy=ADV_ALLOW_SCAN_WLST_CON_WLST;//仅允许来自白名单设备的扫描和连接请求
         }
 #endif
  		/*-----------------------------------------------------------------------------------
@@ -445,6 +446,12 @@ void appm_stop_advertising(void)
 {
     if (ke_state_get(TASK_APP) == APPM_ADVERTISING)
     {
+        // Stop the advertising timer if needed
+        if (ke_timer_active(APP_ADV_TIMEOUT_TIMER, TASK_APP))
+        {
+            ke_timer_clear(APP_ADV_TIMEOUT_TIMER, TASK_APP);
+        }
+
         // Go in ready state
         ke_state_set(TASK_APP, APPM_READY);
 
@@ -458,6 +465,7 @@ void appm_stop_advertising(void)
         ke_msg_send(cmd);
 
 		wdt_disable_flag = 1;
+		
     }
     // else ignore the request
 }
@@ -543,7 +551,12 @@ void appm_send_seurity_req(void)
 {
     app_sec_send_security_req(app_env.conidx);
 }
-
+void appm_switch_general_adv(void)
+{
+	app_sec_remove_bond();
+	appm_stop_advertising();	
+	ke_msg_send_basic(APP_ADV_ENABLE_TIMER,TASK_APP,TASK_APP);//开始广播
+}
 #endif //(BLE_APP_PRESENT)
 
 /// @} APP

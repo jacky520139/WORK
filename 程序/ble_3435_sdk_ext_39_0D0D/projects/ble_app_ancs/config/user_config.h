@@ -47,7 +47,7 @@
 //最小连接间隔
 #define BLE_UAPDATA_MIN_INTVALUE		20//必须是“0.625ms”的整数倍
 //最大连接间隔 
-#define BLE_UAPDATA_MAX_INTVALUE		100//必须是“0.625ms”的整数倍
+#define BLE_UAPDATA_MAX_INTVALUE		40//必须是“0.625ms”的整数倍
 //连接Latency
 #define BLE_UAPDATA_LATENCY				0
 //连接超时
@@ -59,7 +59,7 @@
 
 
  //广播包UUID配置
-#define APP_FFF0_ADV_DATA_UUID        "\x03\x03\x12\x18"//0x1812
+#define APP_FFF0_ADV_DATA_UUID        "\x03\x03\x0E\x18"//0x1812
 #define APP_FFF0_ADV_DATA_UUID_LEN    (4)
 
 //扫描响应包数据
@@ -72,9 +72,9 @@
 /// Advertising channel map - 37, 38, 39
 #define APP_ADV_CHMAP           (0x07)
 /// Advertising minimum interval - 100ms (160*0.625ms)必须是“0.625ms”的整数倍,范围是“20ms ~ 10.24s”之间
-#define APP_ADV_INT_MIN         (100)
+#define APP_ADV_INT_MIN         (160)
 /// Advertising maximum interval - 100ms (160*0.625ms)
-#define APP_ADV_INT_MAX         (100)
+#define APP_ADV_INT_MAX         (160)
 /// Fast advertising interval
 #define APP_ADV_FAST_INT        (32)
 

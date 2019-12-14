@@ -51,7 +51,7 @@ static uint32_t utc_convert_utc_secs( UTCTimeStruct *tm );
 static uint32_t previousRwTimerTick = 0;
 static uint32_t remUsTicks = 0;
 static uint32_t timeMSec = 0;
-uint32_t rtc_timeSeconds = 0;
+uint32_t rtc_timeSeconds = 0;//日历秒数
 
 
 
@@ -165,6 +165,7 @@ void utc_update( void )
  *
  * @return  none
  */
+//毫秒计算出秒数
 static void utc_clock_update( UTCTime elapsedMSec )
 {
 	// Add elapsed milliseconds to the saved millisecond portion of time
@@ -191,6 +192,7 @@ static void utc_clock_update( UTCTime elapsedMSec )
  *
  * @return  none
  */
+//按照秒数计算出日期
 static void utc_convert_utc_time(UTCTimeStruct *tm, UTCTime secTime )
 {
 	// calculate the time less than a day - hours, minutes, seconds
@@ -266,6 +268,7 @@ static uint8_t monthLength( uint8_t lpyr, uint8_t mon )
  *
  * @return  number of seconds since 00:00:00 on 01/01/2000 (UTC)
  */
+//计算出秒数
 static UTCTime utc_convert_utc_secs( UTCTimeStruct *tm )
 {
 	uint32_t seconds;

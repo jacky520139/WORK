@@ -46,3 +46,4 @@
 .\obj\intc.o: ..\..\sdk\plactform\driver\gpio\gpio.h
 .\obj\intc.o: ..\..\sdk\plactform\arch\BK3435_reg.h
 .\obj\intc.o: ..\..\sdk\plactform\driver\audio\audio.h
+.\obj\intc.o: ..\..\sdk\plactform\driver\rtc\rtc.h

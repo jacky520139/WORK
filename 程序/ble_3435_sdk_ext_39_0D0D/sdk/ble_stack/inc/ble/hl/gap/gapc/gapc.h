@@ -164,6 +164,7 @@ uint8_t gapc_get_role(uint8_t conidx);
  * @return Return found connection address
  ****************************************************************************************
  */
+ //检索当前链接上的连接地址信息
 struct gap_bdaddr* gapc_get_bdaddr(uint8_t conidx, uint8_t src);
 
 

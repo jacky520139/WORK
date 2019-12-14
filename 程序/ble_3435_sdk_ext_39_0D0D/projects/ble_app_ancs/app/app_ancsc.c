@@ -449,6 +449,7 @@ static int app_ancsc_data_ntf_handler(ke_msg_id_t const msgid,
  ****************************************************************************************
  */
  uint32_t NotificationUID_copy_incall;
+//获取来电号码
 static void app_ancsc_get_incomingcall_number(uint32_t NotificationUID)
 {
 	UART_PRINTF("%s \r\n\r\n",__func__);
@@ -500,7 +501,6 @@ void app_ancsc_delete_call(uint32_t NotificationUID_copy_incall )
 	co_write32p(buf + 1, NotificationUID_copy_incall);
 	co_write8(buf + 5, NotificationAttributeIDTitle);
 	req->length = 0x06;
-		
 	ke_msg_send(req);
 }
 
@@ -509,16 +509,16 @@ static void app_ancsc_IncomingCall_unpack(uint8_t EventID,uint8_t EventFlags,uin
 	
 	switch (EventID)
 	{
-		case EventIDNotificationAdded:// 0
+		case EventIDNotificationAdded:// 0已添加事件通知
 			UART_PRINTF("add one new incoming call\r\n");
 			app_ancsc_get_incomingcall_number(NotificationUID);
 			break;
 		
-		case EventIDNotificationModified:// 0
+		case EventIDNotificationModified:// 0修改了一个新的来电
 			UART_PRINTF("Modified one new incoming call\r\n");
 			break;
 		
-		case EventIDNotificationRemoved:// 0
+		case EventIDNotificationRemoved:// 0删除了一个新的来电
 			UART_PRINTF("Removed one new incoming call\r\n");
 			break;
 		

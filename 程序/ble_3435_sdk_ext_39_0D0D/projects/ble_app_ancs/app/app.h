@@ -215,7 +215,7 @@ void appm_get_conn_rssi(void);
 uint8_t appm_get_dev_name(uint8_t* name);
 
 void appm_send_seurity_req(void);
-
+void appm_switch_general_adv(void);
 
 /// @} APP
 

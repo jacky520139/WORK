@@ -48,7 +48,7 @@ static int diss_value_req_ind_handler(ke_msg_id_t const msgid,
     // Check requested value
     switch (param->value)
     {
-        case DIS_MANUFACTURER_NAME_CHAR:
+        case DIS_MANUFACTURER_NAME_CHAR://制造商名
         {
             // Set information
             len = APP_DIS_MANUFACTURER_NAME_LEN;

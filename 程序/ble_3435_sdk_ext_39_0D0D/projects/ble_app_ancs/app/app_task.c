@@ -52,6 +52,8 @@
  * LOCAL FUNCTION DEFINITIONS
  ****************************************************************************************
  */
+ //this flag use indicate adv timeout
+static bool adv_timeout_flag = false;
 bool Pairing_Flag=0;//配对状态
 static uint8_t appm_get_handler(const struct ke_state_handler *handler_list,
                                 ke_msg_id_t msgid,
@@ -144,7 +146,7 @@ static int app_adv_timeout_handler(ke_msg_id_t const msgid,
 {
 	UART_PRINTF("%s\r\n", __func__);
 
-//	adv_timeout_flag = true;
+	adv_timeout_flag = true;
 
 	// Stop advertising
 	appm_stop_advertising();
@@ -243,15 +245,28 @@ static int gapm_cmp_evt_handler(ke_msg_id_t const msgid,
         case (GAPM_ADV_DIRECT):
 		case (GAPM_UPDATE_ADVERTISE_DATA):
         case (GAPM_ADV_DIRECT_LDC):
+	{
+		if (((param->status == GAP_ERR_CANCELED) || (param->status == GAP_ERR_TIMEOUT)) && (!adv_timeout_flag))
 		{
-			if (param->status == GAP_ERR_TIMEOUT)
-			{
-                ke_state_set(TASK_APP, APPM_READY);
-				
-				//device not bonded, start general adv
-				appm_start_advertising();
-            }
+			ke_state_set(TASK_APP, APPM_READY);
+				ke_msg_send_basic(APP_ADV_ENABLE_TIMER,TASK_APP,TASK_APP);//开始广播
+//			if(app_sec_get_bond_status())
+//			{
+//				//if device has bonded, then start direct adv
+//				appm_start_direct_dvertising();
+//			}
+//			else
+//			{
+//				//device not bonded, start general adv
+//				appm_start_advertising();
+//			}
 		}
+		//if device cancel advtising is adv timeout,then reset this flag
+		if((param->status == GAP_ERR_CANCELED) && (adv_timeout_flag == true))
+		{
+			adv_timeout_flag = false;
+		}
+	}
         break;
 
         default:
@@ -372,7 +387,7 @@ static int gapc_connection_req_ind_handler(ke_msg_id_t const msgid,
                                            ke_task_id_t const src_id)
 {	
 	UART_PRINTF("%s\r\n", __func__);
-//	adv_timeout_flag = false;
+	adv_timeout_flag = false;
     app_env.conidx = KE_IDX_GET(src_id);
     // Check if the received Connection Handle was valid检查接收到的连接句柄是否有效
     if (app_env.conidx != GAP_INVALID_CONIDX)
@@ -440,8 +455,17 @@ static int gapc_connection_req_ind_handler(ke_msg_id_t const msgid,
 	
 		
 	    ke_timer_set(APP_ANCS_REQ_IND,TASK_APP,80); 
-			ke_timer_set(APP_SEND_SECURITY_REQ,TASK_APP,220);  //开始发送安全请求
-			
+//			ke_timer_set(APP_SEND_SECURITY_REQ,TASK_APP,220);  //开始发送安全请求
+		//if device not bond with local, send bond request
+		if(!app_sec_get_bond_status())
+		{
+			UART_PRINTF("app_sec_get_bond_status = 0x0\r\n");
+			ke_timer_set(APP_SEND_SECURITY_REQ,TASK_APP,20);
+		}
+		else
+		{
+			UART_PRINTF("app_sec_get_bond_status = 0x1\r\n");
+		}			
 		#if (APP_GET_RSSI_EN)
 		ke_timer_set(APP_GET_RSSI_TIMER,TASK_APP,120);//获取信号强度
     #endif
@@ -601,7 +625,7 @@ static int gapc_disconnect_ind_handler(ke_msg_id_t const msgid,
 
 	// Go to the ready state
 	ke_state_set(TASK_APP, APPM_READY);
-
+	adv_timeout_flag = false;
 	wdt_disable_flag = 1;
 	
 	// Restart Advertising
@@ -619,6 +643,12 @@ static int gapc_disconnect_ind_handler(ke_msg_id_t const msgid,
 //				appm_start_advertising();
 //			}
 	ke_msg_send_basic(APP_ADV_ENABLE_TIMER,TASK_APP,TASK_APP);//开始广播
+//	{
+//		app_sec_env.bond_lost = false;
+//		ke_state_set(TASK_APP, APPM_READY);
+//		appm_start_advertising();
+//		wdt_disable_flag=0;
+//	}
     return (KE_MSG_CONSUMED);
 }
 
@@ -694,20 +724,22 @@ static int app_period_timer_handler(ke_msg_id_t const msgid,
     ke_timer_set(APP_PERIOD_TIMER,TASK_APP,30000);
 #endif  
     Key_Scan();
-  if(KEY1_Dev.Value==Long_Trg_Value)
+  if(KEY1_Dev.Value==Long_Trg_Value)//按键长按
 	{KEY1_Dev.Value=0;
-	if(ke_state_get(TASK_APP) == APPM_ADVERTISING)//如果在广播状态下 
-	{	appm_stop_advertising();
-	  wdt_disable_flag=1;//关闭看门狗
-		ke_state_set(TASK_APP, APPM_READY);
-	}
-	if(ke_state_get(TASK_APP) == APPM_READY)
-			{
-		UART_PRINTF("app_sec_remove_bond\r\n");
-	 app_sec_remove_bond();//解除绑定
-	 ke_msg_send_basic(APP_ADV_ENABLE_TIMER,TASK_APP,TASK_APP);//开始广播
-			}
-		Pairing_Flag=1;
+	appm_switch_general_adv();
+  Pairing_Flag=1;
+//	if(ke_state_get(TASK_APP) == APPM_ADVERTISING)//如果在广播状态下 
+//	{	appm_stop_advertising();
+//	  wdt_disable_flag=1;//关闭看门狗
+//		ke_state_set(TASK_APP, APPM_READY);
+//	}
+//	if(ke_state_get(TASK_APP) == APPM_READY)
+//			{
+//		UART_PRINTF("app_sec_remove_bond\r\n");
+//	 app_sec_remove_bond();//解除绑定
+//	 ke_msg_send_basic(APP_ADV_ENABLE_TIMER,TASK_APP,TASK_APP);//开始广播
+//			}
+//		Pairing_Flag=1;
 	}
  	if(ke_state_get(TASK_APP) == APPM_READY)
 	{

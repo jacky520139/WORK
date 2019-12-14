@@ -167,7 +167,7 @@ void rwble_version(uint8_t* fw_version, uint8_t* hw_version)
     *(hw_version+1) = ble_upg_getf();
     *(hw_version)   = ble_build_getf();
 }
-
+//#include "ALL_Includes.h"
 __BLEIRQ void rwble_isr(void)//蓝牙中断服务
 {
     // Loop until no more interrupts have to be handled循环直到不再需要处理中断
@@ -191,6 +191,7 @@ __BLEIRQ void rwble_isr(void)//蓝牙中断服务
             rwip_wakeup();	
 			
             DBG_SWDIAG(BLE_ISR, SLPINT, 0);
+//					UART_PRINTF("%s\r\n", BLE_SLPINTSTAT_BIT);
         }
 
         // Slot interrupt时隙中断
@@ -208,6 +209,7 @@ __BLEIRQ void rwble_isr(void)//蓝牙中断服务
             ea_finetimer_isr();
 
             DBG_SWDIAG(BLE_ISR, CSCNTINT, 0);
+//					UART_PRINTF("%s\r\n", BLE_CSCNTINTSTAT_BIT);
         }
         #endif //!BT_DUAL_MODE
         #endif //SYSTEM_SLEEP
@@ -223,6 +225,7 @@ __BLEIRQ void rwble_isr(void)//蓝牙中断服务
             ea_finetimer_isr();
 
             DBG_SWDIAG(BLE_ISR, FINETGTIMINT, 0);
+//					UART_PRINTF("%s\r\n", BLE_FINETGTIMINTSTAT_BIT);
         }
         #if ((BLE_CENTRAL || BLE_PERIPHERAL) && (BLE_AUDIO))
         // Audio channel 0 interrupt
@@ -268,6 +271,7 @@ __BLEIRQ void rwble_isr(void)//蓝牙中断服务
             wdt_feed(0x3fff);
             
             DBG_SWDIAG(BLE_ISR, EVENTINT, 0);
+//						UART_PRINTF("%s\r\n", BLE_EVENTINTSTAT_BIT);
         }
 
         // AFPM interrupt
@@ -285,6 +289,7 @@ __BLEIRQ void rwble_isr(void)//蓝牙中断服务
             lld_evt_end_isr(true);
 					
             DBG_SWDIAG(BLE_ISR2, EVENTAPFMINT, 0);
+//						UART_PRINTF("%s\r\n", BLE_EVENTAPFAINTSTAT_BIT);
         }
 
         // Rx interrupt
@@ -294,6 +299,7 @@ __BLEIRQ void rwble_isr(void)//蓝牙中断服务
             ble_intack_clear(BLE_RXINTSTAT_BIT);	
             lld_evt_rx_isr();
             DBG_SWDIAG(BLE_ISR, RXINT, 0);
+//					UART_PRINTF("%s\r\n", BLE_RXINTSTAT_BIT);
         }
 
         // SW interrupt
@@ -305,6 +311,7 @@ __BLEIRQ void rwble_isr(void)//蓝牙中断服务
 
             ea_sw_isr();
             DBG_SWDIAG(BLE_ISR2, SWINT, 0);
+//					UART_PRINTF("%s\r\n", BLE_SWINTSTAT_BIT);
         }
 
         #if (!BT_DUAL_MODE)
@@ -319,6 +326,7 @@ __BLEIRQ void rwble_isr(void)//蓝牙中断服务
             lld_evt_timer_isr();
 
             DBG_SWDIAG(BLE_ISR, GROSSTGTIMINT, 0);
+//					UART_PRINTF("%s\r\n", BLE_GROSSTGTIMINTSTAT_BIT);
         }
         #endif //(!BT_DUAL_MODE)
 
@@ -332,6 +340,7 @@ __BLEIRQ void rwble_isr(void)//蓝牙中断服务
             lld_crypt_isr();
 
             DBG_SWDIAG(BLE_ISR, CRYPTINT, 0);
+//					UART_PRINTF("%s\r\n", BLE_CRYPTINTSTAT_BIT);
         }
 
         // Error interrupt
@@ -344,6 +353,7 @@ __BLEIRQ void rwble_isr(void)//蓝牙中断服务
             // Clear the interrupt
             ble_intack_clear(BLE_ERRORINTSTAT_BIT);
             DBG_SWDIAG(BLE_ISR, ERRORINT, 0);
+//					UART_PRINTF("%s\r\n", BLE_ERRORINTSTAT_BIT);
         }
     }
 }
