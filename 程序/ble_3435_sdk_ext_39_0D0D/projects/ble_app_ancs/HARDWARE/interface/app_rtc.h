@@ -32,24 +32,45 @@ typedef struct
 	  RTC_DATE_DESC       RTC;
 } calendar_dev;
 extern calendar_dev calendar;
-struct user_alarm_ind
-{u8 mode;
-
-};
+//、、、、、、提醒结构体、、、、、、、、、、、、
+typedef struct
+{   
+//	  u8      year;     // 提醒年
+	  u8       mon;     // 提醒月
+	  u8       day;     // 提醒日
+    u8       hour;     // 提醒时
+    u8       minute;     //提醒分
+    u8       week_loop;
+} Remind_dev;
+typedef struct 
+	{
+ u8 on_off;
+ u8 hour;
+ u8 min;
+ u8 week_loop;
+}flash_alarm_date_tag;
+extern u8 ALARM_ID_LIST[10];
+extern u8 REMIND_ID_LIST[10];;
 void Init_RTC(void);
+void Creat_Alarm(u8 Class,u8 hour,u8 min,u8 Week_loop);
+void Creat_Remind(u8 Class,u8 mon,u8 day,u8 hour,u8 min,u8 Week_loop);
+void flash_Close_alarm(u8 Class);
+void flash_Close_Remind(u8 Class);
 //u8 RTC_Get_Week(u16 year,u8 month,u8 day);
 u8 Calendar_Seting(u16 year,u8 mon,u8 day,u8 hour,u8 min,u8 sec);
-u8 Calendar_Update_handler(ke_msg_id_t const msgid, void const *param,ke_task_id_t const dest_id, ke_task_id_t const src_id);
+int Calendar_Update_handler(ke_msg_id_t const msgid, void const *param,ke_task_id_t const dest_id, ke_task_id_t const src_id);
 //得到当前的时间
 //返回值:0,成功;其他:错误代码.
 u8 RTC_Get(void);
 void Text_Alarm(u8 mode,u8 hour,u8 min,u8 sec);
-int user_alarm_ind(ke_msg_id_t const msgid,
-										struct user_alarm_ind *param,
-										ke_task_id_t const dest_id,
-										ke_task_id_t const src_id);
+int user_alarm_ind(ke_msg_id_t const msgid, void const *param,ke_task_id_t const dest_id,ke_task_id_t const src_id);
 void Alarm_Get(u8 Class);	
-void Alarm_date_Get(u8 Class);										
+void Alarm_date_Get(u8 Class);
+//void flash_write_alarm(u8 Class,flash_alarm_date_tag *flash_alarm);
+void flash_Load_alarm(flash_alarm_date_tag *flash_alarm);//从FLASH中写闹钟数据
+void flash_Load_Remind(Remind_dev *flash_Remind);
+u8 Load_Alarm_Date(void);
+void Alarm_Setup(void);//从flash读出闹钟和提醒
 #endif
 
 

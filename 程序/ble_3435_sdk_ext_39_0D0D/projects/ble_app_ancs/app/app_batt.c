@@ -188,7 +188,7 @@ const struct ke_msg_handler app_batt_msg_handler_list[] =
     {KE_MSG_DEFAULT_HANDLER,        (ke_msg_func_t)app_batt_msg_dflt_handler},
     {BASS_BATT_LEVEL_NTF_CFG_IND,   (ke_msg_func_t)bass_batt_level_ntf_cfg_ind_handler},
     {BASS_BATT_LEVEL_UPD_RSP,       (ke_msg_func_t)batt_level_upd_handler},
-	{BASS_ENABLE_RSP,       		(ke_msg_func_t)bass_enable_rsp_handler},
+	  {BASS_ENABLE_RSP,       		    (ke_msg_func_t)bass_enable_rsp_handler},
 		
 };
 

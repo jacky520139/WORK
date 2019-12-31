@@ -183,7 +183,6 @@
 #endif
 
 // </h>
-
 // <h>  Config MAX Connect Device Numble
 // <o>  CFG_CON <1-10>
 // <i>  CFG MAX CONNECT NUM (1 -- 10)
@@ -483,7 +482,7 @@
 
 
 /// Use 32K Hz Clock if set to 1 else 32,768k is used
-#define HZ32000                                     1
+#define HZ32000                                     0
 
 
 /// Time to wake-up Radio Module (in us)
@@ -795,8 +794,8 @@ enum KE_TASK_TYPE
     TASK_L2CC = 6,    // L2CAP Controller Task
     TASK_GATTM = 7,   // Generic Attribute Profile Manager Task
     TASK_GATTC = 8,   // Generic Attribute Profile Controller Task
-    TASK_GAPM = 9,    // Generic Access Profile Manager
-    TASK_GAPC = 10,    // Generic Access Profile Controller
+    TASK_GAPM = 9,    // Generic Access Profile Manager通用访问配置文件管理器
+    TASK_GAPC = 10,    // Generic Access Profile Controller通用访问配置文件控制器
 
     // allocate a certain number of profiles task
     TASK_PRF_MAX = (TASK_GAPC + BLE_NB_PROFILES),//BLE_NB_PROFILES MAX ROM USE == 6 
@@ -822,7 +821,7 @@ enum
     /// Memory allocated for environment variables
     KE_MEM_ENV,
     #if (BLE_HOST_PRESENT)
-    /// Memory allocated for Attribute database
+    /// 为属性数据库分配的内存
     KE_MEM_ATT_DB,
     #endif // (BLE_HOST_PRESENT)
     /// Memory allocated for kernel messages

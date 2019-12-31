@@ -616,19 +616,19 @@ static int gapc_disconnect_ind_handler(ke_msg_id_t const msgid,
 	// Go to the ready state
 	ke_state_set(TASK_APP, APPM_READY);
 
-	app_hid_set_send_flag(false);
+//	app_hid_set_send_flag(false);
 
-	audio_stop();
+////	audio_stop();
 
-	adv_timeout_flag = false;
-#if (HID_CONNECT_ANY)
-	app_sec_env.bonded = false;
-    app_sec_env.peer_pairing = false;
-    app_sec_env.peer_encrypt = false;
-    app_sec_env.bond_lost = false;
-    app_sec_env.pairing_fail = false;
-#endif
-	wdt_disable_flag=1;
+//	adv_timeout_flag = false;
+//#if (HID_CONNECT_ANY)
+//	app_sec_env.bonded = false;
+//    app_sec_env.peer_pairing = false;
+//    app_sec_env.peer_encrypt = false;
+//    app_sec_env.bond_lost = false;
+//    app_sec_env.pairing_fail = false;
+//#endif
+//	wdt_disable_flag=1;
 
 #if (!HID_CONNECT_ANY)
 	if(app_sec_env.bond_lost)

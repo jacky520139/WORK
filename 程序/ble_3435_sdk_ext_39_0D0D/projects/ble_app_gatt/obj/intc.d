@@ -47,3 +47,4 @@
 .\obj\intc.o: ..\..\sdk\plactform\arch\BK3435_reg.h
 .\obj\intc.o: ..\..\sdk\plactform\driver\pwm\pwm.h
 .\obj\intc.o: ..\..\sdk\plactform\driver\adc\adc.h
+.\obj\intc.o: ..\..\sdk\plactform\driver\rtc\rtc.h

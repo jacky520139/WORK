@@ -307,7 +307,7 @@ enum gapc_dev_info
     GAPC_DEV_NAME,
     /// Device Appearance Icon
     GAPC_DEV_APPEARANCE,
-    /// Device Slave preferred parameters
+    /// Device Slave preferred parameters设备从机首选参数
     GAPC_DEV_SLV_PREF_PARAMS,
     /// Device Central address resolution
     GAPC_DEV_CTL_ADDR_RESOL,

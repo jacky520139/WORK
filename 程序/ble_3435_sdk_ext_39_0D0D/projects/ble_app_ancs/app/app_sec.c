@@ -41,6 +41,7 @@
 #include "nvds.h"           // NVDS API Definitions
 #include "co_utils.h"
 #include "uart.h"
+#include "ALL_Includes.h"
 /*
  * GLOBAL VARIABLE DEFINITIONS
  ****************************************************************************************
@@ -172,11 +173,13 @@ static int gapc_bond_req_ind_handler(ke_msg_id_t const msgid,
 	    	UART_PRINTF("gapc_pairing req\r\n");
 	    	app_sec_env.peer_pairing = true;
             cfm->request = GAPC_PAIRING_RSP;//配对
-
             cfm->accept  = false;
              //检查是否已连接（仅支持一个连接）
             // Check if we are already bonded (Only one bonded connection is supported)
+#if (!HID_CONNECT_ANY)
+            // Check if we are already bonded (Only one bonded connection is supported)
             if (!app_sec_env.bonded)
+#endif
             {
                 cfm->accept  = true;//接受
 
@@ -200,10 +203,23 @@ static int gapc_bond_req_ind_handler(ke_msg_id_t const msgid,
             uint8_t counter;
             cfm->accept  = true;
             cfm->request = GAPC_LTK_EXCH;
+#if (HID_CONNECT_ANY)
+			// Generate all the values
+            cfm->data.ltk.ediv = 0x1234; 
 
+            for (counter = 0; counter < RAND_NB_LEN; counter++)
+            {
+                cfm->data.ltk.ltk.key[counter] = 0x11;
+                cfm->data.ltk.randnb.nb[counter] = 0x11;
+            }
+
+            for (counter = RAND_NB_LEN; counter < KEY_LEN; counter++)
+            {
+                cfm->data.ltk.ltk.key[counter] = 0x11;
+            }
+#else
             // Generate all the values
             cfm->data.ltk.ediv = (uint16_t)co_rand_word();
-
             for (counter = 0; counter < RAND_NB_LEN; counter++)
             {
                 cfm->data.ltk.ltk.key[counter]    = (uint8_t)co_rand_word();
@@ -214,8 +230,8 @@ static int gapc_bond_req_ind_handler(ke_msg_id_t const msgid,
             {
                 cfm->data.ltk.ltk.key[counter]    = (uint8_t)co_rand_word();
             }
-
-            // Store the generated value in NVDS
+#endif
+            // 将生成的值存储在NVDS中
             if (nvds_put(NVDS_TAG_LTK, NVDS_LEN_LTK,
                          (uint8_t *)&cfm->data.ltk) != NVDS_OK)
             {
@@ -241,20 +257,16 @@ static int gapc_bond_req_ind_handler(ke_msg_id_t const msgid,
         case (GAPC_TK_EXCH):
         {
             // Generate a PIN Code- (Between 100000 and 999999)
-            uint32_t pin_code =654321;// (100000 + (co_rand_word()%900000));
-
+            uint32_t pin_code =123456;// (100000 + (co_rand_word()%900000));
             cfm->accept  = true;
             cfm->request = GAPC_TK_EXCH;
-
             // Set the TK value
             memset(cfm->data.tk.key, 0, KEY_LEN);
-
             cfm->data.tk.key[0] = (uint8_t)((pin_code & 0x000000FF) >>  0);
             cfm->data.tk.key[1] = (uint8_t)((pin_code & 0x0000FF00) >>  8);
             cfm->data.tk.key[2] = (uint8_t)((pin_code & 0x00FF0000) >> 16);
             cfm->data.tk.key[3] = (uint8_t)((pin_code & 0xFF000000) >> 24);
         } break;
-
         default:
         {
             ASSERT_ERR(0);
@@ -281,9 +293,13 @@ static int gapc_bond_ind_handler(ke_msg_id_t const msgid,
 			// Update the bonding status in the environment
 			app_sec_env.bond_lost = false;
 			app_sec_env.pairing_fail = false;
+//      app_sec_env.bonded = true;
+#if (HID_CONNECT_ANY)
+			app_sec_env.bonded = false;
+#else
             app_sec_env.bonded = true;
+#endif					
 	    	UART_PRINTF("gapc pairing success\r\n");
-		
             // 更新环境中的绑定状态
             if (nvds_put(NVDS_TAG_PERIPH_BONDED, NVDS_LEN_PERIPH_BONDED,
                          (uint8_t *)&app_sec_env.bonded) != NVDS_OK)
@@ -291,7 +307,6 @@ static int gapc_bond_ind_handler(ke_msg_id_t const msgid,
                 // An error has occurred during access to the NVDS
                 ASSERT_ERR(0);
             }
-
             // 在NVDS中设置对等设备蓝牙设备地址
             if (nvds_put(NVDS_TAG_PEER_BD_ADDRESS, NVDS_LEN_PEER_BD_ADDRESS,
                          (uint8_t *)gapc_get_bdaddr(0, SMPC_INFO_PEER)) != NVDS_OK)
@@ -329,17 +344,18 @@ static int gapc_bond_ind_handler(ke_msg_id_t const msgid,
         case (GAPC_IRK_EXCH):
         {
 		   	UART_PRINTF("gapc pairing GAPC_IRK_EXCH\r\n");
-           	// Store peer identity in NVDS在NVDS中存储对等身份
+           	// Store peer identity in NVDS   在NVDS中存储身份解析密匙
            	if (nvds_put(NVDS_TAG_PEER_IRK, NVDS_LEN_PEER_IRK, (uint8_t *)&param->data.irk) != NVDS_OK)
            	{
                	ASSERT_ERR(0);
            	}
 					 
 			memcpy(&app_env.peer_irk,&param->data.irk.irk.key[0],sizeof(struct gapc_irk));
+						
 //						 if (nvds_put(NVDS_TAG_PEER_BD_ADDRESS, NVDS_LEN_PEER_BD_ADDRESS,
 //                         (uint8_t *)param->data.irk.addr.addr.addr) != NVDS_OK)
 //            {
-//                // An error has occurred during access to the NVDS
+//                An error has occurred during access to the NVDS
 //                ASSERT_ERR(0);
 //            }
 			UART_PRINTF("irk.key = ");
@@ -354,8 +370,32 @@ static int gapc_bond_ind_handler(ke_msg_id_t const msgid,
 			for(int i = 0;i<sizeof(struct bd_addr);i++)
 			{
 				UART_PRINTF("0x%x ",param->data.irk.addr.addr.addr[i]);
+				                   
 			}
 			UART_PRINTF("\r\n");
+			Write_Phone_MAC((u8*)param->data.irk.addr.addr.addr);//MAC写入FLASH
+			
+		struct gapc_bond_ind  param2;
+			  uint8_t peer_address_len = NVDS_LEN_PEER_IRK;//7
+//	
+           	if (nvds_get(NVDS_TAG_PEER_IRK, &peer_address_len, (uint8_t *)&(param2.data.irk)) != NVDS_OK)
+           	{
+               	ASSERT_ERR(0);
+           	}		
+			UART_PRINTF("irk.keyll = ");
+			for(int i = 0;i<sizeof(struct gap_sec_key);i++)
+			{
+				UART_PRINTF("0x%x ",param2.data.irk.irk.key[i]);
+			}
+			UART_PRINTF("\r\n");
+			UART_PRINTF("addr.typell = %x\r\n",param2.data.irk.addr.addr_type);
+			UART_PRINTF("addr.addrll = ");
+			for(int i = 0;i<sizeof(struct bd_addr);i++)
+			{
+				UART_PRINTF("0x%x ",param2.data.irk.addr.addr.addr[i]);
+				                   
+			}
+			UART_PRINTF("\r\n");			
         } break;
 
         case (GAPC_PAIRING_FAILED):
@@ -363,7 +403,7 @@ static int gapc_bond_ind_handler(ke_msg_id_t const msgid,
 	    	UART_PRINTF("gapc pairing failed\r\n");
 	    	app_sec_env.peer_pairing = false;
 	    	app_sec_env.peer_encrypt = false;
-			app_sec_env.pairing_fail = true;
+			  app_sec_env.pairing_fail = true;
 	    	appm_disconnect();
         } break;
 
@@ -383,7 +423,7 @@ static int gapc_encrypt_req_ind_handler(ke_msg_id_t const msgid,
 {
 	if(ke_timer_active(APP_SEND_SECURITY_REQ, TASK_APP))
 	{
-		ke_timer_clear(APP_SEND_SECURITY_REQ, TASK_APP);
+		 ke_timer_clear(APP_SEND_SECURITY_REQ, TASK_APP);
 	}
 	
 	UART_PRINTF("%s \r\n",__func__);
@@ -399,8 +439,11 @@ static int gapc_encrypt_req_ind_handler(ke_msg_id_t const msgid,
                                                 gapc_encrypt_cfm);
 
     cfm->found    = false;
-
-    if (1)//(app_sec_env.bonded)  
+#if (!HID_CONNECT_ANY)
+    if (app_sec_env.bonded)  
+#else
+	if(1)
+#endif
     {
         // Retrieve the required informations from NVDS
         if (nvds_get(NVDS_TAG_LTK, &length, (uint8_t *)&ltk) == NVDS_OK)
@@ -413,19 +456,31 @@ static int gapc_encrypt_req_ind_handler(ke_msg_id_t const msgid,
                 cfm->key_size = 16;
                 memcpy(&cfm->ltk, &ltk.ltk, sizeof(struct gap_sec_key));
             }
+						else
+            {
+                UART_PRINTF("we are bonded with another device, disconnect the link\r\n");
+                llc_llcp_reject_ind_pdu_send(0, LLCP_START_ENC_REQ_OPCODE, CO_ERROR_PIN_MISSING);
+                app_sec_env.bond_lost = true;
+                appm_disconnect();
+            }
             /*
              * else we are bonded with another device, disconnect the link
              */
         }
         else
         {
-        	UART_PRINTF("read ltk fail\r\n");
-            ASSERT_ERR(0);
+//        	UART_PRINTF("read ltk fail\r\n");
+//            ASSERT_ERR(0);
+					  UART_PRINTF("read ltk fail\r\n");
+			      llc_llcp_reject_ind_pdu_send(0, LLCP_START_ENC_REQ_OPCODE, CO_ERROR_PIN_MISSING);
+            app_sec_env.bond_lost = true;
+            appm_disconnect();
         }
     }
 	else
 	{
 		UART_PRINTF("bond lost,disconnect link,\r\n");
+		llc_llcp_reject_ind_pdu_send(0, LLCP_START_ENC_REQ_OPCODE, CO_ERROR_PIN_MISSING);   
 		app_sec_env.bond_lost = true;
 		appm_disconnect();
 	}

@@ -322,7 +322,7 @@ void appm_start_white_list_dvertising(void)
 {   
     struct gap_bdaddr whitelist_bdaddr;
     uint8_t peer_address_len = NVDS_LEN_PEER_BD_ADDRESS;
-
+UART_PRINTF("%s \r\n",__func__);
     // Check if the advertising procedure is already is progress
     if (ke_state_get(TASK_APP) == APPM_READY)
     {      
@@ -346,7 +346,7 @@ void appm_start_white_list_dvertising(void)
 /* 设备发起广播函数*/
 void appm_start_advertising(void)
 {
-    
+    UART_PRINTF("%s \r\n",__func__);
         
 
 #if !(SYSTEM_SLEEP)

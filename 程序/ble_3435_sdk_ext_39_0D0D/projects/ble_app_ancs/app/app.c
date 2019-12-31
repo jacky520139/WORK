@@ -36,7 +36,7 @@
 #include "co_bt.h"                   // Common BT Definition
 #include "co_math.h"                 // Common Maths Definition
 #include "ke_timer.h"
-#include "app_wlist.h"               //APP白名单
+//#include "app_wlist.h"               //APP白名单
 #include "app_dis.h"                 // Device Information Service Application Definitions
 #include "app_batt.h"                // Battery Application Definitions
 #include "app_ancsc.h"               // Application ancs Definition
@@ -236,12 +236,14 @@ void appm_start_direct_dvertising(void)
 		 
 		/*
 		 * If the peripheral is already bonded with a central device, use the direct advertising
+		如果外围设备已经与中央设备连接，请使用直接广告
+		过程（对等设备的BD地址存储在NVDS中
 		 * procedure (BD Address of the peer device is stored in NVDS.
 		 */
 		if(app_sec_get_bond_status())
 		{
 			uint8_t bd_len = NVDS_LEN_PEER_BD_ADDRESS;
-			cmd->op.code   = GAPM_ADV_DIRECT_LDC;
+			cmd->op.code   = GAPM_ADV_DIRECT_LDC;//使用低占空比启动定向可连接广告
 			
 			if(nvds_get(NVDS_TAG_PEER_BD_ADDRESS, &bd_len,
 	            		(uint8_t *)cmd->info.direct.addr.addr) != NVDS_OK)
@@ -289,22 +291,29 @@ void appm_start_white_list_dvertising(void)
     uint8_t peer_address_len = NVDS_LEN_PEER_BD_ADDRESS;//7
 
     // Check if the advertising procedure is already is progress
-    if (ke_state_get(TASK_APP) == APPM_READY)
-    {      
-        if(app_sec_get_bond_status())
-        {
+//    if (ke_state_get(TASK_APP) == APPM_READY)
+//    {      
+//        if(app_sec_get_bond_status())
+//        {
             UART_PRINTF("appm_start_white_list_dvertising\r\n");
             if(nvds_get(NVDS_TAG_PEER_BD_ADDRESS, &peer_address_len, (uint8_t *)&whitelist_bdaddr) != NVDS_OK)
             {
                 // An error has occurred during access to the NVDS
                 ASSERT_INFO(0,NVDS_TAG_PEER_BD_ADDRESS,peer_address_len);
             }
-            
-            appm_add_dev_to_wlist(whitelist_bdaddr);
-            wlist_enable_flag = 1;
-            appm_start_advertising();
-        }
-    }		
+						UART_PRINTF("addr_type=%x\r\n",whitelist_bdaddr.addr_type);
+						UART_PRINTF("addr=%x-%x-%x-%x-%x-%x\r\n",
+						            whitelist_bdaddr.addr.addr[0],
+						whitelist_bdaddr.addr.addr[1],
+						whitelist_bdaddr.addr.addr[2],
+						whitelist_bdaddr.addr.addr[3],
+						whitelist_bdaddr.addr.addr[4],
+						whitelist_bdaddr.addr.addr[5]);
+//            appm_add_dev_to_wlist(whitelist_bdaddr);
+//            wlist_enable_flag = 1;
+//            appm_start_advertising();
+//        }
+//    }		
 }
 
 /* 设备发起广播函数*/
@@ -365,12 +374,14 @@ void appm_start_advertising(void)
                 break;
                 default: break; // do nothing
             }
+///////////////////////////////////	加载UUID	/////////////////////////////////////////////					
             cmd->info.host.adv_data_len=3;
             //Add list of UUID and appearance				加载UUID		
             memcpy(&cmd->info.host.adv_data[cmd->info.host.adv_data_len],
                    APP_FFF0_ADV_DATA_UUID, APP_FFF0_ADV_DATA_UUID_LEN);
 						
             cmd->info.host.adv_data_len += APP_FFF0_ADV_DATA_UUID_LEN;
+////////////////////////////////////////////////////////////////////////////////						
         }
 
 		//  Device Name Length
@@ -378,7 +389,7 @@ void appm_start_advertising(void)
         uint8_t device_name_avail_space;//设备名的有效位
         uint8_t device_name_temp_buf[APP_DEVICE_NAME_LENGTH_MAX];//存放设备名的缓存
 
-        // Get remaining space in the Advertising Data - 2 bytes are used for name length/flag
+        // 获取广告数据中的剩余空间-2字节用于名称长度/标志
         device_name_avail_space = ADV_DATA_LEN  - cmd->info.host.adv_data_len - 2;
 
         // 检查数据是否可以添加到广告数据中
@@ -389,7 +400,8 @@ void appm_start_advertising(void)
             if (nvds_get(NVDS_TAG_DEVICE_NAME, &device_name_length,
                          &device_name_temp_buf[0]) != NVDS_OK)
             {
-                device_name_length = strlen(APP_DFLT_DEVICE_NAME);
+//                device_name_length = strlen(APP_DFLT_DEVICE_NAME);
+							  device_name_length =DEVICE_NAME_LEN;
                 // Get default Device Name (No name if not enough space)
                 memcpy(&device_name_temp_buf[0], APP_DFLT_DEVICE_NAME, device_name_length);
             }
@@ -421,6 +433,8 @@ void appm_start_advertising(void)
 			memcpy(&cmd->info.host.scan_rsp_data[cmd->info.host.scan_rsp_data_len],
                    APP_SCNRSP_DATA, APP_SCNRSP_DATA_LEN);
             cmd->info.host.scan_rsp_data_len += APP_SCNRSP_DATA_LEN;
+//					cmd->info.host.scan_rsp_data_len=15;
+//					cmd->info.host.scan_rsp_data_len=13;
         }
 
         // Send the message
@@ -529,7 +543,7 @@ void appm_get_conn_rssi(void)
 //	        KE_BUILD_ID(TASK_GAPC,0), TASK_GAPM,
 //	        gapc_get_info_cmd);
 	struct gapc_get_info_cmd* info_cmd = KE_MSG_ALLOC(GAPC_GET_INFO_CMD,
-	        KE_BUILD_ID(TASK_GAPC,0), TASK_GAPM,
+	        KE_BUILD_ID(TASK_GAPC,0), TASK_APP,
 	        gapc_get_info_cmd);	
 	// request peer device name.
 	info_cmd->operation = GAPC_GET_CON_RSSI;
@@ -549,7 +563,7 @@ uint8_t appm_get_dev_name(uint8_t* name)
 //*发送安全请求
 void appm_send_seurity_req(void)
 {
-    app_sec_send_security_req(app_env.conidx);
+//    app_sec_send_security_req(app_env.conidx);
 }
 void appm_switch_general_adv(void)
 {

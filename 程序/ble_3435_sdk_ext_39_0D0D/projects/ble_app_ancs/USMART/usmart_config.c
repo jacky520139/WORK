@@ -15,6 +15,13 @@
 //extern u16 gui_color_chg(u32 rgb);
 //函数名列表初始化(用户自己添加)
 //用户直接在这里输入要执行的函数名及其查找串
+extern void Get_Loc_Mac(void);
+extern void Push_Step(u8 mon,u8 day);
+extern void flash_Write_Step(u8 mon,u8 day,u8 hour,u16 step);
+extern void Upload_Step_Data(u32 stata);
+extern void flash_Write_Step(u8 mon,u8 day,u8 hour,u16 step);//从FLASH中写步数数据
+extern u16 flash_Read_hour_Step(u8 mon,u8 day,u8 hour);//从FLASH中读出某天步数数据
+extern void appm_start_white_list_dvertising(void);
 struct _m_usmart_nametab usmart_nametab[]=
 {
 //(void*)Init_LED,"void Init_LED(void)",
@@ -36,11 +43,11 @@ struct _m_usmart_nametab usmart_nametab[]=
 //(void*)flash_write,"uint8_t flash_write(uint8_t flash_type, uint32_t offset, uint32_t length, uint8_t *buffer, void (*callback)(void))",
 //(void*)flash_read, "uint8_t flash_read(uint8_t flash_type, uint32_t offset, uint32_t length, uint8_t *buffer, void (*callback)(void))",
 //(void*)flash_test,"void flash_test(void)",
-(void*)ble_printf,"int ble_printf(const char *fmt,...)",
+//(void*)ble_printf,"int ble_printf(const char *fmt,...)",
 (void*)ble_printf_text,"void ble_printf_text(void)",
 (void*)Calendar_Seting,	"u8 Calendar_Seting(u16 year,u8 mon,u8 day,u8 hour,u8 min,u8 sec)",
-(void*)PEDO_Get,	"u16 PEDO_Get(u8 day,u8 hour)",
-(void*)PEDO_Set,	"u16 PEDO_Set(u8 day,u8 hour,u16 cnt)",
+//(void*)PEDO_Get,	"u16 PEDO_Get(u8 day,u8 hour)",
+//(void*)PEDO_Set,	"u16 PEDO_Set(u8 day,u8 hour,u16 cnt)",
 (void*)Motor_Text,	"void Motor_Text(u8 cnt,u8 Tog_time,u8 Tog_Interval_Time,u8 Strength)",
 (void*)Motor_Strength,	"void Motor_Strength(u8 Strength)",
 (void*)pwm_duty_cycle,"void pwm_duty_cycle(unsigned char channel,unsigned short duty_cycle)",	
@@ -53,9 +60,18 @@ struct _m_usmart_nametab usmart_nametab[]=
 (void*)Text_Alarm,"void Text_Alarm(u8 mode,u8 hour,u8 min,u8 sec)",	
 (void*)Alarm_Get,"void Alarm_Get(u8 Class)",
 (void*)Alarm_date_Get,"void Alarm_date_Get(u8 Class)",		
-
-
-
+(void*)User_Anti_ON,"void User_Anti_ON(void)",
+(void*)User_Anti_OFF,"void User_Anti_OFF(void)",
+(void*)Get_Peer_Mac,"void Get_Peer_Mac(void)",
+(void*)flash_Close_alarm,"void flash_Close_alarm(u8 Class)",
+(void*)Get_Loc_Mac,"void Get_Loc_Mac(void)",
+	(void*)Push_Step,"void Push_Step(u8 mon,u8 day)",
+	
+		(void*)flash_Write_Step,"void flash_Write_Step(u8 mon,u8 day,u8 hour,u16 step)",
+(void*)Upload_Step_Data,"void Upload_Step_Data(u32 stata)",	
+(void*)flash_Write_Step,"void flash_Write_Step(u8 mon,u8 day,u8 hour,u16 step)",	
+	(void*)flash_Read_hour_Step,"u16 flash_Read_hour_Step(u8 mon,u8 day,u8 hour)",
+(void*)appm_start_white_list_dvertising,"void list_dvertising(void)",			
 	
 };
 

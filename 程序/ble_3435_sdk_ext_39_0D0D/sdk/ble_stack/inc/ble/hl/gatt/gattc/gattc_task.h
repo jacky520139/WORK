@@ -206,7 +206,7 @@ enum gattc_operation
     GATTC_READ_LONG,
     /// Read attribute by UUID
     GATTC_READ_BY_UUID,
-    /// Read multiple attribute
+    /// Read multiple attribute读取多个属性
     GATTC_READ_MULTIPLE,
 
     /* Operation flags for writing/modifying attributes */
@@ -223,21 +223,21 @@ enum gattc_operation
     /* Operation flags for registering to peer device   */
     /* events                                           */
     /* ************************************************ */
-    /// Register to peer device events
+    /// Register to peer device events注册到对等设备事件
     GATTC_REGISTER,
-    /// Unregister from peer device events
+    /// Unregister from peer device events从对等设备事件中注销
     GATTC_UNREGISTER,
 
     /* Operation flags for sending events to peer device*/
     /* ************************************************ */
-    /// Send an attribute notification
+    /// Send an attribute notification发送属性通知
     GATTC_NOTIFY,
-    /// Send an attribute indication
+    /// Send an attribute indication发送属性指示
     GATTC_INDICATE,
     /// Send a service changed indication
     GATTC_SVC_CHANGED,
 
-    /* Service Discovery Procedure                      */
+    /* 服务发现过程                     */
     /* ************************************************ */
     /// Search specific service
     GATTC_SDP_DISC_SVC,
@@ -278,7 +278,7 @@ struct gattc_cmp_evt
     uint8_t operation;
     /// Status of the request
     uint8_t status;
-    /// operation sequence number - provided when operation is started
+    /// 操作序列号 - 操作开始时提供
     uint16_t seq_num;
 };
 

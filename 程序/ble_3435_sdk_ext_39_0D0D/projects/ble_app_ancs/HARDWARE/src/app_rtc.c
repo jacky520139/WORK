@@ -120,7 +120,7 @@ return 0;
 }
 //得到当前的时间
 //返回值:0,成功;其他:错误代码.
-u8 Calendar_Update_handler(ke_msg_id_t const msgid, void const *param,
+int Calendar_Update_handler(ke_msg_id_t const msgid, void const *param,
         ke_task_id_t const dest_id, ke_task_id_t const src_id)
 {
 
@@ -163,7 +163,7 @@ u8 Calendar_Update_handler(ke_msg_id_t const msgid, void const *param,
 		calendar.date=daycnt+1;  	//得到日期 
 	}
 	ke_timer_set(USER_APP_CALENDAR_UPDATE,TASK_APP , USER_APP_CALENDAR_UPDATE_TIME);//1天更新一次日历数据
-	return 0;
+	return KE_MSG_CONSUMED;
 }	 
 //获得现在是星期几
 //功能描述:输入公历日期得到星期(只允许1901-2099年)
@@ -218,7 +218,13 @@ for(i=0;i<ALARM_CLASS;i++)
 		{
 	   alarm[i]->state=ALARM_OFF;//关闭该组闹钟
 	  }
-
+		 if(alarm[i]->state)
+		 {
+		  UART_PRINTF("alarm[%d]->state= %d\r\n",i,alarm[i]->state);
+		  UART_PRINTF("alarm[%d]->week_loop= %d\r\n",i,alarm[i]->week_loop);
+		  UART_PRINTF("alarm[%d]->hour= %d\r\n",i,alarm[i]->hour);
+	    UART_PRINTF("alarm[%d]->min= %d\r\n",i,alarm[i]->min);
+		 }
 	}
 for(i=0;i<ALARM_CLASS;i++)
 {
@@ -238,12 +244,12 @@ if(id!=ALARM_CLASS)//说明还有闹钟需要加载
 {alarm_env.hour=alarm[id]->hour;
  alarm_env.min=alarm[id]->min;
  alarm_env.mode=alarm[id]->mode;
- alarm_env.ID=id;
+ alarm_env.ID=id+1;
 	if(alarm_env.mode==ALARM_CLOCK)
  alarm_env.time=30;//闹钟30秒
 	else if(alarm_env.mode==REMIND)
  alarm_env.time=10;//提醒10秒
-			UART_PRINTF("alarm.state_id = %d\r\n",id);
+			UART_PRINTF("alarm.state_id = %d\r\n",alarm_env.ID);
 		UART_PRINTF("alarm.state_hour = %d\r\n",alarm_env.hour);
 	UART_PRINTF("alarm.state_min = %d\r\n",alarm_env.min);
 
@@ -255,8 +261,9 @@ return Ret;
 }
 void flash_Close_alarm(u8 Class);
 ////////////////////////闹钟振铃函数///////////////////////////////////
+
 int user_alarm_ind(ke_msg_id_t const msgid,
-										struct user_alarm_ind *param,
+										void const  *param,
 										ke_task_id_t const dest_id,
 										ke_task_id_t const src_id)
 {	
@@ -278,78 +285,97 @@ int user_alarm_ind(ke_msg_id_t const msgid,
 		 }
    else
    {  if(alarm_env.mode==ALARM_CLOCK)
-	    user_Motor_handler(3);//闹钟
+	    user_Motor_handler(3,1);//闹钟
 		  else if(alarm_env.mode==REMIND)
-	    user_Motor_handler(1);//提醒
+	    user_Motor_handler(1,1);//提醒
 		  ke_timer_set(USER_ALARM_IND,TASK_APP,100);
 		  UART_PRINTF("Vib_cont=%d\r\n", Vib_cont);
 	  }	
 	return KE_MSG_CONSUMED;
 }
-typedef struct
-{   
-//    u8      Inde;     // 提醒索引
-//	  u8      Total;     // 提醒总条数
-//	  u16      year;     // 提醒年
-	  u8       mon;     // 提醒月
-	  u8       day;     // 提醒日
-    u8       hour;     // 提醒时
-    u8       minute;     //提醒分
-    u8       week_loop;
-} Remind_dev;
-Remind_dev Remind;
-//接收手机的闹钟数据
-void Alarm_Set(u8 Class,u8 hour,u8 min,u8 week_loop,u8 State)
-{        alarm[Class]->mode=ALARM_CLOCK;
-		     alarm[Class]->hour=hour;
-//         alarm[Class]->minute=min;
-//	       alarm[Class]->week_loop=week_loop;
-	       alarm[Class]->state=State;
-}
-typedef struct 
-	{
- u8 on_off;
- u8 hour;
- u8 min;
- u8 week_loop;
-}flash_alarm_date_tag;
-#define  FLASH_ALARM_CLOCK_ADDRESS   0x42000   //闹钟数据存储地址
-#define  FLASH_REMIND_ADDRESS        0x42100   //闹钟数据存储地址
 
-void flash_read_alarm(u8 Class,flash_alarm_date_tag *flash_alarm)//从FLASH中读出闹钟数据
-{u8 len=sizeof(flash_alarm_date_tag);
-	flash_read(0,FLASH_ALARM_CLOCK_ADDRESS+len*Class,len,(u8*)flash_alarm,NULL);
+//Remind_dev Remind;
+////接收手机的闹钟数据
+//void Alarm_Set(u8 Class,u8 hour,u8 min,u8 week_loop,u8 State)
+//{        alarm[Class]->mode=ALARM_CLOCK;
+//		     alarm[Class]->hour=hour;
+////         alarm[Class]->minute=min;
+////	       alarm[Class]->week_loop=week_loop;
+//	       alarm[Class]->state=State;
+//}
+//typedef struct 
+//	{
+// u8 on_off;
+// u8 hour;
+// u8 min;
+// u8 week_loop;
+//}flash_alarm_date_tag;
+
+//u8 ALARM_ID_LIST[10];
+//u8 REMIND_ID_LIST[10];
+
+//*********************下载闹钟数据到flash*************************
+void flash_Load_alarm(flash_alarm_date_tag *flash_alarm)//从FLASH中写闹钟数据
+{
+	u8 len=sizeof(flash_alarm_date_tag);
+	FLASH_Write(FLASH_ALARM_CLOCK_ADDRESS,(u8*)flash_alarm,len*10);
 }
+//*********************下载提醒数据到flash*************************
+void flash_Load_Remind(Remind_dev *flash_Remind)
+{
+	u8 len=sizeof(Remind_dev);
+	FLASH_Write(FLASH_REMIND_ADDRESS,(u8*)flash_Remind,len*10);
+}
+//*********************从FLASH中读出某组闹钟数据*************************
+void flash_read_alarm(u8 Class,flash_alarm_date_tag *flash_alarm)//
+{u8 len=sizeof(flash_alarm_date_tag);
+	flash_read(0,FLASH_ALARM_CLOCK_ADDRESS+len*(Class-1),len,(u8*)flash_alarm,NULL);
+}
+//*********************从FLASH中写入某组闹钟数据*************************
 void flash_write_alarm(u8 Class,flash_alarm_date_tag *flash_alarm)//从FLASH中写闹钟数据
-{u8 len=sizeof(flash_alarm_date_tag);
-  FLASH_Write(FLASH_ALARM_CLOCK_ADDRESS+len*Class,(u8*)flash_alarm,len);
+{
+	u8 len=sizeof(flash_alarm_date_tag);
+  FLASH_Write(FLASH_ALARM_CLOCK_ADDRESS+len*(Class-1),(u8*)flash_alarm,len);
+//	FLASH_Write(FLASH_ALARM_CLOCK_ADDRESS,(u8*)flash_alarm,len*10);
 }
+
 void flash_read_Remind(u8 Class,Remind_dev *flash_Remind)//从FLASH中读出闹钟数据
 {u8 len=sizeof(Remind_dev);
-	flash_read(0,FLASH_REMIND_ADDRESS+len*Class,len,(u8*)flash_Remind,NULL);
+	flash_read(0,FLASH_REMIND_ADDRESS+len*(Class-1),len,(u8*)flash_Remind,NULL);
 }
-void flash_write_Remind(u8 Class,Remind_dev *flash_Remind)//从FLASH中读出闹钟数据
+void flash_write_Remind(u8 Class,Remind_dev *flash_Remind)//从FLASH中写入提醒数据
 {
 u8 len=sizeof(Remind_dev);
-FLASH_Write(FLASH_REMIND_ADDRESS+len*Class,(u8*)flash_Remind,len);
+FLASH_Write(FLASH_REMIND_ADDRESS+len*(Class-1),(u8*)flash_Remind,len);
 }
+
+
 void flash_Close_alarm(u8 Class)//关闭flash中的某组闹钟
 {
-flash_alarm_date_tag flash_alarm;
-flash_read_alarm(Class,&flash_alarm);
-flash_alarm.on_off=ALARM_OFF;
-flash_write_alarm(Class,&flash_alarm);//从FLASH中写闹钟数据
-
+	u8 Date=ALARM_OFF;
+	FLASH_Write(FLASH_ALARM_CLOCK_ADDRESS+sizeof(flash_alarm_date_tag)*(Class-1),&Date,1);
 }
+
+void flash_Close_Remind(u8 Class)//关闭flash中的某组提醒
+{
+	u8 Date=0xff;
+	FLASH_Write(FLASH_REMIND_ADDRESS+sizeof(Remind_dev)*(Class-1)+4,&Date,1);
+}
+
 u16 Remind_Total=0;//提醒总条数
 void Alarm_Setup(void)//每天调用一次
 {
- 	u8 i,j,k=0;
+ 	u8 i,j;
 	flash_alarm_date_tag flash_alarm;
 	Remind_dev flash_Remind;
 for(i=0;i<10;i++)
 	{//flash读出10组闹钟
-		flash_read_alarm(i,&flash_alarm);//从FLASH读出闹钟
+		flash_read_alarm(i+1,&flash_alarm);//从FLASH读出闹钟
+//												 UART_PRINTF("on_off=%dAlarm_hour=%dAlarm_min=%dAlarm_loop=%d\r\n",
+//									           flash_alarm.on_off,
+//	                           flash_alarm.hour,
+//                             flash_alarm.min,
+//                             flash_alarm.week_loop);
 		if(flash_alarm.on_off==ALARM_ON)//闹钟在激活状态
 		{	
 	if((flash_alarm.week_loop&(1<<calendar.RTC.week_day))||(flash_alarm.week_loop==0))
@@ -358,12 +384,12 @@ for(i=0;i<10;i++)
 		alarm[i]->hour=flash_alarm.hour;
     alarm[i]->min=flash_alarm.min;
 		alarm[i]->week_loop=flash_alarm.week_loop;
-//	UART_PRINTF("alarm.class%d = %d\r\n",i,flash_alarm.on_off);
-//	UART_PRINTF("alarm.mode = %d\r\n",ALARM_CLOCK);
-//	UART_PRINTF("alarm.state = %d\r\n",flash_alarm.on_off);
-//	UART_PRINTF("alarm.hour = %d\r\n",flash_alarm.hour);
-//	UART_PRINTF("alarm.min = %d\r\n",flash_alarm.min);
-//	UART_PRINTF("alarm.week_loop = %d\r\n",flash_alarm.week_loop);
+	UART_PRINTF("alarm.class%d = %d\r\n",i,flash_alarm.on_off);
+	UART_PRINTF("alarm.mode = %d\r\n",ALARM_CLOCK);
+	UART_PRINTF("alarm.state = %d\r\n",flash_alarm.on_off);
+	UART_PRINTF("alarm.hour = %d\r\n",flash_alarm.hour);
+	UART_PRINTF("alarm.min = %d\r\n",flash_alarm.min);
+	UART_PRINTF("alarm.week_loop = %d\r\n",flash_alarm.week_loop);
 	  }
 	 else 
 	 { 
@@ -377,34 +403,35 @@ for(i=0;i<10;i++)
 	}
 for(j=0;j<10;j++)
 { 
-	flash_read_Remind(i,&flash_Remind);//从FLASH读出提醒
+	flash_read_Remind(j+1,&flash_Remind);//从FLASH读出提醒
+//										UART_PRINTF("mon=%d day=%d hour=%d minute=%d week_loop=%d\r\n",
+//									           flash_Remind.mon,
+//									           flash_Remind.day,
+//	                           flash_Remind.hour,
+//                             flash_Remind.minute,
+//                             flash_Remind.week_loop);
+
 	if(flash_Remind.week_loop==0xff)
-		continue;
-	if(((calendar.mon==flash_Remind.mon)&&(calendar.year==flash_Remind.day))||\
-		 (flash_Remind.week_loop&(1<<calendar.RTC.week_day)))
-	{ k++;
-		if(k<10)
-		{
-	 alarm[i+k]->mode=REMIND;
-	 alarm[i+k]->state=ALARM_ON;
-	 alarm[i+k]->hour=flash_Remind.hour;
-   alarm[i+k]->min=flash_Remind.minute;
-		}	
-//   else  
-//     break;	//1天5条提醒
-	 
-	 
+	{alarm[10+j]->state=ALARM_OFF;
+	 continue;}
+	else if(((calendar.mon==flash_Remind.mon)&&(calendar.date==flash_Remind.day))||\
+		       (flash_Remind.week_loop&(1<<calendar.RTC.week_day)))
+	{
+	 alarm[10+j]->mode=REMIND;
+	 alarm[10+j]->state=ALARM_ON;
+	 alarm[10+j]->hour=flash_Remind.hour;
+   alarm[10+j]->min=flash_Remind.minute;
+//													UART_PRINTF("mon1=%d day1=%d hour1=%d minute1=%d week_loop1=%d\r\n",
+//									           flash_Remind.mon,
+//									           flash_Remind.day,
+//	                           flash_Remind.hour,
+//                             flash_Remind.minute,
+//                             flash_Remind.week_loop);
 	 }
 	 
 }	
-if((i+k)<20)//如果闹钟和提醒总数小于10
-{
-	for(u8 j=i+k+1;j<20;j++)
-	{
-   alarm[j]->state=ALARM_OFF;
-	}
-}
- Load_Alarm_Date();
+
+// Load_Alarm_Date();
 }
 	
 //void Alarm_get(u8 Class)
@@ -426,7 +453,27 @@ if((i+k)<20)//如果闹钟和提醒总数小于10
 
 //}
 
-
+void Creat_Alarm(u8 Class,u8 hour,u8 min,u8 Week_loop)
+{
+  flash_alarm_date_tag flash_alarm;
+	flash_alarm.on_off=ALARM_ON;
+	flash_alarm.hour=hour;
+	flash_alarm.min=min;
+  flash_alarm.week_loop=Week_loop;
+  flash_write_alarm(Class,&flash_alarm);
+  Alarm_Setup();	
+}
+void Creat_Remind(u8 Class,u8 mon,u8 day,u8 hour,u8 min,u8 Week_loop)//创建提醒
+{
+  Remind_dev flash_Remind;
+	flash_Remind.mon=mon;
+	flash_Remind.day=day;
+	flash_Remind.hour=hour;
+	flash_Remind.minute=min;
+	flash_Remind.week_loop=Week_loop;
+	flash_write_Remind(Class,&flash_Remind);
+  Alarm_Setup();	
+}	
 void Text_Alarm(u8 mode,u8 hour,u8 min,u8 sec)
 {
 //RTC_DATE_DESC Alarm_DATE={sec,min,hour,1};
@@ -449,6 +496,7 @@ void Text_Alarm(u8 mode,u8 hour,u8 min,u8 sec)
   flash_write_alarm(mode,&flash_alarm);
   Alarm_Setup();	
 }
+
 void Alarm_Get(u8 Class)
 {
   flash_alarm_date_tag flash_alarm;	

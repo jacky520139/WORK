@@ -94,9 +94,12 @@ int ble_uart_putchar(char * st)
 			st++;
 			num++;
 	}
-	app_fff1_send_lvl((uint8_t*)st_temp,num);
 
-	uart_write((uint8_t*)st_temp,num,0,0);
+	if(ke_state_get(TASK_APP) == APPM_CONNECTED)
+	{app_fff1_send_lvl((uint8_t*)st_temp,num);}
+
+//	uart_write((uint8_t*)st_temp,num,0,0);
+	uart_send((uint8_t*)st_temp,num);
 	return num;
 }
 int ble_printf(const char *fmt,...)
@@ -174,12 +177,13 @@ void LED10_ON(void)   {LED_OFF();Set_Get3();RES_COM3();}
 void LED11_ON(void)   {LED_OFF();Set_Get3();RES_COM4();}
 void LED12_ON(void)   {LED_OFF();Set_Get1();RES_COM1();}
 static const LED_CTRL_env LED_ctrl_handler[14]={LED_OFF,LED1_ON,LED2_ON,LED3_ON,LED4_ON,LED5_ON,LED6_ON,LED7_ON,LED8_ON,LED9_ON,LED10_ON,LED11_ON,LED12_ON,};
+static const LED_CTRL_env Pair_LED_ctrl_handler[3]={LED11_ON,LED12_ON,LED1_ON};//配对模式LED
 
 struct LED_Dev_tag LED_Dev;
 #define LED_OPEN_T      10;
 #define LED_CLOSE_T     90;
 void Init_LED(void)
-{	memset(&LED_Dev, 0, sizeof(struct LED_Dev_tag)); 
+{	memset(&LED_Dev, 0, sizeof(struct LED_Dev_tag));
   LED_Dev.Mode=0X08;//灯光模式
 	LED_Dev.Strength=50;
 	gpio_config(Get1, OUTPUT, PULL_NONE);
@@ -223,17 +227,26 @@ u8 GET_LED_State(void)
 extern bool Pairing_Flag;//配对状态
  u32 LED_Scan(void)
  {static u8 STEP=1,STEP2=1,STEP3=1,cnt=0;
-//	static u8 TIME_S=0;
+
 	u32 LED_Time;
 	 if (ke_state_get(TASK_APP) == APPM_ADVERTISING)
 	 {
-		 cnt=0;
+    if((Anti_Lose.State==ON)&&(Anti_Lose.Con_State==OFF))//防丢开着，连接断开
+		{
+		LED_ctrl_handler[(cnt%12)+1](); 
+		LED_Time=10;
+		cnt++;
+		}
+		else
+		{
 		if(STEP2==1) 
 		{STEP2=0;
 		if(Pairing_Flag==0)
 	 LED12_ON();
 		else
-		LED6_ON();	
+		{Pair_LED_ctrl_handler[cnt%3]();
+		 cnt++;}
+	
 	 LED_Time=20;
 		}
 		else
@@ -241,10 +254,10 @@ extern bool Pairing_Flag;//配对状态
 		 LED_OFF();
 	   LED_Time=20;
 		}
-		
+	  }
 		return LED_Time;	
 	 }
-else if ((ke_state_get(TASK_APP) == APPM_CONNECTED)&&(cnt==0))
+else if ((ke_state_get(TASK_APP) == APPM_CONNECTED)&&(cnt!=0))
  { if(STEP3==1) 
 		{STEP3=0;
 	  LED12_ON();
@@ -253,11 +266,13 @@ else if ((ke_state_get(TASK_APP) == APPM_CONNECTED)&&(cnt==0))
 		else
 		{STEP3=1;
 		 LED_OFF();
-			cnt=1;
+			cnt=0;
 			LED_Dev.TIME_min=1;
 		}
 	 return LED_Time;	
- }	 
+ }
+else 
+{cnt=0;}	
 switch(STEP)
 	 {
 		 case 0:LED_ON();

@@ -14,3 +14,5 @@
 .\obj\flash.o: .\config\rwprf_config.h
 .\obj\flash.o: .\config\user_config.h
 .\obj\flash.o: ..\..\sdk\ble_stack\com\rwip\api\rwip.h
+.\obj\flash.o: ..\..\sdk\plactform\arch\ll\ll.h
+.\obj\flash.o: ..\..\sdk\plactform\arch\compiler\compiler.h

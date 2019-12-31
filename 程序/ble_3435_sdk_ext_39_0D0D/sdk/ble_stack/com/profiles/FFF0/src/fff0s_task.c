@@ -64,7 +64,7 @@ static int gattc_att_info_req_ind_handler(ke_msg_id_t const msgid,
         ke_task_id_t const dest_id,
         ke_task_id_t const src_id)
 {
-
+// UART_PRINTF("%s\r\n", __func__);
     struct gattc_att_info_cfm * cfm;
     uint8_t  att_idx = 0;
     // retrieve handle information检索句柄信息
@@ -76,10 +76,10 @@ static int gattc_att_info_req_ind_handler(ke_msg_id_t const msgid,
 
     if(status == GAP_ERR_NO_ERROR)
     {
-        // check if it's a client configuration char
+        // 检查它是否是客户端配置字符
         if(att_idx == FFF0S_IDX_FFF1_LVL_NTF_CFG)
         {
-            // CCC attribute length = 2
+            // CCC attribute length = 2  //属性长度=2
             cfm->length = 2;
         }
         // not expected request
@@ -101,6 +101,7 @@ static int gattc_att_info_req_ind_handler(ke_msg_id_t const msgid,
 static int gattc_write_req_ind_handler(ke_msg_id_t const msgid, struct gattc_write_req_ind const *param,
                                       ke_task_id_t const dest_id, ke_task_id_t const src_id)
 {
+//	UART_PRINTF("%s\r\n", __func__);
     struct gattc_write_cfm * cfm;
     uint8_t att_idx = 0;
     uint8_t conidx = KE_IDX_GET(src_id);
@@ -114,7 +115,7 @@ static int gattc_write_req_ind_handler(ke_msg_id_t const msgid, struct gattc_wri
         // Extract value before check
         uint16_t ntf_cfg = co_read16p(&param->value[0]);
 
-        // Only update configuration if value for stop or notification enable
+        // Only update configuration if value for stop or notification enable仅当“停止”或“通知”的值启用时更新配置
         if ((att_idx == FFF0S_IDX_FFF1_LVL_NTF_CFG)
                 && ((ntf_cfg == PRF_CLI_STOP_NTFIND) || (ntf_cfg == PRF_CLI_START_NTF)))
         {
@@ -177,6 +178,7 @@ static int gattc_read_req_ind_handler(ke_msg_id_t const msgid, struct gattc_read
                                       ke_task_id_t const dest_id, ke_task_id_t const src_id)
 {
     struct gattc_read_cfm * cfm;
+//	UART_PRINTF("%s\r\n", __func__);
     uint8_t  att_idx = 0;
     uint8_t conidx = KE_IDX_GET(src_id);
     // retrieve handle information
@@ -240,9 +242,9 @@ static int gattc_cmp_evt_handler(ke_msg_id_t const msgid,  struct gattc_cmp_evt 
 //	UART_PRINTF("%s\r\n", __func__);
     if(param->operation == GATTC_NOTIFY)
     {	
+//			UART_PRINTF("GATTC_NOTIFY\r\n");
       	uint8_t conidx = KE_IDX_GET(src_id);
       	struct fff0s_env_tag* fff0s_env = PRF_ENV_GET(FFF0S, fff0s);
-
 	    struct fff0s_fff1_level_upd_rsp *rsp = KE_MSG_ALLOC(FFF0S_FFF1_LEVEL_UPD_RSP,
                                                          prf_dst_task_get(&(fff0s_env->prf_env), conidx),
                                                          dest_id, fff0s_fff1_level_upd_rsp);

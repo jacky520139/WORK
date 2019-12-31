@@ -377,7 +377,7 @@
               <MiscControls>--c99</MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\config;.\app;..\..\libs;..\..\sdk\plactform\core_modules\src;..\..\sdk\plactform\arch;..\..\sdk\plactform\arch\compiler;..\..\sdk\plactform\arch\ll;..\..\sdk\plactform\core_modules\common\api;..\..\sdk\plactform\arch\boot;..\..\sdk\plactform\core_modules\dbg\api;..\..\sdk\plactform\core_modules\rf\api;..\..\sdk\plactform\core_modules\ecc_p256\api;..\..\sdk\plactform\arch\main;..\..\sdk\plactform\core_modules\util;..\..\sdk\plactform\driver\pwm;..\..\sdk\plactform\driver\adc;..\..\sdk\plactform\driver\audio;..\..\sdk\plactform\driver\wdt;..\..\sdk\plactform\driver\rtc;..\..\sdk\plactform\driver\i2c;..\..\sdk\plactform\driver\utc;..\..\sdk\plactform\driver\ir;..\..\sdk\plactform\driver\spi;..\..\sdk\plactform\driver\plf;..\..\sdk\plactform\driver\counter;..\..\sdk\plactform\driver\gpio;..\..\sdk\plactform\driver\intcntl;..\..\sdk\plactform\driver\icu;..\..\sdk\plactform\driver\intc;..\..\sdk\plactform\driver\flash;..\..\sdk\plactform\driver\timer;..\..\sdk\plactform\driver\reg;..\..\sdk\plactform\driver\uart;..\..\sdk\plactform\driver\emi;..\..\sdk\ble_stack\com\rwble;..\..\sdk\ble_stack\com\rwble_hl;..\..\sdk\ble_stack\com\rwble;..\..\sdk\ble_stack\com\rwip\api;..\..\sdk\ble_stack\com\rwble_hl;..\..\sdk\ble_stack\src;..\..\sdk\plactform\reg;..\..\sdk\plactform\driver\syscntl;..\..\sdk\plactform\rom\hci;..\..\sdk\plactform\core_modules\ecc_p256\api;..\..\sdk\ble_stack\inc;..\..\sdk\ble_stack\inc\hci;..\..\sdk\ble_stack\inc\h4tl;..\..\sdk\ble_stack\inc\ke;..\..\sdk\ble_stack\inc\nvds;..\..\sdk\ble_stack\inc\ea;..\..\sdk\ble_stack\inc\em;..\..\sdk\ble_stack\inc\ahi;..\..\sdk\ble_stack\inc\ble\hl\gap\gapc;..\..\sdk\ble_stack\inc\ble\hl\gap\gapm;..\..\sdk\ble_stack\inc\ble\hl\gap\smpc;..\..\sdk\ble_stack\inc\ble\hl\gap\smpm;..\..\sdk\ble_stack\inc\ble\hl\gatt\attc;..\..\sdk\ble_stack\inc\ble\hl\gatt\attm;..\..\sdk\ble_stack\inc\ble\hl\gatt\atts;..\..\sdk\ble_stack\inc\ble\hl\gatt\gattc;..\..\sdk\ble_stack\inc\ble\hl\gatt\gattm;..\..\sdk\ble_stack\inc\ble\hl\l2c\l2cc;..\..\sdk\ble_stack\inc\ble\hl\l2c\l2cm;..\..\sdk\ble_stack\inc\ble\ll\em;..\..\sdk\ble_stack\inc\ble\ll\llc;..\..\sdk\ble_stack\inc\ble\ll\lld;..\..\sdk\ble_stack\inc\ble\ll\llm;..\..\sdk\ble_stack\com\rwip\api;..\..\sdk\ble_stack\inc\ble\hl\gap;..\..\sdk\ble_stack\inc\ble\hl\gatt;..\..\sdk\ble_stack\com\prf;..\..\sdk\ble_stack\com\profiles\dis\diss\src;..\..\sdk\ble_stack\com\profiles\bas\bass\src;..\..\sdk\ble_stack\com\profiles\ancs\ancsc\api;..\..\sdk\ble_stack\com\profiles\ancs\ancsc\src;..\..\sdk\ble_stack\com\profiles\ancs;..\..\sdk\ble_stack\com\profiles\FCC0\api;..\..\sdk\ble_stack\com\profiles\FCC0\src;..\..\sdk\ble_stack\com\profiles\FCC0\util;..\..\sdk\ble_stack\com\profiles\FEE0\api;..\..\sdk\ble_stack\com\profiles\FEE0\src;..\..\sdk\ble_stack\com\profiles\hogp;..\..\sdk\ble_stack\com\profiles\hogp\hogpd\api;..\..\sdk\ble_stack\com\profiles\hogp\hogpd\src;..\..\libs;..\..\sdk\ble_stack\com\profiles\wechat\api;..\..\sdk\ble_stack\com\profiles\wechat\src;.\wechat;..\..\sdk\ble_stack\com\profiles\bas\bass;..\..\sdk\ble_stack\com\profiles\bas\bass\api;..\..\sdk\ble_stack\com\profiles\dis\diss;..\..\sdk\ble_stack\com\profiles\dis\diss\api;..\..\sdk\ble_stack\com\profiles\FFF0\api;..\..\sdk\ble_stack\com\profiles\FFF0;..\..\sdk\ble_stack\com\profiles\oad\api;..\..\sdk\plactform\driver\rc_cal;.\HARDWARE\interface;.\USMART;.\HARDWARE\SC7A21</IncludePath>
+              <IncludePath>.\config;.\app;..\..\libs;..\..\sdk\plactform\core_modules\src;..\..\sdk\plactform\arch;..\..\sdk\plactform\arch\compiler;..\..\sdk\plactform\arch\ll;..\..\sdk\plactform\core_modules\common\api;..\..\sdk\plactform\arch\boot;..\..\sdk\plactform\core_modules\dbg\api;..\..\sdk\plactform\core_modules\rf\api;..\..\sdk\plactform\core_modules\ecc_p256\api;..\..\sdk\plactform\arch\main;..\..\sdk\plactform\core_modules\util;..\..\sdk\plactform\driver\pwm;..\..\sdk\plactform\driver\adc;..\..\sdk\plactform\driver\audio;..\..\sdk\plactform\driver\wdt;..\..\sdk\plactform\driver\rtc;..\..\sdk\plactform\driver\i2c;..\..\sdk\plactform\driver\utc;..\..\sdk\plactform\driver\ir;..\..\sdk\plactform\driver\spi;..\..\sdk\plactform\driver\plf;..\..\sdk\plactform\driver\counter;..\..\sdk\plactform\driver\gpio;..\..\sdk\plactform\driver\intcntl;..\..\sdk\plactform\driver\icu;..\..\sdk\plactform\driver\intc;..\..\sdk\plactform\driver\flash;..\..\sdk\plactform\driver\timer;..\..\sdk\plactform\driver\reg;..\..\sdk\plactform\driver\uart;..\..\sdk\plactform\driver\emi;..\..\sdk\ble_stack\com\rwble;..\..\sdk\ble_stack\com\rwble_hl;..\..\sdk\ble_stack\com\rwble;..\..\sdk\ble_stack\com\rwip\api;..\..\sdk\ble_stack\com\rwble_hl;..\..\sdk\ble_stack\src;..\..\sdk\plactform\reg;..\..\sdk\plactform\driver\syscntl;..\..\sdk\plactform\rom\hci;..\..\sdk\plactform\core_modules\ecc_p256\api;..\..\sdk\ble_stack\inc;..\..\sdk\ble_stack\inc\hci;..\..\sdk\ble_stack\inc\h4tl;..\..\sdk\ble_stack\inc\ke;..\..\sdk\ble_stack\inc\nvds;..\..\sdk\ble_stack\inc\ea;..\..\sdk\ble_stack\inc\em;..\..\sdk\ble_stack\inc\ahi;..\..\sdk\ble_stack\inc\ble\hl\gap\gapc;..\..\sdk\ble_stack\inc\ble\hl\gap\gapm;..\..\sdk\ble_stack\inc\ble\hl\gap\smpc;..\..\sdk\ble_stack\inc\ble\hl\gap\smpm;..\..\sdk\ble_stack\inc\ble\hl\gatt\attc;..\..\sdk\ble_stack\inc\ble\hl\gatt\attm;..\..\sdk\ble_stack\inc\ble\hl\gatt\atts;..\..\sdk\ble_stack\inc\ble\hl\gatt\gattc;..\..\sdk\ble_stack\inc\ble\hl\gatt\gattm;..\..\sdk\ble_stack\inc\ble\hl\l2c\l2cc;..\..\sdk\ble_stack\inc\ble\hl\l2c\l2cm;..\..\sdk\ble_stack\inc\ble\ll\em;..\..\sdk\ble_stack\inc\ble\ll\llc;..\..\sdk\ble_stack\inc\ble\ll\lld;..\..\sdk\ble_stack\inc\ble\ll\llm;..\..\sdk\ble_stack\com\rwip\api;..\..\sdk\ble_stack\inc\ble\hl\gap;..\..\sdk\ble_stack\inc\ble\hl\gatt;..\..\sdk\ble_stack\com\prf;..\..\sdk\ble_stack\com\profiles\dis\diss\src;..\..\sdk\ble_stack\com\profiles\bas\bass\src;..\..\sdk\ble_stack\com\profiles\ancs\ancsc\api;..\..\sdk\ble_stack\com\profiles\ancs\ancsc\src;..\..\sdk\ble_stack\com\profiles\ancs;..\..\sdk\ble_stack\com\profiles\FCC0\api;..\..\sdk\ble_stack\com\profiles\FCC0\src;..\..\sdk\ble_stack\com\profiles\FCC0\util;..\..\sdk\ble_stack\com\profiles\FEE0\api;..\..\sdk\ble_stack\com\profiles\FEE0\src;..\..\sdk\ble_stack\com\profiles\hogp;..\..\sdk\ble_stack\com\profiles\hogp\hogpd\api;..\..\sdk\ble_stack\com\profiles\hogp\hogpd\src;..\..\libs;..\..\sdk\ble_stack\com\profiles\wechat\api;..\..\sdk\ble_stack\com\profiles\wechat\src;.\wechat;..\..\sdk\ble_stack\com\profiles\bas\bass;..\..\sdk\ble_stack\com\profiles\bas\bass\api;..\..\sdk\ble_stack\com\profiles\dis\diss;..\..\sdk\ble_stack\com\profiles\dis\diss\api;..\..\sdk\ble_stack\com\profiles\FFF0\api;..\..\sdk\ble_stack\com\profiles\FFF0;..\..\sdk\ble_stack\com\profiles\oad\api;..\..\sdk\plactform\driver\rc_cal;.\HARDWARE\interface;.\USMART;.\HARDWARE\SC7A21;.\Service</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -969,6 +969,9 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Service</GroupName>
+        </Group>
+        <Group>
           <GroupName>app</GroupName>
           <GroupOption>
             <CommonProperty>
@@ -1081,14 +1084,14 @@
               <FilePath>.\app\app_key.c</FilePath>
             </File>
             <File>
-              <FileName>app_wlist.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\app\app_wlist.c</FilePath>
-            </File>
-            <File>
               <FileName>app_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\app\app_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>app_wlist.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\app_wlist.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1146,24 +1149,24 @@
               <FilePath>.\HARDWARE\src\ANO_UART.C</FilePath>
             </File>
             <File>
-              <FileName>app_rtc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\HARDWARE\src\app_rtc.c</FilePath>
-            </File>
-            <File>
               <FileName>LED.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\HARDWARE\src\LED.c</FilePath>
             </File>
             <File>
-              <FileName>User_Save.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\HARDWARE\src\User_Save.c</FilePath>
-            </File>
-            <File>
               <FileName>Motor.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\HARDWARE\src\Motor.c</FilePath>
+            </File>
+            <File>
+              <FileName>app_rtc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HARDWARE\src\app_rtc.c</FilePath>
+            </File>
+            <File>
+              <FileName>User_Save.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HARDWARE\src\User_Save.c</FilePath>
             </File>
             <File>
               <FileName>user_app.c</FileName>

@@ -44,15 +44,13 @@ static int fee0s_fee1_level_upd_req_handler(ke_msg_id_t const msgid,
     // check state of the task
     if(state == FEE0S_IDLE)
     {
-        struct fee0s_env_tag* fee0s_env = PRF_ENV_GET(FEE0S, fee0s);
-
-        // put task in a busy state
-        ke_state_set(dest_id, FEE0S_BUSY);						
+    struct fee0s_env_tag* fee0s_env = PRF_ENV_GET(FEE0S, fee0s);
+    // put task in a busy state
+    ke_state_set(dest_id, FEE0S_BUSY);						
 		fee0s_notify_fee1_lvl(fee0s_env, param);
 		ke_state_set(dest_id, FEE0S_IDLE);   
 		msg_status = KE_MSG_CONSUMED;	
     }
-
     return (msg_status);
   }
 

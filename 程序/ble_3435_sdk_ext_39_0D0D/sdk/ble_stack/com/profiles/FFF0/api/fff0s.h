@@ -86,7 +86,7 @@ enum
 /// FFF0 'Profile' Server environment variable
 struct fff0s_env_tag
 {
-    /// profile environment
+    /// profile environment 数据存储变量
     prf_env_t prf_env;
    
     /// On-going operation
@@ -97,11 +97,11 @@ struct fff0s_env_tag
     uint8_t fff1_lvl[FFF0_FFF1_DATA_LEN];
 	
 	uint8_t fff2_value[FFF0_FFF2_DATA_LEN];
-    /// BASS task state
+    /// BASS task state任务状态
     ke_state_t state[FFF0S_IDX_MAX];
-    /// Notification configuration of peer devices.
+    /// Notification configuration of peer devices.对等设备的通知配置
     uint8_t ntf_cfg[BLE_CONNECTION_MAX];
-    /// Database features
+    /// 数据库功能
     uint8_t features;
 
 };

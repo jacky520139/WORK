@@ -26,9 +26,11 @@ extern "C" {
 //----------------------------------------------
 typedef struct
 {
-    unsigned char       second;     // second, 0~59
-    unsigned char       minute;     // minute, 0~59
+//	  unsigned char       second;     // second, 0~59
+//    unsigned char       minute;     // minute, 0~59
     unsigned char       hour;       // hour,   0~23
+	  unsigned char       minute;     // minute, 0~59
+	  unsigned char       second;     // second, 0~59
     unsigned char       week_day;   // week_day, 0~6
 } RTC_DATE_DESC;
 

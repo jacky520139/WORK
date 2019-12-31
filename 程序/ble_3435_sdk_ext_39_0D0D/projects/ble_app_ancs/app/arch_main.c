@@ -159,6 +159,11 @@ uint8_t encrypt_key_array[16] =
 };
 #endif
 
+
+
+unsigned char APP_DFLT_DEVICE_NAME[DEVICE_NAME_LEN]={"YZL_"};//设备名
+unsigned char APP_SCNRSP_DATA[APP_SCNRSP_DATA_LEN]={0x0c,0x08};
+
 /*
  * EXPORTED FUNCTION DEFINITIONS
  ****************************************************************************************
@@ -199,12 +204,31 @@ void platform_reset(uint32_t error)
 void bdaddr_env_init(void)
 {
 	struct bd_addr co_bdaddr;
+	u8 buff[5];
+	u32 cnt=0;
+//	u8 temp;
 	flash_read_data(&co_bdaddr.addr[0],0x400e3,6);
 	if(co_bdaddr.addr[0]!=0xff ||co_bdaddr.addr[1]!=0xff||
 	        co_bdaddr.addr[2]!=0xff||co_bdaddr.addr[3]!=0xff||
 	        co_bdaddr.addr[4]!=0xff||co_bdaddr.addr[5]!=0xff )
 	{
 		memcpy(&co_default_bdaddr,&co_bdaddr,6);
+
+		
+		cnt=(co_bdaddr.addr[3]<<24)|(co_bdaddr.addr[2]<<16)|(co_bdaddr.addr[1]<<8)|(co_bdaddr.addr[0]);
+//		buff[0]=cnt/26000%26+0x41;
+//		buff[1]=cnt/1000%26+0x41;
+//		buff[2]=cnt/100%10+0x30;
+//		buff[3]=cnt/10%10+0x30;
+//		buff[4]=cnt%10+0x30;
+		buff[0]=cnt/175760%10+0x30;
+		buff[1]=cnt/17576%10+0x30;
+		buff[2]=cnt/676%26+0x41;
+		buff[3]=cnt/26%26+0x41;
+		buff[4]=cnt%26+0x41;		
+   memcpy(&(APP_DFLT_DEVICE_NAME[4]),buff,5);//配置广播设备名+ID
+	 memcpy(&(APP_SCNRSP_DATA[2]),APP_DFLT_DEVICE_NAME,DEVICE_NAME_LEN);//配置广播回应
+
 	}
 }
 
@@ -234,15 +258,15 @@ void rw_app_enter(void)
 	 * Main loop
 	 ***************************************************************************
 	 */
-
 	while(1)
 	{
 		//schedule all pending events
 		rwip_schedule();
-	  usmart_scan();//usmart扫描
-		// Checks for sleep have to be done with interrupt disabled
-		GLOBAL_INT_DISABLE();
 
+		// Checks for sleep have to be done with interrupt disabled
+//		GLOBAL_INT_START();//打开全局中断
+		GLOBAL_INT_DISABLE();
+	  usmart_scan();//usmart扫描
 		oad_updating_user_section_pro();
 
 		if(wdt_disable_flag==1)
@@ -275,8 +299,10 @@ void rw_app_enter(void)
 			
 		}
 #endif
+    
 		Stack_Integrity_Check();
 		GLOBAL_INT_RESTORE();
+//		GLOBAL_INT_DISABLE();
 	}
 }
 
@@ -332,16 +358,19 @@ void rw_main(void)
 	
 	// Initialize UART component
 #if (UART_DRIVER)
+	
 	uart_init(115200);
 //	uart_cb_register(uart_rx_handler);
 	uart_cb_register(USART1_IRQHandler);//串口注册接收回调函数
+//uart_cb_register(Receive_phone_date);//接收的数据到手机判断
+//uart_cb_register(app_fff1_send_lvl);//接收的数据到手机判断
 #endif
     user_app_text();//用户测试程序
     uart_stack_register(uart_printf);
 
 
 	flash_advance_init();
-	bdaddr_env_init();
+	bdaddr_env_init();//读出MAC
 
 #if 0 //bk encrypt interface test
 	code_sanity_check();
@@ -372,6 +401,7 @@ void rw_main(void)
 	REG_AHB0_ICU_INT_ENABLE |= (0x01 << 15); //BLE INT
 	REG_AHB0_ICU_IRQ_ENABLE = 0x03;
   User_HeadWare_Init();
+
 	// finally start interrupt handling
 	GLOBAL_INT_START();//打开全局中断
 	UART_PRINTF("start\r\n");

@@ -352,6 +352,8 @@ void uart_init(uint32_t baudrate)
 	                     uart_tx_en ;
 
 	REG_APB3_UART_FIFO_CFG = (1<<BIT_TX_FIFO_THRESHOLD)|(16<<BIT_RX_FIFO_THRESHOLD)|(0x2 << BIT_STOP_DETECT_TIME);//(0x3 << BIT_STOP_DETECT_TIME);
+//	REG_APB3_UART_FIFO_CFG = (1<<BIT_TX_FIFO_THRESHOLD)|(4<<BIT_RX_FIFO_THRESHOLD)|(0x2 << BIT_STOP_DETECT_TIME);//(0x3 << BIT_STOP_DETECT_TIME);
+	
 	REG_APB3_UART_INT_ENABLE = ((0x01 << 1) | (0x01 << 6) | (0x01 << 7));
 	REG_APB3_UART_FLOW_CFG  = 0x00000000 ;  // No Flow Control
 	REG_APB3_UART_WAKE_CFG  = ((0x01 << 0 )| (0x01 << 20) |  (0x01 << 21)| (0x01 << 22));  // No Wake Control

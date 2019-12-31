@@ -435,13 +435,13 @@ enum {
 
 
     /*---------------- DECLARATIONS -----------------*/
-    /// Primary service Declaration
+    /// Primary service Declaration主服务声明
     ATT_DECL_PRIMARY_SERVICE                     = ATT_UUID_16(0x2800),
-    /// Secondary service Declaration
+    /// Secondary service Declaration二次服务声明
     ATT_DECL_SECONDARY_SERVICE                   = ATT_UUID_16(0x2801),
-    /// Include Declaration
+    /// Include Declaration包含声明
     ATT_DECL_INCLUDE                             = ATT_UUID_16(0x2802),
-    /// Characteristic Declaration
+    /// Characteristic Declaration特性声明
     ATT_DECL_CHARACTERISTIC                      = ATT_UUID_16(0x2803),
 
 
@@ -450,7 +450,7 @@ enum {
     ATT_DESC_CHAR_EXT_PROPERTIES                 = ATT_UUID_16(0x2900),
     /// Characteristic user description
     ATT_DESC_CHAR_USER_DESCRIPTION               = ATT_UUID_16(0x2901),
-    /// Client characteristic configuration
+    /// 客户端特征配置
     ATT_DESC_CLIENT_CHAR_CFG                     = ATT_UUID_16(0x2902),
     /// Server characteristic configuration
     ATT_DESC_SERVER_CHAR_CFG                     = ATT_UUID_16(0x2903),

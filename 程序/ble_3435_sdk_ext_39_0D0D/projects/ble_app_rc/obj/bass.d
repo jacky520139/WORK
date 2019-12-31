@@ -36,3 +36,5 @@
 .\obj\bass.o: ..\..\sdk\ble_stack\inc\ble\hl\gatt\attm\attm.h
 .\obj\bass.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\obj\bass.o: ..\..\sdk\ble_stack\inc\ke\ke_mem.h
+.\obj\bass.o: ..\..\sdk\plactform\driver\uart\uart.h
+.\obj\bass.o: .\config\user_config.h

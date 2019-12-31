@@ -31,7 +31,7 @@
 #include "prf.h"
 
 #include "ke_mem.h"
-
+#include "uart.h"
 /*
  * BAS ATTRIBUTES DEFINITION
  ****************************************************************************************
@@ -243,7 +243,7 @@ static void bass_cleanup(struct prf_task_env* env, uint8_t conidx, uint8_t reaso
 
 /**
  ****************************************************************************************
- * @brief  Trigger battery level notification
+ * @brief  Trigger battery level notification触发电池电量通知
  *
  * @param bass_env profile environment
  * @param conidx   peer destination connection index
@@ -394,7 +394,7 @@ void bass_exe_operation(void)
 
     // Restoring connection information requested
     if(bass_env->operation->id == BASS_ENABLE_REQ)
-    {
+    {	UART_PRINTF("BASS_ENABLE_REQ\r\n");
         struct bass_enable_req * enable = (struct bass_enable_req *) ke_msg2param(bass_env->operation);
         conidx = enable->conidx;
         // loop on all services to check if notification should be triggered
@@ -415,10 +415,10 @@ void bass_exe_operation(void)
     }
     // Battery level updated
     else if(bass_env->operation->id == BASS_BATT_LEVEL_UPD_REQ)
-    {
+    {UART_PRINTF("BASS_BATT_LEVEL_UPD_REQ\r\n");
         struct bass_batt_level_upd_req * update = (struct bass_batt_level_upd_req *) ke_msg2param(bass_env->operation);
 
-        // loop on all connection
+        // loop on all connection所有连接上的循环
         while(bass_env->cursor < BLE_CONNECTION_MAX)
         {
             if((bass_env->ntf_cfg[bass_env->cursor] & (1 << update->bas_instance)) != 0)
@@ -444,7 +444,7 @@ void bass_exe_operation(void)
     {
         // trigger response message
         if(bass_env->operation->id == BASS_ENABLE_REQ)
-        {
+        {UART_PRINTF("BASS_ENABLE_REQ\r\n");
             struct bass_enable_rsp * rsp = KE_MSG_ALLOC(BASS_ENABLE_RSP, bass_env->operation->src_id,
                     bass_env->operation->dest_id, bass_enable_rsp);
 
@@ -453,7 +453,7 @@ void bass_exe_operation(void)
             ke_msg_send(rsp);
         }
         else if(bass_env->operation->id == BASS_BATT_LEVEL_UPD_REQ)
-        {
+        {{UART_PRINTF("BASS_BATT_LEVEL_UPD_REQ\r\n");
             struct bass_batt_level_upd_rsp * rsp = KE_MSG_ALLOC(BASS_BATT_LEVEL_UPD_RSP, bass_env->operation->src_id,
                     bass_env->operation->dest_id, bass_batt_level_upd_rsp);
 
@@ -468,8 +468,7 @@ void bass_exe_operation(void)
         ke_state_set(prf_src_task_get(&(bass_env->prf_env), 0), BASS_IDLE);
     }
 }
-
+}
 
 #endif // (BLE_BATT_SERVER)
 
-/// @} BASS

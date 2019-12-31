@@ -98,11 +98,11 @@
 
 
 //打开这个宏将打开可变地址解析功能，即只允许绑定的设备建立连接，否则断开连接
-#define BK_CONNNECT_FILTER_CTRL		 (0)
+#define BK_CONNNECT_FILTER_CTRL		 (1)
 //白名单使能
-#define APP_WHITE_LIST_ENABLE        1
+#define APP_WHITE_LIST_ENABLE        0
 
-#define HID_CONNECT_ANY				 (1)
+#define HID_CONNECT_ANY				 (0)
 
 /*******************************************************************************
  *#############################################################################*

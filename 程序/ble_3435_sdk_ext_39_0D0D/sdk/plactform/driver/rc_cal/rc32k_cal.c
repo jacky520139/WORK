@@ -91,8 +91,9 @@ void user_timer_cb(unsigned char ucChannel)
     pwm_disable(ucChannel);
 
     icu_set_sleep_mode(0);
+		#if SYSTEM_SLEEP
     rwip_prevent_sleep_clear(BK_DRIVER_TIMER_ACTIVE);
-
+    #endif
     
 }
 
@@ -100,7 +101,9 @@ void user_timer_cb(unsigned char ucChannel)
 void user_timer_init(void)
 {	
 	icu_set_sleep_mode(1);
+	#if SYSTEM_SLEEP
 	rwip_prevent_sleep_set(BK_DRIVER_TIMER_ACTIVE);
+	#endif
 	PWM_DRV_DESC timer_desc;
 
 	timer_desc.channel = 3;            				  

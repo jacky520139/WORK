@@ -53,7 +53,7 @@ enum hl_err
     ATT_ERR_INVALID_HANDLE                                                         = 0x01,
     /// 0x02: Read permission disabled
     ATT_ERR_READ_NOT_PERMITTED                                                     = 0x02,
-    /// 0x03: Write permission disabled
+    /// 0x03: Write permission disabled写权限已禁用
     ATT_ERR_WRITE_NOT_PERMITTED                                                    = 0x03,
     /// 0x04: Incorrect PDU
     ATT_ERR_INVALID_PDU                                                            = 0x04,

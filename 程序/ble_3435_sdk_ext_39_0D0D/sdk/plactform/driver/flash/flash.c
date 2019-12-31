@@ -731,7 +731,7 @@ void FLASH_Read(uint32_t address,uint8_t *buffer,uint32_t len)
                             flash_enable_erase_flag2=FLASH_ERASE_ENABLE2;}						//解锁
 #define   FLASH_Lock()   {flash_enable_erase_flag1=0;\
                             flash_enable_erase_flag2=0;}						//解锁
-		 
+	#include "ll.h"	 
 uint8_t STMFLASH_BUF[FLASH_ERASE_SECTOR_SIZE];//最多是2K字节
 void FLASH_Write(uint32_t WriteAddr,uint8_t *pBuffer,uint16_t NumToWrite)
 {
@@ -740,12 +740,14 @@ void FLASH_Write(uint32_t WriteAddr,uint8_t *pBuffer,uint16_t NumToWrite)
 	uint16_t secremain; //扇区内剩余地址(16位字计算)	   
  	uint16_t i;    
 //	uint32_t offaddr;   //去掉0X08000000后的地址
-
+//   GLOBAL_INT_STOP();
+//	GLOBAL_INT_DISABLE();
     if(flash_mid != get_flash_ID())
     {
         return ;
     }
-	FLASH_Unlock()//解锁	 
+	
+	FLASH_Unlock();//解锁	 
 //	offaddr=WriteAddr;		//实际偏移地址.
 	secpos=WriteAddr & (~FLASH_ERASE_SECTOR_SIZE_MASK);			//扇区地址  0~127 for STM32F103RBT6
 	secoff=WriteAddr & FLASH_ERASE_SECTOR_SIZE_MASK;		//在扇区内的偏移
@@ -785,20 +787,7 @@ void FLASH_Write(uint32_t WriteAddr,uint8_t *pBuffer,uint16_t NumToWrite)
 		}	 
 	};	
 	FLASH_Lock();//上锁
-
+//		GLOBAL_INT_RESTORE();
+//	GLOBAL_INT_START();
+		
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

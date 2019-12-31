@@ -40,13 +40,13 @@ void Init_LED(void)
 	  adc_init(1,1);//初始化ADC,软件模式
 		GLOBAL_INT_START();//使能全局中断
 	//初始化LED
-	gpio_config(BlueLedPort, OUTPUT, PULL_NONE);
-	gpio_config(RedLedPort, OUTPUT, PULL_NONE);
-//  gpio_config(MotorPort, OUTPUT, PULL_NONE);
-	gpio_config(ButtonPort, INPUT, PULL_HIGH);
-	gpio_set(BlueLedPort, 1);
-	gpio_set(RedLedPort, 1);
-  gpio_set(ButtonPort, 0);
+//	gpio_config(BlueLedPort, OUTPUT, PULL_NONE);
+//	gpio_config(RedLedPort, OUTPUT, PULL_NONE);
+////  gpio_config(MotorPort, OUTPUT, PULL_NONE);
+//	gpio_config(ButtonPort, INPUT, PULL_HIGH);
+//	gpio_set(BlueLedPort, 1);
+//	gpio_set(RedLedPort, 1);
+//  gpio_set(ButtonPort, 0);
 	
 RTC_DATE.hour=18;
 RTC_DATE.minute=30;
@@ -55,25 +55,25 @@ RTC_DATE.week_day=3;
 rtc_init(&RTC_DATE);
 rtc_enable();
  u16 adc_val=adc_get_value(8);
- 	u16 BAT_VCC=(adc_val*490)>>8;//VCC电压
-while(1)
-{
+// 	u16 BAT_VCC=(adc_val*490)>>8;//VCC电压
+//while(1)
+//{
 
-if(gpio_get_input(ButtonPort))
-{	gpio_set(BlueLedPort, 1);
-	gpio_set(RedLedPort, 1);
-//	gpio_set(MotorPort, 0);
-}
-	else
-	{
-  gpio_set(BlueLedPort, 0);
-	gpio_set(RedLedPort, 0);
-//	gpio_set(MotorPort, 1);
-	}	
-//	adc_get_value(1);
-		rtc_get_time(&RTC_DATE);
-	ANO_DT_Send_Version(0xf1,RTC_DATE.hour, RTC_DATE.minute, RTC_DATE.second, RTC_DATE.week_day, 5);
-	}
+//if(gpio_get_input(ButtonPort))
+//{	gpio_set(BlueLedPort, 1);
+//	gpio_set(RedLedPort, 1);
+////	gpio_set(MotorPort, 0);
+//}
+//	else
+//	{
+//  gpio_set(BlueLedPort, 0);
+//	gpio_set(RedLedPort, 0);
+////	gpio_set(MotorPort, 1);
+//	}	
+////	adc_get_value(1);
+//		rtc_get_time(&RTC_DATE);
+//	ANO_DT_Send_Version(0xf1,RTC_DATE.hour, RTC_DATE.minute, RTC_DATE.second, RTC_DATE.week_day, 5);
+//	}
 
 
 
@@ -83,7 +83,7 @@ if(gpio_get_input(ButtonPort))
 void BlueLed(void)
 {
 	
-BlueLedToggle();
+//BlueLedToggle();
 //RedLedToggle();
 
 }

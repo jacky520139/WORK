@@ -341,18 +341,18 @@ void rw_main(void)
 #if (UART_DRIVER)
 	uart_init(115200);
 	//uart_cb_register(uart_rx_handler);//串口注册接收回调函数
-	uart_cb_register(USART1_IRQHandler);//串口注册接收回调函数
-//    uart_cb_register();//串口注册接收回调函数
+//	uart_cb_register(USART1_IRQHandler);//串口注册接收回调函数
+    uart_cb_register();//串口注册接收回调函数
 	
 	//uart_cb_register(app_fff1_send_lvl);//串口注册接收回调函数
 #endif
 
 //	Init_LED();
-	gpio_config(BlueLedPort, OUTPUT, PULL_NONE);
-	gpio_config(RedLedPort, OUTPUT, PULL_NONE);
+//	gpio_config(BlueLedPort, OUTPUT, PULL_NONE);
+//	gpio_config(RedLedPort, OUTPUT, PULL_NONE);
 
-	gpio_set(BlueLedPort, 0);
-	gpio_set(RedLedPort, 0);
+//	gpio_set(BlueLedPort, 0);
+//	gpio_set(RedLedPort, 0);
 
   uart_stack_register(uart_printf);
 

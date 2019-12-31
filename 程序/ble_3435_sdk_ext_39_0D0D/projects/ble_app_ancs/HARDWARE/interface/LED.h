@@ -50,11 +50,12 @@
 
 
 struct LED_Dev_tag
-{
+{ u8 State;//状态
   u8 Mode;//模式
 	u8 Strength;//亮度
 	u8 TIME_s;//运行的时间，秒
 	u8 TIME_min;//运行的时间，分钟
+	u8 Delay;//延时
 };
 extern struct LED_Dev_tag LED_Dev;
 void Init_LED(void);

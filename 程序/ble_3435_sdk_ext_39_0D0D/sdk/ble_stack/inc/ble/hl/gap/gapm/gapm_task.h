@@ -195,7 +195,7 @@ enum gapm_operation
     GAPM_GET_DEV_VERSION, // 0x05
     /// Get Local device BD Address
     GAPM_GET_DEV_BDADDR, // 0x06
-    /// Get device advertising power level
+    /// Get device advertising power level获取设备广告功率级别
     GAPM_GET_DEV_ADV_TX_POWER, // 0x07
     /* Operation on White list                          */
     /* ************************************************ */

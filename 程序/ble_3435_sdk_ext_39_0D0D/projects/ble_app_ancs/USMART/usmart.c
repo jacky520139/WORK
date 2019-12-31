@@ -1,8 +1,8 @@
 
 #include "ALL_Includes.h"
 #include "lld_evt.h" 
-//#define  USMART_PRINTF uart_printf
-#define  USMART_PRINTF ble_printf
+#define  USMART_PRINTF uart_printf
+//#define  USMART_PRINTF ble_printf
 
                // Battery Application Module Definitions
 //////////////////////////////////////////////////////////////////////////////////	 
@@ -229,13 +229,13 @@ u8 usmart_sys_cmd_exe(u8 *str)
 //需要根据所移植到的MCU的定时器参数进行修改
 void usmart_reset_runtime(void)
 {
-	u32 timer_625us_start,timer_1us_start;
-//	TIM4->SR&=~(1<<0);	//清除中断标志位 
-//	TIM4->ARR=0XFFFF;	//将重装载值设置到最大
-//	TIM4->CNT=0;		//清空定时器的CNT
-	lld_evt_time_get_us(&timer_625us_start,&timer_1us_start);
-  	usmart_dev.timer_625us_start=timer_625us_start*625+timer_1us_start;
-//	USMART_PRINTF("start=%d;\r\n",delta_time);//输出执行结果(16进制参数显示)
+//	u32 timer_625us_start,timer_1us_start;
+////	TIM4->SR&=~(1<<0);	//清除中断标志位 
+////	TIM4->ARR=0XFFFF;	//将重装载值设置到最大
+////	TIM4->CNT=0;		//清空定时器的CNT
+//	lld_evt_time_get_us(&timer_625us_start,&timer_1us_start);
+//  	usmart_dev.timer_625us_start=timer_625us_start*625+timer_1us_start;
+////	USMART_PRINTF("start=%d;\r\n",delta_time);//输出执行结果(16进制参数显示)
 //  USMART_PRINTF("\r\n");//输出执行结果(16进制参数显示)	
 	
 	usmart_dev.runtime=0;	
@@ -245,32 +245,32 @@ void usmart_reset_runtime(void)
 //需要根据所移植到的MCU的定时器参数进行修改
 u32 usmart_get_runtime(void)
 {
-//	u32 delta_time_end,delta_time_start;
-	u32 timer_625us_end,timer_1us_end;
-//	if(TIM4->SR&0X0001)//在运行期间,产生了定时器溢出
-//	{
-//		usmart_dev.runtime+=0XFFFF;
-//	}
-//	usmart_dev.runtime+=TIM4->CNT;
-	lld_evt_time_get_us(&timer_625us_end,&timer_1us_end);
+////	u32 delta_time_end,delta_time_start;
+//	u32 timer_625us_end,timer_1us_end;
+////	if(TIM4->SR&0X0001)//在运行期间,产生了定时器溢出
+////	{
+////		usmart_dev.runtime+=0XFFFF;
+////	}
+////	usmart_dev.runtime+=TIM4->CNT;
+//	lld_evt_time_get_us(&timer_625us_end,&timer_1us_end);
+////	usmart_dev.timer_625us_end=timer_625us_end*625+timer_1us_end;
+////	USMART_PRINTF("start1=%d;\r\n",usmart_dev.timer_625us_end);//输出执行结果(16进制参数显示)
+//	
+//	lld_evt_time_get_us(&timer_625us_end,&timer_1us_end);
 //	usmart_dev.timer_625us_end=timer_625us_end*625+timer_1us_end;
-//	USMART_PRINTF("start1=%d;\r\n",usmart_dev.timer_625us_end);//输出执行结果(16进制参数显示)
-	
-	lld_evt_time_get_us(&timer_625us_end,&timer_1us_end);
-	usmart_dev.timer_625us_end=timer_625us_end*625+timer_1us_end;
-//	USMART_PRINTF("start2=%d;\r\n",usmart_dev.timer_625us_end);//输出执行结果(16进制参数显示)	
-//	delta_time_end  =usmart_dev.timer_625us_end*625+usmart_dev.timer_1us_end;
-//	delta_time_start=usmart_dev.timer_625us_start*625+usmart_dev.timer_1us_start;
-//	USMART_PRINTF("start=%d;\r\n",usmart_dev.timer_625us_start);//输出执行结果(16进制参数显示)
-//	USMART_PRINTF("end=%d;\r\n",usmart_dev.timer_625us_end);//输出执行结果(16进制参数显示)
-	if(usmart_dev.timer_625us_end!=usmart_dev.timer_625us_start)
-	{
-	usmart_dev.runtime=(usmart_dev.timer_625us_end-usmart_dev.timer_625us_start)/100;
-	}
-	else
-	{usmart_dev.runtime=0;}
-//	USMART_PRINTF("end=%d;\r\n",delta_time);//输出执行结果(16进制参数显示)	
-//	 delta_time=((usmart_dev.timer_625us_end*625+usmart_dev.timer_1us_end)-(usmart_dev.timer_625us_start*625+usmart_dev.timer_1us_start))/100;
+////	USMART_PRINTF("start2=%d;\r\n",usmart_dev.timer_625us_end);//输出执行结果(16进制参数显示)	
+////	delta_time_end  =usmart_dev.timer_625us_end*625+usmart_dev.timer_1us_end;
+////	delta_time_start=usmart_dev.timer_625us_start*625+usmart_dev.timer_1us_start;
+////	USMART_PRINTF("start=%d;\r\n",usmart_dev.timer_625us_start);//输出执行结果(16进制参数显示)
+////	USMART_PRINTF("end=%d;\r\n",usmart_dev.timer_625us_end);//输出执行结果(16进制参数显示)
+//	if(usmart_dev.timer_625us_end!=usmart_dev.timer_625us_start)
+//	{
+//	usmart_dev.runtime=(usmart_dev.timer_625us_end-usmart_dev.timer_625us_start)/100;
+//	}
+//	else
+//	{usmart_dev.runtime=0;}
+////	USMART_PRINTF("end=%d;\r\n",delta_time);//输出执行结果(16进制参数显示)	
+////	 delta_time=((usmart_dev.timer_625us_end*625+usmart_dev.timer_1us_end)-(usmart_dev.timer_625us_start*625+usmart_dev.timer_1us_start))/100;
 //	usmart_dev.runtime=delta_time;
 //	USMART_PRINTF("runtime=%d;\r\n",delta_time);//输出执行结果(16进制参数显示)
 	return usmart_dev.runtime;		//返回计数值

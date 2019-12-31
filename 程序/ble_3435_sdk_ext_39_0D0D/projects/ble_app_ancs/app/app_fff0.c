@@ -138,9 +138,11 @@ static int fff1_level_upd_handler(ke_msg_id_t const msgid,
 {
 	if(param->status == GAP_ERR_NO_ERROR)
 	{
-		uint8_t buf[128];
-		memset(buf, 0x54, 128);
+//		uint8_t buf[128];
+//		memset(buf, 0x54, 128);
 //		app_fff1_send_lvl(buf, 1);
+//	UART_PRINTF("%s\r\n", __func__);
+		ke_msg_send_basic(UPLOAD_DATA,TASK_APP,TASK_APP);//同步步数数据
 	}
 	
     return (KE_MSG_CONSUMED);
@@ -188,8 +190,13 @@ static int fff2_writer_req_handler(ke_msg_id_t const msgid,
 //	}
 //	UART_PRINTF("\r\n");
 //		UART_PRINTF("\r\n");
-//	uart_write(param->fff2_value, param->length, NULL, NULL);
-  USART1_IRQHandler(param->fff2_value, param->length);
+//	UART_PRINTF("%s\r\n", __func__);
+//	UART_PRINTF("length=%d\r\n", param->length);
+//	uart_write((uint8_t *)param->fff2_value, param->length, NULL, NULL);
+//	uart_send(param->fff2_value, param->length);
+//	UART_PRINTF("%s \r\n",param->fff2_value);
+//  USART1_IRQHandler(param->fff2_value, param->length);
+	Receive_phone_date(param->fff2_value, param->length);
 //	memcpy(USART_RX_BUF,param->fff2_value,param->length);
     return (KE_MSG_CONSUMED);
 }
@@ -200,10 +207,13 @@ static int fff1_period_ntf_handler(ke_msg_id_t const msgid,
                                                ke_task_id_t const dest_id,
                                                ke_task_id_t const src_id)
 {
-	rtc_get_time(&calendar.RTC);
-	uint8_t buf[128];
-	memset(buf, 0x89, 128);
-//  app_fff1_send_lvl(&RTC_DEV.second, 1);
+//	rtc_get_time(&calendar.RTC);
+//	uint8_t buf[128];
+////	memset(buf, 0x89, 128);
+//	for(u8 i=0;i<=128;i++)
+//	{buf[i]=i;}
+//  app_fff1_send_lvl(buf, 128);
+//	 app_fff1_send_lvl(buf, 10);
 // ke_timer_set(FFF0S_FFF1_LEVEL_PERIOD_NTF,dest_id , 100);//延时1s后触发
 //		
     return (KE_MSG_CONSUMED);

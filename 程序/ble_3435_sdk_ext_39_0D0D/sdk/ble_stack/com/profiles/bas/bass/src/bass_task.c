@@ -179,7 +179,7 @@ static int gattc_att_info_req_ind_handler(ke_msg_id_t const msgid,
 
     if(status == GAP_ERR_NO_ERROR)
     {
-        // check if it's a client configuration char
+        // check if it's a client configuration char检查它是否是客户端配置字符
         if(att_idx == BAS_IDX_BATT_LVL_NTF_CFG)
         {
             // CCC attribute length = 2

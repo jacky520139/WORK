@@ -67,13 +67,13 @@ struct attm_desc
 {
     /// 16 bits UUID LSB First
     uint16_t uuid;
-    /// Attribute Permissions (@see enum attm_perm_mask)
+    /// Attribute Permissions (@see enum attm_perm_mask)属性权限
     uint16_t perm;
-    /// Attribute Extended Permissions (@see enum attm_value_perm_mask)
+    /// Attribute Extended Permissions (@see enum attm_value_perm_mask)属性扩展权限
     uint16_t ext_perm;
     /// Attribute Max Size
     /// note: for characteristic declaration contains handle offset
-    /// note: for included service, contains target service handle
+    /// note: for included service, contains target service handle对于包含的服务，包含目标服务句柄
     uint16_t max_size;
 };
 

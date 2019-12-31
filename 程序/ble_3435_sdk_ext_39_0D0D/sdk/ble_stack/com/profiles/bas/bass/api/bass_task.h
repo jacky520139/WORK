@@ -114,7 +114,7 @@ struct bass_enable_rsp
 ///Parameters of the @ref BASS_BATT_LEVEL_UPD_REQ message
 struct bass_batt_level_upd_req
 {
-    /// BAS instance
+    /// BAS instanceÊµÀý
     uint8_t bas_instance;
     /// Battery Level
     uint8_t batt_level;

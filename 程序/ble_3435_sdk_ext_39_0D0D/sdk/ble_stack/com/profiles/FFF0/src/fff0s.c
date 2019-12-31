@@ -35,17 +35,17 @@ const struct attm_desc fff0_att_db[FFF0S_IDX_NB] =
 {
     // FFF0 Service Declaration
     [FFF0S_IDX_SVC]            =   {ATT_DECL_PRIMARY_SERVICE, PERM(RD, ENABLE), 0, 0},
-
+//声明和特征值     手机发数据到设备
 	[FFF0S_IDX_FFF2_LVL_CHAR]  =   {ATT_DECL_CHARACTERISTIC, PERM(RD, ENABLE), 0, 0},
-    //  Characteristic Value
-    [FFF0S_IDX_FFF2_LVL_VAL]   =   {ATT_USER_SERVER_CHAR_FFF2,PERM(WRITE_COMMAND, ENABLE), PERM(RI, ENABLE), FFF0_FFF2_DATA_LEN *sizeof(uint8_t)},
+    //  特征值
+  [FFF0S_IDX_FFF2_LVL_VAL]   =   {ATT_USER_SERVER_CHAR_FFF2,PERM(WRITE_REQ, ENABLE), PERM(RI, ENABLE), FFF0_FFF2_DATA_LEN *sizeof(uint8_t)},
 
-	// fff1 Level Characteristic Declaration
+	// fff1 Level Characteristic Declaration特征声明
 	[FFF0S_IDX_FFF1_LVL_CHAR]  =   {ATT_DECL_CHARACTERISTIC, PERM(RD, ENABLE), 0, 0},
     // fff1 Level Characteristic Value
-    [FFF0S_IDX_FFF1_LVL_VAL]   =   {ATT_USER_SERVER_CHAR_FFF1, PERM(WRITE_COMMAND, ENABLE) , PERM(RI, ENABLE), FFF0_FFF1_DATA_LEN * sizeof(uint8_t)},
+  [FFF0S_IDX_FFF1_LVL_VAL]   =   {ATT_USER_SERVER_CHAR_FFF1, PERM(WRITE_COMMAND, ENABLE) , PERM(RI, ENABLE), FFF0_FFF1_DATA_LEN * sizeof(uint8_t)},
 
-	// fff1 Level Characteristic - Client Characteristic Configuration Descriptor
+	// fff1 Level Characteristic - Client Characteristic Configuration Descriptor客户端特征配置描述符
 	[FFF0S_IDX_FFF1_LVL_NTF_CFG] = {ATT_DESC_CLIENT_CHAR_CFG,  PERM(RD, ENABLE)|PERM(WRITE_REQ, ENABLE), 0, 0},
 
 };/// Macro used to retrieve permission value from access and rights on attribute.
@@ -58,35 +58,35 @@ static uint8_t fff0s_init (struct prf_task_env* env, uint16_t* start_hdl, uint16
     // Status
     uint8_t status = GAP_ERR_NO_ERROR;
     
-    //-------------------- allocate memory required for the profile  ---------------------
+    //-------------------- 分配配置文件所需的内存  ---------------------
     fff0s_env = (struct fff0s_env_tag* ) ke_malloc(sizeof(struct fff0s_env_tag), KE_MEM_ATT_DB);
     memset(fff0s_env, 0 , sizeof(struct fff0s_env_tag));
 
-    // Service content flag
+    // Service content flag 服务内容标志
     uint8_t cfg_flag = FFF0S_CFG_FLAG_MANDATORY_MASK;
 
-    // Save database configuration
+    // Save database configuration 保存数据库配置信息
     fff0s_env->features |= (params->features) ;
    
-    // Check if notifications are supported
+    // 检查是否支持通知
     if (params->features == FFF0_FFF1_LVL_NTF_SUP)
     {
         cfg_flag |= FFF0_CFG_FLAG_NTF_SUP_MASK;
     }
     shdl = *start_hdl;
 
-    //Create FFF0 in the DB
-    //------------------ create the attribute database for the profile -------------------
+    //Create FFF0 in the DB 在数据库中创建FFF0
+    //------------------ 为配置文件创建属性数据库 -------------------
     status = attm_svc_create_db(&(shdl), ATT_USER_SERVER_FFF0, (uint8_t *)&cfg_flag,
             FFF0S_IDX_NB, NULL, env->task, &fff0_att_db[0],
             (sec_lvl & (PERM_MASK_SVC_DIS | PERM_MASK_SVC_AUTH | PERM_MASK_SVC_EKS)));
 				
 
 
-    //Set optional permissions
+    //设置可选权限
     if (status == GAP_ERR_NO_ERROR)
     {
-        //Set optional permissions
+        //设置可选权限
         if(params->features == FFF0_FFF1_LVL_NTF_SUP)
         {
             // Battery Level characteristic value permissions
